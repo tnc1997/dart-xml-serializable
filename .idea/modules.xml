@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/xml_annotation/xml_annotation.iml" filepath="$PROJECT_DIR$/xml_annotation/xml_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xml_serializable/xml_serializable.iml" filepath="$PROJECT_DIR$/xml_serializable/xml_serializable.iml" />
+    </modules>
+  </component>
+</project>
