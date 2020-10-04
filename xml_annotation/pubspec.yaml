@@ -1,0 +1,11 @@
+name: xml_annotation
+description: Classes and helper functions that support XML code generation via the `xml_serializable` package.
+version: 1.0.0
+homepage: https://github.com/tnc1997/dart-xml-serializable
+
+environment:
+  sdk: '>=2.8.0 <3.0.0'
+
+dev_dependencies:
+  pedantic: ^1.0.0
+  test: ^1.0.0

@@ -1,0 +1,3 @@
+class XmlSerializable {
+  const XmlSerializable();
+}
