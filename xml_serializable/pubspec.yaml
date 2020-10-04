@@ -1,0 +1,20 @@
+name: xml_serializable
+description: Automatically generate code for converting to and from XML by annotating Dart classes.
+version: 1.0.0
+homepage: https://github.com/tnc1997/dart-xml-serializable
+
+environment:
+  sdk: '>=2.8.0 <3.0.0'
+
+dependencies:
+  analyzer: ^0.40.0
+  build: ^1.0.0
+  build_config: ^0.4.0
+  source_gen: ^0.9.0
+  xml: ^4.0.0
+  xml_annotation: ^1.0.0
+
+dev_dependencies:
+  build_runner: ^1.0.0
+  pedantic: ^1.0.0
+  test: ^1.0.0
