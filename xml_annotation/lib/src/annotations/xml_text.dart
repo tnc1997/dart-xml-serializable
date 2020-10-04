@@ -1,0 +1,3 @@
+class XmlText {
+  const XmlText();
+}
