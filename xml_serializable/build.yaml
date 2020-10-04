@@ -1,0 +1,15 @@
+targets:
+  $default:
+    builders:
+      xml_serializable:
+        generate_for:
+          - example/*
+
+builders:
+  xml_serializable:
+    import: "package:xml_serializable/builder.dart"
+    builder_factories: ["xmlSerializableBuilder"]
+    build_extensions: {".dart": ["xml_serializable.g.part"]}
+    auto_apply: dependents
+    build_to: cache
+    applies_builders: ["source_gen|combining_builder"]
