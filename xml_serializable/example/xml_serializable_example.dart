@@ -8,14 +8,17 @@ void main() {
     '''<?xml version="1.0"?>
     <bookshelf>
       <book>
-        <title lang="english">Growing a Language</title>
-        <price>29.99</price>
+        <title lang="english">XML Pocket Reference</title>
+        <author>Simon St. Laurent</author>
+        <author>Michael James Fitzgerald</author>
+        <price>6.63</price>
       </book>
       <book>
-        <title lang="english">Learning XML</title>
-        <price>39.95</price>
+        <title lang="english">HTML and XHTML Pocket Reference</title>
+        <author>Jennifer Niederst Robbins</author>
+        <price>7.09</price>
       </book>
-      <price>132.00</price>
+      <price/>
     </bookshelf>''',
   );
 
@@ -29,15 +32,19 @@ void main() {
 @annotation.XmlRootElement(name: 'book')
 @annotation.XmlSerializable()
 class Book {
-  @annotation.XmlElement(name: 'price')
-  Price price;
-
   @annotation.XmlElement(name: 'title')
-  Title title;
+  Title? title;
+
+  @annotation.XmlElement(name: 'author')
+  List<String>? authors;
+
+  @annotation.XmlElement(name: 'price')
+  String? price;
 
   Book({
-    this.price,
     this.title,
+    this.authors,
+    this.price,
   });
 
   factory Book.fromXmlElement(XmlElement element) =>
@@ -45,7 +52,7 @@ class Book {
 
   @override
   String toString() {
-    return 'Book{price: $price, title: $title}';
+    return 'Book{title: $title, authors: $authors, price: $price}';
   }
 
   void buildXmlChildren(
@@ -69,7 +76,7 @@ class Book {
       );
 
   List<XmlAttribute> toXmlAttributes({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$BookToXmlAttributes(
         this,
@@ -77,7 +84,7 @@ class Book {
       );
 
   List<XmlNode> toXmlChildren({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$BookToXmlChildren(
         this,
@@ -85,7 +92,7 @@ class Book {
       );
 
   XmlElement toXmlElement({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$BookToXmlElement(
         this,
@@ -97,10 +104,10 @@ class Book {
 @annotation.XmlSerializable()
 class Bookshelf {
   @annotation.XmlElement(name: 'book')
-  List<Book> books;
+  List<Book>? books;
 
   @annotation.XmlElement(name: 'price')
-  Price price;
+  String? price;
 
   Bookshelf({
     this.books,
@@ -136,7 +143,7 @@ class Bookshelf {
       );
 
   List<XmlAttribute> toXmlAttributes({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$BookshelfToXmlAttributes(
         this,
@@ -144,7 +151,7 @@ class Bookshelf {
       );
 
   List<XmlNode> toXmlChildren({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$BookshelfToXmlChildren(
         this,
@@ -152,72 +159,9 @@ class Bookshelf {
       );
 
   XmlElement toXmlElement({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$BookshelfToXmlElement(
-        this,
-        namespaces: namespaces,
-      );
-}
-
-@annotation.XmlRootElement(name: 'price')
-@annotation.XmlSerializable()
-class Price {
-  @annotation.XmlText()
-  String text;
-
-  Price({
-    this.text,
-  });
-
-  factory Price.fromXmlElement(XmlElement element) =>
-      _$PriceFromXmlElement(element);
-
-  @override
-  String toString() {
-    return 'Price{text: $text}';
-  }
-
-  void buildXmlChildren(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$PriceBuildXmlChildren(
-        this,
-        builder,
-        namespaces: namespaces,
-      );
-
-  void buildXmlElement(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$PriceBuildXmlElement(
-        this,
-        builder,
-        namespaces: namespaces,
-      );
-
-  List<XmlAttribute> toXmlAttributes({
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$PriceToXmlAttributes(
-        this,
-        namespaces: namespaces,
-      );
-
-  List<XmlNode> toXmlChildren({
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$PriceToXmlChildren(
-        this,
-        namespaces: namespaces,
-      );
-
-  XmlElement toXmlElement({
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$PriceToXmlElement(
         this,
         namespaces: namespaces,
       );
@@ -227,10 +171,10 @@ class Price {
 @annotation.XmlSerializable()
 class Title {
   @annotation.XmlAttribute(name: 'lang')
-  String lang;
+  String? lang;
 
   @annotation.XmlText()
-  String text;
+  String? text;
 
   Title({
     this.lang,
@@ -266,7 +210,7 @@ class Title {
       );
 
   List<XmlAttribute> toXmlAttributes({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$TitleToXmlAttributes(
         this,
@@ -274,7 +218,7 @@ class Title {
       );
 
   List<XmlNode> toXmlChildren({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$TitleToXmlChildren(
         this,
@@ -282,7 +226,7 @@ class Title {
       );
 
   XmlElement toXmlElement({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$TitleToXmlElement(
         this,

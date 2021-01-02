@@ -3,9 +3,8 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:xml_annotation/xml_annotation.dart';
-import 'package:xml_serializable/src/extensions/class_element_extensions.dart';
 import 'package:xml_serializable/src/extensions/constant_reader_extensions.dart';
-import 'package:xml_serializable/src/extensions/field_element_extensions.dart';
+import 'package:xml_serializable/src/extensions/element_extensions.dart';
 import 'package:xml_serializable/src/type_checkers/xml_attribute_type_checker.dart';
 import 'package:xml_serializable/src/type_checkers/xml_element_type_checker.dart';
 import 'package:xml_serializable/src/type_checkers/xml_root_element_type_checker.dart';
@@ -60,78 +59,44 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       'void _\$${element.name}BuildXmlChildren(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {},}) {',
     );
 
-    final attributeElements = <FieldElement>{};
-    final elementElements = <FieldElement>{};
-    final textElements = <FieldElement>{};
-
     for (final element in element.fields) {
-      if (element.hasXmlAttribute) {
-        attributeElements.add(element);
-      } else if (element.hasXmlElement) {
-        elementElements.add(element);
-      } else if (element.hasXmlText) {
-        textElements.add(element);
-      }
-    }
-
-    for (final attributeElement in attributeElements) {
-      final annotation = ConstantReader(
-        xmlAttributeTypeChecker.firstAnnotationOf(attributeElement),
-      );
-
-      final name = annotation.peekStringValue('name') ?? attributeElement.name;
-      final namespace = annotation.peekStringValue('namespace');
-
-      buffer.writeln(
-        'if (instance.${attributeElement.name} != null) {',
-      );
-
-      buffer.writeln(
-        'builder.attribute(',
-      );
-
-      buffer.writeln(
-        '\'$name\',',
-      );
-
-      buffer.writeln(
-        'instance.${attributeElement.name},',
-      );
-
-      if (namespace != null) {
+      if (element.hasXmlAttribute ||
+          element.hasXmlElement ||
+          element.hasXmlText) {
         buffer.writeln(
-          'namespace: \'$namespace\',',
+          'final ${element.name} = instance.${element.name};',
         );
       }
-
-      buffer.writeln(
-        ');',
-      );
-
-      buffer.writeln(
-        '}',
-      );
     }
 
-    for (final elementElement in elementElements) {
-      final elementType = elementElement.type;
+    buffer.writeln();
+
+    for (final element in element.fields) {
+      final elementType = element.type;
       final elementTypeElement = elementType.element;
 
-      final annotation = ConstantReader(
-        xmlElementTypeChecker.firstAnnotationOf(elementElement),
-      );
+      if (element.hasXmlAttribute) {
+        final annotation = ConstantReader(
+          xmlAttributeTypeChecker.firstAnnotationOf(element),
+        );
 
-      final name = annotation.peekStringValue('name') ?? elementElement.name;
-      final namespace = annotation.peekStringValue('namespace');
+        final name = annotation.peekStringValue('name') ?? element.name;
+        final namespace = annotation.peekStringValue('namespace');
 
-      if (elementTypeElement is ClassElement &&
-          elementTypeElement.hasXmlSerializable) {
         buffer.writeln(
-          'builder.element(',
+          'if (${element.name} != null) {',
+        );
+
+        buffer.writeln(
+          'builder.attribute(',
         );
 
         buffer.writeln(
           '\'$name\',',
+        );
+
+        buffer.writeln(
+          '${element.name},',
         );
 
         if (namespace != null) {
@@ -139,128 +104,220 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
             'namespace: \'$namespace\',',
           );
         }
-
-        buffer.writeln(
-          'nest: () {',
-        );
-
-        buffer.writeln(
-          'instance.${elementElement.name}?.buildXmlChildren(builder, namespaces: namespaces,);',
-        );
-
-        buffer.writeln(
-          '},',
-        );
 
         buffer.writeln(
           ');',
-        );
-      } else if (elementType.isDartCoreString) {
-        buffer.writeln(
-          'builder.element(',
-        );
-
-        buffer.writeln(
-          '\'$name\',',
-        );
-
-        if (namespace != null) {
-          buffer.writeln(
-            'namespace: \'$namespace\',',
-          );
-        }
-
-        buffer.writeln(
-          'nest: () {',
-        );
-
-        buffer.writeln(
-          'if (instance.${elementElement.name} != null) {',
-        );
-
-        buffer.writeln(
-          'builder.text(instance.${elementElement.name},);',
         );
 
         buffer.writeln(
           '}',
         );
+      } else if (element.hasXmlElement) {
+        final annotation = ConstantReader(
+          xmlElementTypeChecker.firstAnnotationOf(element),
+        );
+
+        final name = annotation.peekStringValue('name') ?? element.name;
+        final namespace = annotation.peekStringValue('namespace');
+
+        if (elementTypeElement.hasXmlSerializable) {
+          buffer.writeln(
+            'builder.element(',
+          );
+
+          buffer.writeln(
+            '\'$name\',',
+          );
+
+          if (namespace != null) {
+            buffer.writeln(
+              'namespace: \'$namespace\',',
+            );
+          }
+
+          buffer.writeln(
+            'nest: () {',
+          );
+
+          buffer.writeln(
+            'if (${element.name} != null) {',
+          );
+
+          buffer.writeln(
+            '${element.name}.buildXmlChildren(builder, namespaces: namespaces,);',
+          );
+
+          buffer.writeln(
+            '}',
+          );
+
+          buffer.writeln(
+            '},',
+          );
+
+          buffer.writeln(
+            ');',
+          );
+        } else if (elementType.isDartCoreString) {
+          buffer.writeln(
+            'builder.element(',
+          );
+
+          buffer.writeln(
+            '\'$name\',',
+          );
+
+          if (namespace != null) {
+            buffer.writeln(
+              'namespace: \'$namespace\',',
+            );
+          }
+
+          buffer.writeln(
+            'nest: () {',
+          );
+
+          buffer.writeln(
+            'if (${element.name} != null) {',
+          );
+
+          buffer.writeln(
+            'builder.text(${element.name});',
+          );
+
+          buffer.writeln(
+            '}',
+          );
+
+          buffer.writeln(
+            '},',
+          );
+
+          buffer.writeln(
+            ');',
+          );
+        } else if (elementType.isDartCoreList || elementType.isDartCoreSet) {
+          if (elementType is ParameterizedType) {
+            final elementTypeElement = elementType.typeArguments.single.element;
+
+            if (elementTypeElement is ClassElement) {
+              if (elementTypeElement.hasXmlSerializable) {
+                buffer.writeln(
+                  'if (${element.name} != null) {',
+                );
+
+                buffer.writeln(
+                  'for (final value in ${element.name}) {',
+                );
+
+                buffer.writeln(
+                  'builder.element(',
+                );
+
+                buffer.writeln(
+                  '\'$name\',',
+                );
+
+                if (namespace != null) {
+                  buffer.writeln(
+                    'namespace: \'$namespace\',',
+                  );
+                }
+
+                buffer.writeln(
+                  'nest: () {',
+                );
+
+                buffer.writeln(
+                  'value.buildXmlChildren(builder, namespaces: namespaces,);',
+                );
+
+                buffer.writeln(
+                  '},',
+                );
+
+                buffer.writeln(
+                  ');',
+                );
+
+                buffer.writeln(
+                  '}',
+                );
+
+                buffer.writeln(
+                  '}',
+                );
+              } else if (elementTypeElement.thisType.isDartCoreString) {
+                buffer.writeln(
+                  'if (${element.name} != null) {',
+                );
+
+                buffer.writeln(
+                  'for (final value in ${element.name}) {',
+                );
+
+                buffer.writeln(
+                  'builder.element(',
+                );
+
+                buffer.writeln(
+                  '\'$name\',',
+                );
+
+                if (namespace != null) {
+                  buffer.writeln(
+                    'namespace: \'$namespace\',',
+                  );
+                }
+
+                buffer.writeln(
+                  'nest: () {',
+                );
+
+                buffer.writeln(
+                  'builder.text(value);',
+                );
+
+                buffer.writeln(
+                  '},',
+                );
+
+                buffer.writeln(
+                  ');',
+                );
+
+                buffer.writeln(
+                  '}',
+                );
+
+                buffer.writeln(
+                  '}',
+                );
+              }
+            }
+          }
+        }
+      } else if (element.hasXmlText) {
+        buffer.writeln(
+          'if (${element.name} != null) {',
+        );
 
         buffer.writeln(
-          '},',
+          'builder.text(',
+        );
+
+        buffer.writeln(
+          '${element.name},',
         );
 
         buffer.writeln(
           ');',
         );
-      } else if (elementType.isDartCoreList || elementType.isDartCoreSet) {
-        if (elementType is ParameterizedType) {
-          final elementTypeElement = elementType.typeArguments.single.element;
 
-          if (elementTypeElement is ClassElement &&
-              elementTypeElement.hasXmlSerializable) {
-            buffer.writeln(
-              'if (instance.${elementElement.name} != null) {',
-            );
-
-            buffer.writeln(
-              'for (final value in instance.${elementElement.name}) {',
-            );
-
-            buffer.writeln(
-              'builder.element(',
-            );
-
-            buffer.writeln(
-              '\'$name\',',
-            );
-
-            if (namespace != null) {
-              buffer.writeln(
-                'namespace: \'$namespace\',',
-              );
-            }
-
-            buffer.writeln(
-              'nest: () {',
-            );
-
-            buffer.writeln(
-              'value.buildXmlChildren(builder, namespaces: namespaces,);',
-            );
-
-            buffer.writeln(
-              '},',
-            );
-
-            buffer.writeln(
-              ');',
-            );
-
-            buffer.writeln(
-              '}',
-            );
-
-            buffer.writeln(
-              '}',
-            );
-          }
-        }
+        buffer.writeln(
+          '}',
+        );
       }
-    }
-
-    for (final textElement in textElements) {
-      buffer.writeln(
-        'if (instance.${textElement.name} != null) {',
-      );
-
-      buffer.writeln(
-        'builder.text(instance.${textElement.name},);',
-      );
-
-      buffer.writeln(
-        '}',
-      );
     }
 
     buffer.writeln(
@@ -327,6 +384,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     );
 
     for (final element in element.fields) {
+      final elementType = element.type;
+      final elementTypeElement = elementType.element;
+
       if (element.hasXmlAttribute) {
         final annotation = ConstantReader(
           xmlAttributeTypeChecker.firstAnnotationOf(element),
@@ -356,21 +416,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         final name = annotation.peekStringValue('name') ?? element.name;
         final namespace = annotation.peekStringValue('namespace');
 
-        if (element.type.isDartCoreList || element.type.isDartCoreSet) {
-          buffer.write(
-            'final ${element.name} = element.findElements(\'$name\',',
-          );
-
-          if (namespace != null) {
-            buffer.write(
-              'namespace: \'$namespace\',',
-            );
-          }
-
-          buffer.writeln(
-            ');',
-          );
-        } else {
+        if (elementTypeElement.hasXmlSerializable) {
           buffer.write(
             'final ${element.name} = element.getElement(\'$name\',',
           );
@@ -384,10 +430,60 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           buffer.writeln(
             ');',
           );
+        } else if (elementType.isDartCoreString) {
+          buffer.write(
+            'final ${element.name} = element.getElementText(\'$name\',',
+          );
+
+          if (namespace != null) {
+            buffer.write(
+              'namespace: \'$namespace\',',
+            );
+          }
+
+          buffer.writeln(
+            ');',
+          );
+        } else if (elementType.isDartCoreList || elementType.isDartCoreSet) {
+          if (elementType is ParameterizedType) {
+            final elementTypeElement = elementType.typeArguments.single.element;
+
+            if (elementTypeElement is ClassElement) {
+              if (elementTypeElement.hasXmlSerializable) {
+                buffer.write(
+                  'final ${element.name} = element.findElements(\'$name\',',
+                );
+
+                if (namespace != null) {
+                  buffer.write(
+                    'namespace: \'$namespace\',',
+                  );
+                }
+
+                buffer.writeln(
+                  ');',
+                );
+              } else if (elementTypeElement.thisType.isDartCoreString) {
+                buffer.write(
+                  'final ${element.name} = element.findElementsText(\'$name\',',
+                );
+
+                if (namespace != null) {
+                  buffer.write(
+                    'namespace: \'$namespace\',',
+                  );
+                }
+
+                buffer.writeln(
+                  ');',
+                );
+              }
+            }
+          }
         }
       } else if (element.hasXmlText) {
         buffer.writeln(
-          'final ${element.name} = element.text;',
+          'final ${element.name} = element.getText();',
         );
       }
     }
@@ -399,36 +495,40 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     );
 
     for (final element in element.fields) {
-      if (element.hasXmlElement) {
-        final elementType = element.type;
-        final elementTypeElement = elementType.element;
+      final elementType = element.type;
+      final elementTypeElement = elementType.element;
 
-        if (elementTypeElement is ClassElement &&
-            elementTypeElement.hasXmlSerializable) {
-          buffer.write(
-            '${element.name}: ${element.name} != null ? ${elementType.element.name}.fromXmlElement(${element.name}) : null,',
-          );
-        } else if (elementType.isDartCoreString) {
-          buffer.write(
-            '${element.name}: ${element.name} != null ? ${element.name}.text : null,',
-          );
-        } else if ((elementType.isDartCoreList || elementType.isDartCoreSet)) {
-          if (elementType is ParameterizedType) {
-            final elementTypeElement = elementType.typeArguments.single.element;
-
-            if (elementTypeElement is ClassElement &&
-                elementTypeElement.hasXmlSerializable) {
-              buffer.write(
-                '${element.name}: ${element.name} != null ? ${element.name}.map((element) => ${elementType.typeArguments.single.element.name}.fromXmlElement(element)).${elementType.isDartCoreList ? 'toList()' : 'toSet()'} : null,',
-              );
-            }
-          }
-        }
-      } else {
-        if (element.type.isDartCoreString) {
+      if (element.hasXmlAttribute || element.hasXmlText) {
+        if (elementType.isDartCoreString) {
           buffer.write(
             '${element.name}: ${element.name},',
           );
+        }
+      } else if (element.hasXmlElement) {
+        if (elementTypeElement.hasXmlSerializable) {
+          buffer.write(
+            '${element.name}: ${element.name} != null ? ${elementTypeElement.name}.fromXmlElement(${element.name}) : null,',
+          );
+        } else if (elementType.isDartCoreString) {
+          buffer.write(
+            '${element.name}: ${element.name},',
+          );
+        } else if (elementType.isDartCoreList || elementType.isDartCoreSet) {
+          if (elementType is ParameterizedType) {
+            final elementTypeElement = elementType.typeArguments.single.element;
+
+            if (elementTypeElement is ClassElement) {
+              if (elementTypeElement.hasXmlSerializable) {
+                buffer.write(
+                  '${element.name}: ${element.name}.map((element) => ${elementTypeElement.name}.fromXmlElement(element)).${elementType.isDartCoreList ? 'toList()' : 'toSet()'},',
+                );
+              } else if (elementTypeElement.thisType.isDartCoreString) {
+                buffer.write(
+                  '${element.name}: ${element.name}.${elementType.isDartCoreList ? 'toList()' : 'toSet()'},',
+                );
+              }
+            }
+          }
         }
       }
     }
@@ -444,8 +544,18 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
   void _generateToXmlAttributes(StringBuffer buffer, ClassElement element) {
     buffer.writeln(
-      'List<XmlAttribute> _\$${element.name}ToXmlAttributes(${element.name} instance, {Map<String, String> namespaces = const {},}) {',
+      'List<XmlAttribute> _\$${element.name}ToXmlAttributes(${element.name} instance, {Map<String, String?> namespaces = const {},}) {',
     );
+
+    for (final element in element.fields) {
+      if (element.hasXmlAttribute) {
+        buffer.writeln(
+          'final ${element.name} = instance.${element.name};',
+        );
+      }
+    }
+
+    buffer.writeln();
 
     buffer.writeln(
       'return [',
@@ -461,7 +571,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         final namespace = annotation.peekStringValue('namespace');
 
         buffer.writeln(
-          'if (instance.${element.name} != null)',
+          'if (${element.name} != null)',
         );
 
         buffer.writeln(
@@ -487,7 +597,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         );
 
         buffer.writeln(
-          'instance.${element.name},',
+          '${element.name},',
         );
 
         buffer.writeln(
@@ -507,8 +617,18 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
   void _generateToXmlChildren(StringBuffer buffer, ClassElement element) {
     buffer.writeln(
-      'List<XmlNode> _\$${element.name}ToXmlChildren(${element.name} instance, {Map<String, String> namespaces = const {},}) {',
+      'List<XmlNode> _\$${element.name}ToXmlChildren(${element.name} instance, {Map<String, String?> namespaces = const {},}) {',
     );
+
+    for (final element in element.fields) {
+      if (element.hasXmlElement || element.hasXmlText) {
+        buffer.writeln(
+          'final ${element.name} = instance.${element.name};',
+        );
+      }
+    }
+
+    buffer.writeln();
 
     buffer.writeln(
       'return [',
@@ -526,8 +646,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         final name = annotation.peekStringValue('name') ?? element.name;
         final namespace = annotation.peekStringValue('namespace');
 
-        if (elementTypeElement is ClassElement &&
-            elementTypeElement.hasXmlSerializable) {
+        if (elementTypeElement.hasXmlSerializable) {
           buffer.writeln(
             'XmlElement(',
           );
@@ -551,11 +670,11 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           );
 
           buffer.writeln(
-            'instance.${element.name}?.toXmlAttributes(namespaces: namespaces,) ?? [],',
+            '[if (${element.name} != null) ...${element.name}.toXmlAttributes(namespaces: namespaces,),],',
           );
 
           buffer.writeln(
-            'instance.${element.name}?.toXmlChildren(namespaces: namespaces,) ?? [],',
+            '[if (${element.name} != null) ...${element.name}.toXmlChildren(namespaces: namespaces,),],',
           );
 
           buffer.writeln(
@@ -589,7 +708,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           );
 
           buffer.writeln(
-            '[if (instance.${element.name} != null) XmlText(instance.${element.name},),],',
+            '[if (${element.name} != null) XmlText(${element.name},),],',
           );
 
           buffer.writeln(
@@ -599,59 +718,98 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           if (elementType is ParameterizedType) {
             final elementTypeElement = elementType.typeArguments.single.element;
 
-            if (elementTypeElement is ClassElement &&
-                elementTypeElement.hasXmlSerializable) {
-              buffer.writeln(
-                'if (instance.${element.name} != null)',
-              );
-
-              buffer.writeln(
-                'for (final value in instance.${element.name})',
-              );
-
-              buffer.writeln(
-                'XmlElement(',
-              );
-
-              buffer.writeln(
-                'XmlName(',
-              );
-
-              buffer.writeln(
-                '\'$name\',',
-              );
-
-              if (namespace != null) {
+            if (elementTypeElement is ClassElement) {
+              if (elementTypeElement.hasXmlSerializable) {
                 buffer.writeln(
-                  'namespaces[\'$namespace\'],',
+                  'if (${element.name} != null)',
+                );
+
+                buffer.writeln(
+                  'for (final value in ${element.name})',
+                );
+
+                buffer.writeln(
+                  'XmlElement(',
+                );
+
+                buffer.writeln(
+                  'XmlName(',
+                );
+
+                buffer.writeln(
+                  '\'$name\',',
+                );
+
+                if (namespace != null) {
+                  buffer.writeln(
+                    'namespaces[\'$namespace\'],',
+                  );
+                }
+
+                buffer.writeln(
+                  '),',
+                );
+
+                buffer.writeln(
+                  'value.toXmlAttributes(namespaces: namespaces,),',
+                );
+
+                buffer.writeln(
+                  'value.toXmlChildren(namespaces: namespaces,),',
+                );
+
+                buffer.writeln(
+                  '),',
+                );
+              } else if (elementTypeElement.thisType.isDartCoreString) {
+                buffer.writeln(
+                  'if (${element.name} != null)',
+                );
+
+                buffer.writeln(
+                  'for (final value in ${element.name})',
+                );
+
+                buffer.writeln(
+                  'XmlElement(',
+                );
+
+                buffer.writeln(
+                  'XmlName(',
+                );
+
+                buffer.writeln(
+                  '\'$name\',',
+                );
+
+                if (namespace != null) {
+                  buffer.writeln(
+                    'namespaces[\'$namespace\'],',
+                  );
+                }
+
+                buffer.writeln(
+                  '),',
+                );
+
+                buffer.writeln(
+                  '[],',
+                );
+
+                buffer.writeln(
+                  '[XmlText(value,),],',
+                );
+
+                buffer.writeln(
+                  '),',
                 );
               }
-
-              buffer.writeln(
-                '),',
-              );
-
-              buffer.writeln(
-                'value.toXmlAttributes(namespaces: namespaces,),',
-              );
-
-              buffer.writeln(
-                'value.toXmlChildren(namespaces: namespaces,),',
-              );
-
-              buffer.writeln(
-                '),',
-              );
             }
           }
         }
       } else if (element.hasXmlText) {
         buffer.writeln(
-          'if (instance.${element.name} != null)',
-        );
-
-        buffer.writeln(
-          'XmlText(instance.${element.name},),',
+          'if (${element.name} != null) XmlText(${element.name},),',
         );
       }
     }
@@ -668,7 +826,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   void _generateToXmlElement(StringBuffer buffer, ClassElement element) {
     if (element.hasXmlRootElement) {
       buffer.writeln(
-        'XmlElement _\$${element.name}ToXmlElement(${element.name} instance, {Map<String, String> namespaces = const {},}) {',
+        'XmlElement _\$${element.name}ToXmlElement(${element.name} instance, {Map<String, String?> namespaces = const {},}) {',
       );
 
       final annotation = ConstantReader(
@@ -691,11 +849,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       );
 
       buffer.writeln(
-        'for (final entry in namespaces.entries)',
-      );
-
-      buffer.writeln(
-        'XmlAttribute(entry.value != null ? XmlName(entry.value, \'xmlns\',) : XmlName(\'xmlns\',), entry.key,),',
+        '...namespaces.toXmlAttributes(),',
       );
 
       buffer.writeln(

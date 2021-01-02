@@ -1,6 +1,6 @@
 class XmlRootElement {
-  final String name;
-  final String namespace;
+  final String? name;
+  final String? namespace;
 
   const XmlRootElement({
     this.name,
