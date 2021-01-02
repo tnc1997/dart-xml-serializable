@@ -17,6 +17,7 @@ void _$BookBuildXmlChildren(
 
   builder.element(
     'title',
+    isSelfClosing: true,
     nest: () {
       if (title != null) {
         title.buildXmlChildren(
@@ -30,6 +31,7 @@ void _$BookBuildXmlChildren(
     for (final value in authors) {
       builder.element(
         'author',
+        isSelfClosing: true,
         nest: () {
           builder.text(value);
         },
@@ -38,6 +40,7 @@ void _$BookBuildXmlChildren(
   }
   builder.element(
     'price',
+    isSelfClosing: false,
     nest: () {
       if (price != null) {
         builder.text(price);
@@ -113,6 +116,7 @@ List<XmlNode> _$BookToXmlChildren(
             namespaces: namespaces,
           ),
       ],
+      true,
     ),
     if (authors != null)
       for (final value in authors)
@@ -126,6 +130,7 @@ List<XmlNode> _$BookToXmlChildren(
               value,
             ),
           ],
+          true,
         ),
     XmlElement(
       XmlName(
@@ -138,6 +143,7 @@ List<XmlNode> _$BookToXmlChildren(
             price,
           ),
       ],
+      false,
     ),
   ];
 }
@@ -159,6 +165,7 @@ XmlElement _$BookToXmlElement(
     instance.toXmlChildren(
       namespaces: namespaces,
     ),
+    true,
   );
 }
 
@@ -174,6 +181,7 @@ void _$BookshelfBuildXmlChildren(
     for (final value in books) {
       builder.element(
         'book',
+        isSelfClosing: true,
         nest: () {
           value.buildXmlChildren(
             builder,
@@ -185,6 +193,7 @@ void _$BookshelfBuildXmlChildren(
   }
   builder.element(
     'price',
+    isSelfClosing: true,
     nest: () {
       if (price != null) {
         builder.text(price);
@@ -251,6 +260,7 @@ List<XmlNode> _$BookshelfToXmlChildren(
           value.toXmlChildren(
             namespaces: namespaces,
           ),
+          true,
         ),
     XmlElement(
       XmlName(
@@ -263,6 +273,7 @@ List<XmlNode> _$BookshelfToXmlChildren(
             price,
           ),
       ],
+      true,
     ),
   ];
 }
@@ -284,6 +295,7 @@ XmlElement _$BookshelfToXmlElement(
     instance.toXmlChildren(
       namespaces: namespaces,
     ),
+    true,
   );
 }
 
@@ -385,5 +397,6 @@ XmlElement _$TitleToXmlElement(
     instance.toXmlChildren(
       namespaces: namespaces,
     ),
+    true,
   );
 }
