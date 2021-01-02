@@ -18,7 +18,6 @@ void main() {
         <author>Jennifer Niederst Robbins</author>
         <price></price>
       </book>
-      <price/>
     </bookshelf>''',
   );
 
@@ -106,7 +105,7 @@ class Bookshelf {
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
-  @annotation.XmlElement(name: 'price')
+  @annotation.XmlElement(name: 'price', includeIfNull: false)
   String? price;
 
   Bookshelf({

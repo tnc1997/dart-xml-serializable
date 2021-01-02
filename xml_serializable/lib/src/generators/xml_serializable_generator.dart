@@ -120,8 +120,15 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         final name = annotation.peekStringValue('name') ?? element.name;
         final namespace = annotation.peekStringValue('namespace');
         final isSelfClosing = annotation.readBoolValue('isSelfClosing');
+        final includeIfNull = annotation.readBoolValue('includeIfNull');
 
         if (elementTypeElement.hasXmlSerializable) {
+          if (!includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null) {',
+            );
+          }
+
           buffer.writeln(
             'builder.element(',
           );
@@ -144,17 +151,21 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
             'nest: () {',
           );
 
-          buffer.writeln(
-            'if (${element.name} != null) {',
-          );
+          if (includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null) {',
+            );
+          }
 
           buffer.writeln(
             '${element.name}.buildXmlChildren(builder, namespaces: namespaces,);',
           );
 
-          buffer.writeln(
-            '}',
-          );
+          if (includeIfNull) {
+            buffer.writeln(
+              '}',
+            );
+          }
 
           buffer.writeln(
             '},',
@@ -163,7 +174,19 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           buffer.writeln(
             ');',
           );
+
+          if (!includeIfNull) {
+            buffer.writeln(
+              '}',
+            );
+          }
         } else if (elementType.isDartCoreString) {
+          if (!includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null) {',
+            );
+          }
+
           buffer.writeln(
             'builder.element(',
           );
@@ -186,17 +209,21 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
             'nest: () {',
           );
 
-          buffer.writeln(
-            'if (${element.name} != null) {',
-          );
+          if (includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null) {',
+            );
+          }
 
           buffer.writeln(
             'builder.text(${element.name});',
           );
 
-          buffer.writeln(
-            '}',
-          );
+          if (includeIfNull) {
+            buffer.writeln(
+              '}',
+            );
+          }
 
           buffer.writeln(
             '},',
@@ -205,6 +232,12 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           buffer.writeln(
             ');',
           );
+
+          if (!includeIfNull) {
+            buffer.writeln(
+              '}',
+            );
+          }
         } else if (elementType.isDartCoreList || elementType.isDartCoreSet) {
           if (elementType is ParameterizedType) {
             final elementTypeElement = elementType.typeArguments.single.element;
@@ -663,8 +696,15 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         final name = annotation.peekStringValue('name') ?? element.name;
         final namespace = annotation.peekStringValue('namespace');
         final isSelfClosing = annotation.readBoolValue('isSelfClosing');
+        final includeIfNull = annotation.readBoolValue('includeIfNull');
 
         if (elementTypeElement.hasXmlSerializable) {
+          if (!includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null)',
+            );
+          }
+
           buffer.writeln(
             'XmlElement(',
           );
@@ -688,11 +728,39 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           );
 
           buffer.writeln(
-            '[if (${element.name} != null) ...${element.name}.toXmlAttributes(namespaces: namespaces,),],',
+            '[',
+          );
+
+          if (includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null)',
+            );
+          }
+
+          buffer.writeln(
+            '...${element.name}.toXmlAttributes(namespaces: namespaces,),',
           );
 
           buffer.writeln(
-            '[if (${element.name} != null) ...${element.name}.toXmlChildren(namespaces: namespaces,),],',
+            '],',
+          );
+
+          buffer.writeln(
+            '[',
+          );
+
+          if (includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null)',
+            );
+          }
+
+          buffer.writeln(
+            '...${element.name}.toXmlChildren(namespaces: namespaces,),',
+          );
+
+          buffer.writeln(
+            '],',
           );
 
           buffer.writeln(
@@ -703,6 +771,12 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
             '),',
           );
         } else if (elementType.isDartCoreString) {
+          if (!includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null)',
+            );
+          }
+
           buffer.writeln(
             'XmlElement(',
           );
@@ -730,7 +804,21 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           );
 
           buffer.writeln(
-            '[if (${element.name} != null) XmlText(${element.name},),],',
+            '[',
+          );
+
+          if (includeIfNull) {
+            buffer.writeln(
+              'if (${element.name} != null)',
+            );
+          }
+
+          buffer.writeln(
+            'XmlText(${element.name},),',
+          );
+
+          buffer.writeln(
+            '],',
           );
 
           buffer.writeln(
