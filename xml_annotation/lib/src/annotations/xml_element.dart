@@ -1,6 +1,6 @@
 class XmlElement {
-  final String name;
-  final String namespace;
+  final String? name;
+  final String? namespace;
 
   const XmlElement({
     this.name,

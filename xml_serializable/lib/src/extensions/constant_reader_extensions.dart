@@ -25,26 +25,26 @@ extension ConstantReaderExtensions on ConstantReader {
     return reader.isString ? reader.stringValue : throw FormatException();
   }
 
-  bool peekBoolValue(String field) {
-    final reader = peek(field);
+  bool? peekBoolValue(String field) {
+    final reader = peek(field) as ConstantReader?;
 
     return reader != null && reader.isBool ? reader.boolValue : null;
   }
 
-  int peekIntValue(String field) {
-    final reader = peek(field);
+  int? peekIntValue(String field) {
+    final reader = peek(field) as ConstantReader?;
 
     return reader != null && reader.isInt ? reader.intValue : null;
   }
 
-  double peekDoubleValue(String field) {
-    final reader = peek(field);
+  double? peekDoubleValue(String field) {
+    final reader = peek(field) as ConstantReader?;
 
     return reader != null && reader.isDouble ? reader.doubleValue : null;
   }
 
-  String peekStringValue(String field) {
-    final reader = peek(field);
+  String? peekStringValue(String field) {
+    final reader = peek(field) as ConstantReader?;
 
     return reader != null && reader.isString ? reader.stringValue : null;
   }
