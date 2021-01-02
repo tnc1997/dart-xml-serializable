@@ -11,12 +11,12 @@ void main() {
         <title lang="english">XML Pocket Reference</title>
         <author>Simon St. Laurent</author>
         <author>Michael James Fitzgerald</author>
-        <price>6.63</price>
+        <price></price>
       </book>
       <book>
         <title lang="english">HTML and XHTML Pocket Reference</title>
         <author>Jennifer Niederst Robbins</author>
-        <price>7.09</price>
+        <price></price>
       </book>
       <price/>
     </bookshelf>''',
@@ -38,7 +38,7 @@ class Book {
   @annotation.XmlElement(name: 'author')
   List<String>? authors;
 
-  @annotation.XmlElement(name: 'price')
+  @annotation.XmlElement(name: 'price', isSelfClosing: false)
   String? price;
 
   Book({

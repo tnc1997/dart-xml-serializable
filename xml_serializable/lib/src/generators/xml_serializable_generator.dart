@@ -119,6 +119,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
         final name = annotation.peekStringValue('name') ?? element.name;
         final namespace = annotation.peekStringValue('namespace');
+        final isSelfClosing = annotation.readBoolValue('isSelfClosing');
 
         if (elementTypeElement.hasXmlSerializable) {
           buffer.writeln(
@@ -134,6 +135,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
               'namespace: \'$namespace\',',
             );
           }
+
+          buffer.writeln(
+            'isSelfClosing: $isSelfClosing,',
+          );
 
           buffer.writeln(
             'nest: () {',
@@ -172,6 +177,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
               'namespace: \'$namespace\',',
             );
           }
+
+          buffer.writeln(
+            'isSelfClosing: $isSelfClosing,',
+          );
 
           buffer.writeln(
             'nest: () {',
@@ -225,6 +234,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
                 }
 
                 buffer.writeln(
+                  'isSelfClosing: $isSelfClosing,',
+                );
+
+                buffer.writeln(
                   'nest: () {',
                 );
 
@@ -269,6 +282,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
                     'namespace: \'$namespace\',',
                   );
                 }
+
+                buffer.writeln(
+                  'isSelfClosing: $isSelfClosing,',
+                );
 
                 buffer.writeln(
                   'nest: () {',
@@ -645,6 +662,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
         final name = annotation.peekStringValue('name') ?? element.name;
         final namespace = annotation.peekStringValue('namespace');
+        final isSelfClosing = annotation.readBoolValue('isSelfClosing');
 
         if (elementTypeElement.hasXmlSerializable) {
           buffer.writeln(
@@ -675,6 +693,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
           buffer.writeln(
             '[if (${element.name} != null) ...${element.name}.toXmlChildren(namespaces: namespaces,),],',
+          );
+
+          buffer.writeln(
+            '$isSelfClosing,',
           );
 
           buffer.writeln(
@@ -709,6 +731,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
           buffer.writeln(
             '[if (${element.name} != null) XmlText(${element.name},),],',
+          );
+
+          buffer.writeln(
+            '$isSelfClosing,',
           );
 
           buffer.writeln(
@@ -759,6 +785,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
                 );
 
                 buffer.writeln(
+                  '$isSelfClosing,',
+                );
+
+                buffer.writeln(
                   '),',
                 );
               } else if (elementTypeElement.thisType.isDartCoreString) {
@@ -801,6 +831,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
                 );
 
                 buffer.writeln(
+                  '$isSelfClosing,',
+                );
+
+                buffer.writeln(
                   '),',
                 );
               }
@@ -835,6 +869,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
       final name = annotation.peekStringValue('name') ?? element.name;
       final namespace = annotation.peekStringValue('namespace');
+      final isSelfClosing = annotation.readBoolValue('isSelfClosing');
 
       buffer.writeln(
         'return XmlElement(',
@@ -862,6 +897,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
       buffer.writeln(
         'instance.toXmlChildren(namespaces: namespaces,),',
+      );
+
+      buffer.writeln(
+        '$isSelfClosing,',
       );
 
       buffer.writeln(
