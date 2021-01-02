@@ -191,15 +191,15 @@ void _$BookshelfBuildXmlChildren(
       );
     }
   }
-  builder.element(
-    'price',
-    isSelfClosing: true,
-    nest: () {
-      if (price != null) {
+  if (price != null) {
+    builder.element(
+      'price',
+      isSelfClosing: true,
+      nest: () {
         builder.text(price);
-      }
-    },
-  );
+      },
+    );
+  }
 }
 
 void _$BookshelfBuildXmlElement(
@@ -262,19 +262,19 @@ List<XmlNode> _$BookshelfToXmlChildren(
           ),
           true,
         ),
-    XmlElement(
-      XmlName(
-        'price',
-      ),
-      [],
-      [
-        if (price != null)
+    if (price != null)
+      XmlElement(
+        XmlName(
+          'price',
+        ),
+        [],
+        [
           XmlText(
             price,
           ),
-      ],
-      true,
-    ),
+        ],
+        true,
+      ),
   ];
 }
 
