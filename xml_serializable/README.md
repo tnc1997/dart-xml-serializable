@@ -94,7 +94,9 @@ void _$PersonBuildXmlChildren(
     isSelfClosing: true,
     nest: () {
       if (firstName != null) {
-        builder.text(firstName);
+        builder.text(
+          firstName,
+        );
       }
     },
   );
@@ -103,7 +105,9 @@ void _$PersonBuildXmlChildren(
     isSelfClosing: true,
     nest: () {
       if (lastName != null) {
-        builder.text(lastName);
+        builder.text(
+          lastName,
+        );
       }
     },
   );
