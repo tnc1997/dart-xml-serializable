@@ -1,3 +1,4 @@
+/// Provides annotation classes to use with [xml_serializable](https://pub.dev/packages/xml_serializable).
 library xml_annotation;
 
 export 'package:xml_annotation/src/annotations/xml_attribute.dart';
