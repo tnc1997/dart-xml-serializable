@@ -33,7 +33,9 @@ void _$BookBuildXmlChildren(
         'author',
         isSelfClosing: true,
         nest: () {
-          builder.text(value);
+          builder.text(
+            value,
+          );
         },
       );
     }
@@ -43,7 +45,9 @@ void _$BookBuildXmlChildren(
     isSelfClosing: false,
     nest: () {
       if (price != null) {
-        builder.text(price);
+        builder.text(
+          price,
+        );
       }
     },
   );
@@ -196,7 +200,9 @@ void _$BookshelfBuildXmlChildren(
       'price',
       isSelfClosing: true,
       nest: () {
-        builder.text(price);
+        builder.text(
+          price,
+        );
       },
     );
   }

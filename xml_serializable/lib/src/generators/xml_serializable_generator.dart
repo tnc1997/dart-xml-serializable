@@ -216,7 +216,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           }
 
           buffer.writeln(
-            'builder.text(${element.name});',
+            'builder.text(${element.name},);',
           );
 
           if (includeIfNull) {
@@ -325,7 +325,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
                 );
 
                 buffer.writeln(
-                  'builder.text(value);',
+                  'builder.text(value,);',
                 );
 
                 buffer.writeln(
