@@ -20,10 +20,10 @@ part 'example.g.dart';
 @annotation.XmlSerializable()
 class Person {
   @annotation.XmlElement(name: 'firstname')
-  final String firstName;
+  final String? firstName;
 
   @annotation.XmlElement(name: 'lastname')
-  final String lastName;
+  final String? lastName;
 
   Person({this.firstName, this.lastName});
 
@@ -51,7 +51,7 @@ class Person {
       );
 
   List<XmlAttribute> toXmlAttributes({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$PersonToXmlAttributes(
         this,
@@ -59,7 +59,7 @@ class Person {
       );
 
   List<XmlNode> toXmlChildren({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$PersonToXmlChildren(
         this,
@@ -67,7 +67,7 @@ class Person {
       );
 
   XmlElement toXmlElement({
-    Map<String, String> namespaces = const {},
+    Map<String, String?> namespaces = const {},
   }) =>
       _$PersonToXmlElement(
         this,
@@ -86,23 +86,24 @@ void _$PersonBuildXmlChildren(
   XmlBuilder builder, {
   Map<String, String> namespaces = const {},
 }) {
+  final firstName = instance.firstName;
+  final lastName = instance.lastName;
+
   builder.element(
     'firstname',
+    isSelfClosing: true,
     nest: () {
-      if (instance.firstName != null) {
-        builder.text(
-          instance.firstName,
-        );
+      if (firstName != null) {
+        builder.text(firstName);
       }
     },
   );
   builder.element(
     'lastname',
+    isSelfClosing: true,
     nest: () {
-      if (instance.lastName != null) {
-        builder.text(
-          instance.lastName,
-        );
+      if (lastName != null) {
+        builder.text(lastName);
       }
     },
   );
@@ -126,30 +127,33 @@ void _$PersonBuildXmlElement(
 }
 
 Person _$PersonFromXmlElement(XmlElement element) {
-  final firstName = element.getElement(
+  final firstName = element.getElementText(
     'firstname',
   );
-  final lastName = element.getElement(
+  final lastName = element.getElementText(
     'lastname',
   );
 
   return Person(
-    firstName: firstName != null ? firstName.text : null,
-    lastName: lastName != null ? lastName.text : null,
+    firstName: firstName,
+    lastName: lastName,
   );
 }
 
 List<XmlAttribute> _$PersonToXmlAttributes(
   Person instance, {
-  Map<String, String> namespaces = const {},
+  Map<String, String?> namespaces = const {},
 }) {
   return [];
 }
 
 List<XmlNode> _$PersonToXmlChildren(
   Person instance, {
-  Map<String, String> namespaces = const {},
+  Map<String, String?> namespaces = const {},
 }) {
+  final firstName = instance.firstName;
+  final lastName = instance.lastName;
+
   return [
     XmlElement(
       XmlName(
@@ -157,11 +161,12 @@ List<XmlNode> _$PersonToXmlChildren(
       ),
       [],
       [
-        if (instance.firstName != null)
+        if (firstName != null)
           XmlText(
-            instance.firstName,
+            firstName,
           ),
       ],
+      true,
     ),
     XmlElement(
       XmlName(
@@ -169,36 +174,26 @@ List<XmlNode> _$PersonToXmlChildren(
       ),
       [],
       [
-        if (instance.lastName != null)
+        if (lastName != null)
           XmlText(
-            instance.lastName,
+            lastName,
           ),
       ],
+      true,
     ),
   ];
 }
 
 XmlElement _$PersonToXmlElement(
   Person instance, {
-  Map<String, String> namespaces = const {},
+  Map<String, String?> namespaces = const {},
 }) {
   return XmlElement(
     XmlName(
       'person',
     ),
     [
-      for (final entry in namespaces.entries)
-        XmlAttribute(
-          entry.value != null
-              ? XmlName(
-                  entry.value,
-                  'xmlns',
-                )
-              : XmlName(
-                  'xmlns',
-                ),
-          entry.key,
-        ),
+      ...namespaces.toXmlAttributes(),
       ...instance.toXmlAttributes(
         namespaces: namespaces,
       ),
@@ -206,6 +201,7 @@ XmlElement _$PersonToXmlElement(
     instance.toXmlChildren(
       namespaces: namespaces,
     ),
+    true,
   );
 }
 ```

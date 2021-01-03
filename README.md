@@ -16,7 +16,7 @@ Import it into your pubspec `dev_dependencies:` section.
 * Package: https://pub.dev/packages/xml_annotation
 * [Source code](xml_annotation)
 
-The annotation package which has no dependencies.
+The annotation package which has few dependencies.
 
 Import it into your pubspec `dependencies:` section.
 
