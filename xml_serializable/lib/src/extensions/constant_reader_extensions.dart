@@ -31,28 +31,28 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as a [bool] or `null` if the field is not a [bool].
   bool? peekBoolValue(String field) {
-    final reader = peek(field) as ConstantReader?;
+    final reader = peek(field);
 
     return reader != null && reader.isBool ? reader.boolValue : null;
   }
 
   /// Returns the value of the [field] as an [int] or `null` if the field is not an [int].
   int? peekIntValue(String field) {
-    final reader = peek(field) as ConstantReader?;
+    final reader = peek(field);
 
     return reader != null && reader.isInt ? reader.intValue : null;
   }
 
   /// Returns the value of the [field] as a [double] or `null` if the field is not a [double].
   double? peekDoubleValue(String field) {
-    final reader = peek(field) as ConstantReader?;
+    final reader = peek(field);
 
     return reader != null && reader.isDouble ? reader.doubleValue : null;
   }
 
   /// Returns the value of the [field] as a [String] or `null` if the field is not a [String].
   String? peekStringValue(String field) {
-    final reader = peek(field) as ConstantReader?;
+    final reader = peek(field);
 
     return reader != null && reader.isString ? reader.stringValue : null;
   }
