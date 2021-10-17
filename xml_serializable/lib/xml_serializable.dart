@@ -1,3 +1,4 @@
+/// Provides serialization classes to use with [xml_annotation](https://pub.dev/packages/xml_annotation).
 library xml_serializable;
 
 export 'package:xml_serializable/src/extensions/constant_reader_extensions.dart';
