@@ -12,6 +12,10 @@ import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
+/// Supports `package:build_runner` creation and configuration of
+/// `xml_serializable`.
+///
+/// Not meant to be invoked by hand-authored code.
 Builder xmlSerializableBuilder(BuilderOptions options) => SharedPartBuilder(
       [XmlSerializableGenerator()],
       'xml_serializable',
