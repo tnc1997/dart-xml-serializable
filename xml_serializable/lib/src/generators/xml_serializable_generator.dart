@@ -18,6 +18,13 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
+    if (!element.library!.isNonNullableByDefault) {
+      throw InvalidGenerationSourceError(
+        'Generator cannot target libraries that have not been migrated to null-safety.',
+        element: element,
+      );
+    }
+
     if (element is ClassElement) {
       final buffer = StringBuffer();
 
@@ -73,7 +80,6 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     for (final element in element.fields) {
       final elementType = element.type;
-      final elementTypeElement = elementType.element;
 
       if (element.hasXmlAttribute) {
         final annotation = ConstantReader(
@@ -113,6 +119,15 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           '}',
         );
       } else if (element.hasXmlElement) {
+        final elementTypeElement = elementType.element;
+
+        if (elementTypeElement == null) {
+          throw InvalidGenerationSourceError(
+            'The element representing the declaration of this type cannot be null.',
+            element: element,
+          );
+        }
+
         final annotation = ConstantReader(
           xmlElementTypeChecker.firstAnnotationOf(element),
         );
@@ -435,7 +450,6 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     for (final element in element.fields) {
       final elementType = element.type;
-      final elementTypeElement = elementType.element;
 
       if (element.hasXmlAttribute) {
         final annotation = ConstantReader(
@@ -459,6 +473,15 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           ');',
         );
       } else if (element.hasXmlElement) {
+        final elementTypeElement = elementType.element;
+
+        if (elementTypeElement == null) {
+          throw InvalidGenerationSourceError(
+            'The element representing the declaration of this type cannot be null.',
+            element: element,
+          );
+        }
+
         final annotation = ConstantReader(
           xmlElementTypeChecker.firstAnnotationOf(element),
         );
@@ -546,7 +569,6 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     for (final element in element.fields) {
       final elementType = element.type;
-      final elementTypeElement = elementType.element;
 
       if (element.hasXmlAttribute || element.hasXmlText) {
         if (elementType.isDartCoreString) {
@@ -555,6 +577,15 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           );
         }
       } else if (element.hasXmlElement) {
+        final elementTypeElement = elementType.element;
+
+        if (elementTypeElement == null) {
+          throw InvalidGenerationSourceError(
+            'The element representing the declaration of this type cannot be null.',
+            element: element,
+          );
+        }
+
         if (elementTypeElement.hasXmlSerializable) {
           buffer.write(
             '${element.name}: ${element.name} != null ? ${elementTypeElement.name}.fromXmlElement(${element.name}) : null,',
@@ -688,6 +719,13 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       if (element.hasXmlElement) {
         final elementType = element.type;
         final elementTypeElement = elementType.element;
+
+        if (elementTypeElement == null) {
+          throw InvalidGenerationSourceError(
+            'The element representing the declaration of this type cannot be null.',
+            element: element,
+          );
+        }
 
         final annotation = ConstantReader(
           xmlElementTypeChecker.firstAnnotationOf(element),
