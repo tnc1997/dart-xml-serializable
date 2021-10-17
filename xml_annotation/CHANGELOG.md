@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.0.0 (2021-10-17)
+
+### Builds
+
+* upgrade dependencies ([#9](https://github.com/tnc1997/dart-xml-serializable/issues/9)) ([9d8f30f](https://github.com/tnc1997/dart-xml-serializable/commit/9d8f30faf697edb0a88298f0b0d662059369fca1))
+
+### Documentation
+
+* add example to xml annotation ([59c9e71](https://github.com/tnc1997/dart-xml-serializable/commit/59c9e7141e779c74219b2a640e5af67bb2f8758d))
+
 ## 2.0.0-nullsafety.0 (2021-01-04)
 
 ### Features
