@@ -1,11 +1,11 @@
-import '../example/xml_serializable_example.dart';
+import '../example/xml_serializable_example.dart' show Book;
 
 void main(List<String> arguments) {
   // This works as expected.
-  final book = Book();
-  book.toXmlElement();
+  final book1 = Book();
+  book1.toXmlElement();
 
-  // This fails with an exception.
-  // dynamic book = Book();
-  // book.toXmlElement();
+  // This works as expected.
+  dynamic book2 = Book();
+  book2.toXmlElement();
 }

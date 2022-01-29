@@ -24,14 +24,14 @@ Book _$BookFromXmlElement(XmlElement element) {
   );
 }
 
-extension BookXmlSerializableExtensions on Book {
+mixin BookXmlSerializableMixin {
   void buildXmlChildren(
     XmlBuilder builder, {
     Map<String, String> namespaces = const {},
   }) {
-    final title = this.title;
-    final authors = this.authors;
-    final price = this.price;
+    final title = (this as Book).title;
+    final authors = (this as Book).authors;
+    final price = (this as Book).price;
 
     builder.element(
       'title',
@@ -96,9 +96,9 @@ extension BookXmlSerializableExtensions on Book {
   List<XmlNode> toXmlChildren({
     Map<String, String?> namespaces = const {},
   }) {
-    final title = this.title;
-    final authors = this.authors;
-    final price = this.price;
+    final title = (this as Book).title;
+    final authors = (this as Book).authors;
+    final price = (this as Book).price;
 
     return [
       XmlElement(
@@ -184,13 +184,13 @@ Bookshelf _$BookshelfFromXmlElement(XmlElement element) {
   );
 }
 
-extension BookshelfXmlSerializableExtensions on Bookshelf {
+mixin BookshelfXmlSerializableMixin {
   void buildXmlChildren(
     XmlBuilder builder, {
     Map<String, String> namespaces = const {},
   }) {
-    final books = this.books;
-    final price = this.price;
+    final books = (this as Bookshelf).books;
+    final price = (this as Bookshelf).price;
 
     if (books != null) {
       for (final value in books) {
@@ -244,8 +244,8 @@ extension BookshelfXmlSerializableExtensions on Bookshelf {
   List<XmlNode> toXmlChildren({
     Map<String, String?> namespaces = const {},
   }) {
-    final books = this.books;
-    final price = this.price;
+    final books = (this as Bookshelf).books;
+    final price = (this as Bookshelf).price;
 
     return [
       if (books != null)
@@ -311,13 +311,13 @@ Title _$TitleFromXmlElement(XmlElement element) {
   );
 }
 
-extension TitleXmlSerializableExtensions on Title {
+mixin TitleXmlSerializableMixin {
   void buildXmlChildren(
     XmlBuilder builder, {
     Map<String, String> namespaces = const {},
   }) {
-    final lang = this.lang;
-    final text = this.text;
+    final lang = (this as Title).lang;
+    final text = (this as Title).text;
 
     if (lang != null) {
       builder.attribute(
@@ -351,7 +351,7 @@ extension TitleXmlSerializableExtensions on Title {
   List<XmlAttribute> toXmlAttributes({
     Map<String, String?> namespaces = const {},
   }) {
-    final lang = this.lang;
+    final lang = (this as Title).lang;
 
     return [
       if (lang != null)
@@ -367,7 +367,7 @@ extension TitleXmlSerializableExtensions on Title {
   List<XmlNode> toXmlChildren({
     Map<String, String?> namespaces = const {},
   }) {
-    final text = this.text;
+    final text = (this as Title).text;
 
     return [
       if (text != null)

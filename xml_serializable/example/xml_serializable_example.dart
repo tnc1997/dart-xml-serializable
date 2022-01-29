@@ -30,7 +30,7 @@ void main() {
 
 @annotation.XmlRootElement(name: 'book')
 @annotation.XmlSerializable()
-class Book {
+class Book with BookXmlSerializableMixin {
   @annotation.XmlElement(name: 'title')
   Title? title;
 
@@ -57,7 +57,7 @@ class Book {
 
 @annotation.XmlRootElement(name: 'bookshelf')
 @annotation.XmlSerializable()
-class Bookshelf {
+class Bookshelf with BookshelfXmlSerializableMixin {
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
@@ -80,7 +80,7 @@ class Bookshelf {
 
 @annotation.XmlRootElement(name: 'title')
 @annotation.XmlSerializable()
-class Title {
+class Title with TitleXmlSerializableMixin {
   @annotation.XmlAttribute(name: 'lang')
   String? lang;
 
