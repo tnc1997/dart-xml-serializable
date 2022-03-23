@@ -8,6 +8,7 @@ import 'package:xml_serializable/src/extensions/element_extensions.dart';
 import 'package:xml_serializable/src/type_checkers/xml_attribute_type_checker.dart';
 import 'package:xml_serializable/src/type_checkers/xml_element_type_checker.dart';
 import 'package:xml_serializable/src/type_checkers/xml_root_element_type_checker.dart';
+import 'package:xml_serializable/src/type_checkers/xml_serializable_type_checker.dart';
 
 class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   const XmlSerializableGenerator();
@@ -26,6 +27,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     }
 
     if (element is ClassElement) {
+      final annotation = ConstantReader(
+        xmlSerializableTypeChecker.firstAnnotationOf(element),
+      );
+
       final buffer = StringBuffer();
 
       _generateBuildXmlChildren(buffer, element);
@@ -51,6 +56,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       _generateToXmlElement(buffer, element);
 
       buffer.writeln();
+
+      if (annotation.peekBoolValue('createMixin') == true) {
+        _generateMixin(buffer, element);
+      }
 
       return buffer.toString();
     } else {
@@ -616,6 +625,44 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     buffer.writeln(
       ');',
+    );
+
+    buffer.writeln(
+      '}',
+    );
+  }
+
+  void _generateMixin(StringBuffer buffer, ClassElement element) {
+    buffer.writeln(
+      'mixin _\$${element.name}XmlSerializableMixin {',
+    );
+
+    buffer.writeln(
+      'void buildXmlChildren(XmlBuilder builder, {Map<String, String> namespaces = const {},}) => _\$${element.name}BuildXmlChildren(this as ${element.name}, builder, namespaces: namespaces,);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'void buildXmlElement(XmlBuilder builder, {Map<String, String> namespaces = const {},}) => _\$${element.name}BuildXmlElement(this as ${element.name}, builder, namespaces: namespaces,);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'List<XmlAttribute> toXmlAttributes({Map<String, String?> namespaces = const {},}) => _\$${element.name}ToXmlAttributes(this as ${element.name}, namespaces: namespaces,);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'List<XmlNode> toXmlChildren({Map<String, String?> namespaces = const {},}) => _\$${element.name}ToXmlChildren(this as ${element.name}, namespaces: namespaces,);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'XmlElement toXmlElement({Map<String, String?> namespaces = const {},}) => _\$${element.name}ToXmlElement(this as ${element.name}, namespaces: namespaces,);',
     );
 
     buffer.writeln(

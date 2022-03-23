@@ -29,8 +29,8 @@ void main() {
 }
 
 @annotation.XmlRootElement(name: 'book')
-@annotation.XmlSerializable()
-class Book with BookXmlSerializableMixin {
+@annotation.XmlSerializable(createMixin: true)
+class Book with _$BookXmlSerializableMixin {
   @annotation.XmlElement(name: 'title')
   Title? title;
 
@@ -56,8 +56,8 @@ class Book with BookXmlSerializableMixin {
 }
 
 @annotation.XmlRootElement(name: 'bookshelf')
-@annotation.XmlSerializable()
-class Bookshelf with BookshelfXmlSerializableMixin {
+@annotation.XmlSerializable(createMixin: true)
+class Bookshelf with _$BookshelfXmlSerializableMixin {
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
@@ -79,8 +79,8 @@ class Bookshelf with BookshelfXmlSerializableMixin {
 }
 
 @annotation.XmlRootElement(name: 'title')
-@annotation.XmlSerializable()
-class Title with TitleXmlSerializableMixin {
+@annotation.XmlSerializable(createMixin: true)
+class Title with _$TitleXmlSerializableMixin {
   @annotation.XmlAttribute(name: 'lang')
   String? lang;
 
