@@ -31,9 +31,7 @@ class XmlAttributeConstructorGenerator extends ConstructorGenerator {
       buffer.write(', namespaces[\'$_namespace\']');
     }
 
-    buffer.write(
-      '), $expression)',
-    );
+    buffer.write('), $expression)');
 
     if (_isNullable) {
       buffer.write(' : null');

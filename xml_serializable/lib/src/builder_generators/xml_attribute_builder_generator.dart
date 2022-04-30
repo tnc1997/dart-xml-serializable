@@ -31,9 +31,7 @@ class XmlAttributeBuilderGenerator extends BuilderGenerator {
       buffer.write(', namespace: \'$_namespace\'');
     }
 
-    buffer.write(
-      ');',
-    );
+    buffer.write(');');
 
     if (_isNullable) {
       buffer.write(' }');
