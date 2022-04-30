@@ -1,0 +1,28 @@
+name: Test
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    name: Test
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+      - name: Install dependencies
+        run: |
+          cd xml_serializable
+          dart pub get
+      - name: Run tests
+        run: |
+          cd xml_serializable
+          dart test
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        sdk: [stable, beta, dev]
