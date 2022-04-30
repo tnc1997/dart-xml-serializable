@@ -3,16 +3,16 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:xml_annotation/xml_annotation.dart';
-import 'package:xml_serializable/src/generator_factories/builder_generator_factory.dart';
 
-import '../extensions/dart_object_extensions.dart';
-import '../extensions/dart_type_extensions.dart';
-import '../extensions/element_extensions.dart';
-import '../generator_factories/constructor_generator_factory.dart';
-import '../generator_factories/getter_generator_factory.dart';
-import '../generator_factories/serializer_generator_factory.dart';
-import '../serializer_generators/iterable_serializer_generator.dart';
-import '../serializer_generators/serializer_generator.dart';
+import 'extensions/dart_object_extensions.dart';
+import 'extensions/dart_type_extensions.dart';
+import 'extensions/element_extensions.dart';
+import 'generator_factories/builder_generator_factory.dart';
+import 'generator_factories/constructor_generator_factory.dart';
+import 'generator_factories/getter_generator_factory.dart';
+import 'generator_factories/serializer_generator_factory.dart';
+import 'serializer_generators/iterable_serializer_generator.dart';
+import 'serializer_generators/serializer_generator.dart';
 
 class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   final BuilderGeneratorFactory _builderGeneratorFactory;
@@ -54,31 +54,34 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       _generateBuildXmlChildren(buffer, element);
 
       buffer.writeln();
+      buffer.writeln();
 
       _generateBuildXmlElement(buffer, element);
 
+      buffer.writeln();
       buffer.writeln();
 
       _generateFromXmlElement(buffer, element);
 
       buffer.writeln();
+      buffer.writeln();
 
       _generateToXmlAttributes(buffer, element);
 
+      buffer.writeln();
       buffer.writeln();
 
       _generateToXmlChildren(buffer, element);
 
       buffer.writeln();
+      buffer.writeln();
 
       _generateToXmlElement(buffer, element);
-
-      buffer.writeln();
 
       return buffer.toString();
     } else {
       throw InvalidGenerationSourceError(
-        '`@XmlSerializable` can only be used on classes.',
+        '`@XmlSerializable()` can only be used on classes.',
         element: element,
       );
     }
@@ -94,7 +97,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
   void _generateBuildXmlChildren(StringBuffer buffer, ClassElement element) {
     buffer.writeln(
-      'void _\$${element.name}BuildXmlChildren(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {},}) {',
+      'void _\$${element.name}BuildXmlChildren(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {',
     );
 
     for (final element in element.fields) {
@@ -117,13 +120,13 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       }
     }
 
-    buffer.writeln('}');
+    buffer.write('}');
   }
 
   void _generateBuildXmlElement(StringBuffer buffer, ClassElement element) {
     if (element.hasXmlRootElement) {
-      buffer.writeln(
-        'void _\$${element.name}BuildXmlElement(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {},}) { ${_builderGeneratorFactory(element).generateBuilder('instance')} }',
+      buffer.write(
+        'void _\$${element.name}BuildXmlElement(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {\n${_builderGeneratorFactory(element).generateBuilder('instance')}\n}',
       );
     }
   }
@@ -139,22 +142,16 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       );
     }
 
-    buffer.writeln('return ${element.name}(');
+    buffer.writeln(
+      'return ${element.name}(${element.fields.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)}').join(', ')});',
+    );
 
-    for (final element in element.fields) {
-      buffer.writeln(
-        '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)},',
-      );
-    }
-
-    buffer.writeln(');');
-
-    buffer.writeln('}');
+    buffer.write('}');
   }
 
   void _generateToXmlAttributes(StringBuffer buffer, ClassElement element) {
     buffer.writeln(
-      'List<XmlAttribute> _\$${element.name}ToXmlAttributes(${element.name} instance, {Map<String, String?> namespaces = const {},}) {',
+      'List<XmlAttribute> _\$${element.name}ToXmlAttributes(${element.name} instance, {Map<String, String?> namespaces = const {}}) {',
     );
 
     buffer.writeln('final attributes = <XmlAttribute>[];');
@@ -172,31 +169,36 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         );
 
         if (_doesRequireNullCheck(element)) {
-          buffer.writeln('if (${element.name}Constructed != null) {');
+          buffer.write('if (${element.name}Constructed != null) { ');
         }
 
         if (element.type.isDartCoreIterable ||
             element.type.isDartCoreList ||
             element.type.isDartCoreSet) {
-          buffer.writeln('attributes.addAll(${element.name}Constructed);');
+          throw InvalidGenerationSourceError(
+            '`@XmlAttribute()` cannot be used on fields of an iterable type due to https://www.w3.org/TR/xml/#uniqattspec.',
+            element: element,
+          );
         } else {
-          buffer.writeln('attributes.add(${element.name}Constructed);');
+          buffer.write('attributes.add(${element.name}Constructed);');
         }
 
         if (_doesRequireNullCheck(element)) {
-          buffer.writeln('}');
+          buffer.write(' }');
         }
+
+        buffer.writeln();
       }
     }
 
-    buffer.write('return attributes;');
+    buffer.writeln('return attributes;');
 
-    buffer.writeln('}');
+    buffer.write('}');
   }
 
   void _generateToXmlChildren(StringBuffer buffer, ClassElement element) {
     buffer.writeln(
-      'List<XmlNode> _\$${element.name}ToXmlChildren(${element.name} instance, {Map<String, String?> namespaces = const {},}) {',
+      'List<XmlNode> _\$${element.name}ToXmlChildren(${element.name} instance, {Map<String, String?> namespaces = const {}}) {',
     );
 
     buffer.writeln('final children = <XmlNode>[];');
@@ -214,32 +216,34 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         );
 
         if (_doesRequireNullCheck(element)) {
-          buffer.writeln('if (${element.name}Constructed != null) {');
+          buffer.write('if (${element.name}Constructed != null) { ');
         }
 
         if (element.type.isDartCoreIterable ||
             element.type.isDartCoreList ||
             element.type.isDartCoreSet) {
-          buffer.writeln('children.addAll(${element.name}Constructed);');
+          buffer.write('children.addAll(${element.name}Constructed);');
         } else {
-          buffer.writeln('children.add(${element.name}Constructed);');
+          buffer.write('children.add(${element.name}Constructed);');
         }
 
         if (_doesRequireNullCheck(element)) {
-          buffer.writeln('}');
+          buffer.write(' }');
         }
+
+        buffer.writeln();
       }
     }
 
-    buffer.write('return children;');
+    buffer.writeln('return children;');
 
-    buffer.writeln('}');
+    buffer.write('}');
   }
 
   void _generateToXmlElement(StringBuffer buffer, ClassElement element) {
     if (element.hasXmlRootElement) {
-      buffer.writeln(
-        'XmlElement _\$${element.name}ToXmlElement(${element.name} instance, {Map<String, String?> namespaces = const {},}) { return ${_constructorGeneratorFactory(element).generateConstructor('instance')}; }',
+      buffer.write(
+        'XmlElement _\$${element.name}ToXmlElement(${element.name} instance, {Map<String, String?> namespaces = const {}}) {\nreturn ${_constructorGeneratorFactory(element).generateConstructor('instance')};\n}',
       );
     }
   }

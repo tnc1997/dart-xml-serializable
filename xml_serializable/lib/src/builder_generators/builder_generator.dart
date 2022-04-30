@@ -5,7 +5,7 @@
 ///   const XmlTextBuilderGenerator();
 ///
 ///   @override
-///   String generateBuilder(String expression) => 'builder.text($expression);';
+///   String generateBuilder(String expression, {String builder = 'builder'}) => '$builder.text($expression);';
 /// }
 /// ```
 ///
@@ -24,7 +24,7 @@ abstract class BuilderGenerator {
   /// An implementation to build a representation of the type as an XML text could be as simple as:
   ///
   /// ```dart
-  /// String generateBuilder(String expression) => 'builder.text($expression);';
+  /// String generateBuilder(String expression, {String builder = 'builder'}) => '$builder.text($expression);';
   /// ```
   String generateBuilder(String expression, {String builder = 'builder'});
 }

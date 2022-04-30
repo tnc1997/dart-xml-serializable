@@ -24,7 +24,6 @@ export 'package:xml_serializable/src/generator_factories/builder_generator_facto
 export 'package:xml_serializable/src/generator_factories/constructor_generator_factory.dart';
 export 'package:xml_serializable/src/generator_factories/getter_generator_factory.dart';
 export 'package:xml_serializable/src/generator_factories/serializer_generator_factory.dart';
-export 'package:xml_serializable/src/generators/xml_serializable_generator.dart';
 export 'package:xml_serializable/src/getter_generators/getter_generator.dart';
 export 'package:xml_serializable/src/getter_generators/xml_attribute_getter_generator.dart';
 export 'package:xml_serializable/src/getter_generators/xml_element_getter_generator.dart';
@@ -47,3 +46,4 @@ export 'package:xml_serializable/src/type_checkers/xml_element_type_checker.dart
 export 'package:xml_serializable/src/type_checkers/xml_root_element_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_serializable_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_text_type_checker.dart';
+export 'package:xml_serializable/src/xml_serializable_generator.dart';

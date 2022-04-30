@@ -17,41 +17,57 @@ typedef BuilderGeneratorFactory = BuilderGenerator Function(Element element);
 
 /// Creates a [BuilderGenerator] from an [Element] that has an attribute of the form `@XmlAttribute()`, `@XmlElement()`, `@XmlRootElement()`, or `@XmlText()`.
 BuilderGenerator builderGeneratorFactory(Element element) {
-  if (element is VariableElement) {
-    if (element.hasXmlAttribute) {
+  if (element.hasXmlAttribute) {
+    if (element is FieldElement) {
       return xmlAttributeBuilderGeneratorFactory(element);
-    } else if (element.hasXmlElement) {
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlAttribute()` can only be used on fields.',
+      );
+    }
+  } else if (element.hasXmlElement) {
+    if (element is FieldElement) {
       return xmlElementBuilderGeneratorFactory(element);
-    } else if (element.hasXmlText) {
-      return XmlTextBuilderGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlElement()` can only be used on fields.',
+      );
     }
-
-    throw ArgumentError.value(
-      element,
-      'element',
-      '`${element.name}` does not have a supported annotation. Add an annotation of the form `@XmlAttribute()`, `@XmlElement()`, or `@XmlText()` to `${element.name}`.',
-    );
-  } else if (element is ClassElement) {
-    if (element.hasXmlRootElement) {
+  } else if (element.hasXmlRootElement) {
+    if (element is ClassElement) {
       return xmlRootElementBuilderGeneratorFactory(element);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlRootElement()` can only be used on classes.',
+      );
     }
-
-    throw ArgumentError.value(
-      element,
-      'element',
-      '`${element.name}` does not have a supported annotation. Add an annotation of the form `@XmlRootElement()` to `${element.name}`.',
-    );
+  } else if (element.hasXmlText) {
+    if (element is FieldElement) {
+      return XmlTextBuilderGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlText()` can only be used on fields.',
+      );
+    }
   }
 
   throw ArgumentError.value(
     element,
     'element',
-    '`${element.name}` is not a supported element. Change `${element.name}` to a class or a variable.',
+    '`${element.name}` does not have a supported annotation. Add an annotation of the form `@XmlAttribute()`, `@XmlElement()`, `@XmlRootElement()`, or `@XmlText()` to `${element.name}`.',
   );
 }
 
-/// Creates a [BuilderGenerator] from a [VariableElement] that has an attribute of the form `@XmlAttribute()`.
-BuilderGenerator xmlAttributeBuilderGeneratorFactory(VariableElement element) {
+/// Creates a [BuilderGenerator] from a [FieldElement] that has an attribute of the form `@XmlAttribute()`.
+BuilderGenerator xmlAttributeBuilderGeneratorFactory(FieldElement element) {
   final annotation = element.getXmlAttribute()!;
 
   final name = annotation.getStringValue('name') ?? element.name;
@@ -64,8 +80,8 @@ BuilderGenerator xmlAttributeBuilderGeneratorFactory(VariableElement element) {
   );
 }
 
-/// Creates a [BuilderGenerator] from a [VariableElement] that has an attribute of the form `@XmlElement()`.
-BuilderGenerator xmlElementBuilderGeneratorFactory(VariableElement element) {
+/// Creates a [BuilderGenerator] from a [FieldElement] that has an attribute of the form `@XmlElement()`.
+BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
   final annotation = element.getXmlElement()!;
 
   final name = annotation.getStringValue('name') ?? element.name;

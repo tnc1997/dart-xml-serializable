@@ -1,3 +1,5 @@
+// coverage:ignore-file
+
 import 'package:source_gen/source_gen.dart';
 
 extension ConstantReaderExtensions on ConstantReader {

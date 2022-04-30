@@ -15,31 +15,47 @@ typedef GetterGeneratorFactory = GetterGenerator Function(Element element);
 
 /// Creates a [GetterGenerator] from an [Element] that has an attribute of the form `@XmlAttribute()`, `@XmlElement()`, or `@XmlText()`.
 GetterGenerator getterGeneratorFactory(Element element) {
-  if (element is VariableElement) {
-    if (element.hasXmlAttribute) {
+  if (element.hasXmlAttribute) {
+    if (element is FieldElement) {
       return xmlAttributeGetterGeneratorFactory(element);
-    } else if (element.hasXmlElement) {
-      return xmlElementGetterGeneratorFactory(element);
-    } else if (element.hasXmlText) {
-      return XmlTextGetterGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlAttribute()` can only be used on fields.',
+      );
     }
-
-    throw ArgumentError.value(
-      element,
-      'element',
-      '`${element.name}` does not have a supported annotation. Add an annotation of the form `@XmlAttribute()`, `@XmlElement()`, or `@XmlText()` to `${element.name}`.',
-    );
+  } else if (element.hasXmlElement) {
+    if (element is FieldElement) {
+      return xmlElementGetterGeneratorFactory(element);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlElement()` can only be used on fields.',
+      );
+    }
+  } else if (element.hasXmlText) {
+    if (element is FieldElement) {
+      return XmlTextGetterGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlText()` can only be used on fields.',
+      );
+    }
   }
 
   throw ArgumentError.value(
     element,
     'element',
-    '`${element.name}` is not a supported element. Change `${element.name}` to a variable.',
+    '`${element.name}` does not have a supported annotation. Add an annotation of the form `@XmlAttribute()`, `@XmlElement()`, or `@XmlText()` to `${element.name}`.',
   );
 }
 
-/// Creates a [GetterGenerator] from a [VariableElement] that has an attribute of the form `@XmlAttribute()`.
-GetterGenerator xmlAttributeGetterGeneratorFactory(VariableElement element) {
+/// Creates a [GetterGenerator] from a [FieldElement] that has an attribute of the form `@XmlAttribute()`.
+GetterGenerator xmlAttributeGetterGeneratorFactory(FieldElement element) {
   final annotation = element.getXmlAttribute()!;
 
   final name = annotation.getStringValue('name') ?? element.name;
@@ -52,8 +68,8 @@ GetterGenerator xmlAttributeGetterGeneratorFactory(VariableElement element) {
   );
 }
 
-/// Creates a [GetterGenerator] from a [VariableElement] that has an attribute of the form `@XmlElement()`.
-GetterGenerator xmlElementGetterGeneratorFactory(VariableElement element) {
+/// Creates a [GetterGenerator] from a [FieldElement] that has an attribute of the form `@XmlElement()`.
+GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
   final annotation = element.getXmlElement()!;
 
   final name = annotation.getStringValue('name') ?? element.name;
