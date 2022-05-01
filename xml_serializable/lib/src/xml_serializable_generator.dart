@@ -49,6 +49,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     }
 
     if (element is ClassElement) {
+      final annotation = element.getXmlSerializable()!;
+
       final buffer = StringBuffer();
 
       _generateBuildXmlChildren(buffer, element);
@@ -77,6 +79,13 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       buffer.writeln();
 
       _generateToXmlElement(buffer, element);
+
+      if (annotation.getBoolValue('createMixin') == true) {
+        buffer.writeln();
+        buffer.writeln();
+
+        _generateMixin(buffer, element);
+      }
 
       return buffer.toString();
     } else {
@@ -144,6 +153,42 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     buffer.writeln(
       'return ${element.name}(${element.fields.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)}').join(', ')});',
+    );
+
+    buffer.write('}');
+  }
+
+  void _generateMixin(StringBuffer buffer, ClassElement element) {
+    buffer.writeln(
+      'mixin _\$${element.name}XmlSerializableMixin {',
+    );
+
+    buffer.writeln(
+      'void buildXmlChildren(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlChildren(this as ${element.name}, builder, namespaces: namespaces);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'void buildXmlElement(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlElement(this as ${element.name}, builder, namespaces: namespaces);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'List<XmlAttribute> toXmlAttributes({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlAttributes(this as ${element.name}, namespaces: namespaces);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'List<XmlNode> toXmlChildren({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlChildren(this as ${element.name}, namespaces: namespaces);',
+    );
+
+    buffer.writeln();
+
+    buffer.writeln(
+      'XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlElement(this as ${element.name}, namespaces: namespaces);',
     );
 
     buffer.write('}');

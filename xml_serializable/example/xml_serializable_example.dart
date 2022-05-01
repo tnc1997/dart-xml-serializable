@@ -29,8 +29,8 @@ void main() {
 }
 
 @annotation.XmlRootElement(name: 'book')
-@annotation.XmlSerializable(createMixin: true)
-class Book with _$BookXmlSerializableMixin {
+@annotation.XmlSerializable()
+class Book {
   @annotation.XmlElement(name: 'title')
   Title? title;
 
@@ -53,11 +53,55 @@ class Book with _$BookXmlSerializableMixin {
   String toString() {
     return 'Book{title: $title, authors: $authors, price: $price}';
   }
+
+  void buildXmlChildren(
+    XmlBuilder builder, {
+    Map<String, String> namespaces = const {},
+  }) =>
+      _$BookBuildXmlChildren(
+        this,
+        builder,
+        namespaces: namespaces,
+      );
+
+  void buildXmlElement(
+    XmlBuilder builder, {
+    Map<String, String> namespaces = const {},
+  }) =>
+      _$BookBuildXmlElement(
+        this,
+        builder,
+        namespaces: namespaces,
+      );
+
+  List<XmlAttribute> toXmlAttributes({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$BookToXmlAttributes(
+        this,
+        namespaces: namespaces,
+      );
+
+  List<XmlNode> toXmlChildren({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$BookToXmlChildren(
+        this,
+        namespaces: namespaces,
+      );
+
+  XmlElement toXmlElement({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$BookToXmlElement(
+        this,
+        namespaces: namespaces,
+      );
 }
 
 @annotation.XmlRootElement(name: 'bookshelf')
-@annotation.XmlSerializable(createMixin: true)
-class Bookshelf with _$BookshelfXmlSerializableMixin {
+@annotation.XmlSerializable()
+class Bookshelf {
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
@@ -76,11 +120,55 @@ class Bookshelf with _$BookshelfXmlSerializableMixin {
   String toString() {
     return 'Bookshelf{books: $books, price: $price}';
   }
+
+  void buildXmlChildren(
+    XmlBuilder builder, {
+    Map<String, String> namespaces = const {},
+  }) =>
+      _$BookshelfBuildXmlChildren(
+        this,
+        builder,
+        namespaces: namespaces,
+      );
+
+  void buildXmlElement(
+    XmlBuilder builder, {
+    Map<String, String> namespaces = const {},
+  }) =>
+      _$BookshelfBuildXmlElement(
+        this,
+        builder,
+        namespaces: namespaces,
+      );
+
+  List<XmlAttribute> toXmlAttributes({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$BookshelfToXmlAttributes(
+        this,
+        namespaces: namespaces,
+      );
+
+  List<XmlNode> toXmlChildren({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$BookshelfToXmlChildren(
+        this,
+        namespaces: namespaces,
+      );
+
+  XmlElement toXmlElement({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$BookshelfToXmlElement(
+        this,
+        namespaces: namespaces,
+      );
 }
 
 @annotation.XmlRootElement(name: 'title')
-@annotation.XmlSerializable(createMixin: true)
-class Title with _$TitleXmlSerializableMixin {
+@annotation.XmlSerializable()
+class Title {
   @annotation.XmlAttribute(name: 'lang')
   String? lang;
 
@@ -99,4 +187,48 @@ class Title with _$TitleXmlSerializableMixin {
   String toString() {
     return 'Title{lang: $lang, text: $text}';
   }
+
+  void buildXmlChildren(
+    XmlBuilder builder, {
+    Map<String, String> namespaces = const {},
+  }) =>
+      _$TitleBuildXmlChildren(
+        this,
+        builder,
+        namespaces: namespaces,
+      );
+
+  void buildXmlElement(
+    XmlBuilder builder, {
+    Map<String, String> namespaces = const {},
+  }) =>
+      _$TitleBuildXmlElement(
+        this,
+        builder,
+        namespaces: namespaces,
+      );
+
+  List<XmlAttribute> toXmlAttributes({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$TitleToXmlAttributes(
+        this,
+        namespaces: namespaces,
+      );
+
+  List<XmlNode> toXmlChildren({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$TitleToXmlChildren(
+        this,
+        namespaces: namespaces,
+      );
+
+  XmlElement toXmlElement({
+    Map<String, String?> namespaces = const {},
+  }) =>
+      _$TitleToXmlElement(
+        this,
+        namespaces: namespaces,
+      );
 }
