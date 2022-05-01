@@ -6,541 +6,230 @@ part of 'xml_serializable_example.dart';
 // XmlSerializableGenerator
 // **************************************************************************
 
-void _$BookBuildXmlChildren(
-  Book instance,
-  XmlBuilder builder, {
-  Map<String, String> namespaces = const {},
-}) {
+void _$BookBuildXmlChildren(Book instance, XmlBuilder builder,
+    {Map<String, String> namespaces = const {}}) {
   final title = instance.title;
+  final titleSerialized = title;
+  builder.element('title', nest: () {
+    if (titleSerialized != null) {
+      titleSerialized.buildXmlChildren(builder, namespaces: namespaces);
+    }
+  });
   final authors = instance.authors;
-  final price = instance.price;
-
-  builder.element(
-    'title',
-    isSelfClosing: true,
-    nest: () {
-      if (title != null) {
-        title.buildXmlChildren(
-          builder,
-          namespaces: namespaces,
-        );
-      }
-    },
-  );
-  if (authors != null) {
-    for (final value in authors) {
-      builder.element(
-        'author',
-        isSelfClosing: true,
-        nest: () {
-          builder.text(
-            value,
-          );
-        },
-      );
+  final authorsSerialized = authors;
+  if (authorsSerialized != null) {
+    for (final value in authorsSerialized) {
+      builder.element('author', nest: () {
+        builder.text(value);
+      });
     }
   }
-  builder.element(
-    'price',
-    isSelfClosing: false,
-    nest: () {
-      if (price != null) {
-        builder.text(
-          price,
-        );
-      }
-    },
-  );
+  final price = instance.price;
+  final priceSerialized = price;
+  builder.element('price', isSelfClosing: false, nest: () {
+    if (priceSerialized != null) {
+      builder.text(priceSerialized);
+    }
+  });
 }
 
-void _$BookBuildXmlElement(
-  Book instance,
-  XmlBuilder builder, {
-  Map<String, String> namespaces = const {},
-}) {
-  builder.element(
-    'book',
-    namespaces: namespaces,
-    nest: () {
-      instance.buildXmlChildren(
-        builder,
-        namespaces: namespaces,
-      );
-    },
-  );
+void _$BookBuildXmlElement(Book instance, XmlBuilder builder,
+    {Map<String, String> namespaces = const {}}) {
+  builder.element('book', namespaces: namespaces, nest: () {
+    instance.buildXmlChildren(builder, namespaces: namespaces);
+  });
 }
 
 Book _$BookFromXmlElement(XmlElement element) {
-  final title = element.getElement(
-    'title',
-  );
-  final authors = element.findElementsText(
-    'author',
-  );
-  final price = element.getElementText(
-    'price',
-  );
-
+  final title = element.getElement('title');
+  final authors = element
+      .getElements('author')
+      ?.map((e) => e.getText())
+      .whereType<String>();
+  final price = element.getElement('price')?.getText();
   return Book(
-    title: title != null ? Title.fromXmlElement(title) : null,
-    authors: authors.toList(),
-    price: price,
-  );
+      title: title != null ? Title.fromXmlElement(title) : null,
+      authors: authors?.toList(),
+      price: price);
 }
 
-List<XmlAttribute> _$BookToXmlAttributes(
-  Book instance, {
-  Map<String, String?> namespaces = const {},
-}) {
-  return [];
+List<XmlAttribute> _$BookToXmlAttributes(Book instance,
+    {Map<String, String?> namespaces = const {}}) {
+  final attributes = <XmlAttribute>[];
+  return attributes;
 }
 
-List<XmlNode> _$BookToXmlChildren(
-  Book instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+List<XmlNode> _$BookToXmlChildren(Book instance,
+    {Map<String, String?> namespaces = const {}}) {
+  final children = <XmlNode>[];
   final title = instance.title;
+  final titleSerialized = title;
+  final titleConstructed = XmlElement(
+      XmlName('title'),
+      titleSerialized?.toXmlAttributes(namespaces: namespaces) ?? [],
+      titleSerialized?.toXmlChildren(namespaces: namespaces) ?? []);
+  children.add(titleConstructed);
   final authors = instance.authors;
+  final authorsSerialized = authors;
+  final authorsConstructed = authorsSerialized
+      ?.map((e) => XmlElement(XmlName('author'), [], [XmlText(e)]));
+  if (authorsConstructed != null) {
+    children.addAll(authorsConstructed);
+  }
   final price = instance.price;
-
-  return [
-    XmlElement(
-      XmlName(
-        'title',
-      ),
-      [
-        if (title != null)
-          ...title.toXmlAttributes(
-            namespaces: namespaces,
-          ),
-      ],
-      [
-        if (title != null)
-          ...title.toXmlChildren(
-            namespaces: namespaces,
-          ),
-      ],
-      true,
-    ),
-    if (authors != null)
-      for (final value in authors)
-        XmlElement(
-          XmlName(
-            'author',
-          ),
-          [],
-          [
-            XmlText(
-              value,
-            ),
-          ],
-          true,
-        ),
-    XmlElement(
-      XmlName(
-        'price',
-      ),
-      [],
-      [
-        if (price != null)
-          XmlText(
-            price,
-          ),
-      ],
-      false,
-    ),
-  ];
+  final priceSerialized = price;
+  final priceConstructed = XmlElement(XmlName('price'), [],
+      priceSerialized != null ? [XmlText(priceSerialized)] : [], false);
+  children.add(priceConstructed);
+  return children;
 }
 
-XmlElement _$BookToXmlElement(
-  Book instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+XmlElement _$BookToXmlElement(Book instance,
+    {Map<String, String?> namespaces = const {}}) {
   return XmlElement(
-    XmlName(
-      'book',
-    ),
-    [
-      ...namespaces.toXmlAttributes(),
-      ...instance.toXmlAttributes(
-        namespaces: namespaces,
-      ),
-    ],
-    instance.toXmlChildren(
-      namespaces: namespaces,
-    ),
-    true,
-  );
+      XmlName('book'),
+      [
+        ...namespaces.toXmlAttributes(),
+        ...instance.toXmlAttributes(namespaces: namespaces)
+      ],
+      instance.toXmlChildren(namespaces: namespaces));
 }
 
-mixin _$BookXmlSerializableMixin {
-  void buildXmlChildren(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$BookBuildXmlChildren(
-        this as Book,
-        builder,
-        namespaces: namespaces,
-      );
-
-  void buildXmlElement(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$BookBuildXmlElement(
-        this as Book,
-        builder,
-        namespaces: namespaces,
-      );
-
-  List<XmlAttribute> toXmlAttributes({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$BookToXmlAttributes(
-        this as Book,
-        namespaces: namespaces,
-      );
-
-  List<XmlNode> toXmlChildren({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$BookToXmlChildren(
-        this as Book,
-        namespaces: namespaces,
-      );
-
-  XmlElement toXmlElement({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$BookToXmlElement(
-        this as Book,
-        namespaces: namespaces,
-      );
-}
-
-void _$BookshelfBuildXmlChildren(
-  Bookshelf instance,
-  XmlBuilder builder, {
-  Map<String, String> namespaces = const {},
-}) {
+void _$BookshelfBuildXmlChildren(Bookshelf instance, XmlBuilder builder,
+    {Map<String, String> namespaces = const {}}) {
   final books = instance.books;
-  final price = instance.price;
-
-  if (books != null) {
-    for (final value in books) {
-      builder.element(
-        'book',
-        isSelfClosing: true,
-        nest: () {
-          value.buildXmlChildren(
-            builder,
-            namespaces: namespaces,
-          );
-        },
-      );
+  final booksSerialized = books;
+  if (booksSerialized != null) {
+    for (final value in booksSerialized) {
+      builder.element('book', nest: () {
+        value.buildXmlChildren(builder, namespaces: namespaces);
+      });
     }
   }
-  if (price != null) {
-    builder.element(
-      'price',
-      isSelfClosing: true,
-      nest: () {
-        builder.text(
-          price,
-        );
-      },
-    );
+  final price = instance.price;
+  final priceSerialized = price;
+  if (priceSerialized != null) {
+    builder.element('price', nest: () {
+      builder.text(priceSerialized);
+    });
   }
 }
 
-void _$BookshelfBuildXmlElement(
-  Bookshelf instance,
-  XmlBuilder builder, {
-  Map<String, String> namespaces = const {},
-}) {
-  builder.element(
-    'bookshelf',
-    namespaces: namespaces,
-    nest: () {
-      instance.buildXmlChildren(
-        builder,
-        namespaces: namespaces,
-      );
-    },
-  );
+void _$BookshelfBuildXmlElement(Bookshelf instance, XmlBuilder builder,
+    {Map<String, String> namespaces = const {}}) {
+  builder.element('bookshelf', namespaces: namespaces, nest: () {
+    instance.buildXmlChildren(builder, namespaces: namespaces);
+  });
 }
 
 Bookshelf _$BookshelfFromXmlElement(XmlElement element) {
-  final books = element.findElements(
-    'book',
-  );
-  final price = element.getElementText(
-    'price',
-  );
-
+  final books = element.getElements('book');
+  final price = element.getElement('price')?.getText();
   return Bookshelf(
-    books: books.map((element) => Book.fromXmlElement(element)).toList(),
-    price: price,
-  );
+      books: books?.map((e) => Book.fromXmlElement(e)).toList(), price: price);
 }
 
-List<XmlAttribute> _$BookshelfToXmlAttributes(
-  Bookshelf instance, {
-  Map<String, String?> namespaces = const {},
-}) {
-  return [];
+List<XmlAttribute> _$BookshelfToXmlAttributes(Bookshelf instance,
+    {Map<String, String?> namespaces = const {}}) {
+  final attributes = <XmlAttribute>[];
+  return attributes;
 }
 
-List<XmlNode> _$BookshelfToXmlChildren(
-  Bookshelf instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+List<XmlNode> _$BookshelfToXmlChildren(Bookshelf instance,
+    {Map<String, String?> namespaces = const {}}) {
+  final children = <XmlNode>[];
   final books = instance.books;
+  final booksSerialized = books;
+  final booksConstructed = booksSerialized?.map((e) => XmlElement(
+      XmlName('book'),
+      e.toXmlAttributes(namespaces: namespaces),
+      e.toXmlChildren(namespaces: namespaces)));
+  if (booksConstructed != null) {
+    children.addAll(booksConstructed);
+  }
   final price = instance.price;
-
-  return [
-    if (books != null)
-      for (final value in books)
-        XmlElement(
-          XmlName(
-            'book',
-          ),
-          value.toXmlAttributes(
-            namespaces: namespaces,
-          ),
-          value.toXmlChildren(
-            namespaces: namespaces,
-          ),
-          true,
-        ),
-    if (price != null)
-      XmlElement(
-        XmlName(
-          'price',
-        ),
-        [],
-        [
-          XmlText(
-            price,
-          ),
-        ],
-        true,
-      ),
-  ];
+  final priceSerialized = price;
+  final priceConstructed = priceSerialized != null
+      ? XmlElement(XmlName('price'), [], [XmlText(priceSerialized)])
+      : null;
+  if (priceConstructed != null) {
+    children.add(priceConstructed);
+  }
+  return children;
 }
 
-XmlElement _$BookshelfToXmlElement(
-  Bookshelf instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+XmlElement _$BookshelfToXmlElement(Bookshelf instance,
+    {Map<String, String?> namespaces = const {}}) {
   return XmlElement(
-    XmlName(
-      'bookshelf',
-    ),
-    [
-      ...namespaces.toXmlAttributes(),
-      ...instance.toXmlAttributes(
-        namespaces: namespaces,
-      ),
-    ],
-    instance.toXmlChildren(
-      namespaces: namespaces,
-    ),
-    true,
-  );
+      XmlName('bookshelf'),
+      [
+        ...namespaces.toXmlAttributes(),
+        ...instance.toXmlAttributes(namespaces: namespaces)
+      ],
+      instance.toXmlChildren(namespaces: namespaces));
 }
 
-mixin _$BookshelfXmlSerializableMixin {
-  void buildXmlChildren(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$BookshelfBuildXmlChildren(
-        this as Bookshelf,
-        builder,
-        namespaces: namespaces,
-      );
-
-  void buildXmlElement(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$BookshelfBuildXmlElement(
-        this as Bookshelf,
-        builder,
-        namespaces: namespaces,
-      );
-
-  List<XmlAttribute> toXmlAttributes({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$BookshelfToXmlAttributes(
-        this as Bookshelf,
-        namespaces: namespaces,
-      );
-
-  List<XmlNode> toXmlChildren({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$BookshelfToXmlChildren(
-        this as Bookshelf,
-        namespaces: namespaces,
-      );
-
-  XmlElement toXmlElement({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$BookshelfToXmlElement(
-        this as Bookshelf,
-        namespaces: namespaces,
-      );
-}
-
-void _$TitleBuildXmlChildren(
-  Title instance,
-  XmlBuilder builder, {
-  Map<String, String> namespaces = const {},
-}) {
+void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
+    {Map<String, String> namespaces = const {}}) {
   final lang = instance.lang;
-  final text = instance.text;
-
-  if (lang != null) {
-    builder.attribute(
-      'lang',
-      lang,
-    );
+  final langSerialized = lang;
+  if (langSerialized != null) {
+    builder.attribute('lang', langSerialized);
   }
-  if (text != null) {
-    builder.text(
-      text,
-    );
+  final text = instance.text;
+  final textSerialized = text;
+  if (textSerialized != null) {
+    builder.text(textSerialized);
   }
 }
 
-void _$TitleBuildXmlElement(
-  Title instance,
-  XmlBuilder builder, {
-  Map<String, String> namespaces = const {},
-}) {
-  builder.element(
-    'title',
-    namespaces: namespaces,
-    nest: () {
-      instance.buildXmlChildren(
-        builder,
-        namespaces: namespaces,
-      );
-    },
-  );
+void _$TitleBuildXmlElement(Title instance, XmlBuilder builder,
+    {Map<String, String> namespaces = const {}}) {
+  builder.element('title', namespaces: namespaces, nest: () {
+    instance.buildXmlChildren(builder, namespaces: namespaces);
+  });
 }
 
 Title _$TitleFromXmlElement(XmlElement element) {
-  final lang = element.getAttribute(
-    'lang',
-  );
+  final lang = element.getAttribute('lang');
   final text = element.getText();
-
-  return Title(
-    lang: lang,
-    text: text,
-  );
+  return Title(lang: lang, text: text);
 }
 
-List<XmlAttribute> _$TitleToXmlAttributes(
-  Title instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+List<XmlAttribute> _$TitleToXmlAttributes(Title instance,
+    {Map<String, String?> namespaces = const {}}) {
+  final attributes = <XmlAttribute>[];
   final lang = instance.lang;
-
-  return [
-    if (lang != null)
-      XmlAttribute(
-        XmlName(
-          'lang',
-        ),
-        lang,
-      ),
-  ];
+  final langSerialized = lang;
+  final langConstructed = langSerialized != null
+      ? XmlAttribute(XmlName('lang'), langSerialized)
+      : null;
+  if (langConstructed != null) {
+    attributes.add(langConstructed);
+  }
+  return attributes;
 }
 
-List<XmlNode> _$TitleToXmlChildren(
-  Title instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+List<XmlNode> _$TitleToXmlChildren(Title instance,
+    {Map<String, String?> namespaces = const {}}) {
+  final children = <XmlNode>[];
   final text = instance.text;
-
-  return [
-    if (text != null)
-      XmlText(
-        text,
-      ),
-  ];
+  final textSerialized = text;
+  final textConstructed =
+      textSerialized != null ? XmlText(textSerialized) : null;
+  if (textConstructed != null) {
+    children.add(textConstructed);
+  }
+  return children;
 }
 
-XmlElement _$TitleToXmlElement(
-  Title instance, {
-  Map<String, String?> namespaces = const {},
-}) {
+XmlElement _$TitleToXmlElement(Title instance,
+    {Map<String, String?> namespaces = const {}}) {
   return XmlElement(
-    XmlName(
-      'title',
-    ),
-    [
-      ...namespaces.toXmlAttributes(),
-      ...instance.toXmlAttributes(
-        namespaces: namespaces,
-      ),
-    ],
-    instance.toXmlChildren(
-      namespaces: namespaces,
-    ),
-    true,
-  );
-}
-
-mixin _$TitleXmlSerializableMixin {
-  void buildXmlChildren(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$TitleBuildXmlChildren(
-        this as Title,
-        builder,
-        namespaces: namespaces,
-      );
-
-  void buildXmlElement(
-    XmlBuilder builder, {
-    Map<String, String> namespaces = const {},
-  }) =>
-      _$TitleBuildXmlElement(
-        this as Title,
-        builder,
-        namespaces: namespaces,
-      );
-
-  List<XmlAttribute> toXmlAttributes({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$TitleToXmlAttributes(
-        this as Title,
-        namespaces: namespaces,
-      );
-
-  List<XmlNode> toXmlChildren({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$TitleToXmlChildren(
-        this as Title,
-        namespaces: namespaces,
-      );
-
-  XmlElement toXmlElement({
-    Map<String, String?> namespaces = const {},
-  }) =>
-      _$TitleToXmlElement(
-        this as Title,
-        namespaces: namespaces,
-      );
+      XmlName('title'),
+      [
+        ...namespaces.toXmlAttributes(),
+        ...instance.toXmlAttributes(namespaces: namespaces)
+      ],
+      instance.toXmlChildren(namespaces: namespaces));
 }

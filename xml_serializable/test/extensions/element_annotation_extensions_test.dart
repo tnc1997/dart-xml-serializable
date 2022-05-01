@@ -1,0 +1,141 @@
+import 'package:test/test.dart';
+import 'package:xml_serializable/xml_serializable.dart';
+
+import '../fake_element_annotation.dart';
+import '../fake_xml_attribute_element_annotation.dart';
+import '../fake_xml_element_element_annotation.dart';
+import '../fake_xml_root_element_element_annotation.dart';
+import '../fake_xml_serializable_element_annotation.dart';
+import '../fake_xml_text_element_annotation.dart';
+
+void main() {
+  group(
+    'ElementAnnotationExtensions',
+    () {
+      group(
+        'isXmlAttribute',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlAttribute`',
+            () {
+              expect(
+                FakeXmlAttributeElementAnnotation().isXmlAttribute,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlAttribute`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlAttribute,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'isXmlElement',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlElement`',
+            () {
+              expect(
+                FakeXmlElementElementAnnotation().isXmlElement,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlElement`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlElement,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'ixXmlRootElement',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlRootElement`',
+            () {
+              expect(
+                FakeXmlRootElementElementAnnotation().isXmlRootElement,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlRootElement`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlRootElement,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'isXmlSerializable',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlSerializable`',
+            () {
+              expect(
+                FakeXmlSerializableElementAnnotation().isXmlSerializable,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlSerializable`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlSerializable,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'isXmlText',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlText`',
+            () {
+              expect(
+                FakeXmlTextElementAnnotation().isXmlText,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlText`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlText,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+    },
+  );
+}
