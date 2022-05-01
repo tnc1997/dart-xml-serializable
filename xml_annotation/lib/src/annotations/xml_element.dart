@@ -7,15 +7,15 @@ class XmlElement {
   final String? namespace;
 
   /// If `true` (the default) then the element will be self-closed if it is empty.
-  final bool isSelfClosing;
+  final bool? isSelfClosing;
 
   /// If `true` (the default) then the element will be serialized even if it is `null`.
-  final bool includeIfNull;
+  final bool? includeIfNull;
 
   const XmlElement({
     this.name,
     this.namespace,
-    this.isSelfClosing = true,
-    this.includeIfNull = true,
+    this.isSelfClosing,
+    this.includeIfNull,
   });
 }
