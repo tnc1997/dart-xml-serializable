@@ -159,9 +159,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }
 
   void _generateMixin(StringBuffer buffer, ClassElement element) {
-    buffer.writeln(
-      'mixin _\$${element.name}XmlSerializableMixin {',
-    );
+    buffer.writeln('mixin _\$${element.name}XmlSerializableMixin {');
 
     buffer.writeln(
       'void buildXmlChildren(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlChildren(this as ${element.name}, builder, namespaces: namespaces);',
