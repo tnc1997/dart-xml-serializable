@@ -216,7 +216,7 @@ List<XmlNode> _$TitleToXmlChildren(Title instance,
   final text = instance.text;
   final textSerialized = text;
   final textConstructed =
-  textSerialized != null ? XmlText(textSerialized) : null;
+      textSerialized != null ? XmlText(textSerialized) : null;
   if (textConstructed != null) {
     children.add(textConstructed);
   }
