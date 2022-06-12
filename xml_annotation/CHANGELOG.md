@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.1.0 (2022-06-12)
+
+### Features
+
+* add support for serializing additional types ([#15](https://github.com/tnc1997/dart-xml-serializable/issues/15)) ([0186617](https://github.com/tnc1997/dart-xml-serializable/commit/0186617c0bbdfe649818b36f98efcb26ca5b05f7))
+* add create mixin to reduce boilerplate ([#17](https://github.com/tnc1997/dart-xml-serializable/issues/17)) ([47c7a7b](https://github.com/tnc1997/dart-xml-serializable/commit/47c7a7b7debfd82ff333573cf977450316a07c55))
+
 ## 2.0.1 (2022-04-30)
 
 ### Builds
