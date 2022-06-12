@@ -5,7 +5,7 @@ import 'fake_library_element.dart';
 import 'fake_xml_serializable_dart_object.dart';
 
 class FakeXmlSerializableElementAnnotation extends FakeElementAnnotation {
-  FakeXmlSerializableElementAnnotation()
+  FakeXmlSerializableElementAnnotation({bool? createMixin})
       : super(
           element: FakeConstructorElement(
             FakeClassElement(
@@ -20,6 +20,8 @@ class FakeXmlSerializableElementAnnotation extends FakeElementAnnotation {
                   'package:xml_annotation/src/annotations/xml_serializable.dart',
             ),
           ),
-          value: FakeXmlSerializableDartObject(),
+          value: FakeXmlSerializableDartObject(
+            createMixin: createMixin,
+          ),
         );
 }
