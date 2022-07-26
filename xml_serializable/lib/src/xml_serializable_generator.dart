@@ -167,9 +167,11 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     buffer.writeln();
 
-    buffer.writeln(
-      'void buildXmlElement(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlElement(this as ${element.name}, builder, namespaces: namespaces);',
-    );
+    if (element.hasXmlRootElement) {
+      buffer.writeln(
+        'void buildXmlElement(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlElement(this as ${element.name}, builder, namespaces: namespaces);',
+      );
+    }
 
     buffer.writeln();
 
@@ -185,9 +187,11 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     buffer.writeln();
 
-    buffer.writeln(
-      'XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlElement(this as ${element.name}, namespaces: namespaces);',
-    );
+    if (element.hasXmlRootElement) {
+      buffer.writeln(
+        'XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlElement(this as ${element.name}, namespaces: namespaces);',
+      );
+    }
 
     buffer.write('}');
   }
