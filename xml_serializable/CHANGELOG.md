@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.1.1 (2022-08-07)
+
+### Bug Fixes
+
+* mixin support for classes without root element ([#18](https://github.com/tnc1997/dart-xml-serializable/issues/18)) ([731babb](https://github.com/tnc1997/dart-xml-serializable/commit/731babb2f627daa9eb395616a9857124cd66bb15))
+
 ## 2.1.0 (2022-06-12)
 
 ### Features
