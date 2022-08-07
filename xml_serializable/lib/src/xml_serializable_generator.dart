@@ -55,10 +55,12 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
       _generateBuildXmlChildren(buffer, element);
 
-      buffer.writeln();
-      buffer.writeln();
+      if (element.hasXmlRootElement) {
+        buffer.writeln();
+        buffer.writeln();
 
-      _generateBuildXmlElement(buffer, element);
+        _generateBuildXmlElement(buffer, element);
+      }
 
       buffer.writeln();
       buffer.writeln();
@@ -75,10 +77,12 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
       _generateToXmlChildren(buffer, element);
 
-      buffer.writeln();
-      buffer.writeln();
+      if (element.hasXmlRootElement) {
+        buffer.writeln();
+        buffer.writeln();
 
-      _generateToXmlElement(buffer, element);
+        _generateToXmlElement(buffer, element);
+      }
 
       if (annotation.getBoolValue('createMixin') == true) {
         buffer.writeln();
@@ -133,11 +137,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }
 
   void _generateBuildXmlElement(StringBuffer buffer, ClassElement element) {
-    if (element.hasXmlRootElement) {
-      buffer.write(
-        'void _\$${element.name}BuildXmlElement(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {\n${_builderGeneratorFactory(element).generateBuilder('instance')}\n}',
-      );
-    }
+    buffer.write(
+      'void _\$${element.name}BuildXmlElement(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {\n${_builderGeneratorFactory(element).generateBuilder('instance')}\n}',
+    );
   }
 
   void _generateFromXmlElement(StringBuffer buffer, ClassElement element) {
@@ -165,9 +167,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       'void buildXmlChildren(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlChildren(this as ${element.name}, builder, namespaces: namespaces);',
     );
 
-    buffer.writeln();
-
     if (element.hasXmlRootElement) {
+      buffer.writeln();
+
       buffer.writeln(
         'void buildXmlElement(XmlBuilder builder, {Map<String, String> namespaces = const {}}) => _\$${element.name}BuildXmlElement(this as ${element.name}, builder, namespaces: namespaces);',
       );
@@ -185,9 +187,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       'List<XmlNode> toXmlChildren({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlChildren(this as ${element.name}, namespaces: namespaces);',
     );
 
-    buffer.writeln();
-
     if (element.hasXmlRootElement) {
+      buffer.writeln();
+
       buffer.writeln(
         'XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$${element.name}ToXmlElement(this as ${element.name}, namespaces: namespaces);',
       );
@@ -288,11 +290,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }
 
   void _generateToXmlElement(StringBuffer buffer, ClassElement element) {
-    if (element.hasXmlRootElement) {
-      buffer.write(
-        'XmlElement _\$${element.name}ToXmlElement(${element.name} instance, {Map<String, String?> namespaces = const {}}) {\nreturn ${_constructorGeneratorFactory(element).generateConstructor('instance')};\n}',
-      );
-    }
+    buffer.write(
+      'XmlElement _\$${element.name}ToXmlElement(${element.name} instance, {Map<String, String?> namespaces = const {}}) {\nreturn ${_constructorGeneratorFactory(element).generateConstructor('instance')};\n}',
+    );
   }
 
   SerializerGenerator _xmlSerializableSerializerGeneratorFactory(
