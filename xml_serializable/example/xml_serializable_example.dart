@@ -6,7 +6,7 @@ part 'xml_serializable_example.g.dart';
 void main() {
   final document = XmlDocument.parse(
     '''<?xml version="1.0"?>
-    <bookshelf>
+    <bookshelf wood-type="ebony">
       <book>
         <title lang="english">XML Pocket Reference</title>
         <author>Simon St. Laurent</author>
@@ -26,6 +26,15 @@ void main() {
 
   final element = bookshelf.toXmlElement();
   print(element);
+}
+
+enum WoodType {
+  @annotation.XmlValue('balsa-wood')
+  balsaWood,
+  ebony,
+  @annotation.XmlValue('california-redwood')
+  californiaRedwood,
+  amber,
 }
 
 @annotation.XmlRootElement(name: 'book')
@@ -102,6 +111,9 @@ class Book {
 @annotation.XmlRootElement(name: 'bookshelf')
 @annotation.XmlSerializable()
 class Bookshelf {
+  @annotation.XmlAttribute(name: 'wood-type')
+  WoodType? woodType;
+
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
@@ -110,6 +122,7 @@ class Bookshelf {
 
   Bookshelf({
     this.books,
+    this.woodType,
     this.price,
   });
 

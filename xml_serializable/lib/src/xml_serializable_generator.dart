@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
@@ -51,9 +53,16 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     if (element is ClassElement) {
       final annotation = element.getXmlSerializable()!;
 
+      final addedMembers = <String>{};
       final buffer = StringBuffer();
 
-      _generateBuildXmlChildren(buffer, element);
+      // final library = await buildStep.inputLibrary;
+      // final libraries = library.importedLibraries.map((e) {
+      //   return e;
+      // }).join(',');
+      // buffer.writeln('// $libraries');
+
+      _generateBuildXmlChildren(buffer, element, addedMembers);
 
       if (element.hasXmlRootElement) {
         buffer.writeln();
@@ -65,17 +74,17 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       buffer.writeln();
       buffer.writeln();
 
-      _generateFromXmlElement(buffer, element);
+      _generateFromXmlElement(buffer, element, addedMembers);
 
       buffer.writeln();
       buffer.writeln();
 
-      _generateToXmlAttributes(buffer, element);
+      _generateToXmlAttributes(buffer, element, addedMembers);
 
       buffer.writeln();
       buffer.writeln();
 
-      _generateToXmlChildren(buffer, element);
+      _generateToXmlChildren(buffer, element, addedMembers);
 
       if (element.hasXmlRootElement) {
         buffer.writeln();
@@ -89,6 +98,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln();
 
         _generateMixin(buffer, element);
+      }
+
+      for (final member in addedMembers) {
+        buffer.writeln(member);
       }
 
       return buffer.toString();
@@ -108,7 +121,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
               element.type.isDartCoreSet)
       : element.type.isNullable;
 
-  void _generateBuildXmlChildren(StringBuffer buffer, ClassElement element) {
+  void _generateBuildXmlChildren(
+      StringBuffer buffer, ClassElement element, Set<String> addedMembers) {
     buffer.writeln(
       'void _\$${element.name}BuildXmlChildren(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {',
     );
@@ -122,7 +136,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         );
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name, addedMembers)};',
         );
 
         buffer.writeln(
@@ -142,7 +156,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     );
   }
 
-  void _generateFromXmlElement(StringBuffer buffer, ClassElement element) {
+  void _generateFromXmlElement(
+      StringBuffer buffer, ClassElement element, Set<String> addedMembers) {
     buffer.writeln(
       '${element.name} _\$${element.name}FromXmlElement(XmlElement element) {',
     );
@@ -154,7 +169,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     }
 
     buffer.writeln(
-      'return ${element.name}(${element.fields.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)}').join(', ')});',
+      'return ${element.name}(${element.fields.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name, addedMembers)}').join(', ')});',
     );
 
     buffer.write('}');
@@ -198,7 +213,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     buffer.write('}');
   }
 
-  void _generateToXmlAttributes(StringBuffer buffer, ClassElement element) {
+  void _generateToXmlAttributes(
+      StringBuffer buffer, ClassElement element, Set<String> addedMembers) {
     buffer.writeln(
       'List<XmlAttribute> _\$${element.name}ToXmlAttributes(${element.name} instance, {Map<String, String?> namespaces = const {}}) {',
     );
@@ -210,7 +226,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name, addedMembers)};',
         );
 
         buffer.writeln(
@@ -245,7 +261,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     buffer.write('}');
   }
 
-  void _generateToXmlChildren(StringBuffer buffer, ClassElement element) {
+  void _generateToXmlChildren(
+      StringBuffer buffer, ClassElement element, Set<String> addedMembers) {
     buffer.writeln(
       'List<XmlNode> _\$${element.name}ToXmlChildren(${element.name} instance, {Map<String, String?> namespaces = const {}}) {',
     );
@@ -257,7 +274,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name, addedMembers)};',
         );
 
         buffer.writeln(
@@ -327,10 +344,12 @@ class _XmlSerializableSerializerGenerator extends SerializerGenerator {
   const _XmlSerializableSerializerGenerator(this._type);
 
   @override
-  String generateSerializer(String expression) => expression;
+  String generateSerializer(String expression, Set<String> addedMembers) {
+    return expression;
+  }
 
   @override
-  String generateDeserializer(String expression) {
+  String generateDeserializer(String expression, Set<String> addedMembers) {
     final buffer = StringBuffer();
 
     if (_type.isNullable) {

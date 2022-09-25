@@ -12,7 +12,7 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                BoolSerializerGenerator().generateSerializer('value'),
+                BoolSerializerGenerator().generateSerializer('value', {}),
                 equals(
                   'value == true ? \'true\' : \'false\'',
                 ),
@@ -24,7 +24,8 @@ void main() {
             'should generate a null-aware serializer if constructed with a nullable type',
             () {
               expect(
-                NullableBoolSerializerGenerator().generateSerializer('value'),
+                NullableBoolSerializerGenerator()
+                    .generateSerializer('value', {}),
                 equals(
                   'value != null ? value == true ? \'true\' : \'false\' : null',
                 ),
@@ -41,7 +42,7 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                BoolSerializerGenerator().generateDeserializer('value'),
+                BoolSerializerGenerator().generateDeserializer('value', {}),
                 equals(
                   'value == \'true\' || value == \'1\' ? true : value == \'false\' || value == \'0\' ? false : throw FormatException(\'Invalid bool format\', value)',
                 ),
@@ -53,7 +54,8 @@ void main() {
             'should generate a null-aware deserializer if constructed with a nullable type',
             () {
               expect(
-                NullableBoolSerializerGenerator().generateDeserializer('value'),
+                NullableBoolSerializerGenerator()
+                    .generateDeserializer('value', {}),
                 equals(
                   'value != null ? value == \'true\' || value == \'1\' ? true : value == \'false\' || value == \'0\' ? false : throw FormatException(\'Invalid bool format\', value) : null',
                 ),

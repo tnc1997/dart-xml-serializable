@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/type.dart';
+import 'package:xml_serializable/src/serializer_generators/enum_serializer_generator.dart';
 
 import '../extensions/dart_type_extensions.dart';
 import '../serializer_generators/bool_serializer_generator.dart';
@@ -53,6 +54,9 @@ SerializerGenerator serializerGeneratorFactory(DartType type) {
     return const StringSerializerGenerator();
   } else if (type.isDartCoreUri) {
     return UriSerializerGenerator(isNullable: type.isNullable);
+  } else if (type is InterfaceType &&
+      (type.superclass?.isDartCoreEnum ?? false)) {
+    return EnumSerializerGenerator(type: type);
   }
 
   throw ArgumentError.value(

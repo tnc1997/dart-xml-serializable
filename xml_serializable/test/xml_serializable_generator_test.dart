@@ -11,6 +11,7 @@ import 'fake_date_time_class_element.dart';
 import 'fake_double_class_element.dart';
 import 'fake_duration_class_element.dart';
 import 'fake_dynamic_class_element.dart';
+import 'fake_enum_class_element.dart';
 import 'fake_field_element.dart';
 import 'fake_int_class_element.dart';
 import 'fake_interface_type.dart';
@@ -435,6 +436,20 @@ void main() {
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
+                  FakeFieldElement(
+                    metadata: [
+                      FakeXmlTextElementAnnotation(),
+                    ],
+                    name: 'direction',
+                    type: FakeInterfaceType(
+                      element2: FakeEnumClassElement('Direction', [
+                        FakeConstFieldElement('a'),
+                        FakeConstFieldElement('b'),
+                      ]),
+                      nullabilitySuffix: NullabilitySuffix.question,
+                      superclass: FakeInterfaceType(isDartCoreEnum: true),
+                    ),
+                  ),
                 ],
                 metadata: [
                   FakeXmlSerializableElementAnnotation(),
@@ -445,7 +460,8 @@ void main() {
               FakeBuildStep(),
             ),
             equals(
-                '''void _\$TestClassBuildXmlChildren(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+                r'''
+void _$TestClassBuildXmlChildren(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final boolAttribute = instance.boolAttribute;
 final boolAttributeSerialized = boolAttribute != null ? boolAttribute == true ? 'true' : 'false' : null;
 if (boolAttributeSerialized != null) { builder.attribute('boolattribute', boolAttributeSerialized); }
@@ -521,9 +537,12 @@ if (excludeIfNullCustomElementSerialized != null) { builder.element('excludeifnu
 final stringText = instance.stringText;
 final stringTextSerialized = stringText;
 if (stringTextSerialized != null) { builder.text(stringTextSerialized); }
+final direction = instance.direction;
+final directionSerialized = _$DirectionEnumMap[direction];
+if (directionSerialized != null) { builder.text(directionSerialized); }
 }
 
-TestClass _\$TestClassFromXmlElement(XmlElement element) {
+TestClass _$TestClassFromXmlElement(XmlElement element) {
 final boolAttribute = element.getAttribute('boolattribute');
 final dateTimeAttribute = element.getAttribute('datetimeattribute');
 final doubleAttribute = element.getAttribute('doubleattribute');
@@ -549,10 +568,11 @@ final customElement = element.getElement('customelement');
 final nonSelfClosingCustomElement = element.getElement('nonselfclosingcustomelement');
 final excludeIfNullCustomElement = element.getElement('excludeifnullcustomelement');
 final stringText = element.getText();
-return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText);
+final direction = element.getText();
+return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText, direction: annotation.$enumDecodeNullable(_$DirectionEnumMap, direction));
 }
 
-List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+List<XmlAttribute> _$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
 final attributes = <XmlAttribute>[];
 final boolAttribute = instance.boolAttribute;
 final boolAttributeSerialized = boolAttribute != null ? boolAttribute == true ? 'true' : 'false' : null;
@@ -593,7 +613,7 @@ if (uriAttributeConstructed != null) { attributes.add(uriAttributeConstructed); 
 return attributes;
 }
 
-List<XmlNode> _\$TestClassToXmlChildren(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+List<XmlNode> _$TestClassToXmlChildren(TestClass instance, {Map<String, String?> namespaces = const {}}) {
 final children = <XmlNode>[];
 final stringElement = instance.stringElement;
 final stringElementSerialized = stringElement;
@@ -659,8 +679,15 @@ final stringText = instance.stringText;
 final stringTextSerialized = stringText;
 final stringTextConstructed = stringTextSerialized != null ? XmlText(stringTextSerialized) : null;
 if (stringTextConstructed != null) { children.add(stringTextConstructed); }
+final direction = instance.direction;
+final directionSerialized = _$DirectionEnumMap[direction];
+final directionConstructed = directionSerialized != null ? XmlText(directionSerialized) : null;
+if (directionConstructed != null) { children.add(directionConstructed); }
 return children;
-}'''),
+}const _$DirectionEnumMap = {
+  Direction.a: 'a',  Direction.b: 'b',
+};
+'''),
           );
         },
       );
@@ -1067,6 +1094,20 @@ return children;
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
+                  FakeFieldElement(
+                    metadata: [
+                      FakeXmlTextElementAnnotation(),
+                    ],
+                    name: 'direction',
+                    type: FakeInterfaceType(
+                      element2: FakeEnumClassElement('Direction', [
+                        FakeConstFieldElement('a'),
+                        FakeConstFieldElement('b'),
+                      ]),
+                      nullabilitySuffix: NullabilitySuffix.question,
+                      superclass: FakeInterfaceType(isDartCoreEnum: true),
+                    ),
+                  ),
                 ],
                 metadata: [
                   FakeXmlRootElementElementAnnotation(
@@ -1079,8 +1120,8 @@ return children;
               FakeConstantReader(),
               FakeBuildStep(),
             ),
-            equals(
-                '''void _\$TestClassBuildXmlChildren(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+            equals(r'''
+void _$TestClassBuildXmlChildren(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final boolAttribute = instance.boolAttribute;
 final boolAttributeSerialized = boolAttribute != null ? boolAttribute == true ? 'true' : 'false' : null;
 if (boolAttributeSerialized != null) { builder.attribute('boolattribute', boolAttributeSerialized); }
@@ -1156,13 +1197,16 @@ if (excludeIfNullCustomElementSerialized != null) { builder.element('excludeifnu
 final stringText = instance.stringText;
 final stringTextSerialized = stringText;
 if (stringTextSerialized != null) { builder.text(stringTextSerialized); }
+final direction = instance.direction;
+final directionSerialized = _$DirectionEnumMap[direction];
+if (directionSerialized != null) { builder.text(directionSerialized); }
 }
 
-void _\$TestClassBuildXmlElement(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+void _$TestClassBuildXmlElement(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 builder.element('testclass', namespaces: namespaces, nest: () { instance.buildXmlChildren(builder, namespaces: namespaces); });
 }
 
-TestClass _\$TestClassFromXmlElement(XmlElement element) {
+TestClass _$TestClassFromXmlElement(XmlElement element) {
 final boolAttribute = element.getAttribute('boolattribute');
 final dateTimeAttribute = element.getAttribute('datetimeattribute');
 final doubleAttribute = element.getAttribute('doubleattribute');
@@ -1188,10 +1232,11 @@ final customElement = element.getElement('customelement');
 final nonSelfClosingCustomElement = element.getElement('nonselfclosingcustomelement');
 final excludeIfNullCustomElement = element.getElement('excludeifnullcustomelement');
 final stringText = element.getText();
-return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText);
+final direction = element.getText();
+return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText, direction: annotation.$enumDecodeNullable(_$DirectionEnumMap, direction));
 }
 
-List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+List<XmlAttribute> _$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
 final attributes = <XmlAttribute>[];
 final boolAttribute = instance.boolAttribute;
 final boolAttributeSerialized = boolAttribute != null ? boolAttribute == true ? 'true' : 'false' : null;
@@ -1232,7 +1277,7 @@ if (uriAttributeConstructed != null) { attributes.add(uriAttributeConstructed); 
 return attributes;
 }
 
-List<XmlNode> _\$TestClassToXmlChildren(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+List<XmlNode> _$TestClassToXmlChildren(TestClass instance, {Map<String, String?> namespaces = const {}}) {
 final children = <XmlNode>[];
 final stringElement = instance.stringElement;
 final stringElementSerialized = stringElement;
@@ -1298,12 +1343,19 @@ final stringText = instance.stringText;
 final stringTextSerialized = stringText;
 final stringTextConstructed = stringTextSerialized != null ? XmlText(stringTextSerialized) : null;
 if (stringTextConstructed != null) { children.add(stringTextConstructed); }
+final direction = instance.direction;
+final directionSerialized = _$DirectionEnumMap[direction];
+final directionConstructed = directionSerialized != null ? XmlText(directionSerialized) : null;
+if (directionConstructed != null) { children.add(directionConstructed); }
 return children;
 }
 
-XmlElement _\$TestClassToXmlElement(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+XmlElement _$TestClassToXmlElement(TestClass instance, {Map<String, String?> namespaces = const {}}) {
 return XmlElement(XmlName('testclass'), [...namespaces.toXmlAttributes(), ...instance.toXmlAttributes(namespaces: namespaces)], instance.toXmlChildren(namespaces: namespaces));
-}'''),
+}const _$DirectionEnumMap = {
+  Direction.a: 'a',  Direction.b: 'b',
+};
+'''),
           );
         },
       );

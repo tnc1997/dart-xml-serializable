@@ -6,5 +6,7 @@ export 'package:xml_annotation/src/annotations/xml_element.dart';
 export 'package:xml_annotation/src/annotations/xml_root_element.dart';
 export 'package:xml_annotation/src/annotations/xml_serializable.dart';
 export 'package:xml_annotation/src/annotations/xml_text.dart';
+export 'package:xml_annotation/src/annotations/xml_value.dart';
 export 'package:xml_annotation/src/extensions/namespace_map_extensions.dart';
 export 'package:xml_annotation/src/extensions/xml_node_extensions.dart';
+export 'package:xml_annotation/src/enum_helper.dart';

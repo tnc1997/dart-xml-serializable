@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/src/generated/source.dart';
 import 'package:test/fake.dart';
 
 class FakeLibraryElement extends Fake implements LibraryElement {
@@ -14,6 +15,9 @@ class FakeLibraryElement extends Fake implements LibraryElement {
   @override
   final String name;
 
+  @override
+  Source get librarySource => FakeLibrarySource(identifier);
+
   FakeLibraryElement({
     String? identifier,
     bool? isDartCore,
@@ -23,4 +27,13 @@ class FakeLibraryElement extends Fake implements LibraryElement {
         isDartCore = isDartCore ?? false,
         isNonNullableByDefault = isNonNullableByDefault ?? true,
         name = name ?? '';
+}
+
+class FakeLibrarySource extends Fake implements Source {
+  FakeLibrarySource(this._uri);
+
+  final String _uri;
+
+  @override
+  Uri get uri => Uri.parse(_uri);
 }

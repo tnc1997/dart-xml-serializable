@@ -10,15 +10,15 @@ class IterableSerializerGenerator extends SerializerGenerator {
   /// The generator for generating a serializer for the iterable type argument.
   final SerializerGenerator _generator;
 
-  const IterableSerializerGenerator(
-    this._generator, {
+  const IterableSerializerGenerator(this._generator, {
     bool isNullable = false,
   }) : _isNullable = isNullable;
 
   @override
-  String generateSerializer(String expression) {
+  String generateSerializer(String expression, Set<String> addedMembers) {
     final closureArgument = IterableSerializerGenerator._closureArgument;
-    final closureResult = _generator.generateSerializer(closureArgument);
+    final closureResult =
+    _generator.generateSerializer(closureArgument, addedMembers);
 
     final buffer = StringBuffer(expression);
 
@@ -34,9 +34,10 @@ class IterableSerializerGenerator extends SerializerGenerator {
   }
 
   @override
-  String generateDeserializer(String expression) {
+  String generateDeserializer(String expression, Set<String> addedMembers) {
     final closureArgument = IterableSerializerGenerator._closureArgument;
-    final closureResult = _generator.generateDeserializer(closureArgument);
+    final closureResult =
+    _generator.generateDeserializer(closureArgument, addedMembers);
 
     final buffer = StringBuffer(expression);
 
@@ -58,15 +59,15 @@ class NullableIterableSerializerGenerator extends IterableSerializerGenerator {
 }
 
 class ListSerializerGenerator extends IterableSerializerGenerator {
-  const ListSerializerGenerator(
-    SerializerGenerator generator, {
+  const ListSerializerGenerator(SerializerGenerator generator, {
     bool isNullable = false,
   }) : super(generator, isNullable: isNullable);
 
   @override
-  String generateDeserializer(String expression) {
+  String generateDeserializer(String expression, Set<String> addedMembers) {
     final closureArgument = IterableSerializerGenerator._closureArgument;
-    final closureResult = _generator.generateDeserializer(closureArgument);
+    final closureResult = _generator.generateDeserializer(
+        closureArgument, addedMembers);
 
     final buffer = StringBuffer(expression);
 
@@ -90,15 +91,15 @@ class NullableListSerializerGenerator extends ListSerializerGenerator {
 }
 
 class SetSerializerGenerator extends IterableSerializerGenerator {
-  const SetSerializerGenerator(
-    SerializerGenerator generator, {
+  const SetSerializerGenerator(SerializerGenerator generator, {
     bool isNullable = false,
   }) : super(generator, isNullable: isNullable);
 
   @override
-  String generateDeserializer(String expression) {
+  String generateDeserializer(String expression, Set<String> addedMembers) {
     final closureArgument = IterableSerializerGenerator._closureArgument;
-    final closureResult = _generator.generateDeserializer(closureArgument);
+    final closureResult = _generator.generateDeserializer(
+        closureArgument, addedMembers);
 
     final buffer = StringBuffer(expression);
 

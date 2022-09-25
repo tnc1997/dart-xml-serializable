@@ -12,7 +12,7 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                DurationSerializerGenerator().generateSerializer('value'),
+                DurationSerializerGenerator().generateSerializer('value', {}),
                 equals(
                   'value.inMicroseconds.toString()',
                 ),
@@ -25,7 +25,7 @@ void main() {
             () {
               expect(
                 NullableDurationSerializerGenerator()
-                    .generateSerializer('value'),
+                    .generateSerializer('value', {}),
                 equals(
                   'value?.inMicroseconds.toString()',
                 ),
@@ -42,7 +42,7 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                DurationSerializerGenerator().generateDeserializer('value'),
+                DurationSerializerGenerator().generateDeserializer('value', {}),
                 equals(
                   'Duration(microseconds: int.parse(value))',
                 ),
@@ -55,7 +55,7 @@ void main() {
             () {
               expect(
                 NullableDurationSerializerGenerator()
-                    .generateDeserializer('value'),
+                    .generateDeserializer('value', {}),
                 equals(
                   'value != null ? Duration(microseconds: int.parse(value)) : null',
                 ),

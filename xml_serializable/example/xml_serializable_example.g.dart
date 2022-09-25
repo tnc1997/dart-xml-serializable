@@ -97,6 +97,11 @@ XmlElement _$BookToXmlElement(Book instance,
 
 void _$BookshelfBuildXmlChildren(Bookshelf instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
+  final woodType = instance.woodType;
+  final woodTypeSerialized = _$WoodTypeEnumMap[woodType];
+  if (woodTypeSerialized != null) {
+    builder.attribute('wood-type', woodTypeSerialized);
+  }
   final books = instance.books;
   final booksSerialized = books;
   if (booksSerialized != null) {
@@ -123,15 +128,26 @@ void _$BookshelfBuildXmlElement(Bookshelf instance, XmlBuilder builder,
 }
 
 Bookshelf _$BookshelfFromXmlElement(XmlElement element) {
+  final woodType = element.getAttribute('wood-type');
   final books = element.getElements('book');
   final price = element.getElement('price')?.getText();
   return Bookshelf(
-      books: books?.map((e) => Book.fromXmlElement(e)).toList(), price: price);
+      woodType: annotation.$enumDecodeNullable(_$WoodTypeEnumMap, woodType),
+      books: books?.map((e) => Book.fromXmlElement(e)).toList(),
+      price: price);
 }
 
 List<XmlAttribute> _$BookshelfToXmlAttributes(Bookshelf instance,
     {Map<String, String?> namespaces = const {}}) {
   final attributes = <XmlAttribute>[];
+  final woodType = instance.woodType;
+  final woodTypeSerialized = _$WoodTypeEnumMap[woodType];
+  final woodTypeConstructed = woodTypeSerialized != null
+      ? XmlAttribute(XmlName('wood-type'), woodTypeSerialized)
+      : null;
+  if (woodTypeConstructed != null) {
+    attributes.add(woodTypeConstructed);
+  }
   return attributes;
 }
 
@@ -168,6 +184,13 @@ XmlElement _$BookshelfToXmlElement(Bookshelf instance,
       ],
       instance.toXmlChildren(namespaces: namespaces));
 }
+
+const _$WoodTypeEnumMap = {
+  WoodType.balsaWood: 'balsa-wood',
+  WoodType.ebony: 'ebony',
+  WoodType.californiaRedwood: 'california-redwood',
+  WoodType.amber: 'amber',
+};
 
 void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {

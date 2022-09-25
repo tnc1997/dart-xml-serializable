@@ -1,9 +1,11 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:analyzer/src/generated/source.dart';
 import 'package:test/fake.dart';
 
-import 'fake_library_element.dart';
+import 'fake_enum_class_element.dart';
 import 'fake_interface_type.dart';
+import 'fake_library_element.dart';
 
 class FakeClassElement extends Fake implements ClassElement {
   @override
@@ -19,7 +21,21 @@ class FakeClassElement extends Fake implements ClassElement {
   final String name;
 
   @override
+  ElementKind get kind => ElementKind.CLASS;
+
+  @override
+  Source get librarySource => library.librarySource;
+
+  @override
   InterfaceType get thisType => _thisType ?? FakeInterfaceType(element: this);
+
+  @override
+  FieldElement? getField(String name) {
+    if (name == 'value') {
+      return FakeConstFieldElement(name);
+    }
+    return null;
+  }
 
   final InterfaceType? _thisType;
 

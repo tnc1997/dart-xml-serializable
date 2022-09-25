@@ -12,7 +12,7 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                NumSerializerGenerator().generateSerializer('value'),
+                NumSerializerGenerator().generateSerializer('value', {}),
                 equals(
                   'value.toString()',
                 ),
@@ -24,7 +24,8 @@ void main() {
             'should generate a null-aware serializer if constructed with a nullable type',
             () {
               expect(
-                NullableNumSerializerGenerator().generateSerializer('value'),
+                NullableNumSerializerGenerator()
+                    .generateSerializer('value', {}),
                 equals(
                   'value?.toString()',
                 ),
@@ -41,7 +42,7 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                NumSerializerGenerator().generateDeserializer('value'),
+                NumSerializerGenerator().generateDeserializer('value', {}),
                 equals(
                   'num.parse(value)',
                 ),
@@ -53,7 +54,8 @@ void main() {
             'should generate a null-aware deserializer if constructed with a nullable type',
             () {
               expect(
-                NullableNumSerializerGenerator().generateDeserializer('value'),
+                NullableNumSerializerGenerator()
+                    .generateDeserializer('value', {}),
                 equals(
                   'value != null ? num.parse(value) : null',
                 ),

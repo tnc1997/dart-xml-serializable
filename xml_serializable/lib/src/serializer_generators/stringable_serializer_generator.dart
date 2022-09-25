@@ -24,7 +24,7 @@ abstract class StringableSerializerGenerator extends SerializerGenerator {
   }) : _isNullable = isNullable;
 
   @override
-  String generateSerializer(String expression) {
+  String generateSerializer(String expression, Set<String> addedMembers) {
     final buffer = StringBuffer(expression);
 
     if (_isNullable) {
@@ -37,7 +37,7 @@ abstract class StringableSerializerGenerator extends SerializerGenerator {
   }
 
   @override
-  String generateDeserializer(String expression) {
+  String generateDeserializer(String expression, Set<String> addedMembers) {
     final buffer = StringBuffer();
 
     if (_isNullable) {

@@ -15,6 +15,9 @@ class FakeDartObject<T> extends Fake implements DartObject {
         _fields = fields;
 
   @override
+  bool get isNull => _value == null;
+
+  @override
   DartObject? getField(String name) => _fields?[name];
 
   @override
