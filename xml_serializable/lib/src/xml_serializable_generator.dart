@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
@@ -15,6 +13,8 @@ import 'generator_factories/getter_generator_factory.dart';
 import 'generator_factories/serializer_generator_factory.dart';
 import 'serializer_generators/iterable_serializer_generator.dart';
 import 'serializer_generators/serializer_generator.dart';
+
+final generatedEnums = <String, Set<String>>{};
 
 class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   final BuilderGeneratorFactory _builderGeneratorFactory;
@@ -56,12 +56,6 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       final addedMembers = <String>{};
       final buffer = StringBuffer();
 
-      // final library = await buildStep.inputLibrary;
-      // final libraries = library.importedLibraries.map((e) {
-      //   return e;
-      // }).join(',');
-      // buffer.writeln('// $libraries');
-
       _generateBuildXmlChildren(buffer, element, addedMembers);
 
       if (element.hasXmlRootElement) {
@@ -100,7 +94,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         _generateMixin(buffer, element);
       }
 
-      for (final member in addedMembers) {
+      final filePath = buildStep.inputId.path;
+      final fileMembers = generatedEnums.putIfAbsent(filePath, () => {});
+      for (final member in addedMembers.difference(fileMembers)) {
+        generatedEnums[filePath]?.add(member);
         buffer.writeln(member);
       }
 
