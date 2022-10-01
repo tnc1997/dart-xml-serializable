@@ -34,6 +34,7 @@ export 'package:xml_serializable/src/serializer_generators/date_time_serializer_
 export 'package:xml_serializable/src/serializer_generators/double_serializer_generator.dart';
 export 'package:xml_serializable/src/serializer_generators/duration_serializer_generator.dart';
 export 'package:xml_serializable/src/serializer_generators/dynamic_serializer_generator.dart';
+export 'package:xml_serializable/src/serializer_generators/enum_serializer_generator.dart';
 export 'package:xml_serializable/src/serializer_generators/int_serializer_generator.dart';
 export 'package:xml_serializable/src/serializer_generators/iterable_serializer_generator.dart';
 export 'package:xml_serializable/src/serializer_generators/num_serializer_generator.dart';

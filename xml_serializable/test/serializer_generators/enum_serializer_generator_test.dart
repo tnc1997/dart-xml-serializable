@@ -1,6 +1,6 @@
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:test/test.dart';
-import 'package:xml_serializable/src/serializer_generators/enum_serializer_generator.dart';
+import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_class_element.dart';
 import '../fake_enum_class_element.dart';

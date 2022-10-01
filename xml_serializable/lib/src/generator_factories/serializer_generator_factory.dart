@@ -1,5 +1,4 @@
 import 'package:analyzer/dart/element/type.dart';
-import 'package:xml_serializable/src/serializer_generators/enum_serializer_generator.dart';
 
 import '../extensions/dart_type_extensions.dart';
 import '../serializer_generators/bool_serializer_generator.dart';
@@ -7,6 +6,7 @@ import '../serializer_generators/date_time_serializer_generator.dart';
 import '../serializer_generators/double_serializer_generator.dart';
 import '../serializer_generators/duration_serializer_generator.dart';
 import '../serializer_generators/dynamic_serializer_generator.dart';
+import '../serializer_generators/enum_serializer_generator.dart';
 import '../serializer_generators/int_serializer_generator.dart';
 import '../serializer_generators/iterable_serializer_generator.dart';
 import '../serializer_generators/num_serializer_generator.dart';
