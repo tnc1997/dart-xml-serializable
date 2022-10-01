@@ -16,7 +16,7 @@
 /// ```
 class XmlValue {
   /// The value to use when serializing and deserializing.
-  final String value;
+  final dynamic value;
 
   const XmlValue(this.value);
 }

@@ -3,7 +3,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/src/generated/source.dart';
 import 'package:test/fake.dart';
 
-import 'fake_enum_class_element.dart';
+import 'fake_field_element.dart';
 import 'fake_interface_type.dart';
 import 'fake_library_element.dart';
 
@@ -32,7 +32,7 @@ class FakeClassElement extends Fake implements ClassElement {
   @override
   FieldElement? getField(String name) {
     if (name == 'value') {
-      return FakeConstFieldElement(name);
+      return FakeFieldElement(name: name);
     }
     return null;
   }

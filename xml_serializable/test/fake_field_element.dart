@@ -18,13 +18,18 @@ class FakeFieldElement extends Fake implements FieldElement {
   @override
   final DartType type;
 
+  @override
+  final bool isEnumConstant;
+
   FakeFieldElement({
     LibraryElement? library,
     List<ElementAnnotation>? metadata,
     String? name,
     DartType? type,
+    bool? isEnumConstant,
   })  : library = library ?? FakeLibraryElement(),
         metadata = metadata ?? [],
         name = name ?? 'value',
-        type = type ?? FakeInterfaceType();
+        type = type ?? FakeInterfaceType(),
+        isEnumConstant = isEnumConstant ?? false;
 }

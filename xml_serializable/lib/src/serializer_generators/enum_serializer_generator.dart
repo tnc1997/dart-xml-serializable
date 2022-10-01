@@ -7,13 +7,15 @@ import 'serializer_generator.dart';
 class EnumSerializerGenerator extends SerializerGenerator {
   const EnumSerializerGenerator({required this.type});
 
-  final InterfaceType type;
+  final DartType type;
 
   @override
   String generateSerializer(String expression, Set<String> addedMembers) {
     final memberContent = enumValueMapFromType(type);
 
-    addedMembers.add(memberContent);
+    if (memberContent != null) {
+      addedMembers.add(memberContent);
+    }
 
     if (type.isNullableType) {
       return '${constMapName(type)}[$expression]';
@@ -33,7 +35,9 @@ class EnumSerializerGenerator extends SerializerGenerator {
       functionName = r'$enumDecode';
     }
 
-    addedMembers.add(memberContent);
+    if (memberContent != null) {
+      addedMembers.add(memberContent);
+    }
 
     final args = [
       constMapName(type),

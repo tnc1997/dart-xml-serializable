@@ -45,4 +45,13 @@ extension ElementAnnotationExtensions on ElementAnnotation {
         element.library.identifier.startsWith('package:xml_annotation') &&
         element.enclosingElement.name == 'XmlText';
   }
+
+  /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlValue`.
+  bool get isXmlValue {
+    final element = this.element;
+
+    return element is ConstructorElement &&
+        element.library.identifier.startsWith('package:xml_annotation') &&
+        element.enclosingElement.name == 'XmlValue';
+  }
 }

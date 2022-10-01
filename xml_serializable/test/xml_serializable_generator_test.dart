@@ -11,7 +11,7 @@ import 'fake_date_time_class_element.dart';
 import 'fake_double_class_element.dart';
 import 'fake_duration_class_element.dart';
 import 'fake_dynamic_class_element.dart';
-import 'fake_enum_class_element.dart';
+import 'fake_enum_element.dart';
 import 'fake_field_element.dart';
 import 'fake_int_class_element.dart';
 import 'fake_interface_type.dart';
@@ -442,9 +442,15 @@ void main() {
                     ],
                     name: 'direction',
                     type: FakeInterfaceType(
-                      element2: FakeEnumClassElement('Direction', [
-                        FakeConstFieldElement('a'),
-                        FakeConstFieldElement('b'),
+                      element2: FakeEnumElement('Direction', [
+                        FakeFieldElement(
+                          name: 'a',
+                          isEnumConstant: true,
+                        ),
+                        FakeFieldElement(
+                          name: 'b',
+                          isEnumConstant: true,
+                        ),
                       ]),
                       nullabilitySuffix: NullabilitySuffix.question,
                       superclass: FakeInterfaceType(isDartCoreEnum: true),
@@ -459,8 +465,7 @@ void main() {
               FakeConstantReader(),
               FakeBuildStep(),
             ),
-            equals(
-                r'''
+            equals(r'''
 void _$TestClassBuildXmlChildren(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final boolAttribute = instance.boolAttribute;
 final boolAttributeSerialized = boolAttribute != null ? boolAttribute == true ? 'true' : 'false' : null;
@@ -1100,9 +1105,15 @@ return children;
                     ],
                     name: 'direction',
                     type: FakeInterfaceType(
-                      element2: FakeEnumClassElement('Direction', [
-                        FakeConstFieldElement('a'),
-                        FakeConstFieldElement('b'),
+                      element2: FakeEnumElement('Direction', [
+                        FakeFieldElement(
+                          name: 'a',
+                          isEnumConstant: true,
+                        ),
+                        FakeFieldElement(
+                          name: 'b',
+                          isEnumConstant: true,
+                        ),
                       ]),
                       nullabilitySuffix: NullabilitySuffix.question,
                       superclass: FakeInterfaceType(isDartCoreEnum: true),
