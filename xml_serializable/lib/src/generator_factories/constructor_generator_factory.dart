@@ -101,7 +101,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     final typeArgument = (type as ParameterizedType).typeArguments.single;
 
     return IterableConstructorGenerator(
-      typeArgument.element!.hasXmlSerializable
+      typeArgument.element2!.hasXmlSerializable
           ? XmlSerializableXmlElementConstructorGenerator(
               name,
               namespace: namespace,
@@ -119,7 +119,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
       isNullable: type.isNullable,
     );
   } else {
-    return type.element!.hasXmlSerializable
+    return type.element2!.hasXmlSerializable
         ? XmlSerializableXmlElementConstructorGenerator(
             name,
             namespace: namespace,
