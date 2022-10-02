@@ -89,7 +89,9 @@ void main() {
               ]),
             ),
           ).generateDeserializer('value', addedMembers),
-          equals(r'annotation.$enumDecode(_$FooEnumMap, value)'),
+          equals(
+            '_\$FooEnumMap.entries.singleWhere((e) => e.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooEnumMap.values.join(\', \')}\')).key',
+          ),
         );
         expect(
           addedMembers,
@@ -119,7 +121,9 @@ void main() {
               nullabilitySuffix: NullabilitySuffix.question,
             ),
           ).generateDeserializer('value', addedMembers),
-          equals(r'annotation.$enumDecodeNullable(_$FooEnumMap, value)'),
+          equals(
+            'value != null ? _\$FooEnumMap.entries.singleWhere((e) => e.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooEnumMap.values.join(\', \')}\')).key : null',
+          ),
         );
         expect(
           addedMembers,

@@ -1,7 +1,7 @@
-import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 
 import '../enum_utils.dart';
+import '../extensions/dart_type_extensions.dart';
 import 'serializer_generator.dart';
 
 class EnumSerializerGenerator extends SerializerGenerator {
@@ -17,38 +17,39 @@ class EnumSerializerGenerator extends SerializerGenerator {
       addedMembers.add(memberContent);
     }
 
-    if (type.isNullableType) {
-      return '_\$${type.element!.name!}EnumMap[$expression]';
-    } else {
-      return '_\$${type.element!.name!}EnumMap[$expression]!';
+    final buffer = StringBuffer();
+
+    buffer.write('_\$${type.element!.name!}EnumMap[$expression]');
+
+    if (!type.isNullable) {
+      buffer.write('!');
     }
+
+    return buffer.toString();
   }
 
   @override
   String generateDeserializer(String expression, Set<String> addedMembers) {
     final memberContent = enumValueMapFromType(type);
 
-    String functionName;
-    if (type.isNullableType) {
-      functionName = r'$enumDecodeNullable';
-    } else {
-      functionName = r'$enumDecode';
-    }
-
     if (memberContent != null) {
       addedMembers.add(memberContent);
     }
 
-    final args = [
-      '_\$${type.element!.name!}EnumMap',
-      expression,
-    ];
+    final buffer = StringBuffer();
 
-    return 'annotation.$functionName(${args.join(', ')})';
+    if (type.isNullable) {
+      buffer.write('$expression != null ? ');
+    }
+
+    buffer.write(
+      '_\$${type.element!.name!}EnumMap.entries.singleWhere((e) => e.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${_\$${type.element!.name!}EnumMap.values.join(\', \')}\')).key',
+    );
+
+    if (type.isNullable) {
+      buffer.write(' : null');
+    }
+
+    return buffer.toString();
   }
-}
-
-extension on DartType {
-  bool get isNullableType =>
-      isDynamic || nullabilitySuffix == NullabilitySuffix.question;
 }

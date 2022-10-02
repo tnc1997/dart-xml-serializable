@@ -132,7 +132,13 @@ Bookshelf _$BookshelfFromXmlElement(XmlElement element) {
   final books = element.getElements('book');
   final price = element.getElement('price')?.getText();
   return Bookshelf(
-      woodType: annotation.$enumDecodeNullable(_$WoodTypeEnumMap, woodType),
+      woodType: woodType != null
+          ? _$WoodTypeEnumMap.entries
+              .singleWhere((e) => e.value == woodType,
+                  orElse: () => throw ArgumentError(
+                      '`$woodType` is not one of the supported values: ${_$WoodTypeEnumMap.values.join(', ')}'))
+              .key
+          : null,
       books: books?.map((e) => Book.fromXmlElement(e)).toList(),
       price: price);
 }
