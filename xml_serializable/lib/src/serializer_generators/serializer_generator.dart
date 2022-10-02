@@ -22,7 +22,7 @@ abstract class SerializerGenerator {
   /// ```dart
   /// String generateSerializer(String expression) => '$expression.toIso8601String()';
   /// ```
-  String generateSerializer(String expression, Set<String> addedMembers);
+  String generateSerializer(String expression);
 
   /// Generates code that deserializes an [expression] representing a [String] to an instance of the type.
   ///
@@ -31,5 +31,5 @@ abstract class SerializerGenerator {
   /// ```dart
   /// String generateDeserializer(String expression) => 'DateTime.parse($expression)';
   /// ```
-  String generateDeserializer(String expression, Set<String> addedMembers);
+  String generateDeserializer(String expression);
 }

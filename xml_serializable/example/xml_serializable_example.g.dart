@@ -3,6 +3,17 @@
 part of 'xml_serializable_example.dart';
 
 // **************************************************************************
+// XmlEnumGenerator
+// **************************************************************************
+
+const _$WoodTypeEnumMap = {
+  WoodType.balsaWood: 'balsa-wood',
+  WoodType.ebony: 'ebony',
+  WoodType.californiaRedwood: 'california-redwood',
+  WoodType.amber: 'amber'
+};
+
+// **************************************************************************
 // XmlSerializableGenerator
 // **************************************************************************
 
@@ -98,7 +109,8 @@ XmlElement _$BookToXmlElement(Book instance,
 void _$BookshelfBuildXmlChildren(Bookshelf instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
   final woodType = instance.woodType;
-  final woodTypeSerialized = _$WoodTypeEnumMap[woodType];
+  final woodTypeSerialized =
+      woodType != null ? _$WoodTypeEnumMap[woodType]! : null;
   if (woodTypeSerialized != null) {
     builder.attribute('wood-type', woodTypeSerialized);
   }
@@ -147,7 +159,8 @@ List<XmlAttribute> _$BookshelfToXmlAttributes(Bookshelf instance,
     {Map<String, String?> namespaces = const {}}) {
   final attributes = <XmlAttribute>[];
   final woodType = instance.woodType;
-  final woodTypeSerialized = _$WoodTypeEnumMap[woodType];
+  final woodTypeSerialized =
+      woodType != null ? _$WoodTypeEnumMap[woodType]! : null;
   final woodTypeConstructed = woodTypeSerialized != null
       ? XmlAttribute(XmlName('wood-type'), woodTypeSerialized)
       : null;
@@ -190,13 +203,6 @@ XmlElement _$BookshelfToXmlElement(Bookshelf instance,
       ],
       instance.toXmlChildren(namespaces: namespaces));
 }
-
-const _$WoodTypeEnumMap = {
-  WoodType.balsaWood: 'balsa-wood',
-  WoodType.ebony: 'ebony',
-  WoodType.californiaRedwood: 'california-redwood',
-  WoodType.amber: 'amber',
-};
 
 void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {

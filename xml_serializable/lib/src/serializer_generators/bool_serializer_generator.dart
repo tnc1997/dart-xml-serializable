@@ -8,7 +8,7 @@ class BoolSerializerGenerator extends SerializerGenerator {
       : _isNullable = isNullable;
 
   @override
-  String generateSerializer(String expression, Set<String> addedMembers) {
+  String generateSerializer(String expression) {
     final buffer = StringBuffer();
 
     if (_isNullable) {
@@ -25,7 +25,7 @@ class BoolSerializerGenerator extends SerializerGenerator {
   }
 
   @override
-  String generateDeserializer(String expression, Set<String> addedMembers) {
+  String generateDeserializer(String expression) {
     final buffer = StringBuffer();
 
     if (_isNullable) {

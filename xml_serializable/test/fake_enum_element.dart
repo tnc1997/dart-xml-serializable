@@ -1,21 +1,37 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:test/fake.dart';
 
+import 'fake_interface_type.dart';
+import 'fake_library_element.dart';
+
 class FakeEnumElement extends Fake implements EnumElement {
-  FakeEnumElement(this._name, [this._fields]);
-
-  final String _name;
-  final List<FieldElement>? _fields;
+  @override
+  final List<FieldElement> fields;
 
   @override
-  String get name => _name;
+  final LibraryElement library;
 
   @override
-  final metadata = [];
+  final List<ElementAnnotation> metadata;
 
   @override
-  ElementKind get kind => ElementKind.CLASS;
+  final String name;
 
   @override
-  List<FieldElement> get fields => _fields ?? [];
+  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element2: this);
+
+  final InterfaceType? _thisType;
+
+  FakeEnumElement({
+    List<FieldElement>? fields,
+    LibraryElement? library,
+    List<ElementAnnotation>? metadata,
+    String? name,
+    InterfaceType? thisType,
+  })  : fields = fields ?? [],
+        library = library ?? FakeLibraryElement(),
+        metadata = metadata ?? [],
+        name = name ?? 'HelloWorld',
+        _thisType = thisType;
 }

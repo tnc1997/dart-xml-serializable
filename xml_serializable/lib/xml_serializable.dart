@@ -47,4 +47,5 @@ export 'package:xml_serializable/src/type_checkers/xml_element_type_checker.dart
 export 'package:xml_serializable/src/type_checkers/xml_root_element_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_serializable_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_text_type_checker.dart';
+export 'package:xml_serializable/src/xml_enum_generator.dart';
 export 'package:xml_serializable/src/xml_serializable_generator.dart';

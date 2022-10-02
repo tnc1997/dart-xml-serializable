@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 
 import '../extensions/dart_type_extensions.dart';
@@ -19,7 +20,7 @@ typedef SerializerGeneratorFactory = SerializerGenerator Function(
   DartType type,
 );
 
-/// Creates a [SerializerGenerator] from a [DartType] that represents a [bool], [DateTime], [double], [Duration], [dynamic], [int], [Iterable], [List], [num], [Set], [String], or [Uri].
+/// Creates a [SerializerGenerator] from a [DartType] that represents a [bool], [DateTime], [double], [Duration], [dynamic], [enum], [int], [Iterable], [List], [num], [Set], [String], or [Uri].
 SerializerGenerator serializerGeneratorFactory(DartType type) {
   if (type is ParameterizedType && type.isDartCoreIterable) {
     return IterableSerializerGenerator(
@@ -54,14 +55,16 @@ SerializerGenerator serializerGeneratorFactory(DartType type) {
     return const StringSerializerGenerator();
   } else if (type.isDartCoreUri) {
     return UriSerializerGenerator(isNullable: type.isNullable);
-  } else if (type is InterfaceType &&
-      (type.superclass?.isDartCoreEnum ?? false)) {
-    return EnumSerializerGenerator(type: type);
+  } else if (type is InterfaceType && type.element2 is EnumElement) {
+    return EnumSerializerGenerator(
+      type.element2.name,
+      isNullable: type.isNullable,
+    );
   }
 
   throw ArgumentError.value(
     type,
     'type',
-    'The type `$type` is not supported. Change the type `$type` to `bool`, `DateTime`, `double`, `Duration`, `dynamic`, `int`, `Iterable`, `List`, `num`, `Set`, `String`, or `Uri`.',
+    'The type `$type` is not supported. Change the type `$type` to `bool`, `DateTime`, `double`, `Duration`, `dynamic`, `enum`, `int`, `Iterable`, `List`, `num`, `Set`, `String`, or `Uri`.',
   );
 }

@@ -4,12 +4,12 @@ class DynamicSerializerGenerator extends SerializerGenerator {
   const DynamicSerializerGenerator();
 
   @override
-  String generateSerializer(String expression, Set<String> addedMembers) {
+  String generateSerializer(String expression) {
     return expression;
   }
 
   @override
-  String generateDeserializer(String expression, Set<String> addedMembers) {
+  String generateDeserializer(String expression) {
     return expression;
   }
 }

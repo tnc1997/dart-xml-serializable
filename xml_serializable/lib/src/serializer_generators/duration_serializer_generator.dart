@@ -8,7 +8,7 @@ class DurationSerializerGenerator extends SerializerGenerator {
       : _isNullable = isNullable;
 
   @override
-  String generateSerializer(String expression, Set<String> addedMembers) {
+  String generateSerializer(String expression) {
     final buffer = StringBuffer(expression);
 
     if (_isNullable) {
@@ -21,7 +21,7 @@ class DurationSerializerGenerator extends SerializerGenerator {
   }
 
   @override
-  String generateDeserializer(String expression, Set<String> addedMembers) {
+  String generateDeserializer(String expression) {
     final buffer = StringBuffer();
 
     if (_isNullable) {

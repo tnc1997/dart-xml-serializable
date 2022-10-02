@@ -28,6 +28,7 @@ void main() {
   print(element);
 }
 
+@annotation.XmlEnum()
 enum WoodType {
   @annotation.XmlValue('balsa-wood')
   balsaWood,

@@ -11,13 +11,13 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   final InterfaceElement element2;
 
   @override
-  final InterfaceType? superclass;
-
-  @override
   final bool isDartCoreBool;
 
   @override
   final bool isDartCoreDouble;
+
+  @override
+  final bool isDartCoreEnum;
 
   @override
   final bool isDartCoreFunction;
@@ -53,9 +53,6 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   final bool isDartCoreSymbol;
 
   @override
-  final bool isDartCoreEnum;
-
-  @override
   final bool isDynamic;
 
   @override
@@ -70,9 +67,9 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   FakeInterfaceType({
     List<InterfaceType>? allSupertypes,
     required this.element2,
-    this.superclass,
     bool? isDartCoreBool,
     bool? isDartCoreDouble,
+    bool? isDartCoreEnum,
     bool? isDartCoreFunction,
     bool? isDartCoreInt,
     bool? isDartCoreIterable,
@@ -84,7 +81,6 @@ class FakeInterfaceType extends Fake implements InterfaceType {
     bool? isDartCoreSet,
     bool? isDartCoreString,
     bool? isDartCoreSymbol,
-    bool? isDartCoreEnum,
     bool? isDynamic,
     bool? isVoid,
     NullabilitySuffix? nullabilitySuffix,
@@ -92,6 +88,7 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   })  : allSupertypes = allSupertypes ?? [],
         isDartCoreBool = isDartCoreBool ?? false,
         isDartCoreDouble = isDartCoreDouble ?? false,
+        isDartCoreEnum = isDartCoreEnum ?? false,
         isDartCoreFunction = isDartCoreFunction ?? false,
         isDartCoreInt = isDartCoreInt ?? false,
         isDartCoreIterable = isDartCoreIterable ?? false,
@@ -103,7 +100,6 @@ class FakeInterfaceType extends Fake implements InterfaceType {
         isDartCoreSet = isDartCoreSet ?? false,
         isDartCoreString = isDartCoreString ?? false,
         isDartCoreSymbol = isDartCoreSymbol ?? false,
-        isDartCoreEnum = isDartCoreEnum ?? false,
         isDynamic = isDynamic ?? false,
         isVoid = isVoid ?? false,
         nullabilitySuffix = nullabilitySuffix ?? NullabilitySuffix.none,

@@ -52,6 +52,6 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement.name == 'XmlValue';
+        element.enclosingElement3.name == 'XmlValue';
   }
 }

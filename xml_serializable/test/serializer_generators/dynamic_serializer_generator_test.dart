@@ -12,7 +12,7 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                DynamicSerializerGenerator().generateSerializer('value', {}),
+                DynamicSerializerGenerator().generateSerializer('value'),
                 equals(
                   'value',
                 ),
@@ -29,7 +29,7 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                DynamicSerializerGenerator().generateDeserializer('value', {}),
+                DynamicSerializerGenerator().generateDeserializer('value'),
                 equals(
                   'value',
                 ),

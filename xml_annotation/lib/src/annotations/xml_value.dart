@@ -1,4 +1,4 @@
-/// An annotation used to specify how an enum value is serialized.
+/// An annotation used to specify how an `enum` value is serialized.
 ///
 /// ```dart
 /// enum Language {

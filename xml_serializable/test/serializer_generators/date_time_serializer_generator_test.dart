@@ -12,7 +12,7 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                DateTimeSerializerGenerator().generateSerializer('value', {}),
+                DateTimeSerializerGenerator().generateSerializer('value'),
                 equals(
                   'value.toIso8601String()',
                 ),
@@ -25,7 +25,7 @@ void main() {
             () {
               expect(
                 NullableDateTimeSerializerGenerator()
-                    .generateSerializer('value', {}),
+                    .generateSerializer('value'),
                 equals(
                   'value?.toIso8601String()',
                 ),
@@ -42,7 +42,7 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                DateTimeSerializerGenerator().generateDeserializer('value', {}),
+                DateTimeSerializerGenerator().generateDeserializer('value'),
                 equals(
                   'DateTime.parse(value)',
                 ),
@@ -55,7 +55,7 @@ void main() {
             () {
               expect(
                 NullableDateTimeSerializerGenerator()
-                    .generateDeserializer('value', {}),
+                    .generateDeserializer('value'),
                 equals(
                   'value != null ? DateTime.parse(value) : null',
                 ),

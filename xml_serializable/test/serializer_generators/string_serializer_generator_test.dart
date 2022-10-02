@@ -12,7 +12,7 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                StringSerializerGenerator().generateSerializer('value', {}),
+                StringSerializerGenerator().generateSerializer('value'),
                 equals(
                   'value',
                 ),
@@ -29,7 +29,7 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                StringSerializerGenerator().generateDeserializer('value', {}),
+                StringSerializerGenerator().generateDeserializer('value'),
                 equals(
                   'value',
                 ),

@@ -1,55 +1,55 @@
-import 'package:analyzer/dart/element/type.dart';
-
-import '../enum_utils.dart';
-import '../extensions/dart_type_extensions.dart';
 import 'serializer_generator.dart';
 
 class EnumSerializerGenerator extends SerializerGenerator {
-  const EnumSerializerGenerator({required this.type});
+  /// If `false` (the default) then the type does not represent a nullable type.
+  final bool _isNullable;
 
-  final DartType type;
+  /// The name of the type.
+  final String _name;
 
-  @override
-  String generateSerializer(String expression, Set<String> addedMembers) {
-    final memberContent = enumValueMapFromType(type);
-
-    if (memberContent != null) {
-      addedMembers.add(memberContent);
-    }
-
-    final buffer = StringBuffer();
-
-    buffer.write('_\$${type.element!.name!}EnumMap[$expression]');
-
-    if (!type.isNullable) {
-      buffer.write('!');
-    }
-
-    return buffer.toString();
-  }
+  const EnumSerializerGenerator(
+    this._name, {
+    bool isNullable = false,
+  }) : _isNullable = isNullable;
 
   @override
-  String generateDeserializer(String expression, Set<String> addedMembers) {
-    final memberContent = enumValueMapFromType(type);
-
-    if (memberContent != null) {
-      addedMembers.add(memberContent);
-    }
-
+  String generateSerializer(String expression) {
     final buffer = StringBuffer();
 
-    if (type.isNullable) {
+    if (_isNullable) {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write(
-      '_\$${type.element!.name!}EnumMap.entries.singleWhere((e) => e.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${_\$${type.element!.name!}EnumMap.values.join(\', \')}\')).key',
-    );
+    buffer.write('_\$${_name}EnumMap[$expression]!');
 
-    if (type.isNullable) {
+    if (_isNullable) {
       buffer.write(' : null');
     }
 
     return buffer.toString();
   }
+
+  @override
+  String generateDeserializer(String expression) {
+    final buffer = StringBuffer();
+
+    if (_isNullable) {
+      buffer.write('$expression != null ? ');
+    }
+
+    buffer.write(
+      '_\$${_name}EnumMap.entries.singleWhere((e) => e.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${_\$${_name}EnumMap.values.join(\', \')}\')).key',
+    );
+
+    if (_isNullable) {
+      buffer.write(' : null');
+    }
+
+    return buffer.toString();
+  }
+}
+
+class NullableEnumSerializerGenerator extends EnumSerializerGenerator {
+  const NullableEnumSerializerGenerator(String name)
+      : super(name, isNullable: true);
 }

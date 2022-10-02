@@ -14,7 +14,7 @@ void main() {
               expect(
                 ListSerializerGenerator(
                   DynamicSerializerGenerator(),
-                ).generateSerializer('values', {}),
+                ).generateSerializer('values'),
                 equals(
                   'values',
                 ),
@@ -23,7 +23,7 @@ void main() {
               expect(
                 ListSerializerGenerator(
                   IntSerializerGenerator(),
-                ).generateSerializer('values', {}),
+                ).generateSerializer('values'),
                 equals(
                   'values.map((e) => e.toString())',
                 ),
@@ -32,7 +32,7 @@ void main() {
               expect(
                 ListSerializerGenerator(
                   NullableIntSerializerGenerator(),
-                ).generateSerializer('values', {}),
+                ).generateSerializer('values'),
                 equals(
                   'values.map((e) => e?.toString())',
                 ),
@@ -46,7 +46,7 @@ void main() {
               expect(
                 NullableListSerializerGenerator(
                   DynamicSerializerGenerator(),
-                ).generateSerializer('values', {}),
+                ).generateSerializer('values'),
                 equals(
                   'values',
                 ),
@@ -55,7 +55,7 @@ void main() {
               expect(
                 NullableListSerializerGenerator(
                   IntSerializerGenerator(),
-                ).generateSerializer('values', {}),
+                ).generateSerializer('values'),
                 equals(
                   'values?.map((e) => e.toString())',
                 ),
@@ -64,7 +64,7 @@ void main() {
               expect(
                 NullableListSerializerGenerator(
                   NullableIntSerializerGenerator(),
-                ).generateSerializer('values', {}),
+                ).generateSerializer('values'),
                 equals(
                   'values?.map((e) => e?.toString())',
                 ),
@@ -83,7 +83,7 @@ void main() {
               expect(
                 ListSerializerGenerator(
                   DynamicSerializerGenerator(),
-                ).generateDeserializer('values', {}),
+                ).generateDeserializer('values'),
                 equals(
                   'values.toList()',
                 ),
@@ -92,7 +92,7 @@ void main() {
               expect(
                 ListSerializerGenerator(
                   IntSerializerGenerator(),
-                ).generateDeserializer('values', {}),
+                ).generateDeserializer('values'),
                 equals(
                   'values.map((e) => int.parse(e)).toList()',
                 ),
@@ -101,7 +101,7 @@ void main() {
               expect(
                 ListSerializerGenerator(
                   NullableIntSerializerGenerator(),
-                ).generateDeserializer('values', {}),
+                ).generateDeserializer('values'),
                 equals(
                   'values.map((e) => e != null ? int.parse(e) : null).toList()',
                 ),
@@ -115,7 +115,7 @@ void main() {
               expect(
                 NullableListSerializerGenerator(
                   DynamicSerializerGenerator(),
-                ).generateDeserializer('values', {}),
+                ).generateDeserializer('values'),
                 equals(
                   'values?.toList()',
                 ),
@@ -124,7 +124,7 @@ void main() {
               expect(
                 NullableListSerializerGenerator(
                   IntSerializerGenerator(),
-                ).generateDeserializer('values', {}),
+                ).generateDeserializer('values'),
                 equals(
                   'values?.map((e) => int.parse(e)).toList()',
                 ),
@@ -133,7 +133,7 @@ void main() {
               expect(
                 NullableListSerializerGenerator(
                   NullableIntSerializerGenerator(),
-                ).generateDeserializer('values', {}),
+                ).generateDeserializer('values'),
                 equals(
                   'values?.map((e) => e != null ? int.parse(e) : null).toList()',
                 ),
