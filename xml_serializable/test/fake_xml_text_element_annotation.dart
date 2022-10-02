@@ -8,14 +8,14 @@ class FakeXmlTextElementAnnotation extends FakeElementAnnotation {
   FakeXmlTextElementAnnotation()
       : super(
           element: FakeConstructorElement(
-            FakeClassElement(
+            enclosingElement3: FakeClassElement(
               library: FakeLibraryElement(
                 identifier:
                     'package:xml_annotation/src/annotations/xml_text.dart',
               ),
               name: 'XmlText',
             ),
-            FakeLibraryElement(
+            library: FakeLibraryElement(
               identifier:
                   'package:xml_annotation/src/annotations/xml_text.dart',
             ),

@@ -7,7 +7,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement.name == 'XmlAttribute';
+        element.enclosingElement3.name == 'XmlAttribute';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlElement`.
@@ -16,7 +16,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement.name == 'XmlElement';
+        element.enclosingElement3.name == 'XmlElement';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlRootElement`.
@@ -25,7 +25,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement.name == 'XmlRootElement';
+        element.enclosingElement3.name == 'XmlRootElement';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable using `xml_serializable`.
@@ -34,7 +34,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement.name == 'XmlSerializable';
+        element.enclosingElement3.name == 'XmlSerializable';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlText`.
@@ -43,6 +43,6 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement.name == 'XmlText';
+        element.enclosingElement3.name == 'XmlText';
   }
 }

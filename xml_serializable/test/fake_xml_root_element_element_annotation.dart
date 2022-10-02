@@ -11,14 +11,14 @@ class FakeXmlRootElementElementAnnotation extends FakeElementAnnotation {
     bool? isSelfClosing,
   }) : super(
           element: FakeConstructorElement(
-            FakeClassElement(
+            enclosingElement3: FakeClassElement(
               library: FakeLibraryElement(
                 identifier:
                     'package:xml_annotation/src/annotations/xml_root_element.dart',
               ),
               name: 'XmlRootElement',
             ),
-            FakeLibraryElement(
+            library: FakeLibraryElement(
               identifier:
                   'package:xml_annotation/src/annotations/xml_root_element.dart',
             ),

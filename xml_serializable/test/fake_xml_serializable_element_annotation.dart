@@ -8,14 +8,14 @@ class FakeXmlSerializableElementAnnotation extends FakeElementAnnotation {
   FakeXmlSerializableElementAnnotation({bool? createMixin})
       : super(
           element: FakeConstructorElement(
-            FakeClassElement(
+            enclosingElement3: FakeClassElement(
               library: FakeLibraryElement(
                 identifier:
                     'package:xml_annotation/src/annotations/xml_serializable.dart',
               ),
               name: 'XmlSerializable',
             ),
-            FakeLibraryElement(
+            library: FakeLibraryElement(
               identifier:
                   'package:xml_annotation/src/annotations/xml_serializable.dart',
             ),

@@ -2,8 +2,8 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:test/fake.dart';
 
-import 'fake_library_element.dart';
 import 'fake_interface_type.dart';
+import 'fake_library_element.dart';
 
 class FakeClassElement extends Fake implements ClassElement {
   @override
@@ -19,7 +19,7 @@ class FakeClassElement extends Fake implements ClassElement {
   final String name;
 
   @override
-  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element: this);
+  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element2: this);
 
   final InterfaceType? _thisType;
 

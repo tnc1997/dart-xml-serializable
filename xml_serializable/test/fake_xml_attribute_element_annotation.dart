@@ -10,14 +10,14 @@ class FakeXmlAttributeElementAnnotation extends FakeElementAnnotation {
     String? namespace,
   }) : super(
           element: FakeConstructorElement(
-            FakeClassElement(
+            enclosingElement3: FakeClassElement(
               library: FakeLibraryElement(
                 identifier:
                     'package:xml_annotation/src/annotations/xml_attribute.dart',
               ),
               name: 'XmlAttribute',
             ),
-            FakeLibraryElement(
+            library: FakeLibraryElement(
               identifier:
                   'package:xml_annotation/src/annotations/xml_attribute.dart',
             ),

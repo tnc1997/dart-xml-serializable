@@ -95,7 +95,7 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
     final typeArgument = (type as ParameterizedType).typeArguments.single;
 
     return IterableBuilderGenerator(
-      typeArgument.element!.hasXmlSerializable
+      typeArgument.element2!.hasXmlSerializable
           ? XmlSerializableXmlElementBuilderGenerator(
               name,
               namespace: namespace,
@@ -113,7 +113,7 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
       isNullable: type.isNullable,
     );
   } else {
-    return type.element!.hasXmlSerializable
+    return type.element2!.hasXmlSerializable
         ? XmlSerializableXmlElementBuilderGenerator(
             name,
             namespace: namespace,

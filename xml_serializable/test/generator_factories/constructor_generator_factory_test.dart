@@ -3,8 +3,8 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_class_element.dart';
 import '../fake_field_element.dart';
-import '../fake_iterable_class_element.dart';
 import '../fake_interface_type.dart';
+import '../fake_iterable_class_element.dart';
 import '../fake_string_class_element.dart';
 import '../fake_xml_attribute_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
@@ -118,7 +118,7 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeClassElement(
+                element2: FakeClassElement(
                   metadata: [
                     FakeXmlSerializableElementAnnotation(),
                   ],
@@ -152,7 +152,7 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeClassElement(
+                element2: FakeClassElement(
                   metadata: [
                     FakeXmlSerializableElementAnnotation(),
                   ],
@@ -187,7 +187,7 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeClassElement(
+                element2: FakeClassElement(
                   metadata: [
                     FakeXmlSerializableElementAnnotation(),
                   ],
@@ -219,11 +219,11 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeIterableClassElement(),
+                element2: FakeIterableClassElement(),
                 isDartCoreIterable: true,
                 typeArguments: [
                   FakeInterfaceType(
-                    element: FakeClassElement(
+                    element2: FakeClassElement(
                       metadata: [
                         FakeXmlSerializableElementAnnotation(),
                       ],
@@ -259,11 +259,11 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeIterableClassElement(),
+                element2: FakeIterableClassElement(),
                 isDartCoreIterable: true,
                 typeArguments: [
                   FakeInterfaceType(
-                    element: FakeClassElement(
+                    element2: FakeClassElement(
                       metadata: [
                         FakeXmlSerializableElementAnnotation(),
                       ],
@@ -300,11 +300,11 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeIterableClassElement(),
+                element2: FakeIterableClassElement(),
                 isDartCoreIterable: true,
                 typeArguments: [
                   FakeInterfaceType(
-                    element: FakeClassElement(
+                    element2: FakeClassElement(
                       metadata: [
                         FakeXmlSerializableElementAnnotation(),
                       ],
@@ -414,11 +414,11 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeIterableClassElement(),
+                element2: FakeIterableClassElement(),
                 isDartCoreIterable: true,
                 typeArguments: [
                   FakeInterfaceType(
-                    element: FakeStringClassElement(),
+                    element2: FakeStringClassElement(),
                     isDartCoreString: true,
                   ),
                 ],
@@ -451,11 +451,11 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeIterableClassElement(),
+                element2: FakeIterableClassElement(),
                 isDartCoreIterable: true,
                 typeArguments: [
                   FakeInterfaceType(
-                    element: FakeStringClassElement(),
+                    element2: FakeStringClassElement(),
                     isDartCoreString: true,
                   ),
                 ],
@@ -489,11 +489,11 @@ void main() {
               ],
               name: 'value',
               type: FakeInterfaceType(
-                element: FakeIterableClassElement(),
+                element2: FakeIterableClassElement(),
                 isDartCoreIterable: true,
                 typeArguments: [
                   FakeInterfaceType(
-                    element: FakeStringClassElement(),
+                    element2: FakeStringClassElement(),
                     isDartCoreString: true,
                   ),
                 ],

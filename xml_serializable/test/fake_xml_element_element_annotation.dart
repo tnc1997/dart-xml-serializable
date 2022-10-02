@@ -12,14 +12,14 @@ class FakeXmlElementElementAnnotation extends FakeElementAnnotation {
     bool? includeIfNull,
   }) : super(
           element: FakeConstructorElement(
-            FakeClassElement(
+            enclosingElement3: FakeClassElement(
               library: FakeLibraryElement(
                 identifier:
                     'package:xml_annotation/src/annotations/xml_element.dart',
               ),
               name: 'XmlElement',
             ),
-            FakeLibraryElement(
+            library: FakeLibraryElement(
               identifier:
                   'package:xml_annotation/src/annotations/xml_element.dart',
             ),

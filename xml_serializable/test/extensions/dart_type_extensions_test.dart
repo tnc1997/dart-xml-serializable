@@ -21,7 +21,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeStringClassElement(),
+                  element2: FakeStringClassElement(),
                   isDartCoreString: true,
                 ).isDartCore,
                 isTrue,
@@ -46,7 +46,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeDateTimeClassElement(),
+                  element2: FakeDateTimeClassElement(),
                 ).isDartCoreDateTime,
                 isTrue,
               );
@@ -70,7 +70,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeDurationClassElement(),
+                  element2: FakeDurationClassElement(),
                 ).isDartCoreDuration,
                 isTrue,
               );
@@ -94,7 +94,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeUriClassElement(),
+                  element2: FakeUriClassElement(),
                 ).isDartCoreUri,
                 isTrue,
               );
@@ -118,7 +118,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeDynamicClassElement(),
+                  element2: FakeDynamicClassElement(),
                   isDynamic: true,
                 ).isNullable,
                 isTrue,
