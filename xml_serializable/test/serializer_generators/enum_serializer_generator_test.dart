@@ -33,9 +33,7 @@ void main() {
         expect(
           addedMembers,
           equals({
-            'const _\$FooEnumMap = {\n'
-                '  Foo.a: \'a\',  Foo.b: \'b\',\n'
-                '};'
+            'const _\$FooEnumMap = { Foo.a: \'a\', Foo.b: \'b\' };',
           }),
         );
       });
@@ -67,9 +65,7 @@ void main() {
         expect(
           addedMembers,
           equals({
-            'const _\$FooEnumMap = {\n'
-                '  Foo.a: \'a\',  Foo.b: \'b\',\n'
-                '};'
+            'const _\$FooEnumMap = { Foo.a: \'a\', Foo.b: \'b\' };',
           }),
         );
       });
@@ -98,9 +94,7 @@ void main() {
         expect(
           addedMembers,
           equals({
-            'const _\$FooEnumMap = {\n'
-                '  Foo.a: \'a\',  Foo.b: \'b\',\n'
-                '};'
+            'const _\$FooEnumMap = { Foo.a: \'a\', Foo.b: \'b\' };',
           }),
         );
       });
@@ -130,9 +124,7 @@ void main() {
         expect(
           addedMembers,
           equals({
-            'const _\$FooEnumMap = {\n'
-                '  Foo.a: \'a\',  Foo.b: \'b\',\n'
-                '};'
+            'const _\$FooEnumMap = { Foo.a: \'a\', Foo.b: \'b\' };',
           }),
         );
       });

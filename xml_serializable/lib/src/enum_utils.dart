@@ -3,9 +3,6 @@ import 'package:analyzer/dart/element/type.dart';
 
 import 'extensions/element_extensions.dart';
 
-String constMapName(DartType targetType) =>
-    '_\$${targetType.element!.name!}EnumMap';
-
 String? enumValueMapFromType(DartType targetType) {
   final enumFields = iterateEnumFields(targetType);
 
@@ -21,12 +18,7 @@ String? enumValueMapFromType(DartType targetType) {
       ),
   };
 
-  final items = enumMap.entries.map((e) {
-    return '  ${targetType.element!.name!}.${e.key.name}: '
-        "'${e.value}',";
-  }).join();
-
-  return 'const ${constMapName(targetType)} = {\n$items\n};';
+  return 'const _\$${targetType.element!.name!}EnumMap = { ${enumMap.entries.map((e) => '${targetType.element!.name!}.${e.key.name}: \'${e.value}\'').join(', ')} };';
 }
 
 Iterable<FieldElement>? iterateEnumFields(DartType targetType) {

@@ -18,9 +18,9 @@ class EnumSerializerGenerator extends SerializerGenerator {
     }
 
     if (type.isNullableType) {
-      return '${constMapName(type)}[$expression]';
+      return '_\$${type.element!.name!}EnumMap[$expression]';
     } else {
-      return '${constMapName(type)}[$expression]!';
+      return '_\$${type.element!.name!}EnumMap[$expression]!';
     }
   }
 
@@ -40,7 +40,7 @@ class EnumSerializerGenerator extends SerializerGenerator {
     }
 
     final args = [
-      constMapName(type),
+      '_\$${type.element!.name!}EnumMap',
       expression,
     ];
 
