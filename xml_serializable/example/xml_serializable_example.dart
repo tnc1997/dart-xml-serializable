@@ -6,15 +6,15 @@ part 'xml_serializable_example.g.dart';
 void main() {
   final document = XmlDocument.parse(
     '''<?xml version="1.0"?>
-    <bookshelf wood-type="ebony">
+    <bookshelf>
       <book>
-        <title lang="english">XML Pocket Reference</title>
+        <title lang="English">XML Pocket Reference</title>
         <author>Simon St. Laurent</author>
         <author>Michael James Fitzgerald</author>
         <price></price>
       </book>
       <book>
-        <title lang="english">HTML and XHTML Pocket Reference</title>
+        <title lang="English">HTML and XHTML Pocket Reference</title>
         <author>Jennifer Niederst Robbins</author>
         <price></price>
       </book>
@@ -26,16 +26,6 @@ void main() {
 
   final element = bookshelf.toXmlElement();
   print(element);
-}
-
-@annotation.XmlEnum()
-enum WoodType {
-  @annotation.XmlValue('balsa-wood')
-  balsaWood,
-  ebony,
-  @annotation.XmlValue('california-redwood')
-  californiaRedwood,
-  amber,
 }
 
 @annotation.XmlRootElement(name: 'book')
@@ -112,9 +102,6 @@ class Book {
 @annotation.XmlRootElement(name: 'bookshelf')
 @annotation.XmlSerializable()
 class Bookshelf {
-  @annotation.XmlAttribute(name: 'wood-type')
-  WoodType? woodType;
-
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
@@ -123,7 +110,6 @@ class Bookshelf {
 
   Bookshelf({
     this.books,
-    this.woodType,
     this.price,
   });
 
@@ -180,17 +166,31 @@ class Bookshelf {
       );
 }
 
+@annotation.XmlEnum()
+enum Language {
+  @annotation.XmlValue('Mandarin')
+  mandarin,
+  @annotation.XmlValue('Spanish')
+  spanish,
+  @annotation.XmlValue('English')
+  english,
+  @annotation.XmlValue('Hindi')
+  hindi,
+  @annotation.XmlValue('Bengali')
+  bengali,
+}
+
 @annotation.XmlRootElement(name: 'title')
 @annotation.XmlSerializable()
 class Title {
   @annotation.XmlAttribute(name: 'lang')
-  String? lang;
+  Language? language;
 
   @annotation.XmlText()
   String? text;
 
   Title({
-    this.lang,
+    this.language,
     this.text,
   });
 
@@ -199,7 +199,7 @@ class Title {
 
   @override
   String toString() {
-    return 'Title{lang: $lang, text: $text}';
+    return 'Title{language: $language, text: $text}';
   }
 
   void buildXmlChildren(

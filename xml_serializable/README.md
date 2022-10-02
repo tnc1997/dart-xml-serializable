@@ -8,20 +8,13 @@ The builders generate code when they find members annotated with classes defined
 
 ## Usage
 
-Given a library `xml_serializable_example.dart` with a `Book`, `Bookshelf` and `Title` class annotated with `@XmlSerializable()`:
+Given a library `example.dart` with classes annotated with `@XmlSerializable()`:
 
 ```dart
 import 'package:xml/xml.dart';
 import 'package:xml_annotation/xml_annotation.dart' as annotation;
 
-enum WoodType {
-  @annotation.XmlValue('balsa-wood')
-  balsaWood,
-  ebony,
-  @annotation.XmlValue('california-redwood')
-  californiaRedwood,
-  amber,
-}
+part 'example.g.dart';
 
 @annotation.XmlRootElement(name: 'book')
 @annotation.XmlSerializable()
@@ -97,9 +90,6 @@ class Book {
 @annotation.XmlRootElement(name: 'bookshelf')
 @annotation.XmlSerializable()
 class Bookshelf {
-  @annotation.XmlAttribute(name: 'wood-type')
-  WoodType? woodType;
-
   @annotation.XmlElement(name: 'book')
   List<Book>? books;
 
@@ -108,7 +98,6 @@ class Bookshelf {
 
   Bookshelf({
     this.books,
-    this.woodType,
     this.price,
   });
 
@@ -165,17 +154,31 @@ class Bookshelf {
       );
 }
 
+@annotation.XmlEnum()
+enum Language {
+  @annotation.XmlValue('Mandarin')
+  mandarin,
+  @annotation.XmlValue('Spanish')
+  spanish,
+  @annotation.XmlValue('English')
+  english,
+  @annotation.XmlValue('Hindi')
+  hindi,
+  @annotation.XmlValue('Bengali')
+  bengali,
+}
+
 @annotation.XmlRootElement(name: 'title')
 @annotation.XmlSerializable()
 class Title {
   @annotation.XmlAttribute(name: 'lang')
-  String? lang;
+  Language? language;
 
   @annotation.XmlText()
   String? text;
 
   Title({
-    this.lang,
+    this.language,
     this.text,
   });
 
@@ -184,7 +187,7 @@ class Title {
 
   @override
   String toString() {
-    return 'Title{lang: $lang, text: $text}';
+    return 'Title{language: $language, text: $text}';
   }
 
   void buildXmlChildren(
@@ -233,12 +236,24 @@ class Title {
 }
 ```
 
-Building creates the corresponding part `xml_serializable_example.g.dart`:
+Building creates the corresponding part `example.g.dart`:
 
 ```dart
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'xml_serializable_example.dart';
+part of 'example.dart';
+
+// **************************************************************************
+// XmlEnumGenerator
+// **************************************************************************
+
+const _$LanguageEnumMap = {
+  Language.mandarin: 'Mandarin',
+  Language.spanish: 'Spanish',
+  Language.english: 'English',
+  Language.hindi: 'Hindi',
+  Language.bengali: 'Bengali'
+};
 
 // **************************************************************************
 // XmlSerializableGenerator
@@ -335,11 +350,6 @@ XmlElement _$BookToXmlElement(Book instance,
 
 void _$BookshelfBuildXmlChildren(Bookshelf instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
-  final woodType = instance.woodType;
-  final woodTypeSerialized = _$WoodTypeEnumMap[woodType];
-  if (woodTypeSerialized != null) {
-    builder.attribute('wood-type', woodTypeSerialized);
-  }
   final books = instance.books;
   final booksSerialized = books;
   if (booksSerialized != null) {
@@ -366,26 +376,15 @@ void _$BookshelfBuildXmlElement(Bookshelf instance, XmlBuilder builder,
 }
 
 Bookshelf _$BookshelfFromXmlElement(XmlElement element) {
-  final woodType = element.getAttribute('wood-type');
   final books = element.getElements('book');
   final price = element.getElement('price')?.getText();
   return Bookshelf(
-      woodType: annotation.$enumDecodeNullable(_$WoodTypeEnumMap, woodType),
-      books: books?.map((e) => Book.fromXmlElement(e)).toList(),
-      price: price);
+      books: books?.map((e) => Book.fromXmlElement(e)).toList(), price: price);
 }
 
 List<XmlAttribute> _$BookshelfToXmlAttributes(Bookshelf instance,
     {Map<String, String?> namespaces = const {}}) {
   final attributes = <XmlAttribute>[];
-  final woodType = instance.woodType;
-  final woodTypeSerialized = _$WoodTypeEnumMap[woodType];
-  final woodTypeConstructed = woodTypeSerialized != null
-      ? XmlAttribute(XmlName('wood-type'), woodTypeSerialized)
-      : null;
-  if (woodTypeConstructed != null) {
-    attributes.add(woodTypeConstructed);
-  }
   return attributes;
 }
 
@@ -423,19 +422,13 @@ XmlElement _$BookshelfToXmlElement(Bookshelf instance,
       instance.toXmlChildren(namespaces: namespaces));
 }
 
-const _$WoodTypeEnumMap = {
-  WoodType.balsaWood: 'balsa-wood',
-  WoodType.ebony: 'ebony',
-  WoodType.californiaRedwood: 'california-redwood',
-  WoodType.amber: 'amber',
-};
-
 void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
-  final lang = instance.lang;
-  final langSerialized = lang;
-  if (langSerialized != null) {
-    builder.attribute('lang', langSerialized);
+  final language = instance.language;
+  final languageSerialized =
+  language != null ? _$LanguageEnumMap[language]! : null;
+  if (languageSerialized != null) {
+    builder.attribute('lang', languageSerialized);
   }
   final text = instance.text;
   final textSerialized = text;
@@ -452,21 +445,30 @@ void _$TitleBuildXmlElement(Title instance, XmlBuilder builder,
 }
 
 Title _$TitleFromXmlElement(XmlElement element) {
-  final lang = element.getAttribute('lang');
+  final language = element.getAttribute('lang');
   final text = element.getText();
-  return Title(lang: lang, text: text);
+  return Title(
+      language: language != null
+          ? _$LanguageEnumMap.entries
+          .singleWhere((e) => e.value == language,
+          orElse: () => throw ArgumentError(
+              '`$language` is not one of the supported values: ${_$LanguageEnumMap.values.join(', ')}'))
+          .key
+          : null,
+      text: text);
 }
 
 List<XmlAttribute> _$TitleToXmlAttributes(Title instance,
     {Map<String, String?> namespaces = const {}}) {
   final attributes = <XmlAttribute>[];
-  final lang = instance.lang;
-  final langSerialized = lang;
-  final langConstructed = langSerialized != null
-      ? XmlAttribute(XmlName('lang'), langSerialized)
+  final language = instance.language;
+  final languageSerialized =
+  language != null ? _$LanguageEnumMap[language]! : null;
+  final languageConstructed = languageSerialized != null
+      ? XmlAttribute(XmlName('lang'), languageSerialized)
       : null;
-  if (langConstructed != null) {
-    attributes.add(langConstructed);
+  if (languageConstructed != null) {
+    attributes.add(languageConstructed);
   }
   return attributes;
 }
