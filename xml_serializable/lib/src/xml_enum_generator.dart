@@ -10,7 +10,7 @@ class XmlEnumGenerator extends GeneratorForAnnotation<XmlEnum> {
   const XmlEnumGenerator();
 
   @override
-  generateForAnnotatedElement(
+  String? generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
@@ -29,11 +29,7 @@ class XmlEnumGenerator extends GeneratorForAnnotation<XmlEnum> {
       );
     }
 
-    final value = _enumValueMapFromType(element.thisType);
-
-    return [
-      if (value != null) value,
-    ];
+    return _enumValueMapFromType(element.thisType);
   }
 }
 
