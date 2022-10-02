@@ -666,7 +666,9 @@ void main() {
           expect(
             () => constructorGeneratorFactory(
               FakeFieldElement(
-                type: FakeInterfaceType(),
+                type: FakeInterfaceType(
+                  element2: FakeClassElement(),
+                ),
               ),
             ),
             throwsA(isA<ArgumentError>()),

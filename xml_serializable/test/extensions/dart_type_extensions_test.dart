@@ -2,6 +2,7 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:test/test.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
+import '../fake_class_element.dart';
 import '../fake_date_time_class_element.dart';
 import '../fake_duration_class_element.dart';
 import '../fake_dynamic_class_element.dart';
@@ -32,7 +33,11 @@ void main() {
           test(
             'should return false if the type is not a type defined in the dart:core library',
             () {
-              expect(FakeInterfaceType().isDartCore, isFalse);
+              expect(
+                  FakeInterfaceType(
+                    element2: FakeClassElement(),
+                  ).isDartCore,
+                  isFalse);
             },
           );
         },
@@ -56,7 +61,11 @@ void main() {
           test(
             'should return false if the type is not the type `DateTime` defined in the dart:core library',
             () {
-              expect(FakeInterfaceType().isDartCoreDateTime, isFalse);
+              expect(
+                  FakeInterfaceType(
+                    element2: FakeClassElement(),
+                  ).isDartCoreDateTime,
+                  isFalse);
             },
           );
         },
@@ -80,7 +89,11 @@ void main() {
           test(
             'should return false if the type is not the type `Duration` defined in the dart:core library',
             () {
-              expect(FakeInterfaceType().isDartCoreDuration, isFalse);
+              expect(
+                  FakeInterfaceType(
+                    element2: FakeClassElement(),
+                  ).isDartCoreDuration,
+                  isFalse);
             },
           );
         },
@@ -104,7 +117,11 @@ void main() {
           test(
             'should return false if the type is not the type `Uri` defined in the dart:core library',
             () {
-              expect(FakeInterfaceType().isDartCoreUri, isFalse);
+              expect(
+                  FakeInterfaceType(
+                    element2: FakeClassElement(),
+                  ).isDartCoreUri,
+                  isFalse);
             },
           );
         },
@@ -131,6 +148,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
+                  element2: FakeClassElement(),
                   nullabilitySuffix: NullabilitySuffix.question,
                 ).isNullable,
                 isTrue,
@@ -143,6 +161,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
+                  element2: FakeClassElement(),
                   nullabilitySuffix: NullabilitySuffix.none,
                 ).isNullable,
                 isFalse,
