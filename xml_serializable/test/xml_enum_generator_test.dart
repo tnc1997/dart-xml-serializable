@@ -8,6 +8,7 @@ import 'fake_enum_element.dart';
 import 'fake_field_element.dart';
 import 'fake_library_element.dart';
 import 'fake_xml_enum_element_annotation.dart';
+import 'fake_xml_value_element_annotation.dart';
 
 void main() {
   group(
@@ -16,7 +17,7 @@ void main() {
       const generator = XmlEnumGenerator();
 
       test(
-        'should generate enum value map if the enum has an `XmlEnum` attribute',
+        'should generate an enum map if the enum has an `XmlEnum` attribute',
         () {
           expect(
             generator.generateForAnnotatedElement(
@@ -27,6 +28,9 @@ void main() {
                     isEnumConstant: true,
                   ),
                   FakeFieldElement(
+                    metadata: [
+                      FakeXmlValueElementAnnotation('Bar'),
+                    ],
                     name: 'bar',
                     isEnumConstant: true,
                   ),
@@ -40,7 +44,7 @@ void main() {
               FakeBuildStep(),
             ),
             equals(
-              '''const _\$FooBarEnumMap = { FooBar.foo: 'foo', FooBar.bar: 'bar' };''',
+              '''const _\$FooBarEnumMap = { FooBar.foo: 'foo', FooBar.bar: 'Bar' };''',
             ),
           );
         },

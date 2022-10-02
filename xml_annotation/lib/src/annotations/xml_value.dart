@@ -1,6 +1,7 @@
 /// An annotation used to specify how an `enum` value is serialized.
 ///
 /// ```dart
+/// @XmlEnum()
 /// enum Language {
 ///   @XmlValue('Mandarin')
 ///   mandarin,
@@ -16,7 +17,7 @@
 /// ```
 class XmlValue {
   /// The value to use when serializing and deserializing.
-  final dynamic value;
+  final String value;
 
   const XmlValue(this.value);
 }

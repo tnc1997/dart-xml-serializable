@@ -1,5 +1,4 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:xml_annotation/xml_annotation.dart';
@@ -10,7 +9,7 @@ class XmlEnumGenerator extends GeneratorForAnnotation<XmlEnum> {
   const XmlEnumGenerator();
 
   @override
-  String? generateForAnnotatedElement(
+  String generateForAnnotatedElement(
     Element element,
     ConstantReader annotation,
     BuildStep buildStep,
@@ -29,53 +28,6 @@ class XmlEnumGenerator extends GeneratorForAnnotation<XmlEnum> {
       );
     }
 
-    return _enumValueMapFromType(element.thisType);
+    return 'const _\$${element.name}EnumMap = { ${element.fields.where((e) => e.isEnumConstant).map((e) => '${element.name}.${e.name}: \'${e.hasXmlValue ? e.getXmlValue()!.getField('value')!.toStringValue() : e.name}\'').join(', ')} };';
   }
-}
-
-String? _enumValueMapFromType(DartType targetType) {
-  final enumFields = _iterateEnumFields(targetType);
-
-  if (enumFields == null) {
-    return null;
-  }
-
-  final enumMap = {
-    for (var field in enumFields)
-      field: _generateEntry(
-        field: field,
-        targetType: targetType,
-      ),
-  };
-
-  return 'const _\$${targetType.element2!.name!}EnumMap = { ${enumMap.entries.map((e) => '${targetType.element2!.name!}.${e.key.name}: \'${e.value}\'').join(', ')} };';
-}
-
-Iterable<FieldElement>? _iterateEnumFields(DartType targetType) {
-  final element = targetType.element2;
-
-  return element is EnumElement
-      ? element.fields.where((e) => e.isEnumConstant)
-      : null;
-}
-
-dynamic _generateEntry({
-  required FieldElement field,
-  required DartType targetType,
-}) {
-  final annotation = field.hasXmlValue ? field.getXmlValue() : null;
-
-  final value = annotation?.getField('value');
-
-  return value == null
-      ? field.name
-      : value.type!.isDartCoreString
-          ? value.toStringValue()
-          : value.type!.isDartCoreInt
-              ? value.toIntValue()
-              : throw ArgumentError.value(
-                  field,
-                  'field',
-                  'The value `$value` is not a `String` nor an `int`.',
-                );
 }
