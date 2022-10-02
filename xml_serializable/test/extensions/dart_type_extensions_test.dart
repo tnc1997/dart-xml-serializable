@@ -34,10 +34,11 @@ void main() {
             'should return false if the type is not a type defined in the dart:core library',
             () {
               expect(
-                  FakeInterfaceType(
-                    element2: FakeClassElement(),
-                  ).isDartCore,
-                  isFalse);
+                FakeInterfaceType(
+                  element2: FakeClassElement(),
+                ).isDartCore,
+                isFalse,
+              );
             },
           );
         },
@@ -62,10 +63,11 @@ void main() {
             'should return false if the type is not the type `DateTime` defined in the dart:core library',
             () {
               expect(
-                  FakeInterfaceType(
-                    element2: FakeClassElement(),
-                  ).isDartCoreDateTime,
-                  isFalse);
+                FakeInterfaceType(
+                  element2: FakeClassElement(),
+                ).isDartCoreDateTime,
+                isFalse,
+              );
             },
           );
         },
@@ -90,10 +92,11 @@ void main() {
             'should return false if the type is not the type `Duration` defined in the dart:core library',
             () {
               expect(
-                  FakeInterfaceType(
-                    element2: FakeClassElement(),
-                  ).isDartCoreDuration,
-                  isFalse);
+                FakeInterfaceType(
+                  element2: FakeClassElement(),
+                ).isDartCoreDuration,
+                isFalse,
+              );
             },
           );
         },
@@ -118,10 +121,11 @@ void main() {
             'should return false if the type is not the type `Uri` defined in the dart:core library',
             () {
               expect(
-                  FakeInterfaceType(
-                    element2: FakeClassElement(),
-                  ).isDartCoreUri,
-                  isFalse);
+                FakeInterfaceType(
+                  element2: FakeClassElement(),
+                ).isDartCoreUri,
+                isFalse,
+              );
             },
           );
         },
