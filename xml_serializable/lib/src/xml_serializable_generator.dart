@@ -312,7 +312,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   SerializerGenerator _xmlSerializableSerializerGeneratorFactory(
     DartType type,
   ) {
-    if (type is InterfaceType && type.element.hasXmlSerializable) {
+    if (type is InterfaceType && type.element2.hasXmlSerializable) {
       return _XmlSerializableSerializerGenerator(type);
     } else if (type is ParameterizedType && type.isDartCoreIterable) {
       return IterableSerializerGenerator(
@@ -353,7 +353,7 @@ class _XmlSerializableSerializerGenerator extends SerializerGenerator {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write('${_type.element.name}.fromXmlElement($expression)');
+    buffer.write('${_type.element2.name}.fromXmlElement($expression)');
 
     if (_type.isNullable) {
       buffer.write(' : null');

@@ -49,7 +49,7 @@ void main() {
                     ],
                     name: 'boolAttribute',
                     type: FakeInterfaceType(
-                      element: FakeBoolClassElement(),
+                      element2: FakeBoolClassElement(),
                       isDartCoreBool: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -62,7 +62,7 @@ void main() {
                     ],
                     name: 'dateTimeAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDateTimeClassElement(),
+                      element2: FakeDateTimeClassElement(),
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
@@ -74,7 +74,7 @@ void main() {
                     ],
                     name: 'doubleAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDoubleClassElement(),
+                      element2: FakeDoubleClassElement(),
                       isDartCoreDouble: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -87,7 +87,7 @@ void main() {
                     ],
                     name: 'durationAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDurationClassElement(),
+                      element2: FakeDurationClassElement(),
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
@@ -99,7 +99,7 @@ void main() {
                     ],
                     name: 'dynamicAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDynamicClassElement(),
+                      element2: FakeDynamicClassElement(),
                       isDynamic: true,
                     ),
                   ),
@@ -111,7 +111,7 @@ void main() {
                     ],
                     name: 'intAttribute',
                     type: FakeInterfaceType(
-                      element: FakeIntClassElement(),
+                      element2: FakeIntClassElement(),
                       isDartCoreInt: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -124,7 +124,7 @@ void main() {
                     ],
                     name: 'numAttribute',
                     type: FakeInterfaceType(
-                      element: FakeNumClassElement(),
+                      element2: FakeNumClassElement(),
                       isDartCoreNum: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -137,7 +137,7 @@ void main() {
                     ],
                     name: 'stringAttribute',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -150,7 +150,7 @@ void main() {
                     ],
                     name: 'uriAttribute',
                     type: FakeInterfaceType(
-                      element: FakeUriClassElement(),
+                      element2: FakeUriClassElement(),
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
@@ -162,7 +162,7 @@ void main() {
                     ],
                     name: 'stringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -176,7 +176,7 @@ void main() {
                     ],
                     name: 'nonSelfClosingStringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -190,7 +190,7 @@ void main() {
                     ],
                     name: 'excludeIfNullStringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -203,12 +203,12 @@ void main() {
                     ],
                     name: 'iterableElement',
                     type: FakeInterfaceType(
-                      element: FakeIterableClassElement(),
+                      element2: FakeIterableClassElement(),
                       isDartCoreIterable: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -223,12 +223,12 @@ void main() {
                     ],
                     name: 'nonSelfClosingIterableElement',
                     type: FakeInterfaceType(
-                      element: FakeIterableClassElement(),
+                      element2: FakeIterableClassElement(),
                       isDartCoreIterable: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -243,12 +243,12 @@ void main() {
                     ],
                     name: 'excludeIfNullIterableElement',
                     type: FakeInterfaceType(
-                      element: FakeIterableClassElement(),
+                      element2: FakeIterableClassElement(),
                       isDartCoreIterable: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -262,12 +262,12 @@ void main() {
                     ],
                     name: 'listElement',
                     type: FakeInterfaceType(
-                      element: FakeListClassElement(),
+                      element2: FakeListClassElement(),
                       isDartCoreList: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -282,12 +282,12 @@ void main() {
                     ],
                     name: 'nonSelfClosingListElement',
                     type: FakeInterfaceType(
-                      element: FakeListClassElement(),
+                      element2: FakeListClassElement(),
                       isDartCoreList: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -302,12 +302,12 @@ void main() {
                     ],
                     name: 'excludeIfNullListElement',
                     type: FakeInterfaceType(
-                      element: FakeListClassElement(),
+                      element2: FakeListClassElement(),
                       isDartCoreList: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -321,12 +321,12 @@ void main() {
                     ],
                     name: 'setElement',
                     type: FakeInterfaceType(
-                      element: FakeSetClassElement(),
+                      element2: FakeSetClassElement(),
                       isDartCoreSet: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -341,12 +341,12 @@ void main() {
                     ],
                     name: 'nonSelfClosingSetElement',
                     type: FakeInterfaceType(
-                      element: FakeSetClassElement(),
+                      element2: FakeSetClassElement(),
                       isDartCoreSet: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -361,12 +361,12 @@ void main() {
                     ],
                     name: 'excludeIfNullSetElement',
                     type: FakeInterfaceType(
-                      element: FakeSetClassElement(),
+                      element2: FakeSetClassElement(),
                       isDartCoreSet: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -380,7 +380,7 @@ void main() {
                     ],
                     name: 'customElement',
                     type: FakeInterfaceType(
-                      element: FakeClassElement(
+                      element2: FakeClassElement(
                         metadata: [
                           FakeXmlSerializableElementAnnotation(),
                         ],
@@ -398,7 +398,7 @@ void main() {
                     ],
                     name: 'nonSelfClosingCustomElement',
                     type: FakeInterfaceType(
-                      element: FakeClassElement(
+                      element2: FakeClassElement(
                         metadata: [
                           FakeXmlSerializableElementAnnotation(),
                         ],
@@ -416,7 +416,7 @@ void main() {
                     ],
                     name: 'excludeIfNullCustomElement',
                     type: FakeInterfaceType(
-                      element: FakeClassElement(
+                      element2: FakeClassElement(
                         metadata: [
                           FakeXmlSerializableElementAnnotation(),
                         ],
@@ -431,7 +431,7 @@ void main() {
                     ],
                     name: 'stringText',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -712,7 +712,7 @@ return children;
                     ],
                     name: 'boolAttribute',
                     type: FakeInterfaceType(
-                      element: FakeBoolClassElement(),
+                      element2: FakeBoolClassElement(),
                       isDartCoreBool: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -725,7 +725,7 @@ return children;
                     ],
                     name: 'dateTimeAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDateTimeClassElement(),
+                      element2: FakeDateTimeClassElement(),
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
@@ -737,7 +737,7 @@ return children;
                     ],
                     name: 'doubleAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDoubleClassElement(),
+                      element2: FakeDoubleClassElement(),
                       isDartCoreDouble: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -750,7 +750,7 @@ return children;
                     ],
                     name: 'durationAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDurationClassElement(),
+                      element2: FakeDurationClassElement(),
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
@@ -762,7 +762,7 @@ return children;
                     ],
                     name: 'dynamicAttribute',
                     type: FakeInterfaceType(
-                      element: FakeDynamicClassElement(),
+                      element2: FakeDynamicClassElement(),
                       isDynamic: true,
                     ),
                   ),
@@ -774,7 +774,7 @@ return children;
                     ],
                     name: 'intAttribute',
                     type: FakeInterfaceType(
-                      element: FakeIntClassElement(),
+                      element2: FakeIntClassElement(),
                       isDartCoreInt: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -787,7 +787,7 @@ return children;
                     ],
                     name: 'numAttribute',
                     type: FakeInterfaceType(
-                      element: FakeNumClassElement(),
+                      element2: FakeNumClassElement(),
                       isDartCoreNum: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -800,7 +800,7 @@ return children;
                     ],
                     name: 'stringAttribute',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -813,7 +813,7 @@ return children;
                     ],
                     name: 'uriAttribute',
                     type: FakeInterfaceType(
-                      element: FakeUriClassElement(),
+                      element2: FakeUriClassElement(),
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
@@ -825,7 +825,7 @@ return children;
                     ],
                     name: 'stringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -839,7 +839,7 @@ return children;
                     ],
                     name: 'nonSelfClosingStringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -853,7 +853,7 @@ return children;
                     ],
                     name: 'excludeIfNullStringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -866,12 +866,12 @@ return children;
                     ],
                     name: 'iterableElement',
                     type: FakeInterfaceType(
-                      element: FakeIterableClassElement(),
+                      element2: FakeIterableClassElement(),
                       isDartCoreIterable: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -886,12 +886,12 @@ return children;
                     ],
                     name: 'nonSelfClosingIterableElement',
                     type: FakeInterfaceType(
-                      element: FakeIterableClassElement(),
+                      element2: FakeIterableClassElement(),
                       isDartCoreIterable: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -906,12 +906,12 @@ return children;
                     ],
                     name: 'excludeIfNullIterableElement',
                     type: FakeInterfaceType(
-                      element: FakeIterableClassElement(),
+                      element2: FakeIterableClassElement(),
                       isDartCoreIterable: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -925,12 +925,12 @@ return children;
                     ],
                     name: 'listElement',
                     type: FakeInterfaceType(
-                      element: FakeListClassElement(),
+                      element2: FakeListClassElement(),
                       isDartCoreList: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -945,12 +945,12 @@ return children;
                     ],
                     name: 'nonSelfClosingListElement',
                     type: FakeInterfaceType(
-                      element: FakeListClassElement(),
+                      element2: FakeListClassElement(),
                       isDartCoreList: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -965,12 +965,12 @@ return children;
                     ],
                     name: 'excludeIfNullListElement',
                     type: FakeInterfaceType(
-                      element: FakeListClassElement(),
+                      element2: FakeListClassElement(),
                       isDartCoreList: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -984,12 +984,12 @@ return children;
                     ],
                     name: 'setElement',
                     type: FakeInterfaceType(
-                      element: FakeSetClassElement(),
+                      element2: FakeSetClassElement(),
                       isDartCoreSet: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -1004,12 +1004,12 @@ return children;
                     ],
                     name: 'nonSelfClosingSetElement',
                     type: FakeInterfaceType(
-                      element: FakeSetClassElement(),
+                      element2: FakeSetClassElement(),
                       isDartCoreSet: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -1024,12 +1024,12 @@ return children;
                     ],
                     name: 'excludeIfNullSetElement',
                     type: FakeInterfaceType(
-                      element: FakeSetClassElement(),
+                      element2: FakeSetClassElement(),
                       isDartCoreSet: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element2: FakeStringClassElement(),
                           isDartCoreString: true,
                         ),
                       ],
@@ -1043,7 +1043,7 @@ return children;
                     ],
                     name: 'customElement',
                     type: FakeInterfaceType(
-                      element: FakeClassElement(
+                      element2: FakeClassElement(
                         metadata: [
                           FakeXmlSerializableElementAnnotation(),
                         ],
@@ -1061,7 +1061,7 @@ return children;
                     ],
                     name: 'nonSelfClosingCustomElement',
                     type: FakeInterfaceType(
-                      element: FakeClassElement(
+                      element2: FakeClassElement(
                         metadata: [
                           FakeXmlSerializableElementAnnotation(),
                         ],
@@ -1079,7 +1079,7 @@ return children;
                     ],
                     name: 'excludeIfNullCustomElement',
                     type: FakeInterfaceType(
-                      element: FakeClassElement(
+                      element2: FakeClassElement(
                         metadata: [
                           FakeXmlSerializableElementAnnotation(),
                         ],
@@ -1094,7 +1094,7 @@ return children;
                     ],
                     name: 'stringText',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -1386,7 +1386,7 @@ return XmlElement(XmlName('testclass'), [...namespaces.toXmlAttributes(), ...ins
                     ],
                     name: 'stringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -1454,7 +1454,7 @@ List<XmlNode> toXmlChildren({Map<String, String?> namespaces = const {}}) => _\$
                     ],
                     name: 'stringElement',
                     type: FakeInterfaceType(
-                      element: FakeStringClassElement(),
+                      element2: FakeStringClassElement(),
                       isDartCoreString: true,
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
@@ -1559,12 +1559,12 @@ XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$Test
                         FakeXmlAttributeElementAnnotation(),
                       ],
                       type: FakeInterfaceType(
-                        element: FakeIterableClassElement(),
+                        element2: FakeIterableClassElement(),
                         isDartCoreIterable: true,
                         nullabilitySuffix: NullabilitySuffix.question,
                         typeArguments: [
                           FakeInterfaceType(
-                            element: FakeStringClassElement(),
+                            element2: FakeStringClassElement(),
                             isDartCoreString: true,
                           ),
                         ],
