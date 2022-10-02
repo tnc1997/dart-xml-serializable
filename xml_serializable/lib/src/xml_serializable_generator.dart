@@ -327,9 +327,7 @@ class _XmlSerializableSerializerGenerator extends SerializerGenerator {
   const _XmlSerializableSerializerGenerator(this._type);
 
   @override
-  String generateSerializer(String expression) {
-    return expression;
-  }
+  String generateSerializer(String expression) => expression;
 
   @override
   String generateDeserializer(String expression) {
