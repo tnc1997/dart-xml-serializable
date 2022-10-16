@@ -3,6 +3,18 @@
 part of 'xml_serializable_example.dart';
 
 // **************************************************************************
+// XmlEnumGenerator
+// **************************************************************************
+
+const _$LanguageEnumMap = {
+  Language.mandarin: 'Mandarin',
+  Language.spanish: 'Spanish',
+  Language.english: 'English',
+  Language.hindi: 'Hindi',
+  Language.bengali: 'Bengali'
+};
+
+// **************************************************************************
 // XmlSerializableGenerator
 // **************************************************************************
 
@@ -171,10 +183,11 @@ XmlElement _$BookshelfToXmlElement(Bookshelf instance,
 
 void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
-  final lang = instance.lang;
-  final langSerialized = lang;
-  if (langSerialized != null) {
-    builder.attribute('lang', langSerialized);
+  final language = instance.language;
+  final languageSerialized =
+      language != null ? _$LanguageEnumMap[language]! : null;
+  if (languageSerialized != null) {
+    builder.attribute('lang', languageSerialized);
   }
   final text = instance.text;
   final textSerialized = text;
@@ -191,21 +204,30 @@ void _$TitleBuildXmlElement(Title instance, XmlBuilder builder,
 }
 
 Title _$TitleFromXmlElement(XmlElement element) {
-  final lang = element.getAttribute('lang');
+  final language = element.getAttribute('lang');
   final text = element.getText();
-  return Title(lang: lang, text: text);
+  return Title(
+      language: language != null
+          ? _$LanguageEnumMap.entries
+              .singleWhere((e) => e.value == language,
+                  orElse: () => throw ArgumentError(
+                      '`$language` is not one of the supported values: ${_$LanguageEnumMap.values.join(', ')}'))
+              .key
+          : null,
+      text: text);
 }
 
 List<XmlAttribute> _$TitleToXmlAttributes(Title instance,
     {Map<String, String?> namespaces = const {}}) {
   final attributes = <XmlAttribute>[];
-  final lang = instance.lang;
-  final langSerialized = lang;
-  final langConstructed = langSerialized != null
-      ? XmlAttribute(XmlName('lang'), langSerialized)
+  final language = instance.language;
+  final languageSerialized =
+      language != null ? _$LanguageEnumMap[language]! : null;
+  final languageConstructed = languageSerialized != null
+      ? XmlAttribute(XmlName('lang'), languageSerialized)
       : null;
-  if (langConstructed != null) {
-    attributes.add(langConstructed);
+  if (languageConstructed != null) {
+    attributes.add(languageConstructed);
   }
   return attributes;
 }

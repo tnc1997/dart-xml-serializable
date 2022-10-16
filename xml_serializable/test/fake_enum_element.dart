@@ -2,11 +2,13 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:test/fake.dart';
 
-import 'fake_class_element.dart';
 import 'fake_interface_type.dart';
 import 'fake_library_element.dart';
 
-class FakeFieldElement extends Fake implements FieldElement {
+class FakeEnumElement extends Fake implements EnumElement {
+  @override
+  final List<FieldElement> fields;
+
   @override
   final LibraryElement library;
 
@@ -17,20 +19,19 @@ class FakeFieldElement extends Fake implements FieldElement {
   final String name;
 
   @override
-  final DartType type;
+  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element2: this);
 
-  @override
-  final bool isEnumConstant;
+  final InterfaceType? _thisType;
 
-  FakeFieldElement({
+  FakeEnumElement({
+    List<FieldElement>? fields,
     LibraryElement? library,
     List<ElementAnnotation>? metadata,
     String? name,
-    DartType? type,
-    bool? isEnumConstant,
-  })  : library = library ?? FakeLibraryElement(),
+    InterfaceType? thisType,
+  })  : fields = fields ?? [],
+        library = library ?? FakeLibraryElement(),
         metadata = metadata ?? [],
-        name = name ?? 'value',
-        type = type ?? FakeInterfaceType(element2: FakeClassElement()),
-        isEnumConstant = isEnumConstant ?? false;
+        name = name ?? 'HelloWorld',
+        _thisType = thisType;
 }

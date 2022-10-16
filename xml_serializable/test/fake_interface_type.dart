@@ -17,6 +17,9 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   final bool isDartCoreDouble;
 
   @override
+  final bool isDartCoreEnum;
+
+  @override
   final bool isDartCoreFunction;
 
   @override
@@ -66,6 +69,7 @@ class FakeInterfaceType extends Fake implements InterfaceType {
     required this.element2,
     bool? isDartCoreBool,
     bool? isDartCoreDouble,
+    bool? isDartCoreEnum,
     bool? isDartCoreFunction,
     bool? isDartCoreInt,
     bool? isDartCoreIterable,
@@ -84,6 +88,7 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   })  : allSupertypes = allSupertypes ?? [],
         isDartCoreBool = isDartCoreBool ?? false,
         isDartCoreDouble = isDartCoreDouble ?? false,
+        isDartCoreEnum = isDartCoreEnum ?? false,
         isDartCoreFunction = isDartCoreFunction ?? false,
         isDartCoreInt = isDartCoreInt ?? false,
         isDartCoreIterable = isDartCoreIterable ?? false,
