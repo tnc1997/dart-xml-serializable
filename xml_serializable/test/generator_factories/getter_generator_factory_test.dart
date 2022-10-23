@@ -8,7 +8,6 @@ import '../fake_iterable_class_element.dart';
 import '../fake_string_class_element.dart';
 import '../fake_xml_attribute_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
-import '../fake_xml_root_element_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
 import '../fake_xml_text_element_annotation.dart';
 
@@ -21,12 +20,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlAttributeElementAnnotation(),
               ],
@@ -50,12 +43,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlAttributeElementAnnotation(
                   name: 'name',
@@ -81,12 +68,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlAttributeElementAnnotation(
                   name: 'name',
@@ -131,12 +112,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(),
               ],
@@ -167,12 +142,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -205,12 +174,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -246,12 +209,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(),
               ],
@@ -288,12 +245,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -332,12 +283,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -379,12 +324,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(),
               ],
@@ -408,12 +347,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -439,12 +372,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -473,12 +400,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(),
               ],
@@ -514,12 +435,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -557,12 +472,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlElementElementAnnotation(
                   name: 'name',
@@ -617,12 +526,6 @@ void main() {
         () {
           final generator = getterGeneratorFactory(
             FakeFieldElement(
-              enclosingElement3: FakeClassElement(
-                metadata: [
-                  FakeXmlRootElementElementAnnotation(),
-                  FakeXmlSerializableElementAnnotation(),
-                ],
-              ),
               metadata: [
                 FakeXmlTextElementAnnotation(),
               ],

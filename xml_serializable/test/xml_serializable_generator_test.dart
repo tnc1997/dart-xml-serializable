@@ -1657,12 +1657,6 @@ return children;
                 FakeClassElement(
                   fields: [
                     FakeFieldElement(
-                      enclosingElement3: FakeClassElement(
-                        metadata: [
-                          FakeXmlRootElementElementAnnotation(),
-                          FakeXmlSerializableElementAnnotation(),
-                        ],
-                      ),
                       metadata: [
                         FakeXmlAttributeElementAnnotation(),
                       ],
