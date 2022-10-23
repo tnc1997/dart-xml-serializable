@@ -1528,7 +1528,7 @@ XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$Test
       );
 
       test(
-        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` with pascal case attribute names and element names if the class has an `XmlSerializable` annotation with a `fieldRename` of `pascal`',
+        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` with attribute names and element names encoded to pascal case if the class has an `XmlSerializable` annotation with a `fieldRename` of `pascal`',
         () {
           expect(
             generator.generateForAnnotatedElement(

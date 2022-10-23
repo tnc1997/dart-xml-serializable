@@ -1,5 +1,6 @@
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
+import 'package:xml_annotation/xml_annotation.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 import 'fake_build_step.dart';
@@ -45,6 +46,56 @@ void main() {
             ),
             equals(
               '''const _\$FooBarEnumMap = { FooBar.foo: 'foo', FooBar.bar: 'Bar' };''',
+            ),
+          );
+        },
+      );
+
+      test(
+        'should generate an enum map with values encoded to pascal case if the enum has an `XmlEnum` attribute with a `fieldRename` of `pascal`',
+        () {
+          expect(
+            generator.generateForAnnotatedElement(
+              FakeEnumElement(
+                fields: [
+                  FakeFieldElement(
+                    enclosingElement3: FakeEnumElement(
+                      metadata: [
+                        FakeXmlEnumElementAnnotation(
+                          fieldRename: FieldRename.pascal,
+                        ),
+                      ],
+                    ),
+                    name: 'foo',
+                    isEnumConstant: true,
+                  ),
+                  FakeFieldElement(
+                    enclosingElement3: FakeEnumElement(
+                      metadata: [
+                        FakeXmlEnumElementAnnotation(
+                          fieldRename: FieldRename.pascal,
+                        ),
+                      ],
+                    ),
+                    metadata: [
+                      FakeXmlValueElementAnnotation('bar'),
+                    ],
+                    name: 'bar',
+                    isEnumConstant: true,
+                  ),
+                ],
+                metadata: [
+                  FakeXmlEnumElementAnnotation(
+                    fieldRename: FieldRename.pascal,
+                  ),
+                ],
+                name: 'FooBar',
+              ),
+              FakeConstantReader(),
+              FakeBuildStep(),
+            ),
+            equals(
+              '''const _\$FooBarEnumMap = { FooBar.foo: 'Foo', FooBar.bar: 'bar' };''',
             ),
           );
         },

@@ -4,6 +4,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 import '../fake_field_element.dart';
 import '../fake_xml_attribute_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
+import '../fake_xml_enum_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
 import '../fake_xml_text_element_annotation.dart';
@@ -64,6 +65,35 @@ void main() {
             () {
               expect(
                 () => FakeFieldElement().getXmlElement(),
+                throwsA(isA<StateError>()),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'getXmlEnum',
+        () {
+          test(
+            'should return the annotation if the element has an annotation of the form `@XmlEnum`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlEnumElementAnnotation(),
+                  ],
+                ).getXmlEnum(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should throw a `StateError` if the element does not have an annotation of the form `@XmlEnum`',
+            () {
+              expect(
+                () => FakeFieldElement().getXmlEnum(),
                 throwsA(isA<StateError>()),
               );
             },
@@ -209,6 +239,35 @@ void main() {
             () {
               expect(
                 FakeFieldElement().hasXmlElement,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'hasXmlEnum',
+        () {
+          test(
+            'should return true if the element has an annotation of the form `@XmlEnum()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlEnumElementAnnotation(),
+                  ],
+                ).hasXmlEnum,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the element does not have an annotation of the form `@XmlEnum()`',
+            () {
+              expect(
+                FakeFieldElement().hasXmlEnum,
                 isFalse,
               );
             },

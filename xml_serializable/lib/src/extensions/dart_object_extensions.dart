@@ -49,7 +49,7 @@ extension DartObjectExtensions on DartObject {
     return null;
   }
 
-  /// Returns a [XmlAttribute] corresponding to the value of the object being represented or `null` if this object is not of type [XmlAttribute] or the value of the object being represented is `null`.
+  /// Returns a [XmlAttribute] corresponding to the value of the object being represented or `null` if this object is not of type [XmlAttribute].
   XmlAttribute? toXmlAttributeValue() {
     final type = this.type;
 
@@ -84,6 +84,25 @@ extension DartObjectExtensions on DartObject {
           namespace: getField('namespace')?.toStringValue(),
           isSelfClosing: getField('isSelfClosing')?.toBoolValue(),
           includeIfNull: getField('includeIfNull')?.toBoolValue(),
+        );
+      }
+    }
+
+    return null;
+  }
+
+  /// Returns a [XmlEnum] corresponding to the value of the object being represented or `null` if this object is not of type [XmlEnum].
+  XmlEnum? toXmlEnumValue() {
+    final type = this.type;
+
+    if (type is InterfaceType) {
+      final element = type.element2;
+
+      if (element is ClassElement &&
+          element.library.identifier.startsWith('package:xml_annotation') &&
+          element.name == 'XmlEnum') {
+        return XmlEnum(
+          fieldRename: getField('fieldRename')?.toFieldRenameValue(),
         );
       }
     }
@@ -143,6 +162,23 @@ extension DartObjectExtensions on DartObject {
           element.library.identifier.startsWith('package:xml_annotation') &&
           element.name == 'XmlText') {
         return XmlText();
+      }
+    }
+
+    return null;
+  }
+
+  /// Returns an [XmlValue] corresponding to the value of the object being represented or `null` if this object is not of type [XmlValue].
+  XmlValue? toXmlValueValue() {
+    final type = this.type;
+
+    if (type is InterfaceType) {
+      final element = type.element2;
+
+      if (element is ClassElement &&
+          element.library.identifier.startsWith('package:xml_annotation') &&
+          element.name == 'XmlValue') {
+        return XmlValue(getField('value')!.toStringValue()!);
       }
     }
 

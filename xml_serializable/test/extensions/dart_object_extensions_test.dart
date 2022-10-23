@@ -8,9 +8,11 @@ import '../fake_field_rename_enum_element.dart';
 import '../fake_interface_type.dart';
 import '../fake_xml_attribute_dart_object.dart';
 import '../fake_xml_element_dart_object.dart';
+import '../fake_xml_enum_dart_object.dart';
 import '../fake_xml_root_element_dart_object.dart';
 import '../fake_xml_serializable_dart_object.dart';
 import '../fake_xml_text_dart_object.dart';
+import '../fake_xml_value_dart_object.dart';
 
 void main() {
   group(
@@ -225,6 +227,35 @@ void main() {
       );
 
       group(
+        'toXmlEnumValue',
+        () {
+          test(
+            'should return an `XmlEnum` if the object being represented is of type `XmlEnum`',
+            () {
+              expect(
+                FakeXmlEnumDartObject(
+                  fieldRename: FieldRename.none,
+                ).toXmlEnumValue(),
+                predicate<XmlEnum>(
+                  (value) => value.fieldRename == FieldRename.none,
+                ),
+              );
+            },
+          );
+
+          test(
+            'should return null if the object being represented is not of type `XmlEnum`',
+            () {
+              expect(
+                FakeDartObject().toXmlEnumValue(),
+                isNull,
+              );
+            },
+          );
+        },
+      );
+
+      group(
         'toXmlRootElementValue',
         () {
           test(
@@ -300,6 +331,33 @@ void main() {
             () {
               expect(
                 FakeDartObject().toXmlTextValue(),
+                isNull,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'toXmlValueValue',
+        () {
+          test(
+            'should return an `XmlValue` if the object being represented is of type `XmlValue`',
+            () {
+              expect(
+                FakeXmlValueDartObject('value').toXmlValueValue(),
+                predicate<XmlValue>(
+                  (value) => value.value == 'value',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should return null if the object being represented is not of type `XmlValue`',
+            () {
+              expect(
+                FakeDartObject().toXmlValueValue(),
                 isNull,
               );
             },

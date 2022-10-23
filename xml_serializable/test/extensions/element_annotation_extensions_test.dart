@@ -4,6 +4,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 import '../fake_element_annotation.dart';
 import '../fake_xml_attribute_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
+import '../fake_xml_enum_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
 import '../fake_xml_text_element_annotation.dart';
@@ -56,6 +57,31 @@ void main() {
             () {
               expect(
                 FakeElementAnnotation().isXmlElement,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'isXmlEnum',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlEnum`',
+            () {
+              expect(
+                FakeXmlEnumElementAnnotation().isXmlEnum,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlEnum`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlEnum,
                 isFalse,
               );
             },
