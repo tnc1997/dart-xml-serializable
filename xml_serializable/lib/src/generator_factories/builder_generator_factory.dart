@@ -11,11 +11,12 @@ import '../builder_generators/xml_text_xml_element_builder_generator.dart';
 import '../extensions/dart_object_extensions.dart';
 import '../extensions/dart_type_extensions.dart';
 import '../extensions/element_extensions.dart';
+import '../extensions/field_element_extensions.dart';
 
 /// Creates a [BuilderGenerator] from an [Element].
 typedef BuilderGeneratorFactory = BuilderGenerator Function(Element element);
 
-/// Creates a [BuilderGenerator] from an [Element] that has an attribute of the form `@XmlAttribute()`, `@XmlElement()`, `@XmlRootElement()`, or `@XmlText()`.
+/// Creates a [BuilderGenerator] from an [Element] that has an annotation of the form `@XmlAttribute()`, `@XmlElement()`, `@XmlRootElement()`, or `@XmlText()`.
 BuilderGenerator builderGeneratorFactory(Element element) {
   if (element.hasXmlAttribute) {
     if (element is FieldElement) {
@@ -66,28 +67,20 @@ BuilderGenerator builderGeneratorFactory(Element element) {
   );
 }
 
-/// Creates a [BuilderGenerator] from a [FieldElement] that has an attribute of the form `@XmlAttribute()`.
+/// Creates a [BuilderGenerator] from a [FieldElement] that has an annotation of the form `@XmlAttribute()`.
 BuilderGenerator xmlAttributeBuilderGeneratorFactory(FieldElement element) {
-  final annotation = element.getXmlAttribute()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
+  final xmlAttribute = element.getXmlAttribute()!.toXmlAttributeValue()!;
 
   return XmlAttributeBuilderGenerator(
-    name,
-    namespace: namespace,
+    xmlAttribute.name ?? element.getEncodedFieldName(),
+    namespace: xmlAttribute.namespace,
     isNullable: element.type.isNullable,
   );
 }
 
-/// Creates a [BuilderGenerator] from a [FieldElement] that has an attribute of the form `@XmlElement()`.
+/// Creates a [BuilderGenerator] from a [FieldElement] that has an annotation of the form `@XmlElement()`.
 BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
-  final annotation = element.getXmlElement()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
-  final isSelfClosing = annotation.getBoolValue('isSelfClosing');
-  final includeIfNull = annotation.getBoolValue('includeIfNull');
+  final xmlElement = element.getXmlElement()!.toXmlElementValue()!;
 
   final type = element.type;
 
@@ -97,17 +90,17 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
     return IterableBuilderGenerator(
       typeArgument.element2!.hasXmlSerializable
           ? XmlSerializableXmlElementBuilderGenerator(
-              name,
-              namespace: namespace,
-              isSelfClosing: isSelfClosing,
-              includeIfNull: includeIfNull,
+              xmlElement.name ?? element.getEncodedFieldName(),
+              namespace: xmlElement.namespace,
+              isSelfClosing: xmlElement.isSelfClosing,
+              includeIfNull: xmlElement.includeIfNull,
               isNullable: typeArgument.isNullable,
             )
           : XmlTextXmlElementBuilderGenerator(
-              name,
-              namespace: namespace,
-              isSelfClosing: isSelfClosing,
-              includeIfNull: includeIfNull,
+              xmlElement.name ?? element.getEncodedFieldName(),
+              namespace: xmlElement.namespace,
+              isSelfClosing: xmlElement.isSelfClosing,
+              includeIfNull: xmlElement.includeIfNull,
               isNullable: typeArgument.isNullable,
             ),
       isNullable: type.isNullable,
@@ -115,34 +108,30 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
   } else {
     return type.element2!.hasXmlSerializable
         ? XmlSerializableXmlElementBuilderGenerator(
-            name,
-            namespace: namespace,
-            isSelfClosing: isSelfClosing,
-            includeIfNull: includeIfNull,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
+            isSelfClosing: xmlElement.isSelfClosing,
+            includeIfNull: xmlElement.includeIfNull,
             isNullable: type.isNullable,
           )
         : XmlTextXmlElementBuilderGenerator(
-            name,
-            namespace: namespace,
-            isSelfClosing: isSelfClosing,
-            includeIfNull: includeIfNull,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
+            isSelfClosing: xmlElement.isSelfClosing,
+            includeIfNull: xmlElement.includeIfNull,
             isNullable: type.isNullable,
           );
   }
 }
 
-/// Creates a [BuilderGenerator] from a [ClassElement] that has an attribute of the form `@XmlRootElement()`.
+/// Creates a [BuilderGenerator] from a [ClassElement] that has an annotation of the form `@XmlRootElement()`.
 BuilderGenerator xmlRootElementBuilderGeneratorFactory(ClassElement element) {
-  final annotation = element.getXmlRootElement()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
-  final isSelfClosing = annotation.getBoolValue('isSelfClosing');
+  final xmlRootElement = element.getXmlRootElement()!.toXmlRootElementValue()!;
 
   return XmlRootElementBuilderGenerator(
-    name,
-    namespace: namespace,
-    isSelfClosing: isSelfClosing,
+    xmlRootElement.name ?? element.name,
+    namespace: xmlRootElement.namespace,
+    isSelfClosing: xmlRootElement.isSelfClosing,
     isNullable: element.thisType.isNullable,
   );
 }

@@ -1,3 +1,5 @@
+import 'package:xml_annotation/xml_annotation.dart';
+
 import 'fake_class_element.dart';
 import 'fake_constructor_element.dart';
 import 'fake_element_annotation.dart';
@@ -5,8 +7,10 @@ import 'fake_library_element.dart';
 import 'fake_xml_serializable_dart_object.dart';
 
 class FakeXmlSerializableElementAnnotation extends FakeElementAnnotation {
-  FakeXmlSerializableElementAnnotation({bool? createMixin})
-      : super(
+  FakeXmlSerializableElementAnnotation({
+    bool? createMixin,
+    FieldRename? fieldRename,
+  }) : super(
           element: FakeConstructorElement(
             enclosingElement3: FakeClassElement(
               library: FakeLibraryElement(
@@ -22,6 +26,7 @@ class FakeXmlSerializableElementAnnotation extends FakeElementAnnotation {
           ),
           value: FakeXmlSerializableDartObject(
             createMixin: createMixin,
+            fieldRename: fieldRename,
           ),
         );
 }

@@ -3,12 +3,18 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:test/fake.dart';
 
+import 'fake_class_element.dart';
+
 class FakeInterfaceType extends Fake implements InterfaceType {
   @override
   final List<InterfaceType> allSupertypes;
 
   @override
-  final InterfaceElement element2;
+  InterfaceElement get element2 =>
+      _element2 ??
+      FakeClassElement(
+        thisType: this,
+      );
 
   @override
   final bool isDartCoreBool;
@@ -61,9 +67,11 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   @override
   final List<DartType> typeArguments;
 
+  final InterfaceElement? _element2;
+
   FakeInterfaceType({
     List<InterfaceType>? allSupertypes,
-    required this.element2,
+    InterfaceElement? element2,
     bool? isDartCoreBool,
     bool? isDartCoreDouble,
     bool? isDartCoreFunction,
@@ -98,5 +106,6 @@ class FakeInterfaceType extends Fake implements InterfaceType {
         isDynamic = isDynamic ?? false,
         isVoid = isVoid ?? false,
         nullabilitySuffix = nullabilitySuffix ?? NullabilitySuffix.none,
-        typeArguments = typeArguments ?? [];
+        typeArguments = typeArguments ?? [],
+        _element2 = element2;
 }

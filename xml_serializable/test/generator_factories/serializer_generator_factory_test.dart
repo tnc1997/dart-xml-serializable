@@ -2,7 +2,6 @@ import 'package:test/test.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_bool_class_element.dart';
-import '../fake_class_element.dart';
 import '../fake_date_time_class_element.dart';
 import '../fake_double_class_element.dart';
 import '../fake_duration_class_element.dart';
@@ -220,9 +219,7 @@ void main() {
         () {
           expect(
             () => serializerGeneratorFactory(
-              FakeInterfaceType(
-                element2: FakeClassElement(),
-              ),
+              FakeInterfaceType(),
             ),
             throwsA(isA<ArgumentError>()),
           );

@@ -11,6 +11,7 @@ import '../constructor_generators/xml_text_xml_element_constructor_generator.dar
 import '../extensions/dart_object_extensions.dart';
 import '../extensions/dart_type_extensions.dart';
 import '../extensions/element_extensions.dart';
+import '../extensions/field_element_extensions.dart';
 
 /// Creates a [ConstructorGenerator] from an [Element].
 typedef ConstructorGeneratorFactory = ConstructorGenerator Function(
@@ -72,14 +73,11 @@ ConstructorGenerator constructorGeneratorFactory(Element element) {
 ConstructorGenerator xmlAttributeConstructorGeneratorFactory(
   FieldElement element,
 ) {
-  final annotation = element.getXmlAttribute()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
+  final xmlAttribute = element.getXmlAttribute()!.toXmlAttributeValue()!;
 
   return XmlAttributeConstructorGenerator(
-    name,
-    namespace: namespace,
+    xmlAttribute.name ?? element.getEncodedFieldName(),
+    namespace: xmlAttribute.namespace,
     isNullable: element.type.isNullable,
   );
 }
@@ -88,12 +86,7 @@ ConstructorGenerator xmlAttributeConstructorGeneratorFactory(
 ConstructorGenerator xmlElementConstructorGeneratorFactory(
   FieldElement element,
 ) {
-  final annotation = element.getXmlElement()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
-  final isSelfClosing = annotation.getBoolValue('isSelfClosing');
-  final includeIfNull = annotation.getBoolValue('includeIfNull');
+  final xmlElement = element.getXmlElement()!.toXmlElementValue()!;
 
   final type = element.type;
 
@@ -103,17 +96,17 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     return IterableConstructorGenerator(
       typeArgument.element2!.hasXmlSerializable
           ? XmlSerializableXmlElementConstructorGenerator(
-              name,
-              namespace: namespace,
-              isSelfClosing: isSelfClosing,
-              includeIfNull: includeIfNull,
+              xmlElement.name ?? element.getEncodedFieldName(),
+              namespace: xmlElement.namespace,
+              isSelfClosing: xmlElement.isSelfClosing,
+              includeIfNull: xmlElement.includeIfNull,
               isNullable: typeArgument.isNullable,
             )
           : XmlTextXmlElementConstructorGenerator(
-              name,
-              namespace: namespace,
-              isSelfClosing: isSelfClosing,
-              includeIfNull: includeIfNull,
+              xmlElement.name ?? element.getEncodedFieldName(),
+              namespace: xmlElement.namespace,
+              isSelfClosing: xmlElement.isSelfClosing,
+              includeIfNull: xmlElement.includeIfNull,
               isNullable: typeArgument.isNullable,
             ),
       isNullable: type.isNullable,
@@ -121,17 +114,17 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
   } else {
     return type.element2!.hasXmlSerializable
         ? XmlSerializableXmlElementConstructorGenerator(
-            name,
-            namespace: namespace,
-            isSelfClosing: isSelfClosing,
-            includeIfNull: includeIfNull,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
+            isSelfClosing: xmlElement.isSelfClosing,
+            includeIfNull: xmlElement.includeIfNull,
             isNullable: type.isNullable,
           )
         : XmlTextXmlElementConstructorGenerator(
-            name,
-            namespace: namespace,
-            isSelfClosing: isSelfClosing,
-            includeIfNull: includeIfNull,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
+            isSelfClosing: xmlElement.isSelfClosing,
+            includeIfNull: xmlElement.includeIfNull,
             isNullable: type.isNullable,
           );
   }
@@ -141,16 +134,12 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
 ConstructorGenerator xmlRootElementConstructorGeneratorFactory(
   ClassElement element,
 ) {
-  final annotation = element.getXmlRootElement()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
-  final isSelfClosing = annotation.getBoolValue('isSelfClosing');
+  final xmlRootElement = element.getXmlRootElement()!.toXmlRootElementValue()!;
 
   return XmlRootElementConstructorGenerator(
-    name,
-    namespace: namespace,
-    isSelfClosing: isSelfClosing,
+    xmlRootElement.name ?? element.name,
+    namespace: xmlRootElement.namespace,
+    isSelfClosing: xmlRootElement.isSelfClosing,
     isNullable: element.thisType.isNullable,
   );
 }

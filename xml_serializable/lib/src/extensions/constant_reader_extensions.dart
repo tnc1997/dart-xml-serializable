@@ -5,7 +5,7 @@ import 'package:source_gen/source_gen.dart';
 extension ConstantReaderExtensions on ConstantReader {
   /// Returns the value of the [field] as a [bool] or throws a [FormatException] if the field is not a [bool].
   @Deprecated(
-    'Use element.getXyz().getBoolValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readBoolValue().',
+    'Use element.getXyz().getField(abc).toBoolValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readBoolValue(abc).',
   )
   bool readBoolValue(String field) {
     final reader = read(field);
@@ -15,7 +15,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as an [int] or throws a [FormatException] if the field is not an [int].
   @Deprecated(
-    'Use element.getXyz().getIntValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readIntValue().',
+    'Use element.getXyz().getField(abc).toIntValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readIntValue(abc).',
   )
   int readIntValue(String field) {
     final reader = read(field);
@@ -25,7 +25,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as a [double] or throws a [FormatException] if the field is not a [double].
   @Deprecated(
-    'Use element.getXyz().getDoubleValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readDoubleValue().',
+    'Use element.getXyz().getField(abc).toDoubleValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readDoubleValue(abc).',
   )
   double readDoubleValue(String field) {
     final reader = read(field);
@@ -35,7 +35,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as a [String] or throws a [FormatException] if the field is not a [String].
   @Deprecated(
-    'Use element.getXyz().getStringValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readStringValue().',
+    'Use element.getXyz().getField(abc).toStringValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).readStringValue(abc).',
   )
   String readStringValue(String field) {
     final reader = read(field);
@@ -45,7 +45,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as a [bool] or `null` if the field is not a [bool].
   @Deprecated(
-    'Use element.getXyz().getBoolValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekBoolValue().',
+    'Use element.getXyz().getField(abc).toBoolValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekBoolValue(abc).',
   )
   bool? peekBoolValue(String field) {
     final reader = peek(field);
@@ -55,7 +55,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as an [int] or `null` if the field is not an [int].
   @Deprecated(
-    'Use element.getXyz().getIntValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekIntValue().',
+    'Use element.getXyz().getField(abc).toIntValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekIntValue(abc).',
   )
   int? peekIntValue(String field) {
     final reader = peek(field);
@@ -65,7 +65,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as a [double] or `null` if the field is not a [double].
   @Deprecated(
-    'Use element.getXyz().getDoubleValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekDoubleValue().',
+    'Use element.getXyz().getField(abc).toDoubleValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekDoubleValue(abc).',
   )
   double? peekDoubleValue(String field) {
     final reader = peek(field);
@@ -75,7 +75,7 @@ extension ConstantReaderExtensions on ConstantReader {
 
   /// Returns the value of the [field] as a [String] or `null` if the field is not a [String].
   @Deprecated(
-    'Use element.getXyz().getStringValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekStringValue().',
+    'Use element.getXyz().getField(abc).toStringValue() instead of ConstantReader(xyzTypeChecker.firstAnnotationOf(element)).peekStringValue(abc).',
   )
   String? peekStringValue(String field) {
     final reader = peek(field);

@@ -3,15 +3,22 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:test/fake.dart';
 
+import 'fake_interface_type.dart';
+
 class FakeDartObject<T> extends Fake implements DartObject {
+  @override
+  final DartType? type;
+
   final T? _value;
 
   final Map<String, DartObject>? _fields;
 
   FakeDartObject({
+    DartType? type,
     T? value,
     Map<String, DartObject>? fields,
-  })  : _value = value,
+  })  : type = type ?? FakeInterfaceType(),
+        _value = value,
         _fields = fields;
 
   @override

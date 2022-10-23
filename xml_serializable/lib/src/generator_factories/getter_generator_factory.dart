@@ -4,6 +4,7 @@ import 'package:analyzer/dart/element/type.dart';
 import '../extensions/dart_object_extensions.dart';
 import '../extensions/dart_type_extensions.dart';
 import '../extensions/element_extensions.dart';
+import '../extensions/field_element_extensions.dart';
 import '../getter_generators/getter_generator.dart';
 import '../getter_generators/xml_attribute_getter_generator.dart';
 import '../getter_generators/xml_element_getter_generator.dart';
@@ -56,24 +57,18 @@ GetterGenerator getterGeneratorFactory(Element element) {
 
 /// Creates a [GetterGenerator] from a [FieldElement] that has an attribute of the form `@XmlAttribute()`.
 GetterGenerator xmlAttributeGetterGeneratorFactory(FieldElement element) {
-  final annotation = element.getXmlAttribute()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
+  final xmlAttribute = element.getXmlAttribute()!.toXmlAttributeValue()!;
 
   return XmlAttributeGetterGenerator(
-    name,
-    namespace: namespace,
+    xmlAttribute.name ?? element.getEncodedFieldName(),
+    namespace: xmlAttribute.namespace,
     isNullable: element.type.isNullable,
   );
 }
 
 /// Creates a [GetterGenerator] from a [FieldElement] that has an attribute of the form `@XmlElement()`.
 GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
-  final annotation = element.getXmlElement()!;
-
-  final name = annotation.getStringValue('name') ?? element.name;
-  final namespace = annotation.getStringValue('namespace');
+  final xmlElement = element.getXmlElement()!.toXmlElementValue()!;
 
   final type = element.type;
 
@@ -82,25 +77,25 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
 
     return typeArgument.element2!.hasXmlSerializable
         ? XmlSerializableXmlElementIterableGetterGenerator(
-            name,
-            namespace: namespace,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
             isNullable: type.isNullable,
           )
         : XmlTextXmlElementIterableGetterGenerator(
-            name,
-            namespace: namespace,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
             isNullable: type.isNullable,
           );
   } else {
     return type.element2!.hasXmlSerializable
         ? XmlSerializableXmlElementGetterGenerator(
-            name,
-            namespace: namespace,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
             isNullable: type.isNullable,
           )
         : XmlTextXmlElementGetterGenerator(
-            name,
-            namespace: namespace,
+            xmlElement.name ?? element.getEncodedFieldName(),
+            namespace: xmlElement.namespace,
             isNullable: type.isNullable,
           );
   }

@@ -19,7 +19,11 @@ class FakeClassElement extends Fake implements ClassElement {
   final String name;
 
   @override
-  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element2: this);
+  InterfaceType get thisType =>
+      _thisType ??
+      FakeInterfaceType(
+        element2: this,
+      );
 
   final InterfaceType? _thisType;
 
