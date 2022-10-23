@@ -121,7 +121,7 @@ void main() {
           );
 
           test(
-            'should return the value of the enum encoded to kebab case if the enum has an `XmlEnum` annotation with a `fieldRename` of `kebab`',
+            'should return the name of the enum value encoded to kebab case if the enum has an `XmlEnum` annotation with a `fieldRename` of `kebab`',
             () {
               expect(
                 FakeFieldElement(
@@ -140,7 +140,7 @@ void main() {
           );
 
           test(
-            'should return the value of the enum encoded to snake case if the enum has an `XmlEnum` annotation with a `fieldRename` of `snake`',
+            'should return the name of the enum value encoded to snake case if the enum has an `XmlEnum` annotation with a `fieldRename` of `snake`',
             () {
               expect(
                 FakeFieldElement(
@@ -159,7 +159,7 @@ void main() {
           );
 
           test(
-            'should return the value of the enum encoded to pascal case if the enum has an `XmlEnum` annotation with a `fieldRename` of `pascal`',
+            'should return the name of the enum value encoded to pascal case if the enum has an `XmlEnum` annotation with a `fieldRename` of `pascal`',
             () {
               expect(
                 FakeFieldElement(
@@ -178,7 +178,7 @@ void main() {
           );
 
           test(
-            'should return the value of the enum without modification if the enum has an `XmlEnum` annotation with a `fieldRename` of `none`',
+            'should return the name of the enum value without modification if the enum has an `XmlEnum` annotation with a `fieldRename` of `none`',
             () {
               expect(
                 FakeFieldElement(
@@ -197,7 +197,7 @@ void main() {
           );
 
           test(
-            'should return the value of the enum without modification if the enum has an `XmlEnum` annotation with a null `fieldRename`',
+            'should return the name of the enum value without modification if the enum has an `XmlEnum` annotation with a null `fieldRename`',
             () {
               expect(
                 FakeFieldElement(
@@ -214,7 +214,7 @@ void main() {
           );
 
           test(
-            'should return the value of the enum without modification if the enum does not have an `XmlEnum` annotation',
+            'should return the name of the enum value without modification if the enum does not have an `XmlEnum` annotation',
             () {
               expect(
                 FakeFieldElement(
