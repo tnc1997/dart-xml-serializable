@@ -7,6 +7,7 @@ import '../fake_xml_element_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
 import '../fake_xml_text_element_annotation.dart';
+import '../fake_xml_value_element_annotation.dart';
 
 void main() {
   group(
@@ -295,6 +296,35 @@ void main() {
             () {
               expect(
                 FakeFieldElement().hasXmlText,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'hasXmlValue',
+        () {
+          test(
+            'should return true if the element has an annotation of the form `@XmlValue()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlValueElementAnnotation('value'),
+                  ],
+                ).hasXmlValue,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the element does not have an annotation of the form `@XmlValue()`',
+            () {
+              expect(
+                FakeFieldElement().hasXmlValue,
                 isFalse,
               );
             },

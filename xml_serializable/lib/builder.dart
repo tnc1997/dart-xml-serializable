@@ -17,6 +17,6 @@ import 'package:xml_serializable/xml_serializable.dart';
 ///
 /// Not meant to be invoked by hand-authored code.
 Builder xmlSerializableBuilder(BuilderOptions options) => SharedPartBuilder(
-      [XmlSerializableGenerator()],
+      [XmlEnumGenerator(), XmlSerializableGenerator()],
       'xml_serializable',
     );

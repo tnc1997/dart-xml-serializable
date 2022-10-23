@@ -12,6 +12,7 @@ import 'fake_date_time_class_element.dart';
 import 'fake_double_class_element.dart';
 import 'fake_duration_class_element.dart';
 import 'fake_dynamic_class_element.dart';
+import 'fake_enum_element.dart';
 import 'fake_field_element.dart';
 import 'fake_int_class_element.dart';
 import 'fake_interface_type.dart';
@@ -101,6 +102,31 @@ void main() {
                     type: FakeInterfaceType(
                       element2: FakeDynamicClassElement(),
                       isDynamic: true,
+                    ),
+                  ),
+                  FakeFieldElement(
+                    metadata: [
+                      FakeXmlAttributeElementAnnotation(
+                        name: 'enumattribute',
+                      ),
+                    ],
+                    name: 'enumAttribute',
+                    type: FakeInterfaceType(
+                      element2: FakeEnumElement(
+                        fields: [
+                          FakeFieldElement(
+                            name: 'Foo',
+                            isEnumConstant: true,
+                          ),
+                          FakeFieldElement(
+                            name: 'Bar',
+                            isEnumConstant: true,
+                          ),
+                        ],
+                        name: 'FooBar',
+                      ),
+                      isDartCoreEnum: true,
+                      nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
                   FakeFieldElement(
@@ -462,6 +488,9 @@ if (durationAttributeSerialized != null) { builder.attribute('durationattribute'
 final dynamicAttribute = instance.dynamicAttribute;
 final dynamicAttributeSerialized = dynamicAttribute;
 if (dynamicAttributeSerialized != null) { builder.attribute('dynamicattribute', dynamicAttributeSerialized); }
+final enumAttribute = instance.enumAttribute;
+final enumAttributeSerialized = enumAttribute != null ? _\$FooBarEnumMap[enumAttribute]! : null;
+if (enumAttributeSerialized != null) { builder.attribute('enumattribute', enumAttributeSerialized); }
 final intAttribute = instance.intAttribute;
 final intAttributeSerialized = intAttribute?.toString();
 if (intAttributeSerialized != null) { builder.attribute('intattribute', intAttributeSerialized); }
@@ -530,6 +559,7 @@ final dateTimeAttribute = element.getAttribute('datetimeattribute');
 final doubleAttribute = element.getAttribute('doubleattribute');
 final durationAttribute = element.getAttribute('durationattribute');
 final dynamicAttribute = element.getAttribute('dynamicattribute');
+final enumAttribute = element.getAttribute('enumattribute');
 final intAttribute = element.getAttribute('intattribute');
 final numAttribute = element.getAttribute('numattribute');
 final stringAttribute = element.getAttribute('stringattribute');
@@ -550,7 +580,7 @@ final customElement = element.getElement('customelement');
 final nonSelfClosingCustomElement = element.getElement('nonselfclosingcustomelement');
 final excludeIfNullCustomElement = element.getElement('excludeifnullcustomelement');
 final stringText = element.getText();
-return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText);
+return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, enumAttribute: enumAttribute != null ? _\$FooBarEnumMap.entries.singleWhere((e) => e.value == enumAttribute, orElse: () => throw ArgumentError('`\$enumAttribute` is not one of the supported values: \${_\$FooBarEnumMap.values.join(', ')}')).key : null, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText);
 }
 
 List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
@@ -575,6 +605,10 @@ final dynamicAttribute = instance.dynamicAttribute;
 final dynamicAttributeSerialized = dynamicAttribute;
 final dynamicAttributeConstructed = dynamicAttributeSerialized != null ? XmlAttribute(XmlName('dynamicattribute'), dynamicAttributeSerialized) : null;
 if (dynamicAttributeConstructed != null) { attributes.add(dynamicAttributeConstructed); }
+final enumAttribute = instance.enumAttribute;
+final enumAttributeSerialized = enumAttribute != null ? _\$FooBarEnumMap[enumAttribute]! : null;
+final enumAttributeConstructed = enumAttributeSerialized != null ? XmlAttribute(XmlName('enumattribute'), enumAttributeSerialized) : null;
+if (enumAttributeConstructed != null) { attributes.add(enumAttributeConstructed); }
 final intAttribute = instance.intAttribute;
 final intAttributeSerialized = intAttribute?.toString();
 final intAttributeConstructed = intAttributeSerialized != null ? XmlAttribute(XmlName('intattribute'), intAttributeSerialized) : null;
@@ -733,6 +767,31 @@ return children;
                     type: FakeInterfaceType(
                       element2: FakeDynamicClassElement(),
                       isDynamic: true,
+                    ),
+                  ),
+                  FakeFieldElement(
+                    metadata: [
+                      FakeXmlAttributeElementAnnotation(
+                        name: 'enumattribute',
+                      ),
+                    ],
+                    name: 'enumAttribute',
+                    type: FakeInterfaceType(
+                      element2: FakeEnumElement(
+                        fields: [
+                          FakeFieldElement(
+                            name: 'Foo',
+                            isEnumConstant: true,
+                          ),
+                          FakeFieldElement(
+                            name: 'Bar',
+                            isEnumConstant: true,
+                          ),
+                        ],
+                        name: 'FooBar',
+                      ),
+                      isDartCoreEnum: true,
+                      nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
                   FakeFieldElement(
@@ -1097,6 +1156,9 @@ if (durationAttributeSerialized != null) { builder.attribute('durationattribute'
 final dynamicAttribute = instance.dynamicAttribute;
 final dynamicAttributeSerialized = dynamicAttribute;
 if (dynamicAttributeSerialized != null) { builder.attribute('dynamicattribute', dynamicAttributeSerialized); }
+final enumAttribute = instance.enumAttribute;
+final enumAttributeSerialized = enumAttribute != null ? _\$FooBarEnumMap[enumAttribute]! : null;
+if (enumAttributeSerialized != null) { builder.attribute('enumattribute', enumAttributeSerialized); }
 final intAttribute = instance.intAttribute;
 final intAttributeSerialized = intAttribute?.toString();
 if (intAttributeSerialized != null) { builder.attribute('intattribute', intAttributeSerialized); }
@@ -1169,6 +1231,7 @@ final dateTimeAttribute = element.getAttribute('datetimeattribute');
 final doubleAttribute = element.getAttribute('doubleattribute');
 final durationAttribute = element.getAttribute('durationattribute');
 final dynamicAttribute = element.getAttribute('dynamicattribute');
+final enumAttribute = element.getAttribute('enumattribute');
 final intAttribute = element.getAttribute('intattribute');
 final numAttribute = element.getAttribute('numattribute');
 final stringAttribute = element.getAttribute('stringattribute');
@@ -1189,7 +1252,7 @@ final customElement = element.getElement('customelement');
 final nonSelfClosingCustomElement = element.getElement('nonselfclosingcustomelement');
 final excludeIfNullCustomElement = element.getElement('excludeifnullcustomelement');
 final stringText = element.getText();
-return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText);
+return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, enumAttribute: enumAttribute != null ? _\$FooBarEnumMap.entries.singleWhere((e) => e.value == enumAttribute, orElse: () => throw ArgumentError('`\$enumAttribute` is not one of the supported values: \${_\$FooBarEnumMap.values.join(', ')}')).key : null, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, iterableElement: iterableElement, nonSelfClosingIterableElement: nonSelfClosingIterableElement, excludeIfNullIterableElement: excludeIfNullIterableElement, listElement: listElement?.toList(), nonSelfClosingListElement: nonSelfClosingListElement?.toList(), excludeIfNullListElement: excludeIfNullListElement?.toList(), setElement: setElement?.toSet(), nonSelfClosingSetElement: nonSelfClosingSetElement?.toSet(), excludeIfNullSetElement: excludeIfNullSetElement?.toSet(), customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, nonSelfClosingCustomElement: nonSelfClosingCustomElement != null ? CustomClass.fromXmlElement(nonSelfClosingCustomElement) : null, excludeIfNullCustomElement: excludeIfNullCustomElement != null ? CustomClass.fromXmlElement(excludeIfNullCustomElement) : null, stringText: stringText);
 }
 
 List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
@@ -1214,6 +1277,10 @@ final dynamicAttribute = instance.dynamicAttribute;
 final dynamicAttributeSerialized = dynamicAttribute;
 final dynamicAttributeConstructed = dynamicAttributeSerialized != null ? XmlAttribute(XmlName('dynamicattribute'), dynamicAttributeSerialized) : null;
 if (dynamicAttributeConstructed != null) { attributes.add(dynamicAttributeConstructed); }
+final enumAttribute = instance.enumAttribute;
+final enumAttributeSerialized = enumAttribute != null ? _\$FooBarEnumMap[enumAttribute]! : null;
+final enumAttributeConstructed = enumAttributeSerialized != null ? XmlAttribute(XmlName('enumattribute'), enumAttributeSerialized) : null;
+if (enumAttributeConstructed != null) { attributes.add(enumAttributeConstructed); }
 final intAttribute = instance.intAttribute;
 final intAttributeSerialized = intAttribute?.toString();
 final intAttributeConstructed = intAttributeSerialized != null ? XmlAttribute(XmlName('intattribute'), intAttributeSerialized) : null;

@@ -8,13 +8,13 @@ void main() {
     '''<?xml version="1.0"?>
     <bookshelf>
       <book>
-        <title lang="english">XML Pocket Reference</title>
+        <title lang="English">XML Pocket Reference</title>
         <author>Simon St. Laurent</author>
         <author>Michael James Fitzgerald</author>
         <price></price>
       </book>
       <book>
-        <title lang="english">HTML and XHTML Pocket Reference</title>
+        <title lang="English">HTML and XHTML Pocket Reference</title>
         <author>Jennifer Niederst Robbins</author>
         <price></price>
       </book>
@@ -166,17 +166,31 @@ class Bookshelf {
       );
 }
 
+@annotation.XmlEnum()
+enum Language {
+  @annotation.XmlValue('Mandarin')
+  mandarin,
+  @annotation.XmlValue('Spanish')
+  spanish,
+  @annotation.XmlValue('English')
+  english,
+  @annotation.XmlValue('Hindi')
+  hindi,
+  @annotation.XmlValue('Bengali')
+  bengali,
+}
+
 @annotation.XmlRootElement(name: 'title')
 @annotation.XmlSerializable()
 class Title {
   @annotation.XmlAttribute(name: 'lang')
-  String? lang;
+  Language? language;
 
   @annotation.XmlText()
   String? text;
 
   Title({
-    this.lang,
+    this.language,
     this.text,
   });
 
@@ -185,7 +199,7 @@ class Title {
 
   @override
   String toString() {
-    return 'Title{lang: $lang, text: $text}';
+    return 'Title{language: $language, text: $text}';
   }
 
   void buildXmlChildren(

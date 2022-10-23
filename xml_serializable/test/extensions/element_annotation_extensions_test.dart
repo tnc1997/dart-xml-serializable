@@ -7,6 +7,7 @@ import '../fake_xml_element_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
 import '../fake_xml_text_element_annotation.dart';
+import '../fake_xml_value_element_annotation.dart';
 
 void main() {
   group(
@@ -130,6 +131,31 @@ void main() {
             () {
               expect(
                 FakeElementAnnotation().isXmlText,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'isXmlValue',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlValue`',
+            () {
+              expect(
+                FakeXmlValueElementAnnotation('value').isXmlValue,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlValue`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlValue,
                 isFalse,
               );
             },
