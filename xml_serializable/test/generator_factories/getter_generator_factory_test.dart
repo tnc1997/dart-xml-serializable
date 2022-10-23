@@ -560,11 +560,7 @@ void main() {
         () {
           expect(
             () => getterGeneratorFactory(
-              FakeFieldElement(
-                type: FakeInterfaceType(
-                  element2: FakeClassElement(),
-                ),
-              ),
+              FakeFieldElement(),
             ),
             throwsA(isA<ArgumentError>()),
           );

@@ -19,6 +19,15 @@ extension ElementAnnotationExtensions on ElementAnnotation {
         element.enclosingElement3.name == 'XmlElement';
   }
 
+  /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlEnum`.
+  bool get isXmlEnum {
+    final element = this.element;
+
+    return element is ConstructorElement &&
+        element.library.identifier.startsWith('package:xml_annotation') &&
+        element.enclosingElement3.name == 'XmlEnum';
+  }
+
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlRootElement`.
   bool get isXmlRootElement {
     final element = this.element;

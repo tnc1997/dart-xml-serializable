@@ -12,6 +12,10 @@ extension ElementExtensions on Element {
   DartObject? getXmlElement() =>
       metadata.singleWhere((e) => e.isXmlElement).computeConstantValue();
 
+  /// Gets the annotation of the form `@XmlEnum()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlEnum()`. Returns `null` if the value of the annotation could not be computed because of errors.
+  DartObject? getXmlEnum() =>
+      metadata.singleWhere((e) => e.isXmlEnum).computeConstantValue();
+
   /// Gets the annotation of the form `@XmlRootElement()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlRootElement()`. Returns `null` if the value of the annotation could not be computed because of errors.
   DartObject? getXmlRootElement() =>
       metadata.singleWhere((e) => e.isXmlRootElement).computeConstantValue();
@@ -33,6 +37,9 @@ extension ElementExtensions on Element {
 
   /// Returns `true` if this element has an annotation of the form `@XmlElement()`.
   bool get hasXmlElement => metadata.any((e) => e.isXmlElement);
+
+  /// Returns `true` if this element has an annotation of the form `@XmlEnum()`.
+  bool get hasXmlEnum => metadata.any((e) => e.isXmlEnum);
 
   /// Returns `true` if this element has an annotation of the form `@XmlRootElement()`.
   bool get hasXmlRootElement => metadata.any((e) => e.isXmlRootElement);

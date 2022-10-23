@@ -8,6 +8,9 @@ import 'fake_library_element.dart';
 
 class FakeFieldElement extends Fake implements FieldElement {
   @override
+  final Element enclosingElement3;
+
+  @override
   final LibraryElement library;
 
   @override
@@ -23,14 +26,16 @@ class FakeFieldElement extends Fake implements FieldElement {
   final bool isEnumConstant;
 
   FakeFieldElement({
+    Element? enclosingElement3,
     LibraryElement? library,
     List<ElementAnnotation>? metadata,
     String? name,
     DartType? type,
     bool? isEnumConstant,
-  })  : library = library ?? FakeLibraryElement(),
+  })  : enclosingElement3 = enclosingElement3 ?? FakeClassElement(),
+        library = library ?? FakeLibraryElement(),
         metadata = metadata ?? [],
         name = name ?? 'value',
-        type = type ?? FakeInterfaceType(element2: FakeClassElement()),
+        type = type ?? FakeInterfaceType(),
         isEnumConstant = isEnumConstant ?? false;
 }

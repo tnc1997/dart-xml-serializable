@@ -154,17 +154,12 @@ class Bookshelf {
       );
 }
 
-@annotation.XmlEnum()
+@annotation.XmlEnum(fieldRename: annotation.FieldRename.pascal)
 enum Language {
-  @annotation.XmlValue('Mandarin')
   mandarin,
-  @annotation.XmlValue('Spanish')
   spanish,
-  @annotation.XmlValue('English')
   english,
-  @annotation.XmlValue('Hindi')
   hindi,
-  @annotation.XmlValue('Bengali')
   bengali,
 }
 

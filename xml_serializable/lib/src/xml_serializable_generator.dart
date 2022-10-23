@@ -49,7 +49,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     }
 
     if (element is ClassElement) {
-      final annotation = element.getXmlSerializable()!;
+      final xmlSerializable =
+          element.getXmlSerializable()!.toXmlSerializableValue()!;
 
       final buffer = StringBuffer();
 
@@ -84,7 +85,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         _generateToXmlElement(buffer, element);
       }
 
-      if (annotation.getBoolValue('createMixin') == true) {
+      if (xmlSerializable.createMixin == true) {
         buffer.writeln();
         buffer.writeln();
 
@@ -102,7 +103,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
   bool _doesRequireNullCheck(FieldElement element) => element.hasXmlElement
       ? element.type.isNullable &&
-          (element.getXmlElement()?.getBoolValue('includeIfNull') == false ||
+          (element.getXmlElement()?.toXmlElementValue()?.includeIfNull ==
+                  false ||
               element.type.isDartCoreIterable ||
               element.type.isDartCoreList ||
               element.type.isDartCoreSet)

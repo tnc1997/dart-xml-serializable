@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:test/test.dart';
+import 'package:xml_annotation/xml_annotation.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 import 'fake_bool_class_element.dart';
@@ -35,7 +36,7 @@ void main() {
       const generator = XmlSerializableGenerator();
 
       test(
-        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` if the class has an `XmlSerializable` attribute',
+        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` if the class has an `XmlSerializable` annotation',
         () {
           expect(
             generator.generateForAnnotatedElement(
@@ -700,7 +701,7 @@ return children;
       );
 
       test(
-        'should generate `buildXmlChildren`, `buildXmlElement`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren`, `toXmlElement` if the class has an `XmlSerializable` attribute and an `XmlRootElement` attribute',
+        'should generate `buildXmlChildren`, `buildXmlElement`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren`, `toXmlElement` if the class has an `XmlSerializable` annotation and an `XmlRootElement` annotation',
         () {
           expect(
             generator.generateForAnnotatedElement(
@@ -1376,7 +1377,7 @@ return XmlElement(XmlName('testclass'), [...namespaces.toXmlAttributes(), ...ins
       );
 
       test(
-        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` and a mixin with `buildXmlChildren`, `toXmlAttributes`, `toXmlChildren` if the class has an `XmlSerializable` attribute with create mixin',
+        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` and a mixin with `buildXmlChildren`, `toXmlAttributes`, `toXmlChildren` if the class has an `XmlSerializable` annotation with a truthy `createMixin`',
         () {
           expect(
             generator.generateForAnnotatedElement(
@@ -1444,7 +1445,7 @@ List<XmlNode> toXmlChildren({Map<String, String?> namespaces = const {}}) => _\$
       );
 
       test(
-        'should generate `buildXmlChildren`, `buildXmlElement`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren`, `toXmlElement` and a mixin with `buildXmlChildren`, `buildXmlElement`, `toXmlAttributes`, `toXmlChildren`, `toXmlElement` if the class has an `XmlSerializable` attribute with create mixin and an `XmlRootElement` attribute',
+        'should generate `buildXmlChildren`, `buildXmlElement`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren`, `toXmlElement` and a mixin with `buildXmlChildren`, `buildXmlElement`, `toXmlAttributes`, `toXmlChildren`, `toXmlElement` if the class has an `XmlSerializable` annotation with a truthy `createMixin` and an `XmlRootElement` annotation',
         () {
           expect(
             generator.generateForAnnotatedElement(
@@ -1521,6 +1522,103 @@ List<XmlAttribute> toXmlAttributes({Map<String, String?> namespaces = const {}})
 List<XmlNode> toXmlChildren({Map<String, String?> namespaces = const {}}) => _\$TestClassToXmlChildren(this as TestClass, namespaces: namespaces);
 
 XmlElement toXmlElement({Map<String, String?> namespaces = const {}}) => _\$TestClassToXmlElement(this as TestClass, namespaces: namespaces);
+}'''),
+          );
+        },
+      );
+
+      test(
+        'should generate `buildXmlChildren`, `fromXmlElement`, `toXmlAttributes`, `toXmlChildren` with attribute names and element names encoded to pascal case if the class has an `XmlSerializable` annotation with a `fieldRename` of `pascal`',
+        () {
+          expect(
+            generator.generateForAnnotatedElement(
+              FakeClassElement(
+                fields: [
+                  FakeFieldElement(
+                    enclosingElement3: FakeClassElement(
+                      metadata: [
+                        FakeXmlSerializableElementAnnotation(
+                          fieldRename: FieldRename.pascal,
+                        ),
+                      ],
+                    ),
+                    metadata: [
+                      FakeXmlElementElementAnnotation(),
+                    ],
+                    name: 'stringElement',
+                    type: FakeInterfaceType(
+                      element2: FakeStringClassElement(),
+                      isDartCoreString: true,
+                      nullabilitySuffix: NullabilitySuffix.question,
+                    ),
+                  ),
+                  FakeFieldElement(
+                    enclosingElement3: FakeClassElement(
+                      metadata: [
+                        FakeXmlSerializableElementAnnotation(
+                          fieldRename: FieldRename.pascal,
+                        ),
+                      ],
+                    ),
+                    metadata: [
+                      FakeXmlElementElementAnnotation(
+                        name: 'customelement',
+                      ),
+                    ],
+                    name: 'customElement',
+                    type: FakeInterfaceType(
+                      element2: FakeClassElement(
+                        metadata: [
+                          FakeXmlSerializableElementAnnotation(),
+                        ],
+                        name: 'CustomClass',
+                      ),
+                      nullabilitySuffix: NullabilitySuffix.question,
+                    ),
+                  ),
+                ],
+                metadata: [
+                  FakeXmlSerializableElementAnnotation(
+                    fieldRename: FieldRename.pascal,
+                  ),
+                ],
+                name: 'TestClass',
+              ),
+              FakeConstantReader(),
+              FakeBuildStep(),
+            ),
+            equals(
+                '''void _\$TestClassBuildXmlChildren(TestClass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final stringElement = instance.stringElement;
+final stringElementSerialized = stringElement;
+builder.element('StringElement', nest: () { if (stringElementSerialized != null) { builder.text(stringElementSerialized); } });
+final customElement = instance.customElement;
+final customElementSerialized = customElement;
+builder.element('customelement', nest: () { if (customElementSerialized != null) { customElementSerialized.buildXmlChildren(builder, namespaces: namespaces); } });
+}
+
+TestClass _\$TestClassFromXmlElement(XmlElement element) {
+final stringElement = element.getElement('StringElement')?.getText();
+final customElement = element.getElement('customelement');
+return TestClass(stringElement: stringElement, customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null);
+}
+
+List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _\$TestClassToXmlChildren(TestClass instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final stringElement = instance.stringElement;
+final stringElementSerialized = stringElement;
+final stringElementConstructed = XmlElement(XmlName('StringElement'), [], stringElementSerialized != null ? [XmlText(stringElementSerialized)] : []);
+children.add(stringElementConstructed);
+final customElement = instance.customElement;
+final customElementSerialized = customElement;
+final customElementConstructed = XmlElement(XmlName('customelement'), customElementSerialized?.toXmlAttributes(namespaces: namespaces) ?? [], customElementSerialized?.toXmlChildren(namespaces: namespaces) ?? []);
+children.add(customElementConstructed);
+return children;
 }'''),
           );
         },
