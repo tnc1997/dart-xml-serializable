@@ -49,7 +49,7 @@ extension DartObjectExtensions on DartObject {
     return null;
   }
 
-  /// Returns a [XmlAttribute] corresponding to the value of the object being represented or `null` if this object is not of type [XmlAttribute].
+  /// Returns an [XmlAttribute] corresponding to the value of the object being represented or `null` if this object is not of type [XmlAttribute].
   XmlAttribute? toXmlAttributeValue() {
     final type = this.type;
 
@@ -91,7 +91,7 @@ extension DartObjectExtensions on DartObject {
     return null;
   }
 
-  /// Returns a [XmlEnum] corresponding to the value of the object being represented or `null` if this object is not of type [XmlEnum].
+  /// Returns an [XmlEnum] corresponding to the value of the object being represented or `null` if this object is not of type [XmlEnum].
   XmlEnum? toXmlEnumValue() {
     final type = this.type;
 
