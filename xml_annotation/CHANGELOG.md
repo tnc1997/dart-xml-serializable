@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.2.0 (2022-10-23)
+
+### Features
+
+* add support for serializing enums ([#20](https://github.com/tnc1997/dart-xml-serializable/issues/20)) ([c827cce](https://github.com/tnc1997/dart-xml-serializable/commit/c827cce956d43968e78e6939719c4742968895c9))
+* add support for renaming fields in a class ([#24](https://github.com/tnc1997/dart-xml-serializable/issues/24)) ([d2aefbe](https://github.com/tnc1997/dart-xml-serializable/commit/d2aefbe2d76d41c756fa4163e1584077400d271c))
+
 ## 2.1.0 (2022-06-12)
 
 ### Features
