@@ -421,7 +421,7 @@ void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
   final language = instance.language;
   final languageSerialized =
-  language != null ? _$LanguageEnumMap[language]! : null;
+      language != null ? _$LanguageEnumMap[language]! : null;
   if (languageSerialized != null) {
     builder.attribute('lang', languageSerialized);
   }
@@ -445,10 +445,12 @@ Title _$TitleFromXmlElement(XmlElement element) {
   return Title(
       language: language != null
           ? _$LanguageEnumMap.entries
-          .singleWhere((e) => e.value == language,
-          orElse: () => throw ArgumentError(
-              '`$language` is not one of the supported values: ${_$LanguageEnumMap.values.join(', ')}'))
-          .key
+              .singleWhere(
+                  (languageEnumMapEntry) =>
+                      languageEnumMapEntry.value == language,
+                  orElse: () => throw ArgumentError(
+                      '`$language` is not one of the supported values: ${_$LanguageEnumMap.values.join(', ')}'))
+              .key
           : null,
       text: text);
 }
@@ -458,7 +460,7 @@ List<XmlAttribute> _$TitleToXmlAttributes(Title instance,
   final attributes = <XmlAttribute>[];
   final language = instance.language;
   final languageSerialized =
-  language != null ? _$LanguageEnumMap[language]! : null;
+      language != null ? _$LanguageEnumMap[language]! : null;
   final languageConstructed = languageSerialized != null
       ? XmlAttribute(XmlName('lang'), languageSerialized)
       : null;
@@ -474,7 +476,7 @@ List<XmlNode> _$TitleToXmlChildren(Title instance,
   final text = instance.text;
   final textSerialized = text;
   final textConstructed =
-  textSerialized != null ? XmlText(textSerialized) : null;
+      textSerialized != null ? XmlText(textSerialized) : null;
   if (textConstructed != null) {
     children.add(textConstructed);
   }
