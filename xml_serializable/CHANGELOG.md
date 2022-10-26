@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.2.1 (2022-10-26)
+
+### Bug Fixes
+
+* enum iterable duplicate variable declaration ([#26](https://github.com/tnc1997/dart-xml-serializable/issues/26)) ([f429e84](https://github.com/tnc1997/dart-xml-serializable/commit/f429e84e25dae00ffc20b293c287b48f68b66f72))
+
 ## 2.2.0 (2022-10-23)
 
 ### Features
