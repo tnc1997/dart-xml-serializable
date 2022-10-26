@@ -44,7 +44,7 @@ void main() {
               expect(
                 EnumSerializerGenerator('FooBar').generateDeserializer('value'),
                 equals(
-                  '_\$FooBarEnumMap.entries.singleWhere((e) => e.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooBarEnumMap.values.join(\', \')}\')).key',
+                  '_\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooBarEnumMap.values.join(\', \')}\')).key',
                 ),
               );
             },
@@ -57,7 +57,7 @@ void main() {
                 NullableEnumSerializerGenerator('FooBar')
                     .generateDeserializer('value'),
                 equals(
-                  'value != null ? _\$FooBarEnumMap.entries.singleWhere((e) => e.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooBarEnumMap.values.join(\', \')}\')).key : null',
+                  'value != null ? _\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooBarEnumMap.values.join(\', \')}\')).key : null',
                 ),
               );
             },

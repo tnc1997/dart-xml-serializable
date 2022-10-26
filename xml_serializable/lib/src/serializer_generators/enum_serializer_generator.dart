@@ -1,3 +1,5 @@
+import 'package:recase/recase.dart';
+
 import 'serializer_generator.dart';
 
 class EnumSerializerGenerator extends SerializerGenerator {
@@ -38,7 +40,7 @@ class EnumSerializerGenerator extends SerializerGenerator {
     }
 
     buffer.write(
-      '_\$${_name}EnumMap.entries.singleWhere((e) => e.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${_\$${_name}EnumMap.values.join(\', \')}\')).key',
+      '_\$${_name}EnumMap.entries.singleWhere((${_name.camelCase}EnumMapEntry) => ${_name.camelCase}EnumMapEntry.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${_\$${_name}EnumMap.values.join(\', \')}\')).key',
     );
 
     if (_isNullable) {

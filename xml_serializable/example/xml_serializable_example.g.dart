@@ -209,7 +209,9 @@ Title _$TitleFromXmlElement(XmlElement element) {
   return Title(
       language: language != null
           ? _$LanguageEnumMap.entries
-              .singleWhere((e) => e.value == language,
+              .singleWhere(
+                  (languageEnumMapEntry) =>
+                      languageEnumMapEntry.value == language,
                   orElse: () => throw ArgumentError(
                       '`$language` is not one of the supported values: ${_$LanguageEnumMap.values.join(', ')}'))
               .key
