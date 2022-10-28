@@ -14,7 +14,7 @@ void main() {
               expect(
                 EnumSerializerGenerator('FooBar').generateSerializer('value'),
                 equals(
-                  '_\$FooBarEnumMap[value]!',
+                  '\$FooBarEnumMap[value]!',
                 ),
               );
             },
@@ -27,7 +27,7 @@ void main() {
                 NullableEnumSerializerGenerator('FooBar')
                     .generateSerializer('value'),
                 equals(
-                  'value != null ? _\$FooBarEnumMap[value]! : null',
+                  'value != null ? \$FooBarEnumMap[value]! : null',
                 ),
               );
             },
@@ -44,7 +44,7 @@ void main() {
               expect(
                 EnumSerializerGenerator('FooBar').generateDeserializer('value'),
                 equals(
-                  '_\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooBarEnumMap.values.join(\', \')}\')).key',
+                  '\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${\$FooBarEnumMap.values.join(\', \')}\')).key',
                 ),
               );
             },
@@ -57,7 +57,7 @@ void main() {
                 NullableEnumSerializerGenerator('FooBar')
                     .generateDeserializer('value'),
                 equals(
-                  'value != null ? _\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${_\$FooBarEnumMap.values.join(\', \')}\')).key : null',
+                  'value != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError(\'`\$value` is not one of the supported values: \${\$FooBarEnumMap.values.join(\', \')}\')).key : null',
                 ),
               );
             },

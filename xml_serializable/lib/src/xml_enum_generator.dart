@@ -30,6 +30,6 @@ class XmlEnumGenerator extends GeneratorForAnnotation<XmlEnum> {
       );
     }
 
-    return 'const _\$${element.name}EnumMap = { ${element.fields.where((e) => e.isEnumConstant).map((e) => '${element.name}.${e.name}: \'${e.hasXmlValue ? e.getXmlValue()!.toXmlValueValue()!.value : e.getEncodedFieldName()}\'').join(', ')} };';
+    return 'const \$${element.name}EnumMap = { ${element.fields.where((e) => e.isEnumConstant).map((e) => '${element.name}.${e.name}: \'${e.hasXmlValue ? e.getXmlValue()!.toXmlValueValue()!.value : e.getEncodedFieldName()}\'').join(', ')} };';
   }
 }

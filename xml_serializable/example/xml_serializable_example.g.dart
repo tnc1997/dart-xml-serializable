@@ -6,7 +6,7 @@ part of 'xml_serializable_example.dart';
 // XmlEnumGenerator
 // **************************************************************************
 
-const _$LanguageEnumMap = {
+const $LanguageEnumMap = {
   Language.mandarin: 'Mandarin',
   Language.spanish: 'Spanish',
   Language.english: 'English',
@@ -185,7 +185,7 @@ void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     {Map<String, String> namespaces = const {}}) {
   final language = instance.language;
   final languageSerialized =
-      language != null ? _$LanguageEnumMap[language]! : null;
+      language != null ? $LanguageEnumMap[language]! : null;
   if (languageSerialized != null) {
     builder.attribute('lang', languageSerialized);
   }
@@ -208,12 +208,12 @@ Title _$TitleFromXmlElement(XmlElement element) {
   final text = element.getText();
   return Title(
       language: language != null
-          ? _$LanguageEnumMap.entries
+          ? $LanguageEnumMap.entries
               .singleWhere(
                   (languageEnumMapEntry) =>
                       languageEnumMapEntry.value == language,
                   orElse: () => throw ArgumentError(
-                      '`$language` is not one of the supported values: ${_$LanguageEnumMap.values.join(', ')}'))
+                      '`$language` is not one of the supported values: ${$LanguageEnumMap.values.join(', ')}'))
               .key
           : null,
       text: text);
@@ -224,7 +224,7 @@ List<XmlAttribute> _$TitleToXmlAttributes(Title instance,
   final attributes = <XmlAttribute>[];
   final language = instance.language;
   final languageSerialized =
-      language != null ? _$LanguageEnumMap[language]! : null;
+      language != null ? $LanguageEnumMap[language]! : null;
   final languageConstructed = languageSerialized != null
       ? XmlAttribute(XmlName('lang'), languageSerialized)
       : null;
