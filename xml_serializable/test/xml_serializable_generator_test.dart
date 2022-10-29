@@ -532,7 +532,7 @@ final dynamicAttribute = instance.dynamicAttribute;
 final dynamicAttributeSerialized = dynamicAttribute;
 if (dynamicAttributeSerialized != null) { builder.attribute('dynamicattribute', dynamicAttributeSerialized); }
 final enumAttribute = instance.enumAttribute;
-final enumAttributeSerialized = enumAttribute != null ? _\$FooBarEnumMap[enumAttribute]! : null;
+final enumAttributeSerialized = enumAttribute != null ? \$FooBarEnumMap[enumAttribute]! : null;
 if (enumAttributeSerialized != null) { builder.attribute('enumattribute', enumAttributeSerialized); }
 final intAttribute = instance.intAttribute;
 final intAttributeSerialized = intAttribute?.toString();
@@ -553,10 +553,10 @@ final customIterableElement = instance.customIterableElement;
 final customIterableElementSerialized = customIterableElement;
 if (customIterableElementSerialized != null) { for (final value in customIterableElementSerialized) { builder.element('customiterableelement', nest: () { value.buildXmlChildren(builder, namespaces: namespaces); }); } }
 final enumElement = instance.enumElement;
-final enumElementSerialized = enumElement != null ? _\$FooBarEnumMap[enumElement]! : null;
+final enumElementSerialized = enumElement != null ? \$FooBarEnumMap[enumElement]! : null;
 builder.element('enumelement', nest: () { if (enumElementSerialized != null) { builder.text(enumElementSerialized); } });
 final enumIterableElement = instance.enumIterableElement;
-final enumIterableElementSerialized = enumIterableElement?.map((e) => _\$FooBarEnumMap[e]!);
+final enumIterableElementSerialized = enumIterableElement?.map((e) => \$FooBarEnumMap[e]!);
 if (enumIterableElementSerialized != null) { for (final value in enumIterableElementSerialized) { builder.element('enumiterableelement', nest: () { builder.text(value); }); } }
 final stringElement = instance.stringElement;
 final stringElementSerialized = stringElement;
@@ -627,7 +627,7 @@ final stringSetElement = element.getElements('stringsetelement')?.map((e) => e.g
 final nonSelfClosingStringSetElement = element.getElements('nonselfclosingstringsetelement')?.map((e) => e.getText()).whereType<String>();
 final excludeIfNullStringSetElement = element.getElements('excludeifnullstringsetelement')?.map((e) => e.getText()).whereType<String>();
 final stringText = element.getText();
-return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, enumAttribute: enumAttribute != null ? _\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumAttribute, orElse: () => throw ArgumentError('`\$enumAttribute` is not one of the supported values: \${_\$FooBarEnumMap.values.join(', ')}')).key : null, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, customIterableElement: customIterableElement?.map((e) => CustomClass.fromXmlElement(e)), enumElement: enumElement != null ? _\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumElement, orElse: () => throw ArgumentError('`\$enumElement` is not one of the supported values: \${_\$FooBarEnumMap.values.join(', ')}')).key : null, enumIterableElement: enumIterableElement?.map((e) => _\$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == e, orElse: () => throw ArgumentError('`\$e` is not one of the supported values: \${_\$FooBarEnumMap.values.join(', ')}')).key), stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, stringIterableElement: stringIterableElement, nonSelfClosingStringIterableElement: nonSelfClosingStringIterableElement, excludeIfNullStringIterableElement: excludeIfNullStringIterableElement, stringListElement: stringListElement?.toList(), nonSelfClosingStringListElement: nonSelfClosingStringListElement?.toList(), excludeIfNullStringListElement: excludeIfNullStringListElement?.toList(), stringSetElement: stringSetElement?.toSet(), nonSelfClosingStringSetElement: nonSelfClosingStringSetElement?.toSet(), excludeIfNullStringSetElement: excludeIfNullStringSetElement?.toSet(), stringText: stringText);
+return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, enumAttribute: enumAttribute != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumAttribute, orElse: () => throw ArgumentError('`\$enumAttribute` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key : null, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, customIterableElement: customIterableElement?.map((e) => CustomClass.fromXmlElement(e)), enumElement: enumElement != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumElement, orElse: () => throw ArgumentError('`\$enumElement` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key : null, enumIterableElement: enumIterableElement?.map((e) => \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == e, orElse: () => throw ArgumentError('`\$e` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key), stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, stringIterableElement: stringIterableElement, nonSelfClosingStringIterableElement: nonSelfClosingStringIterableElement, excludeIfNullStringIterableElement: excludeIfNullStringIterableElement, stringListElement: stringListElement?.toList(), nonSelfClosingStringListElement: nonSelfClosingStringListElement?.toList(), excludeIfNullStringListElement: excludeIfNullStringListElement?.toList(), stringSetElement: stringSetElement?.toSet(), nonSelfClosingStringSetElement: nonSelfClosingStringSetElement?.toSet(), excludeIfNullStringSetElement: excludeIfNullStringSetElement?.toSet(), stringText: stringText);
 }
 
 List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
@@ -653,7 +653,7 @@ final dynamicAttributeSerialized = dynamicAttribute;
 final dynamicAttributeConstructed = dynamicAttributeSerialized != null ? XmlAttribute(XmlName('dynamicattribute'), dynamicAttributeSerialized) : null;
 if (dynamicAttributeConstructed != null) { attributes.add(dynamicAttributeConstructed); }
 final enumAttribute = instance.enumAttribute;
-final enumAttributeSerialized = enumAttribute != null ? _\$FooBarEnumMap[enumAttribute]! : null;
+final enumAttributeSerialized = enumAttribute != null ? \$FooBarEnumMap[enumAttribute]! : null;
 final enumAttributeConstructed = enumAttributeSerialized != null ? XmlAttribute(XmlName('enumattribute'), enumAttributeSerialized) : null;
 if (enumAttributeConstructed != null) { attributes.add(enumAttributeConstructed); }
 final intAttribute = instance.intAttribute;
@@ -686,11 +686,11 @@ final customIterableElementSerialized = customIterableElement;
 final customIterableElementConstructed = customIterableElementSerialized?.map((e) => XmlElement(XmlName('customiterableelement'), e.toXmlAttributes(namespaces: namespaces), e.toXmlChildren(namespaces: namespaces)));
 if (customIterableElementConstructed != null) { children.addAll(customIterableElementConstructed); }
 final enumElement = instance.enumElement;
-final enumElementSerialized = enumElement != null ? _\$FooBarEnumMap[enumElement]! : null;
+final enumElementSerialized = enumElement != null ? \$FooBarEnumMap[enumElement]! : null;
 final enumElementConstructed = XmlElement(XmlName('enumelement'), [], enumElementSerialized != null ? [XmlText(enumElementSerialized)] : []);
 children.add(enumElementConstructed);
 final enumIterableElement = instance.enumIterableElement;
-final enumIterableElementSerialized = enumIterableElement?.map((e) => _\$FooBarEnumMap[e]!);
+final enumIterableElementSerialized = enumIterableElement?.map((e) => \$FooBarEnumMap[e]!);
 final enumIterableElementConstructed = enumIterableElementSerialized?.map((e) => XmlElement(XmlName('enumiterableelement'), [], [XmlText(e)]));
 if (enumIterableElementConstructed != null) { children.addAll(enumIterableElementConstructed); }
 final stringElement = instance.stringElement;

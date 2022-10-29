@@ -45,7 +45,7 @@ void main() {
               FakeBuildStep(),
             ),
             equals(
-              '''const _\$FooBarEnumMap = { FooBar.foo: 'foo', FooBar.bar: 'Bar' };''',
+              '''const \$FooBarEnumMap = { FooBar.foo: 'foo', FooBar.bar: 'Bar' };''',
             ),
           );
         },
@@ -95,7 +95,7 @@ void main() {
               FakeBuildStep(),
             ),
             equals(
-              '''const _\$FooBarEnumMap = { FooBar.foo: 'Foo', FooBar.bar: 'bar' };''',
+              '''const \$FooBarEnumMap = { FooBar.foo: 'Foo', FooBar.bar: 'bar' };''',
             ),
           );
         },
