@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.2.2 (2022-10-29)
+
+### Bug Fixes
+
+* publicise generated enum maps to enable reuse ([#29](https://github.com/tnc1997/dart-xml-serializable/issues/29)) ([ab66a66](https://github.com/tnc1997/dart-xml-serializable/commit/ab66a665e92ad92d11055a404e3d444fa4556bb2))
+* only deserialize fields with an annotation ([#30](https://github.com/tnc1997/dart-xml-serializable/issues/30)) ([1b96d2d](https://github.com/tnc1997/dart-xml-serializable/commit/1b96d2d2ef323a2e58054760b30720d45e6cf9af))
+
 ## 2.2.1 (2022-10-26)
 
 ### Bug Fixes
