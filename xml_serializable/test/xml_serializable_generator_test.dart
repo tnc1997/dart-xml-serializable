@@ -505,6 +505,13 @@ void main() {
                       nullabilitySuffix: NullabilitySuffix.question,
                     ),
                   ),
+                  FakeFieldElement(
+                    name: 'ignored',
+                    type: FakeInterfaceType(
+                      element2: FakeClassElement(),
+                      nullabilitySuffix: NullabilitySuffix.question,
+                    ),
+                  ),
                 ],
                 metadata: [
                   FakeXmlSerializableElementAnnotation(),

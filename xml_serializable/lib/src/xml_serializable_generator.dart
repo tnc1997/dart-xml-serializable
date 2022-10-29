@@ -149,14 +149,22 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       '${element.name} _\$${element.name}FromXmlElement(XmlElement element) {',
     );
 
+    final elements = <FieldElement>{};
+
     for (final element in element.fields) {
-      buffer.writeln(
-        'final ${element.name} = ${_getterGeneratorFactory(element).generateGetter('element')};',
-      );
+      if (element.hasXmlAttribute ||
+          element.hasXmlElement ||
+          element.hasXmlText) {
+        buffer.writeln(
+          'final ${element.name} = ${_getterGeneratorFactory(element).generateGetter('element')};',
+        );
+
+        elements.add(element);
+      }
     }
 
     buffer.writeln(
-      'return ${element.name}(${element.fields.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)}').join(', ')});',
+      'return ${element.name}(${elements.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)}').join(', ')});',
     );
 
     buffer.write('}');
