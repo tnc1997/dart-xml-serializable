@@ -124,7 +124,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         );
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name)};',
         );
 
         buffer.writeln(
@@ -164,7 +164,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     }
 
     buffer.writeln(
-      'return ${element.name}(${elements.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element.type).generateDeserializer(element.name)}').join(', ')});',
+      'return ${element.name}(${elements.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element).generateDeserializer(element.name)}').join(', ')});',
     );
 
     buffer.write('}');
@@ -220,7 +220,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name)};',
         );
 
         buffer.writeln(
@@ -267,7 +267,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element.type).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name)};',
         );
 
         buffer.writeln(
@@ -305,24 +305,98 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     );
   }
 
+  /// Creates a [SerializerGenerator] from an [element] and a [type].
+  ///
+  /// In the example below the [element] is `prefix.Title? title` and the [type] is `Title?`:
+  ///
+  /// ```dart
+  /// ...
+  ///
+  /// import 'title.dart' as prefix;
+  ///
+  /// part 'book.g.dart';
+  ///
+  /// @annotation.XmlRootElement()
+  /// @annotation.XmlSerializable()
+  /// class Book {
+  ///   @annotation.XmlElement()
+  ///   prefix.Title? title;
+  ///
+  ///   ...
+  /// }
+  /// ```
+  ///
+  /// In the example below the [element] is `List<prefix.Author>? authors` in both recursions and the [type] is `List<Author>?` in the first recursion and `Author` in the second recursion:
+  ///
+  /// ```dart
+  /// ...
+  ///
+  /// import 'author.dart' as prefix;
+  ///
+  /// part 'book.g.dart';
+  ///
+  /// @annotation.XmlRootElement()
+  /// @annotation.XmlSerializable()
+  /// class Book {
+  ///   @annotation.XmlElement()
+  ///   List<prefix.Author>? authors;
+  ///
+  ///   ...
+  /// }
+  /// ```
   SerializerGenerator _xmlSerializableSerializerGeneratorFactory(
-    DartType type,
-  ) {
+    FieldElement element, {
+    DartType? type,
+  }) {
+    type ??= element.type;
+
     if (type is InterfaceType && type.element2.hasXmlSerializable) {
-      return _XmlSerializableSerializerGenerator(type);
+      for (final element in element.library.topLevelElements) {
+        if (element == type.element2) {
+          return _XmlSerializableSerializerGenerator(
+            element.name!,
+            isNullable: type.isNullable,
+          );
+        }
+      }
+
+      for (final import in element.library.libraryImports) {
+        for (final entry in import.namespace.definedNames.entries) {
+          if (entry.value == type.element2) {
+            return _XmlSerializableSerializerGenerator(
+              entry.key,
+              isNullable: type.isNullable,
+            );
+          }
+        }
+      }
+
+      return _XmlSerializableSerializerGenerator(
+        type.element2.name,
+        isNullable: type.isNullable,
+      );
     } else if (type is ParameterizedType && type.isDartCoreIterable) {
       return IterableSerializerGenerator(
-        _xmlSerializableSerializerGeneratorFactory(type.typeArguments.single),
+        _xmlSerializableSerializerGeneratorFactory(
+          element,
+          type: type.typeArguments.single,
+        ),
         isNullable: type.isNullable,
       );
     } else if (type is ParameterizedType && type.isDartCoreList) {
       return ListSerializerGenerator(
-        _xmlSerializableSerializerGeneratorFactory(type.typeArguments.single),
+        _xmlSerializableSerializerGeneratorFactory(
+          element,
+          type: type.typeArguments.single,
+        ),
         isNullable: type.isNullable,
       );
     } else if (type is ParameterizedType && type.isDartCoreSet) {
       return SetSerializerGenerator(
-        _xmlSerializableSerializerGeneratorFactory(type.typeArguments.single),
+        _xmlSerializableSerializerGeneratorFactory(
+          element,
+          type: type.typeArguments.single,
+        ),
         isNullable: type.isNullable,
       );
     } else {
@@ -331,10 +405,18 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }
 }
 
+/// Defines methods for generating serializers and deserializers for types that have an annotation of the form `@XmlSerializable()`.
 class _XmlSerializableSerializerGenerator extends SerializerGenerator {
-  final InterfaceType _type;
+  /// If `false` (the default) then the type does not represent a nullable type.
+  final bool _isNullable;
 
-  const _XmlSerializableSerializerGenerator(this._type);
+  /// The name of the type (including the prefix where applicable).
+  final String _name;
+
+  const _XmlSerializableSerializerGenerator(
+    this._name, {
+    bool isNullable = false,
+  }) : _isNullable = isNullable;
 
   @override
   String generateSerializer(String expression) => expression;
@@ -343,13 +425,13 @@ class _XmlSerializableSerializerGenerator extends SerializerGenerator {
   String generateDeserializer(String expression) {
     final buffer = StringBuffer();
 
-    if (_type.isNullable) {
+    if (_isNullable) {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write('${_type.element2.name}.fromXmlElement($expression)');
+    buffer.write('$_name.fromXmlElement($expression)');
 
-    if (_type.isNullable) {
+    if (_isNullable) {
       buffer.write(' : null');
     }
 
