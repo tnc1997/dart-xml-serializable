@@ -19,6 +19,9 @@ class FakeClassElement extends Fake implements ClassElement {
   final String name;
 
   @override
+  final List<InterfaceType> allSupertypes;
+
+  @override
   InterfaceType get thisType =>
       _thisType ??
       FakeInterfaceType(
@@ -32,10 +35,12 @@ class FakeClassElement extends Fake implements ClassElement {
     LibraryElement? library,
     List<ElementAnnotation>? metadata,
     String? name,
+    List<InterfaceType>? allSupertypes,
     InterfaceType? thisType,
   })  : fields = fields ?? [],
         library = library ?? FakeLibraryElement(),
         metadata = metadata ?? [],
         name = name ?? 'HelloWorld',
+        allSupertypes = allSupertypes ?? [],
         _thisType = thisType;
 }

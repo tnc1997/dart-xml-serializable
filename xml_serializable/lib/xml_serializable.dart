@@ -15,6 +15,7 @@ export 'package:xml_serializable/src/constructor_generators/xml_root_element_con
 export 'package:xml_serializable/src/constructor_generators/xml_serializable_xml_element_constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/xml_text_constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/xml_text_xml_element_constructor_generator.dart';
+export 'package:xml_serializable/src/extensions/class_element_extensions.dart';
 export 'package:xml_serializable/src/extensions/constant_reader_extensions.dart';
 export 'package:xml_serializable/src/extensions/dart_object_extensions.dart';
 export 'package:xml_serializable/src/extensions/dart_type_extensions.dart';
