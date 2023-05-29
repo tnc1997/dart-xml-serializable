@@ -517,6 +517,40 @@ void main() {
                   FakeXmlSerializableElementAnnotation(),
                 ],
                 name: 'TestClass',
+                allSupertypes: [
+                  FakeInterfaceType(
+                    element2: FakeClassElement(
+                      fields: [
+                        FakeFieldElement(
+                          metadata: [
+                            FakeXmlAttributeElementAnnotation(
+                              name: 'superstringattribute',
+                            ),
+                          ],
+                          name: 'superStringAttribute',
+                          type: FakeInterfaceType(
+                            element2: FakeStringClassElement(),
+                            isDartCoreString: true,
+                            nullabilitySuffix: NullabilitySuffix.question,
+                          ),
+                        ),
+                        FakeFieldElement(
+                          metadata: [
+                            FakeXmlElementElementAnnotation(
+                              name: 'superstringelement',
+                            ),
+                          ],
+                          name: 'superStringElement',
+                          type: FakeInterfaceType(
+                            element2: FakeStringClassElement(),
+                            isDartCoreString: true,
+                            nullabilitySuffix: NullabilitySuffix.question,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
               FakeConstantReader(),
               FakeBuildStep(),
@@ -604,6 +638,12 @@ if (excludeIfNullStringSetElementSerialized != null) { for (final value in exclu
 final stringText = instance.stringText;
 final stringTextSerialized = stringText;
 if (stringTextSerialized != null) { builder.text(stringTextSerialized); }
+final superStringAttribute = instance.superStringAttribute;
+final superStringAttributeSerialized = superStringAttribute;
+if (superStringAttributeSerialized != null) { builder.attribute('superstringattribute', superStringAttributeSerialized); }
+final superStringElement = instance.superStringElement;
+final superStringElementSerialized = superStringElement;
+builder.element('superstringelement', nest: () { if (superStringElementSerialized != null) { builder.text(superStringElementSerialized); } });
 }
 
 TestClass _\$TestClassFromXmlElement(XmlElement element) {
@@ -634,7 +674,9 @@ final stringSetElement = element.getElements('stringsetelement')?.map((e) => e.g
 final nonSelfClosingStringSetElement = element.getElements('nonselfclosingstringsetelement')?.map((e) => e.getText()).whereType<String>();
 final excludeIfNullStringSetElement = element.getElements('excludeifnullstringsetelement')?.map((e) => e.getText()).whereType<String>();
 final stringText = element.getText();
-return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, enumAttribute: enumAttribute != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumAttribute, orElse: () => throw ArgumentError('`\$enumAttribute` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key : null, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, customIterableElement: customIterableElement?.map((e) => CustomClass.fromXmlElement(e)), enumElement: enumElement != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumElement, orElse: () => throw ArgumentError('`\$enumElement` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key : null, enumIterableElement: enumIterableElement?.map((e) => \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == e, orElse: () => throw ArgumentError('`\$e` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key), stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, stringIterableElement: stringIterableElement, nonSelfClosingStringIterableElement: nonSelfClosingStringIterableElement, excludeIfNullStringIterableElement: excludeIfNullStringIterableElement, stringListElement: stringListElement?.toList(), nonSelfClosingStringListElement: nonSelfClosingStringListElement?.toList(), excludeIfNullStringListElement: excludeIfNullStringListElement?.toList(), stringSetElement: stringSetElement?.toSet(), nonSelfClosingStringSetElement: nonSelfClosingStringSetElement?.toSet(), excludeIfNullStringSetElement: excludeIfNullStringSetElement?.toSet(), stringText: stringText);
+final superStringAttribute = element.getAttribute('superstringattribute');
+final superStringElement = element.getElement('superstringelement')?.getText();
+return TestClass(boolAttribute: boolAttribute != null ? boolAttribute == 'true' || boolAttribute == '1' ? true : boolAttribute == 'false' || boolAttribute == '0' ? false : throw FormatException('Invalid bool format', boolAttribute) : null, dateTimeAttribute: dateTimeAttribute != null ? DateTime.parse(dateTimeAttribute) : null, doubleAttribute: doubleAttribute != null ? double.parse(doubleAttribute) : null, durationAttribute: durationAttribute != null ? Duration(microseconds: int.parse(durationAttribute)) : null, dynamicAttribute: dynamicAttribute, enumAttribute: enumAttribute != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumAttribute, orElse: () => throw ArgumentError('`\$enumAttribute` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key : null, intAttribute: intAttribute != null ? int.parse(intAttribute) : null, numAttribute: numAttribute != null ? num.parse(numAttribute) : null, stringAttribute: stringAttribute, uriAttribute: uriAttribute != null ? Uri.parse(uriAttribute) : null, customElement: customElement != null ? CustomClass.fromXmlElement(customElement) : null, customIterableElement: customIterableElement?.map((e) => CustomClass.fromXmlElement(e)), enumElement: enumElement != null ? \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == enumElement, orElse: () => throw ArgumentError('`\$enumElement` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key : null, enumIterableElement: enumIterableElement?.map((e) => \$FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == e, orElse: () => throw ArgumentError('`\$e` is not one of the supported values: \${\$FooBarEnumMap.values.join(', ')}')).key), stringElement: stringElement, nonSelfClosingStringElement: nonSelfClosingStringElement, excludeIfNullStringElement: excludeIfNullStringElement, stringIterableElement: stringIterableElement, nonSelfClosingStringIterableElement: nonSelfClosingStringIterableElement, excludeIfNullStringIterableElement: excludeIfNullStringIterableElement, stringListElement: stringListElement?.toList(), nonSelfClosingStringListElement: nonSelfClosingStringListElement?.toList(), excludeIfNullStringListElement: excludeIfNullStringListElement?.toList(), stringSetElement: stringSetElement?.toSet(), nonSelfClosingStringSetElement: nonSelfClosingStringSetElement?.toSet(), excludeIfNullStringSetElement: excludeIfNullStringSetElement?.toSet(), stringText: stringText, superStringAttribute: superStringAttribute, superStringElement: superStringElement);
 }
 
 List<XmlAttribute> _\$TestClassToXmlAttributes(TestClass instance, {Map<String, String?> namespaces = const {}}) {
@@ -679,6 +721,10 @@ final uriAttribute = instance.uriAttribute;
 final uriAttributeSerialized = uriAttribute?.toString();
 final uriAttributeConstructed = uriAttributeSerialized != null ? XmlAttribute(XmlName('uriattribute'), uriAttributeSerialized) : null;
 if (uriAttributeConstructed != null) { attributes.add(uriAttributeConstructed); }
+final superStringAttribute = instance.superStringAttribute;
+final superStringAttributeSerialized = superStringAttribute;
+final superStringAttributeConstructed = superStringAttributeSerialized != null ? XmlAttribute(XmlName('superstringattribute'), superStringAttributeSerialized) : null;
+if (superStringAttributeConstructed != null) { attributes.add(superStringAttributeConstructed); }
 return attributes;
 }
 
@@ -752,6 +798,10 @@ final stringText = instance.stringText;
 final stringTextSerialized = stringText;
 final stringTextConstructed = stringTextSerialized != null ? XmlText(stringTextSerialized) : null;
 if (stringTextConstructed != null) { children.add(stringTextConstructed); }
+final superStringElement = instance.superStringElement;
+final superStringElementSerialized = superStringElement;
+final superStringElementConstructed = XmlElement(XmlName('superstringelement'), [], superStringElementSerialized != null ? [XmlText(superStringElementSerialized)] : []);
+children.add(superStringElementConstructed);
 return children;
 }'''),
           );

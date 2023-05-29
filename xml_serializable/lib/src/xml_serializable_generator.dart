@@ -4,6 +4,7 @@ import 'package:build/build.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:xml_annotation/xml_annotation.dart';
 
+import 'extensions/class_element_extensions.dart';
 import 'extensions/dart_object_extensions.dart';
 import 'extensions/dart_type_extensions.dart';
 import 'extensions/element_extensions.dart';
@@ -115,7 +116,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       'void _\$${element.name}BuildXmlChildren(${element.name} instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {',
     );
 
-    for (final element in element.fields) {
+    for (final element in element.allFields) {
       if (element.hasXmlAttribute ||
           element.hasXmlElement ||
           element.hasXmlText) {
@@ -151,7 +152,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     final elements = <FieldElement>{};
 
-    for (final element in element.fields) {
+    for (final element in element.allFields) {
       if (element.hasXmlAttribute ||
           element.hasXmlElement ||
           element.hasXmlText) {
@@ -215,7 +216,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     buffer.writeln('final attributes = <XmlAttribute>[];');
 
-    for (final element in element.fields) {
+    for (final element in element.allFields) {
       if (element.hasXmlAttribute) {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
@@ -262,7 +263,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     buffer.writeln('final children = <XmlNode>[];');
 
-    for (final element in element.fields) {
+    for (final element in element.allFields) {
       if (element.hasXmlElement || element.hasXmlText) {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
