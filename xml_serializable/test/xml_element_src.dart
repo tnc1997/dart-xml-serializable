@@ -1,8 +1,7 @@
 import 'package:source_gen_test/source_gen_test.dart';
 import 'package:xml_annotation/xml_annotation.dart';
 
-import 'test_class_1.dart';
-import 'test_class_2.dart' as prefix;
+import 'test_class.dart' as prefix;
 import 'test_enum.dart';
 
 @ShouldGenerate(r'''
@@ -1192,4 +1191,12 @@ class OverrideFieldRename {
   String? fooBaz;
 
   OverrideFieldRename({this.fooBar, this.fooBaz});
+}
+
+@XmlSerializable()
+class TestClass {
+  @XmlElement()
+  String? fooBar;
+
+  TestClass({this.fooBar});
 }
