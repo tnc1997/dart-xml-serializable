@@ -1,6 +1,8 @@
 import 'package:source_gen_test/source_gen_test.dart';
 import 'package:xml_annotation/xml_annotation.dart';
 
+import 'test_enum.dart';
+
 @ShouldGenerate(r'''
 void _$BoolFieldBuildXmlChildren(BoolField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
@@ -169,19 +171,19 @@ class DynamicField {
 @ShouldGenerate(r'''
 void _$EnumFieldBuildXmlChildren(EnumField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
-final valueSerialized = $FooBarEnumMap[value]!;
+final valueSerialized = $TestEnumEnumMap[value]!;
 builder.attribute('value', valueSerialized);
 }
 
 EnumField _$EnumFieldFromXmlElement(XmlElement element) {
 final value = element.getAttribute('value')!;
-return EnumField(value: $FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$FooBarEnumMap.values.join(', ')}')).key);
+return EnumField(value: $TestEnumEnumMap.entries.singleWhere((testEnumEnumMapEntry) => testEnumEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$TestEnumEnumMap.values.join(', ')}')).key);
 }
 
 List<XmlAttribute> _$EnumFieldToXmlAttributes(EnumField instance, {Map<String, String?> namespaces = const {}}) {
 final attributes = <XmlAttribute>[];
 final value = instance.value;
-final valueSerialized = $FooBarEnumMap[value]!;
+final valueSerialized = $TestEnumEnumMap[value]!;
 final valueConstructed = XmlAttribute(XmlName('value'), valueSerialized);
 attributes.add(valueConstructed);
 return attributes;
@@ -194,7 +196,7 @@ return children;
 @XmlSerializable()
 class EnumField {
   @XmlAttribute()
-  FooBar value;
+  TestEnum value;
 
   EnumField({required this.value});
 }
@@ -477,19 +479,19 @@ class NullableDurationField {
 @ShouldGenerate(r'''
 void _$NullableEnumFieldBuildXmlChildren(NullableEnumField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
-final valueSerialized = value != null ? $FooBarEnumMap[value]! : null;
+final valueSerialized = value != null ? $TestEnumEnumMap[value]! : null;
 if (valueSerialized != null) { builder.attribute('value', valueSerialized); }
 }
 
 NullableEnumField _$NullableEnumFieldFromXmlElement(XmlElement element) {
 final value = element.getAttribute('value');
-return NullableEnumField(value: value != null ? $FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$FooBarEnumMap.values.join(', ')}')).key : null);
+return NullableEnumField(value: value != null ? $TestEnumEnumMap.entries.singleWhere((testEnumEnumMapEntry) => testEnumEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$TestEnumEnumMap.values.join(', ')}')).key : null);
 }
 
 List<XmlAttribute> _$NullableEnumFieldToXmlAttributes(NullableEnumField instance, {Map<String, String?> namespaces = const {}}) {
 final attributes = <XmlAttribute>[];
 final value = instance.value;
-final valueSerialized = value != null ? $FooBarEnumMap[value]! : null;
+final valueSerialized = value != null ? $TestEnumEnumMap[value]! : null;
 final valueConstructed = valueSerialized != null ? XmlAttribute(XmlName('value'), valueSerialized) : null;
 if (valueConstructed != null) { attributes.add(valueConstructed); }
 return attributes;
@@ -502,7 +504,7 @@ return children;
 @XmlSerializable()
 class NullableEnumField {
   @XmlAttribute()
-  FooBar? value;
+  TestEnum? value;
 
   NullableEnumField({this.value});
 }
@@ -802,9 +804,4 @@ class OverrideFieldRename {
   String? fooBaz;
 
   OverrideFieldRename({this.fooBar, this.fooBaz});
-}
-
-enum FooBar {
-  foo,
-  bar,
 }

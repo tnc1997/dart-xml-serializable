@@ -1,6 +1,10 @@
 import 'package:source_gen_test/source_gen_test.dart';
 import 'package:xml_annotation/xml_annotation.dart';
 
+import 'test_class_1.dart';
+import 'test_class_2.dart' as prefix;
+import 'test_enum.dart';
+
 @ShouldGenerate(r'''
 void _$BoolFieldBuildXmlChildren(BoolField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
@@ -43,7 +47,7 @@ builder.element('value', nest: () { valueSerialized.buildXmlChildren(builder, na
 
 CustomField _$CustomFieldFromXmlElement(XmlElement element) {
 final value = element.getElement('value')!;
-return CustomField(value: HelloWorld.fromXmlElement(value));
+return CustomField(value: TestClass.fromXmlElement(value));
 }
 
 List<XmlAttribute> _$CustomFieldToXmlAttributes(CustomField instance, {Map<String, String?> namespaces = const {}}) {
@@ -62,7 +66,7 @@ return children;
 @XmlSerializable()
 class CustomField {
   @XmlElement()
-  HelloWorld value;
+  TestClass value;
 
   CustomField({required this.value});
 }
@@ -202,13 +206,13 @@ class DynamicField {
 @ShouldGenerate(r'''
 void _$EnumFieldBuildXmlChildren(EnumField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
-final valueSerialized = $FooBarEnumMap[value]!;
+final valueSerialized = $TestEnumEnumMap[value]!;
 builder.element('value', nest: () { builder.text(valueSerialized); });
 }
 
 EnumField _$EnumFieldFromXmlElement(XmlElement element) {
 final value = element.getElement('value')!.getText()!;
-return EnumField(value: $FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$FooBarEnumMap.values.join(', ')}')).key);
+return EnumField(value: $TestEnumEnumMap.entries.singleWhere((testEnumEnumMapEntry) => testEnumEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$TestEnumEnumMap.values.join(', ')}')).key);
 }
 
 List<XmlAttribute> _$EnumFieldToXmlAttributes(EnumField instance, {Map<String, String?> namespaces = const {}}) {
@@ -219,7 +223,7 @@ return attributes;
 List<XmlNode> _$EnumFieldToXmlChildren(EnumField instance, {Map<String, String?> namespaces = const {}}) {
 final children = <XmlNode>[];
 final value = instance.value;
-final valueSerialized = $FooBarEnumMap[value]!;
+final valueSerialized = $TestEnumEnumMap[value]!;
 final valueConstructed = XmlElement(XmlName('value'), [], [XmlText(valueSerialized)]);
 children.add(valueConstructed);
 return children;
@@ -227,7 +231,7 @@ return children;
 @XmlSerializable()
 class EnumField {
   @XmlElement()
-  FooBar value;
+  TestEnum value;
 
   EnumField({required this.value});
 }
@@ -505,7 +509,7 @@ builder.element('value', nest: () { if (valueSerialized != null) { valueSerializ
 
 NullableCustomField _$NullableCustomFieldFromXmlElement(XmlElement element) {
 final value = element.getElement('value');
-return NullableCustomField(value: value != null ? HelloWorld.fromXmlElement(value) : null);
+return NullableCustomField(value: value != null ? TestClass.fromXmlElement(value) : null);
 }
 
 List<XmlAttribute> _$NullableCustomFieldToXmlAttributes(NullableCustomField instance, {Map<String, String?> namespaces = const {}}) {
@@ -524,7 +528,7 @@ return children;
 @XmlSerializable()
 class NullableCustomField {
   @XmlElement()
-  HelloWorld? value;
+  TestClass? value;
 
   NullableCustomField({this.value});
 }
@@ -631,13 +635,13 @@ class NullableDurationField {
 @ShouldGenerate(r'''
 void _$NullableEnumFieldBuildXmlChildren(NullableEnumField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
-final valueSerialized = value != null ? $FooBarEnumMap[value]! : null;
+final valueSerialized = value != null ? $TestEnumEnumMap[value]! : null;
 builder.element('value', nest: () { if (valueSerialized != null) { builder.text(valueSerialized); } });
 }
 
 NullableEnumField _$NullableEnumFieldFromXmlElement(XmlElement element) {
 final value = element.getElement('value')?.getText();
-return NullableEnumField(value: value != null ? $FooBarEnumMap.entries.singleWhere((fooBarEnumMapEntry) => fooBarEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$FooBarEnumMap.values.join(', ')}')).key : null);
+return NullableEnumField(value: value != null ? $TestEnumEnumMap.entries.singleWhere((testEnumEnumMapEntry) => testEnumEnumMapEntry.value == value, orElse: () => throw ArgumentError('`$value` is not one of the supported values: ${$TestEnumEnumMap.values.join(', ')}')).key : null);
 }
 
 List<XmlAttribute> _$NullableEnumFieldToXmlAttributes(NullableEnumField instance, {Map<String, String?> namespaces = const {}}) {
@@ -648,7 +652,7 @@ return attributes;
 List<XmlNode> _$NullableEnumFieldToXmlChildren(NullableEnumField instance, {Map<String, String?> namespaces = const {}}) {
 final children = <XmlNode>[];
 final value = instance.value;
-final valueSerialized = value != null ? $FooBarEnumMap[value]! : null;
+final valueSerialized = value != null ? $TestEnumEnumMap[value]! : null;
 final valueConstructed = XmlElement(XmlName('value'), [], valueSerialized != null ? [XmlText(valueSerialized)] : []);
 children.add(valueConstructed);
 return children;
@@ -656,7 +660,7 @@ return children;
 @XmlSerializable()
 class NullableEnumField {
   @XmlElement()
-  FooBar? value;
+  TestEnum? value;
 
   NullableEnumField({this.value});
 }
@@ -893,6 +897,80 @@ class NullableUriField {
 }
 
 @ShouldGenerate(r'''
+void _$ImportPrefixBuildXmlChildren(ImportPrefix instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+builder.element('value', nest: () { if (valueSerialized != null) { valueSerialized.buildXmlChildren(builder, namespaces: namespaces); } });
+}
+
+ImportPrefix _$ImportPrefixFromXmlElement(XmlElement element) {
+final value = element.getElement('value');
+return ImportPrefix(value: value != null ? prefix.TestClass.fromXmlElement(value) : null);
+}
+
+List<XmlAttribute> _$ImportPrefixToXmlAttributes(ImportPrefix instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$ImportPrefixToXmlChildren(ImportPrefix instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = XmlElement(XmlName('value'), valueSerialized?.toXmlAttributes(namespaces: namespaces) ?? [], valueSerialized?.toXmlChildren(namespaces: namespaces) ?? []);
+children.add(valueConstructed);
+return children;
+}''')
+@XmlSerializable()
+class ImportPrefix {
+  @XmlElement()
+  prefix.TestClass? value;
+
+  ImportPrefix({this.value});
+}
+
+@ShouldGenerate(r'''
+void _$InheritanceSubclassBuildXmlChildren(InheritanceSubclass instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+builder.element('value', nest: () { if (valueSerialized != null) { builder.text(valueSerialized); } });
+final fooBar = instance.fooBar;
+final fooBarSerialized = fooBar;
+builder.element('fooBar', nest: () { if (fooBarSerialized != null) { builder.text(fooBarSerialized); } });
+}
+
+InheritanceSubclass _$InheritanceSubclassFromXmlElement(XmlElement element) {
+final value = element.getElement('value')?.getText();
+final fooBar = element.getElement('fooBar')?.getText();
+return InheritanceSubclass(value: value, fooBar: fooBar);
+}
+
+List<XmlAttribute> _$InheritanceSubclassToXmlAttributes(InheritanceSubclass instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$InheritanceSubclassToXmlChildren(InheritanceSubclass instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = XmlElement(XmlName('value'), [], valueSerialized != null ? [XmlText(valueSerialized)] : []);
+children.add(valueConstructed);
+final fooBar = instance.fooBar;
+final fooBarSerialized = fooBar;
+final fooBarConstructed = XmlElement(XmlName('fooBar'), [], fooBarSerialized != null ? [XmlText(fooBarSerialized)] : []);
+children.add(fooBarConstructed);
+return children;
+}''')
+@XmlSerializable()
+class InheritanceSubclass extends TestClass {
+  @XmlElement()
+  String? value;
+
+  InheritanceSubclass({this.value, super.fooBar});
+}
+
+@ShouldGenerate(r'''
 void _$NonDefaultNameBuildXmlChildren(NonDefaultName instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
 final valueSerialized = value;
@@ -1114,15 +1192,4 @@ class OverrideFieldRename {
   String? fooBaz;
 
   OverrideFieldRename({this.fooBar, this.fooBaz});
-}
-
-enum FooBar {
-  foo,
-  bar,
-}
-
-@XmlSerializable()
-class HelloWorld {
-  @XmlElement()
-  String? value;
 }

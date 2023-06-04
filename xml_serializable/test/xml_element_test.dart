@@ -38,6 +38,8 @@ Future<void> main() async {
       'NullableSetField',
       'NullableStringField',
       'NullableUriField',
+      'ImportPrefix',
+      'InheritanceSubclass',
       'NonDefaultName',
       'NonDefaultNamespace',
       'NonDefaultNameAndNonDefaultNamespace',
