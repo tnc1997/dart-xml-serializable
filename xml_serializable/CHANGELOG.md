@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.3.0 (2023-06-11)
+
+### Features
+
+* add support for fields in superclasses ([#39](https://github.com/tnc1997/dart-xml-serializable/issues/39)) ([8679f1c](https://github.com/tnc1997/dart-xml-serializable/commit/8679f1c0c48b18743c7cac7404ef793d84706d0a))
+* add support for import prefixes ([#40](https://github.com/tnc1997/dart-xml-serializable/issues/40)) ([ca0e835](https://github.com/tnc1997/dart-xml-serializable/commit/ca0e835cb95fdc229c0303c09b79d5ea759897bc))
+
+### Documentation
+
+* add step by step getting started ([#34](https://github.com/tnc1997/dart-xml-serializable/issues/34)) ([4c44991](https://github.com/tnc1997/dart-xml-serializable/commit/4c449910ffbaf6453a50e3fe1ef324066e9a941e))
+
+### Tests
+
+* use build_test and source_gen_test packages ([#41](https://github.com/tnc1997/dart-xml-serializable/issues/41)) ([f35d018](https://github.com/tnc1997/dart-xml-serializable/commit/f35d0186b138a293236d26391bba8dd178600eb4))
+
 ## 2.2.2 (2022-10-29)
 
 ### Bug Fixes
