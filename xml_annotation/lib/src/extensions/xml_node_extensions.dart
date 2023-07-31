@@ -37,9 +37,11 @@ extension XmlNodeExtensions on XmlNode {
     return elements.isNotEmpty ? elements : null;
   }
 
-  /// Gets the text or `null` if there are no `XmlText` children.
+  /// Gets the text or `null` if there are no `XmlText` and `XmlCDATA` children.
   String? getText() {
-    final texts = children.whereType<XmlText>().map((e) => e.text);
+    final texts = children
+        .where((element) => [XmlText, XmlCDATA].contains(element.runtimeType))
+        .map((e) => e.text);
     return texts.isNotEmpty ? texts.join() : null;
   }
 }
