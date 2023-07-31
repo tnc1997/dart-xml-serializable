@@ -41,7 +41,7 @@ extension XmlNodeExtensions on XmlNode {
   String? getText() {
     final texts = children
         .where((element) => [XmlText, XmlCDATA].contains(element.runtimeType))
-        .map((e) => e.text);
+        .map((e) => e.text.trim());
     return texts.isNotEmpty ? texts.join() : null;
   }
 }
