@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.3.0 (2023-10-07)
+
+### Features
+
+* add support for serializing xml cdata ([#48](https://github.com/tnc1997/dart-xml-serializable/issues/48)) ([8a11d9e](https://github.com/tnc1997/dart-xml-serializable/commit/8a11d9e95610e05becf5406eab531c457f5b92f8))
+
 ## 2.2.0 (2022-10-23)
 
 ### Features
