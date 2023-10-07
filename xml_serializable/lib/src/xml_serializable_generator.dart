@@ -118,6 +118,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     for (final element in element.allFields) {
       if (element.hasXmlAttribute ||
+          element.hasXmlCDATA ||
           element.hasXmlElement ||
           element.hasXmlText) {
         buffer.writeln(
@@ -154,6 +155,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     for (final element in element.allFields) {
       if (element.hasXmlAttribute ||
+          element.hasXmlCDATA ||
           element.hasXmlElement ||
           element.hasXmlText) {
         buffer.writeln(
@@ -264,7 +266,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     buffer.writeln('final children = <XmlNode>[];');
 
     for (final element in element.allFields) {
-      if (element.hasXmlElement || element.hasXmlText) {
+      if (element.hasXmlCDATA || element.hasXmlElement || element.hasXmlText) {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(

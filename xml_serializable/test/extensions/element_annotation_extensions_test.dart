@@ -3,6 +3,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_element_annotation.dart';
 import '../fake_xml_attribute_element_annotation.dart';
+import '../fake_xml_cdata_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
 import '../fake_xml_enum_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
@@ -32,6 +33,31 @@ void main() {
             () {
               expect(
                 FakeElementAnnotation().isXmlAttribute,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'isXmlCDATA',
+        () {
+          test(
+            'should return true if the annotation represents the annotation `XmlCDATA`',
+            () {
+              expect(
+                FakeXmlCDATAElementAnnotation().isXmlCDATA,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the annotation does not represent the annotation `XmlCDATA`',
+            () {
+              expect(
+                FakeElementAnnotation().isXmlCDATA,
                 isFalse,
               );
             },

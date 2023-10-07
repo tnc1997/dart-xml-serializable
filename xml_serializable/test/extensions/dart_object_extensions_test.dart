@@ -7,6 +7,7 @@ import '../fake_field_rename_dart_object.dart';
 import '../fake_field_rename_enum_element.dart';
 import '../fake_interface_type.dart';
 import '../fake_xml_attribute_dart_object.dart';
+import '../fake_xml_cdata_dart_object.dart';
 import '../fake_xml_element_dart_object.dart';
 import '../fake_xml_enum_dart_object.dart';
 import '../fake_xml_root_element_dart_object.dart';
@@ -190,6 +191,31 @@ void main() {
             () {
               expect(
                 FakeDartObject().toXmlAttributeValue(),
+                isNull,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'toXmlCDATAValue',
+        () {
+          test(
+            'should return an `XmlCDATA` if the object being represented is of type `XmlCDATA`',
+            () {
+              expect(
+                FakeXmlCDATADartObject().toXmlCDATAValue(),
+                isA<XmlCDATA>(),
+              );
+            },
+          );
+
+          test(
+            'should return null if the object being represented is not of type `XmlCDATA`',
+            () {
+              expect(
+                FakeDartObject().toXmlCDATAValue(),
                 isNull,
               );
             },

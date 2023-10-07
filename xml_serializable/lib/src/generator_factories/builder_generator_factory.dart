@@ -4,6 +4,7 @@ import 'package:analyzer/dart/element/type.dart';
 import '../builder_generators/builder_generator.dart';
 import '../builder_generators/iterable_builder_generator.dart';
 import '../builder_generators/xml_attribute_builder_generator.dart';
+import '../builder_generators/xml_cdata_builder_generator.dart';
 import '../builder_generators/xml_root_element_builder_generator.dart';
 import '../builder_generators/xml_serializable_xml_element_builder_generator.dart';
 import '../builder_generators/xml_text_builder_generator.dart';
@@ -26,6 +27,16 @@ BuilderGenerator builderGeneratorFactory(Element element) {
         element,
         'element',
         '`@XmlAttribute()` can only be used on fields.',
+      );
+    }
+  } else if (element.hasXmlCDATA) {
+    if (element is FieldElement) {
+      return XmlCDATABuilderGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlCDATA()` can only be used on fields.',
       );
     }
   } else if (element.hasXmlElement) {

@@ -3,6 +3,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_field_element.dart';
 import '../fake_xml_attribute_element_annotation.dart';
+import '../fake_xml_cdata_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
 import '../fake_xml_enum_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
@@ -36,6 +37,35 @@ void main() {
             () {
               expect(
                 () => FakeFieldElement().getXmlAttribute(),
+                throwsA(isA<StateError>()),
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'getXmlCDATA',
+        () {
+          test(
+            'should return the annotation if the element has an annotation of the form `@XmlCDATA`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlCDATAElementAnnotation(),
+                  ],
+                ).getXmlCDATA(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should throw a `StateError` if the element does not have an annotation of the form `@XmlCDATA`',
+            () {
+              expect(
+                () => FakeFieldElement().getXmlCDATA(),
                 throwsA(isA<StateError>()),
               );
             },
@@ -210,6 +240,35 @@ void main() {
             () {
               expect(
                 FakeFieldElement().hasXmlAttribute,
+                isFalse,
+              );
+            },
+          );
+        },
+      );
+
+      group(
+        'hasXmlCDATA',
+        () {
+          test(
+            'should return true if the element has an annotation of the form `@XmlCDATA()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlCDATAElementAnnotation(),
+                  ],
+                ).hasXmlCDATA,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return false if the element does not have an annotation of the form `@XmlCDATA()`',
+            () {
+              expect(
+                FakeFieldElement().hasXmlCDATA,
                 isFalse,
               );
             },
