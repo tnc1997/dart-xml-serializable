@@ -69,6 +69,23 @@ extension DartObjectExtensions on DartObject {
     return null;
   }
 
+  /// Returns an [XmlCDATA] corresponding to the value of the object being represented or `null` if this object is not of type [XmlCDATA].
+  XmlCDATA? toXmlCDATAValue() {
+    final type = this.type;
+
+    if (type is InterfaceType) {
+      final element = type.element2;
+
+      if (element is ClassElement &&
+          element.library.identifier.startsWith('package:xml_annotation') &&
+          element.name == 'XmlCDATA') {
+        return XmlCDATA();
+      }
+    }
+
+    return null;
+  }
+
   /// Returns an [XmlElement] corresponding to the value of the object being represented or `null` if this object is not of type [XmlElement].
   XmlElement? toXmlElementValue() {
     final type = this.type;

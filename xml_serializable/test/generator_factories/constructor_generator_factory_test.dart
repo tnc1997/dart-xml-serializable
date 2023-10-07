@@ -7,6 +7,7 @@ import '../fake_interface_type.dart';
 import '../fake_iterable_class_element.dart';
 import '../fake_string_class_element.dart';
 import '../fake_xml_attribute_element_annotation.dart';
+import '../fake_xml_cdata_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
 import '../fake_xml_root_element_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
@@ -28,9 +29,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlAttributeConstructorGenerator) {
-            fail('Expected an XmlAttributeConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlAttributeConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -53,9 +55,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlAttributeConstructorGenerator) {
-            fail('Expected an XmlAttributeConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlAttributeConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -79,9 +82,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlAttributeConstructorGenerator) {
-            fail('Expected an XmlAttributeConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlAttributeConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -109,6 +113,48 @@ void main() {
       );
 
       test(
+        'should create an `XmlCDATAConstructorGenerator` if the field element has an `XmlCDATA` annotation',
+        () {
+          final generator = constructorGeneratorFactory(
+            FakeFieldElement(
+              metadata: [
+                FakeXmlCDATAElementAnnotation(),
+              ],
+              name: 'value',
+            ),
+          );
+
+          expect(
+            generator,
+            isA<XmlCDATAConstructorGenerator>(),
+          );
+
+          expect(
+            generator.generateConstructor('value'),
+            equals(
+              'XmlCDATA(value)',
+            ),
+          );
+        },
+      );
+
+      test(
+        'should throw an argument error if the element has an `XmlCDATA` annotation but is not a field element',
+        () {
+          expect(
+            () => constructorGeneratorFactory(
+              FakeClassElement(
+                metadata: [
+                  FakeXmlCDATAElementAnnotation(),
+                ],
+              ),
+            ),
+            throwsA(isA<ArgumentError>()),
+          );
+        },
+      );
+
+      test(
         'should create an `XmlSerializableXmlElementConstructorGenerator` with the field name if the field element has an `XmlElement` annotation without a name',
         () {
           final generator = constructorGeneratorFactory(
@@ -127,9 +173,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlSerializableXmlElementConstructorGenerator) {
-            fail('Expected an XmlSerializableXmlElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlSerializableXmlElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -161,9 +208,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlSerializableXmlElementConstructorGenerator) {
-            fail('Expected an XmlSerializableXmlElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlSerializableXmlElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -196,9 +244,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlSerializableXmlElementConstructorGenerator) {
-            fail('Expected an XmlSerializableXmlElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlSerializableXmlElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -234,9 +283,10 @@ void main() {
             ),
           );
 
-          if (generator is! IterableConstructorGenerator) {
-            fail('Expected an IterableConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<IterableConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -274,9 +324,10 @@ void main() {
             ),
           );
 
-          if (generator is! IterableConstructorGenerator) {
-            fail('Expected an IterableConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<IterableConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -315,9 +366,10 @@ void main() {
             ),
           );
 
-          if (generator is! IterableConstructorGenerator) {
-            fail('Expected an IterableConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<IterableConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -340,9 +392,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlTextXmlElementConstructorGenerator) {
-            fail('Expected an XmlTextXmlElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlTextXmlElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -365,9 +418,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlTextXmlElementConstructorGenerator) {
-            fail('Expected an XmlTextXmlElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlTextXmlElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -391,9 +445,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlTextXmlElementConstructorGenerator) {
-            fail('Expected an XmlTextXmlElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlTextXmlElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -426,9 +481,10 @@ void main() {
             ),
           );
 
-          if (generator is! IterableConstructorGenerator) {
-            fail('Expected an IterableConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<IterableConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -463,9 +519,10 @@ void main() {
             ),
           );
 
-          if (generator is! IterableConstructorGenerator) {
-            fail('Expected an IterableConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<IterableConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -501,9 +558,10 @@ void main() {
             ),
           );
 
-          if (generator is! IterableConstructorGenerator) {
-            fail('Expected an IterableConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<IterableConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -542,9 +600,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlRootElementConstructorGenerator) {
-            fail('Expected an XmlRootElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlRootElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -569,9 +628,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlRootElementConstructorGenerator) {
-            fail('Expected an XmlRootElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlRootElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -597,9 +657,10 @@ void main() {
             ),
           );
 
-          if (generator is! XmlRootElementConstructorGenerator) {
-            fail('Expected an XmlRootElementConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlRootElementConstructorGenerator>(),
+          );
 
           expect(
             generator.generateConstructor('value'),
@@ -638,9 +699,17 @@ void main() {
             ),
           );
 
-          if (generator is! XmlTextConstructorGenerator) {
-            fail('Expected an XmlTextConstructorGenerator');
-          }
+          expect(
+            generator,
+            isA<XmlTextConstructorGenerator>(),
+          );
+
+          expect(
+            generator.generateConstructor('value'),
+            equals(
+              'XmlText(value)',
+            ),
+          );
         },
       );
 

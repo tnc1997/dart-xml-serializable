@@ -10,6 +10,15 @@ extension ElementAnnotationExtensions on ElementAnnotation {
         element.enclosingElement3.name == 'XmlAttribute';
   }
 
+  /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlCDATA`.
+  bool get isXmlCDATA {
+    final element = this.element;
+
+    return element is ConstructorElement &&
+        element.library.identifier.startsWith('package:xml_annotation') &&
+        element.enclosingElement3.name == 'XmlCDATA';
+  }
+
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlElement`.
   bool get isXmlElement {
     final element = this.element;

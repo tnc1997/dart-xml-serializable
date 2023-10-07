@@ -7,6 +7,7 @@ import '../extensions/element_extensions.dart';
 import '../extensions/field_element_extensions.dart';
 import '../getter_generators/getter_generator.dart';
 import '../getter_generators/xml_attribute_getter_generator.dart';
+import '../getter_generators/xml_cdata_getter_generator.dart';
 import '../getter_generators/xml_element_getter_generator.dart';
 import '../getter_generators/xml_element_iterable_getter_generator.dart';
 import '../getter_generators/xml_text_getter_generator.dart';
@@ -24,6 +25,16 @@ GetterGenerator getterGeneratorFactory(Element element) {
         element,
         'element',
         '`@XmlAttribute()` can only be used on fields.',
+      );
+    }
+  } else if (element.hasXmlCDATA) {
+    if (element is FieldElement) {
+      return XmlCDATAGetterGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@XmlCDATA()` can only be used on fields.',
       );
     }
   } else if (element.hasXmlElement) {

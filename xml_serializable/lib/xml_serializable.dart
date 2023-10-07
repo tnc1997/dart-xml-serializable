@@ -4,6 +4,7 @@ library xml_serializable;
 export 'package:xml_serializable/src/builder_generators/builder_generator.dart';
 export 'package:xml_serializable/src/builder_generators/iterable_builder_generator.dart';
 export 'package:xml_serializable/src/builder_generators/xml_attribute_builder_generator.dart';
+export 'package:xml_serializable/src/builder_generators/xml_cdata_builder_generator.dart';
 export 'package:xml_serializable/src/builder_generators/xml_root_element_builder_generator.dart';
 export 'package:xml_serializable/src/builder_generators/xml_serializable_xml_element_builder_generator.dart';
 export 'package:xml_serializable/src/builder_generators/xml_text_builder_generator.dart';
@@ -11,6 +12,7 @@ export 'package:xml_serializable/src/builder_generators/xml_text_xml_element_bui
 export 'package:xml_serializable/src/constructor_generators/constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/iterable_constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/xml_attribute_constructor_generator.dart';
+export 'package:xml_serializable/src/constructor_generators/xml_cdata_constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/xml_root_element_constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/xml_serializable_xml_element_constructor_generator.dart';
 export 'package:xml_serializable/src/constructor_generators/xml_text_constructor_generator.dart';
@@ -28,6 +30,7 @@ export 'package:xml_serializable/src/generator_factories/getter_generator_factor
 export 'package:xml_serializable/src/generator_factories/serializer_generator_factory.dart';
 export 'package:xml_serializable/src/getter_generators/getter_generator.dart';
 export 'package:xml_serializable/src/getter_generators/xml_attribute_getter_generator.dart';
+export 'package:xml_serializable/src/getter_generators/xml_cdata_getter_generator.dart';
 export 'package:xml_serializable/src/getter_generators/xml_element_getter_generator.dart';
 export 'package:xml_serializable/src/getter_generators/xml_element_iterable_getter_generator.dart';
 export 'package:xml_serializable/src/getter_generators/xml_text_getter_generator.dart';
@@ -45,6 +48,7 @@ export 'package:xml_serializable/src/serializer_generators/string_serializer_gen
 export 'package:xml_serializable/src/serializer_generators/stringable_serializer_generator.dart';
 export 'package:xml_serializable/src/serializer_generators/uri_serializer_generator.dart';
 export 'package:xml_serializable/src/type_checkers/xml_attribute_type_checker.dart';
+export 'package:xml_serializable/src/type_checkers/xml_cdata_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_element_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_root_element_type_checker.dart';
 export 'package:xml_serializable/src/type_checkers/xml_serializable_type_checker.dart';
