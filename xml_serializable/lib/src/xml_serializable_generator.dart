@@ -353,6 +353,20 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }) {
     type ??= element.type;
 
+    // TODO: Add support for classes that have an annotation that implements `@XmlConverter()`.
+    for (final element in element.metadata.map((e) => e.element)) {
+      if (element is ConstructorElement) {
+        for (final supertype in element.enclosingElement3.allSupertypes) {
+          if (supertype.element2.library.identifier.startsWith('package:xml_annotation') && supertype.element2.name == 'XmlConverter' && supertype.typeArguments[0].element2 == type.element2) {
+            return _XmlConverterSerializerGenerator(
+              element.enclosingElement3.name,
+              isNullable: type.isNullable,
+            );
+          }
+        }
+      }
+    }
+
     if (type is InterfaceType && type.element2.hasXmlSerializable) {
       for (final element in element.library.topLevelElements) {
         if (element == type.element2) {
@@ -402,9 +416,57 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         ),
         isNullable: type.isNullable,
       );
-    } else {
-      return _serializerGeneratorFactory(type);
     }
+
+    return _serializerGeneratorFactory(type);
+  }
+}
+
+/// Defines methods for generating serializers and deserializers for classes or fields that have an annotation that implements `@XmlConverter()`.
+class _XmlConverterSerializerGenerator extends SerializerGenerator {
+  /// If `false` (the default) then the type does not represent a nullable type.
+  final bool _isNullable;
+
+  /// The name of the converter (including the prefix where applicable).
+  final String _name;
+
+  const _XmlConverterSerializerGenerator(
+    this._name, {
+    bool isNullable = false,
+  }) : _isNullable = isNullable;
+
+  @override
+  String generateSerializer(String expression) {
+    final buffer = StringBuffer();
+
+    if (_isNullable) {
+      buffer.write('$expression != null ? ');
+    }
+
+    buffer.write('const $_name().toXml($expression)');
+
+    if (_isNullable) {
+      buffer.write(' : null');
+    }
+
+    return buffer.toString();
+  }
+
+  @override
+  String generateDeserializer(String expression) {
+    final buffer = StringBuffer();
+
+    if (_isNullable) {
+      buffer.write('$expression != null ? ');
+    }
+
+    buffer.write('const $_name().fromXml($expression)');
+
+    if (_isNullable) {
+      buffer.write(' : null');
+    }
+
+    return buffer.toString();
   }
 }
 

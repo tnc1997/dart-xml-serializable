@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:xml/xml.dart';
 import 'package:xml_annotation/xml_annotation.dart' as annotation;
 
@@ -8,13 +11,13 @@ void main() {
     '''<?xml version="1.0"?>
     <bookshelf>
       <book>
-        <title lang="English">XML Pocket Reference</title>
+        <title lang="English">WE1MIFBvY2tldCBSZWZlcmVuY2U=</title>
         <author>Simon St. Laurent</author>
         <author>Michael James Fitzgerald</author>
         <price></price>
       </book>
       <book>
-        <title lang="English">HTML and XHTML Pocket Reference</title>
+        <title lang="English">SFRNTCBhbmQgWEhUTUwgUG9ja2V0IFJlZmVyZW5jZQ==</title>
         <author>Jennifer Niederst Robbins</author>
         <price></price>
       </book>
@@ -182,7 +185,8 @@ class Title {
   Language? language;
 
   @annotation.XmlText()
-  String? text;
+  @Base64BinaryConverter()
+  Uint8List? text;
 
   Title({
     this.language,
@@ -240,4 +244,14 @@ class Title {
         this,
         namespaces: namespaces,
       );
+}
+
+class Base64BinaryConverter implements annotation.XmlConverter<Uint8List> {
+  const Base64BinaryConverter();
+
+  @override
+  Uint8List fromXml(String value) => base64.decode(value);
+
+  @override
+  String toXml(Uint8List object) => base64.encode(object);
 }
