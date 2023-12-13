@@ -159,7 +159,7 @@ void main() {
               expect(
                 FakeDartObject(
                   type: FakeInterfaceType(
-                    element2: FakeFieldRenameEnumElement(),
+                    element: FakeFieldRenameEnumElement(),
                   ),
                 ).toFieldRenameValue(),
                 isNull,

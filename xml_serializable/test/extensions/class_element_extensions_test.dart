@@ -53,7 +53,7 @@ void main() {
                 FakeClassElement(
                   allSupertypes: [
                     FakeInterfaceType(
-                      element2: FakeClassElement(
+                      element: FakeClassElement(
                         fields: superclass1Fields,
                       ),
                     ),
@@ -94,7 +94,7 @@ void main() {
                   fields: fields,
                   allSupertypes: [
                     FakeInterfaceType(
-                      element2: FakeClassElement(
+                      element: FakeClassElement(
                         fields: superclass1Fields,
                       ),
                     ),
@@ -135,12 +135,12 @@ void main() {
                 FakeClassElement(
                   allSupertypes: [
                     FakeInterfaceType(
-                      element2: FakeClassElement(
+                      element: FakeClassElement(
                         fields: superclass1Fields,
                       ),
                     ),
                     FakeInterfaceType(
-                      element2: FakeClassElement(
+                      element: FakeClassElement(
                         fields: superclass2Fields,
                       ),
                     ),
@@ -191,12 +191,12 @@ void main() {
                   fields: fields,
                   allSupertypes: [
                     FakeInterfaceType(
-                      element2: FakeClassElement(
+                      element: FakeClassElement(
                         fields: superclass1Fields,
                       ),
                     ),
                     FakeInterfaceType(
-                      element2: FakeClassElement(
+                      element: FakeClassElement(
                         fields: superclass2Fields,
                       ),
                     ),

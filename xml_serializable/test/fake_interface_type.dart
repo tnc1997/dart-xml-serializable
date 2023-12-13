@@ -10,8 +10,8 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   final List<InterfaceType> allSupertypes;
 
   @override
-  InterfaceElement get element2 =>
-      _element2 ??
+  InterfaceElement get element =>
+      _element ??
       FakeClassElement(
         thisType: this,
       );
@@ -59,22 +59,16 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   final bool isDartCoreSymbol;
 
   @override
-  final bool isDynamic;
-
-  @override
-  final bool isVoid;
-
-  @override
   final NullabilitySuffix nullabilitySuffix;
 
   @override
   final List<DartType> typeArguments;
 
-  final InterfaceElement? _element2;
+  final InterfaceElement? _element;
 
   FakeInterfaceType({
     List<InterfaceType>? allSupertypes,
-    InterfaceElement? element2,
+    InterfaceElement? element,
     bool? isDartCoreBool,
     bool? isDartCoreDouble,
     bool? isDartCoreEnum,
@@ -89,8 +83,6 @@ class FakeInterfaceType extends Fake implements InterfaceType {
     bool? isDartCoreSet,
     bool? isDartCoreString,
     bool? isDartCoreSymbol,
-    bool? isDynamic,
-    bool? isVoid,
     NullabilitySuffix? nullabilitySuffix,
     List<DartType>? typeArguments,
   })  : allSupertypes = allSupertypes ?? [],
@@ -108,9 +100,7 @@ class FakeInterfaceType extends Fake implements InterfaceType {
         isDartCoreSet = isDartCoreSet ?? false,
         isDartCoreString = isDartCoreString ?? false,
         isDartCoreSymbol = isDartCoreSymbol ?? false,
-        isDynamic = isDynamic ?? false,
-        isVoid = isVoid ?? false,
         nullabilitySuffix = nullabilitySuffix ?? NullabilitySuffix.none,
         typeArguments = typeArguments ?? [],
-        _element2 = element2;
+        _element = element;
 }

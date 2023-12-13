@@ -33,7 +33,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is EnumElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -54,7 +54,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -74,7 +74,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -91,7 +91,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -113,7 +113,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -132,7 +132,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -153,7 +153,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -173,7 +173,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&
@@ -190,7 +190,7 @@ extension DartObjectExtensions on DartObject {
     final type = this.type;
 
     if (type is InterfaceType) {
-      final element = type.element2;
+      final element = type.element;
 
       if (element is ClassElement &&
           element.library.identifier.startsWith('package:xml_annotation') &&

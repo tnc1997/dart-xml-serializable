@@ -45,7 +45,7 @@ SerializerGenerator serializerGeneratorFactory(DartType type) {
     return DoubleSerializerGenerator(isNullable: type.isNullable);
   } else if (type.isDartCoreDuration) {
     return DurationSerializerGenerator(isNullable: type.isNullable);
-  } else if (type.isDynamic) {
+  } else if (type is DynamicType) {
     return const DynamicSerializerGenerator();
   } else if (type.isDartCoreInt) {
     return IntSerializerGenerator(isNullable: type.isNullable);
@@ -55,9 +55,9 @@ SerializerGenerator serializerGeneratorFactory(DartType type) {
     return const StringSerializerGenerator();
   } else if (type.isDartCoreUri) {
     return UriSerializerGenerator(isNullable: type.isNullable);
-  } else if (type is InterfaceType && type.element2 is EnumElement) {
+  } else if (type is InterfaceType && type.element is EnumElement) {
     return EnumSerializerGenerator(
-      type.element2.name,
+      type.element.name,
       isNullable: type.isNullable,
     );
   }
