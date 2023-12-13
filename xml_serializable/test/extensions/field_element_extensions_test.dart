@@ -20,7 +20,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableElementAnnotation(
                         fieldRename: FieldRename.kebab,
@@ -39,7 +39,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableElementAnnotation(
                         fieldRename: FieldRename.snake,
@@ -58,7 +58,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableElementAnnotation(
                         fieldRename: FieldRename.pascal,
@@ -77,7 +77,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableElementAnnotation(
                         fieldRename: FieldRename.none,
@@ -96,7 +96,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableElementAnnotation(),
                     ],
@@ -125,7 +125,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
+                  enclosingElement: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumElementAnnotation(
                         fieldRename: FieldRename.kebab,
@@ -144,7 +144,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
+                  enclosingElement: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumElementAnnotation(
                         fieldRename: FieldRename.snake,
@@ -163,7 +163,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
+                  enclosingElement: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumElementAnnotation(
                         fieldRename: FieldRename.pascal,
@@ -182,7 +182,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
+                  enclosingElement: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumElementAnnotation(
                         fieldRename: FieldRename.none,
@@ -201,7 +201,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
+                  enclosingElement: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumElementAnnotation(),
                     ],

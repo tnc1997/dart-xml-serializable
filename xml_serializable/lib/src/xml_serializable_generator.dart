@@ -353,9 +353,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }) {
     type ??= element.type;
 
-    if (type is InterfaceType && type.element2.hasXmlSerializable) {
+    if (type is InterfaceType && type.element.hasXmlSerializable) {
       for (final element in element.library.topLevelElements) {
-        if (element == type.element2) {
+        if (element == type.element) {
           return _XmlSerializableSerializerGenerator(
             element.name!,
             isNullable: type.isNullable,
@@ -365,7 +365,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
       for (final import in element.library.libraryImports) {
         for (final entry in import.namespace.definedNames.entries) {
-          if (entry.value == type.element2) {
+          if (entry.value == type.element) {
             return _XmlSerializableSerializerGenerator(
               entry.key,
               isNullable: type.isNullable,
@@ -375,7 +375,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       }
 
       return _XmlSerializableSerializerGenerator(
-        type.element2.name,
+        type.element.name,
         isNullable: type.isNullable,
       );
     } else if (type is ParameterizedType && type.isDartCoreIterable) {

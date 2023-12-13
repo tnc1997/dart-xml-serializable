@@ -7,7 +7,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlAttribute';
+        element.enclosingElement.name == 'XmlAttribute';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlCDATA`.
@@ -16,7 +16,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlCDATA';
+        element.enclosingElement.name == 'XmlCDATA';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlElement`.
@@ -25,7 +25,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlElement';
+        element.enclosingElement.name == 'XmlElement';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlEnum`.
@@ -34,7 +34,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlEnum';
+        element.enclosingElement.name == 'XmlEnum';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlRootElement`.
@@ -43,7 +43,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlRootElement';
+        element.enclosingElement.name == 'XmlRootElement';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable using `xml_serializable`.
@@ -52,7 +52,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlSerializable';
+        element.enclosingElement.name == 'XmlSerializable';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlText`.
@@ -61,7 +61,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlText';
+        element.enclosingElement.name == 'XmlText';
   }
 
   /// Returns `true` if this annotation marks the associated member as being serializable as an `XmlValue`.
@@ -70,6 +70,6 @@ extension ElementAnnotationExtensions on ElementAnnotation {
 
     return element is ConstructorElement &&
         element.library.identifier.startsWith('package:xml_annotation') &&
-        element.enclosingElement3.name == 'XmlValue';
+        element.enclosingElement.name == 'XmlValue';
   }
 }

@@ -105,7 +105,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     final typeArgument = (type as ParameterizedType).typeArguments.single;
 
     return IterableConstructorGenerator(
-      typeArgument.element2!.hasXmlSerializable
+      typeArgument.element!.hasXmlSerializable
           ? XmlSerializableXmlElementConstructorGenerator(
               xmlElement.name ?? element.getEncodedFieldName(),
               namespace: xmlElement.namespace,
@@ -123,7 +123,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
       isNullable: type.isNullable,
     );
   } else {
-    return type.element2!.hasXmlSerializable
+    return type.element!.hasXmlSerializable
         ? XmlSerializableXmlElementConstructorGenerator(
             xmlElement.name ?? element.getEncodedFieldName(),
             namespace: xmlElement.namespace,

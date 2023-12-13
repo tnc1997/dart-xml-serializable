@@ -5,13 +5,13 @@ import 'fake_library_element.dart';
 
 class FakeConstructorElement extends Fake implements ConstructorElement {
   @override
-  final InterfaceElement enclosingElement3;
+  final InterfaceElement enclosingElement;
 
   @override
   final LibraryElement library;
 
   FakeConstructorElement({
-    required this.enclosingElement3,
+    required this.enclosingElement,
     LibraryElement? library,
   }) : library = library ?? FakeLibraryElement();
 }

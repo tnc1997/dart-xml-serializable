@@ -9,7 +9,7 @@ import 'fake_library_element.dart';
 class FakeXmlCDATADartObject extends Fake implements DartObject {
   @override
   final DartType type = FakeInterfaceType(
-    element2: FakeClassElement(
+    element: FakeClassElement(
       library: FakeLibraryElement(
         identifier: 'package:xml_annotation/src/annotations/xml_cdata.dart',
       ),
