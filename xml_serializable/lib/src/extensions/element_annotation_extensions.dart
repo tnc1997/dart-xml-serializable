@@ -72,4 +72,13 @@ extension ElementAnnotationExtensions on ElementAnnotation {
         element.library.identifier.startsWith('package:xml_annotation') &&
         element.enclosingElement.name == 'XmlValue';
   }
+
+    /// Returns `true` if this annotation marks the associated member as being serializable as an `InnerXml`.
+  bool get isInnerXml {
+    final element = this.element;
+
+    return element is ConstructorElement &&
+        element.library.identifier.startsWith('package:xml_annotation') &&
+        element.enclosingElement.name == 'InnerXml';
+  }
 }

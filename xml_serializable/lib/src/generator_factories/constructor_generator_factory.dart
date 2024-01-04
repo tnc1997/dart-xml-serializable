@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:xml_serializable/src/constructor_generators/inner_xml_constructor_generator.dart';
 
 import '../constructor_generators/constructor_generator.dart';
 import '../constructor_generators/iterable_constructor_generator.dart';
@@ -69,6 +70,16 @@ ConstructorGenerator constructorGeneratorFactory(Element element) {
         element,
         'element',
         '`@XmlText()` can only be used on fields.',
+      );
+    }
+  } else if (element.hasInnerXml) {
+    if (element is FieldElement) {
+      return InnerXmlConstructorGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@InnerXml()` can only be used on fields.',
       );
     }
   }

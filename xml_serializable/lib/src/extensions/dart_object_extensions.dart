@@ -185,6 +185,23 @@ extension DartObjectExtensions on DartObject {
     return null;
   }
 
+    /// Returns an [InnerXml] corresponding to the value of the object being represented or `null` if this object is not of type [InnerXml].
+  InnerXml? toInnerXmlValue() {
+    final type = this.type;
+
+    if (type is InterfaceType) {
+      final element = type.element;
+
+      if (element is ClassElement &&
+          element.library.identifier.startsWith('package:xml_annotation') &&
+          element.name == 'InnerXml') {
+        return InnerXml();
+      }
+    }
+
+    return null;
+  }
+
   /// Returns an [XmlValue] corresponding to the value of the object being represented or `null` if this object is not of type [XmlValue].
   XmlValue? toXmlValueValue() {
     final type = this.type;

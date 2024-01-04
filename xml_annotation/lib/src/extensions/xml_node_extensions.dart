@@ -5,7 +5,8 @@ extension XmlNodeExtensions on XmlNode {
   @Deprecated(
     'Use findAllElements(name, namespace: namespace).map((e) => e.getCDATA()).whereType<String>() instead.',
   )
-  Iterable<String> findAllElementsCDATA(String name, {String? namespace}) sync* {
+  Iterable<String> findAllElementsCDATA(String name,
+      {String? namespace}) sync* {
     for (final element in findAllElements(name, namespace: namespace)) {
       final cdata = element.getCDATA();
       if (cdata != null) yield cdata;
@@ -76,6 +77,12 @@ extension XmlNodeExtensions on XmlNode {
   /// Gets the text or `null` if there are no `XmlText` children.
   String? getText() {
     final texts = children.whereType<XmlText>().map((e) => e.value);
+    return texts.isNotEmpty ? texts.join() : null;
+  }
+
+  /// Gets the text or `null` if there are no `InnerXml` children.
+  String? getInnerXml() {
+    final texts = children.map((e) => e.toXmlString());
     return texts.isNotEmpty ? texts.join() : null;
   }
 }

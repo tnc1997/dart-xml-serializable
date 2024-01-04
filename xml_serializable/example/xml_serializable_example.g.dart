@@ -192,7 +192,7 @@ void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
   final text = instance.text;
   final textSerialized = text;
   if (textSerialized != null) {
-    builder.text(textSerialized);
+    builder.xml(textSerialized);
   }
 }
 
@@ -205,7 +205,7 @@ void _$TitleBuildXmlElement(Title instance, XmlBuilder builder,
 
 Title _$TitleFromXmlElement(XmlElement element) {
   final language = element.getAttribute('lang');
-  final text = element.getText();
+  final text = element.getInnerXml();
   return Title(
       language: language != null
           ? $LanguageEnumMap.entries
@@ -239,9 +239,11 @@ List<XmlNode> _$TitleToXmlChildren(Title instance,
   final children = <XmlNode>[];
   final text = instance.text;
   final textSerialized = text;
-  final textConstructed =
-      textSerialized != null ? XmlText(textSerialized) : null;
+  final textConstructed = textSerialized != null
+      ? XmlDocument.parse(textSerialized).rootElement
+      : null;
   if (textConstructed != null) {
+    textConstructed.detachParent(textConstructed.parent!);
     children.add(textConstructed);
   }
   return children;

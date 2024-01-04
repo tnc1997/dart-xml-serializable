@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:xml_serializable/src/getter_generators/inner_xml_getter_generator.dart';
 
 import '../extensions/dart_object_extensions.dart';
 import '../extensions/dart_type_extensions.dart';
@@ -55,6 +56,16 @@ GetterGenerator getterGeneratorFactory(Element element) {
         element,
         'element',
         '`@XmlText()` can only be used on fields.',
+      );
+    }
+  } else if (element.hasInnerXml) {
+    if (element is FieldElement) {
+      return InnerXmlGetterGenerator(isNullable: element.type.isNullable);
+    } else {
+      throw ArgumentError.value(
+        element,
+        'element',
+        '`@InnerXml()` can only be used on fields.',
       );
     }
   }

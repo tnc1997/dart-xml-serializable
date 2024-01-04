@@ -120,7 +120,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       if (element.hasXmlAttribute ||
           element.hasXmlCDATA ||
           element.hasXmlElement ||
-          element.hasXmlText) {
+          element.hasXmlText ||
+          element.hasInnerXml) {
         buffer.writeln(
           'final ${element.name} = instance.${element.name};',
         );
@@ -157,7 +158,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       if (element.hasXmlAttribute ||
           element.hasXmlCDATA ||
           element.hasXmlElement ||
-          element.hasXmlText) {
+          element.hasXmlText ||
+          element.hasInnerXml) {
         buffer.writeln(
           'final ${element.name} = ${_getterGeneratorFactory(element).generateGetter('element')};',
         );
@@ -266,7 +268,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     buffer.writeln('final children = <XmlNode>[];');
 
     for (final element in element.allFields) {
-      if (element.hasXmlCDATA || element.hasXmlElement || element.hasXmlText) {
+      if (element.hasXmlCDATA ||
+          element.hasXmlElement ||
+          element.hasXmlText ||
+          element.hasInnerXml) {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
@@ -284,8 +289,16 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         if (element.type.isDartCoreIterable ||
             element.type.isDartCoreList ||
             element.type.isDartCoreSet) {
+          if (element.hasInnerXml) {
+            buffer.write(
+                '${element.name}Constructed.forEach((e) => e.detachParent(e.parent!));');
+          }
           buffer.write('children.addAll(${element.name}Constructed);');
         } else {
+          if (element.hasInnerXml) {
+            buffer.write(
+                '${element.name}Constructed.detachParent(${element.name}Constructed.parent!);');
+          }
           buffer.write('children.add(${element.name}Constructed);');
         }
 

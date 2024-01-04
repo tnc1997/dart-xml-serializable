@@ -8,13 +8,13 @@ void main() {
     '''<?xml version="1.0"?>
     <bookshelf>
       <book>
-        <title lang="English">XML Pocket Reference</title>
+        <title lang="English"><RandomUnknownTag>XML Pocket Reference</RandomUnknownTag></title>
         <author>Simon St. Laurent</author>
         <author>Michael James Fitzgerald</author>
         <price></price>
       </book>
       <book>
-        <title lang="English">HTML and XHTML Pocket Reference</title>
+        <title lang="English"><Thomas>HTML and XHTML Pocket Reference</Thomas></title>
         <author>Jennifer Niederst Robbins</author>
         <price></price>
       </book>
@@ -181,7 +181,7 @@ class Title {
   @annotation.XmlAttribute(name: 'lang')
   Language? language;
 
-  @annotation.XmlText()
+  @annotation.InnerXml()
   String? text;
 
   Title({

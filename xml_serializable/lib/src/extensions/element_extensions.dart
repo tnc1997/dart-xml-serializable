@@ -59,4 +59,8 @@ extension ElementExtensions on Element {
 
   /// Returns `true` if this element has an annotation of the form `@XmlValue()`.
   bool get hasXmlValue => metadata.any((e) => e.isXmlValue);
+
+
+  /// Returns `true` if this element has an annotation of the form `@InnerXml()`.
+  bool get hasInnerXml => metadata.any((e) => e.isInnerXml);
 }
