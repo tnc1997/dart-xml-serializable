@@ -9,7 +9,7 @@ import 'fake_interface_type.dart';
 class FakeFieldRenameDartObject extends Fake implements DartObject {
   @override
   final DartType type = FakeInterfaceType(
-    element2: FakeFieldRenameEnumElement(),
+    element: FakeFieldRenameEnumElement(),
   );
 
   final int? _index;

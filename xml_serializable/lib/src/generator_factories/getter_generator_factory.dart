@@ -86,7 +86,7 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
   if (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet) {
     final typeArgument = (type as ParameterizedType).typeArguments.single;
 
-    return typeArgument.element2!.hasXmlSerializable
+    return typeArgument.element!.hasXmlSerializable
         ? XmlSerializableXmlElementIterableGetterGenerator(
             xmlElement.name ?? element.getEncodedFieldName(),
             namespace: xmlElement.namespace,
@@ -98,7 +98,7 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
             isNullable: type.isNullable,
           );
   } else {
-    return type.element2!.hasXmlSerializable
+    return type.element!.hasXmlSerializable
         ? XmlSerializableXmlElementGetterGenerator(
             xmlElement.name ?? element.getEncodedFieldName(),
             namespace: xmlElement.namespace,

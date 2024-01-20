@@ -4,7 +4,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_date_time_class_element.dart';
 import '../fake_duration_class_element.dart';
-import '../fake_dynamic_class_element.dart';
+import '../fake_dynamic_type.dart';
 import '../fake_interface_type.dart';
 import '../fake_string_class_element.dart';
 import '../fake_uri_class_element.dart';
@@ -21,7 +21,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element2: FakeStringClassElement(),
+                  element: FakeStringClassElement(),
                   isDartCoreString: true,
                 ).isDartCore,
                 isTrue,
@@ -49,7 +49,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element2: FakeDateTimeClassElement(),
+                  element: FakeDateTimeClassElement(),
                 ).isDartCoreDateTime,
                 isTrue,
               );
@@ -76,7 +76,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element2: FakeDurationClassElement(),
+                  element: FakeDurationClassElement(),
                 ).isDartCoreDuration,
                 isTrue,
               );
@@ -103,7 +103,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  element2: FakeUriClassElement(),
+                  element: FakeUriClassElement(),
                 ).isDartCoreUri,
                 isTrue,
               );
@@ -129,10 +129,7 @@ void main() {
             'should return true if the type is dynamic',
             () {
               expect(
-                FakeInterfaceType(
-                  element2: FakeDynamicClassElement(),
-                  isDynamic: true,
-                ).isNullable,
+                FakeDynamicType().isNullable,
                 isTrue,
               );
             },

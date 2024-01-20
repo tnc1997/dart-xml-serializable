@@ -19,7 +19,7 @@ class FakeEnumElement extends Fake implements EnumElement {
   final String name;
 
   @override
-  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element2: this);
+  InterfaceType get thisType => _thisType ?? FakeInterfaceType(element: this);
 
   final InterfaceType? _thisType;
 

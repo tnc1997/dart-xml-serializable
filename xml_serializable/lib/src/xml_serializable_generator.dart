@@ -356,10 +356,10 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     // TODO: Add support for classes that have an annotation that implements `@XmlConverter()`.
     for (final element in element.metadata.map((e) => e.element)) {
       if (element is ConstructorElement) {
-        for (final supertype in element.enclosingElement3.allSupertypes) {
-          if (supertype.element2.library.identifier.startsWith('package:xml_annotation') && supertype.element2.name == 'XmlConverter' && supertype.typeArguments[0].element2 == type.element2) {
+        for (final supertype in element.enclosingElement.allSupertypes) {
+          if (supertype.element.library.identifier.startsWith('package:xml_annotation') && supertype.element.name == 'XmlConverter' && supertype.typeArguments[0].element == type.element) {
             return _XmlConverterSerializerGenerator(
-              element.enclosingElement3.name,
+              element.enclosingElement.name,
               isNullable: type.isNullable,
             );
           }
@@ -367,9 +367,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       }
     }
 
-    if (type is InterfaceType && type.element2.hasXmlSerializable) {
+    if (type is InterfaceType && type.element.hasXmlSerializable) {
       for (final element in element.library.topLevelElements) {
-        if (element == type.element2) {
+        if (element == type.element) {
           return _XmlSerializableSerializerGenerator(
             element.name!,
             isNullable: type.isNullable,
@@ -379,7 +379,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
       for (final import in element.library.libraryImports) {
         for (final entry in import.namespace.definedNames.entries) {
-          if (entry.value == type.element2) {
+          if (entry.value == type.element) {
             return _XmlSerializableSerializerGenerator(
               entry.key,
               isNullable: type.isNullable,
@@ -389,7 +389,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       }
 
       return _XmlSerializableSerializerGenerator(
-        type.element2.name,
+        type.element.name,
         isNullable: type.isNullable,
       );
     } else if (type is ParameterizedType && type.isDartCoreIterable) {

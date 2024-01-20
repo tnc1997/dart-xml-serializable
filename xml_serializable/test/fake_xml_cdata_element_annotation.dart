@@ -8,7 +8,7 @@ class FakeXmlCDATAElementAnnotation extends FakeElementAnnotation {
   FakeXmlCDATAElementAnnotation()
       : super(
           element: FakeConstructorElement(
-            enclosingElement3: FakeClassElement(
+            enclosingElement: FakeClassElement(
               library: FakeLibraryElement(
                 identifier:
                     'package:xml_annotation/src/annotations/xml_cdata.dart',

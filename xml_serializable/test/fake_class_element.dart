@@ -25,7 +25,7 @@ class FakeClassElement extends Fake implements ClassElement {
   InterfaceType get thisType =>
       _thisType ??
       FakeInterfaceType(
-        element2: this,
+        element: this,
       );
 
   final InterfaceType? _thisType;
