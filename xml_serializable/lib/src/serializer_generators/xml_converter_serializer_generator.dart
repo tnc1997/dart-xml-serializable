@@ -1,16 +1,14 @@
-import 'package:recase/recase.dart';
-
 import 'serializer_generator.dart';
 
-class EnumSerializerGenerator extends SerializerGenerator {
-  /// The name of the type.
-  final String _type;
+class XmlConverterSerializerGenerator extends SerializerGenerator {
+  /// The name of the converter.
+  final String _converter;
 
   /// If `false` (the default) then the type does not represent a nullable type.
   final bool _isNullable;
 
-  const EnumSerializerGenerator(
-    this._type, {
+  const XmlConverterSerializerGenerator(
+    this._converter, {
     bool isNullable = false,
   }) : _isNullable = isNullable;
 
@@ -22,7 +20,7 @@ class EnumSerializerGenerator extends SerializerGenerator {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write('\$${_type}EnumMap[$expression]!');
+    buffer.write('const $_converter().toXml($expression)');
 
     if (_isNullable) {
       buffer.write(' : null');
@@ -39,9 +37,7 @@ class EnumSerializerGenerator extends SerializerGenerator {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write(
-      '\$${_type}EnumMap.entries.singleWhere((${_type.camelCase}EnumMapEntry) => ${_type.camelCase}EnumMapEntry.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${\$${_type}EnumMap.values.join(\', \')}\')).key',
-    );
+    buffer.write('const $_converter().fromXml($expression)');
 
     if (_isNullable) {
       buffer.write(' : null');
@@ -51,7 +47,12 @@ class EnumSerializerGenerator extends SerializerGenerator {
   }
 }
 
-class NullableEnumSerializerGenerator extends EnumSerializerGenerator {
-  const NullableEnumSerializerGenerator(String name)
-      : super(name, isNullable: true);
+class NullableXmlConverterSerializerGenerator
+    extends XmlConverterSerializerGenerator {
+  const NullableXmlConverterSerializerGenerator(
+    String converter,
+  ) : super(
+          converter,
+          isNullable: true,
+        );
 }

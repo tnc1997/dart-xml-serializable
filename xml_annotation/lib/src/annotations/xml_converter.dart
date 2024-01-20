@@ -5,12 +5,12 @@
 /// An implementation to convert a [base64Binary](https://www.w3.org/TR/xmlschema-2/#base64Binary) value to and from a [Uint8List] could be as simple as:
 ///
 /// ```dart
-/// class Base64BinaryConverter extends XmlConverter<Uint8List> {
+/// class Base64BinaryConverter implements XmlConverter<Uint8List> {
 ///   @override
 ///   Uint8List fromXml(String value) => base64.decode(value);
 ///
 ///   @override
-///   String toXml(Uint8List object) => base64.encode(object);
+///   String toXml(Uint8List instance) => base64.encode(instance);
 /// }
 /// ```
 ///
@@ -21,7 +21,7 @@
 /// @XmlSerializable()
 /// class Example {
 ///   @XmlText()
-///   Uint8List text;
+///   Uint8List? text;
 /// }
 /// ```
 ///
@@ -32,7 +32,7 @@
 /// class Example {
 ///   @Base64BinaryConverter()
 ///   @XmlText()
-///   Uint8List text;
+///   Uint8List? text;
 /// }
 /// ```
 abstract class XmlConverter<T> {
@@ -40,5 +40,5 @@ abstract class XmlConverter<T> {
 
   T fromXml(String value);
 
-  String toXml(T object);
+  String toXml(T instance);
 }

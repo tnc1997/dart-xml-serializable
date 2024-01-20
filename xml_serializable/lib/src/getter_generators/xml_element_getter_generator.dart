@@ -1,6 +1,6 @@
 import 'getter_generator.dart';
 
-class XmlSerializableXmlElementGetterGenerator extends GetterGenerator {
+abstract class XmlElementGetterGenerator extends GetterGenerator {
   /// The name of the element.
   final String _name;
 
@@ -10,7 +10,7 @@ class XmlSerializableXmlElementGetterGenerator extends GetterGenerator {
   /// If `false` (the default) then the type does not represent a nullable type.
   final bool _isNullable;
 
-  const XmlSerializableXmlElementGetterGenerator(
+  const XmlElementGetterGenerator(
     this._name, {
     String? namespace,
     bool isNullable = false,
@@ -35,58 +35,4 @@ class XmlSerializableXmlElementGetterGenerator extends GetterGenerator {
 
     return buffer.toString();
   }
-}
-
-class NullableXmlSerializableXmlElementGetterGenerator
-    extends XmlSerializableXmlElementGetterGenerator {
-  const NullableXmlSerializableXmlElementGetterGenerator(
-    String name, {
-    String? namespace,
-  }) : super(
-          name,
-          namespace: namespace,
-          isNullable: true,
-        );
-}
-
-class XmlTextXmlElementGetterGenerator
-    extends XmlSerializableXmlElementGetterGenerator {
-  const XmlTextXmlElementGetterGenerator(
-    String name, {
-    String? namespace,
-    bool isNullable = false,
-  }) : super(
-          name,
-          namespace: namespace,
-          isNullable: isNullable,
-        );
-
-  @override
-  String generateGetter(String expression) {
-    final buffer = StringBuffer(super.generateGetter(expression));
-
-    if (_isNullable) {
-      buffer.write('?');
-    }
-
-    buffer.write('.getText()');
-
-    if (!_isNullable) {
-      buffer.write('!');
-    }
-
-    return buffer.toString();
-  }
-}
-
-class NullableXmlTextXmlElementGetterGenerator
-    extends XmlTextXmlElementGetterGenerator {
-  const NullableXmlTextXmlElementGetterGenerator(
-    String name, {
-    String? namespace,
-  }) : super(
-          name,
-          namespace: namespace,
-          isNullable: true,
-        );
 }

@@ -14,6 +14,9 @@ import 'generator_factories/getter_generator_factory.dart';
 import 'generator_factories/serializer_generator_factory.dart';
 import 'serializer_generators/iterable_serializer_generator.dart';
 import 'serializer_generators/serializer_generator.dart';
+import 'serializer_generators/xml_converter_serializer_generator.dart';
+import 'serializer_generators/xml_element_converter_xml_element_serializer_generator.dart';
+import 'serializer_generators/xml_serializable_xml_element_serializer_generator.dart';
 
 class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   final BuilderGeneratorFactory _builderGeneratorFactory;
@@ -353,13 +356,20 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }) {
     type ??= element.type;
 
-    // TODO: Add support for classes that have an annotation that implements `@XmlConverter()`.
-    for (final element in element.metadata.map((e) => e.element)) {
-      if (element is ConstructorElement) {
-        for (final supertype in element.enclosingElement.allSupertypes) {
-          if (supertype.element.library.identifier.startsWith('package:xml_annotation') && supertype.element.name == 'XmlConverter' && supertype.typeArguments[0].element == type.element) {
-            return _XmlConverterSerializerGenerator(
-              element.enclosingElement.name,
+    for (final element1 in [
+      ...element.metadata.map((e) => e.element),
+      ...element.enclosingElement.metadata.map((e) => e.element)
+    ]) {
+      if (element1 is ConstructorElement) {
+        for (final supertype in element1.enclosingElement.allSupertypes) {
+          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
+            return XmlElementConverterXmlElementSerializerGenerator(
+              element1.enclosingElement.name,
+              isNullable: type.isNullable,
+            );
+          } else if (supertype.isXmlAnnotationXmlConverterForType(type)) {
+            return XmlConverterSerializerGenerator(
+              element1.enclosingElement.name,
               isNullable: type.isNullable,
             );
           }
@@ -370,7 +380,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     if (type is InterfaceType && type.element.hasXmlSerializable) {
       for (final element in element.library.topLevelElements) {
         if (element == type.element) {
-          return _XmlSerializableSerializerGenerator(
+          return XmlSerializableXmlElementSerializerGenerator(
             element.name!,
             isNullable: type.isNullable,
           );
@@ -380,7 +390,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       for (final import in element.library.libraryImports) {
         for (final entry in import.namespace.definedNames.entries) {
           if (entry.value == type.element) {
-            return _XmlSerializableSerializerGenerator(
+            return XmlSerializableXmlElementSerializerGenerator(
               entry.key,
               isNullable: type.isNullable,
             );
@@ -388,7 +398,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         }
       }
 
-      return _XmlSerializableSerializerGenerator(
+      return XmlSerializableXmlElementSerializerGenerator(
         type.element.name,
         isNullable: type.isNullable,
       );
@@ -416,90 +426,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         ),
         isNullable: type.isNullable,
       );
+    } else {
+      return _serializerGeneratorFactory(type);
     }
-
-    return _serializerGeneratorFactory(type);
-  }
-}
-
-/// Defines methods for generating serializers and deserializers for classes or fields that have an annotation that implements `@XmlConverter()`.
-class _XmlConverterSerializerGenerator extends SerializerGenerator {
-  /// If `false` (the default) then the type does not represent a nullable type.
-  final bool _isNullable;
-
-  /// The name of the converter (including the prefix where applicable).
-  final String _name;
-
-  const _XmlConverterSerializerGenerator(
-    this._name, {
-    bool isNullable = false,
-  }) : _isNullable = isNullable;
-
-  @override
-  String generateSerializer(String expression) {
-    final buffer = StringBuffer();
-
-    if (_isNullable) {
-      buffer.write('$expression != null ? ');
-    }
-
-    buffer.write('const $_name().toXml($expression)');
-
-    if (_isNullable) {
-      buffer.write(' : null');
-    }
-
-    return buffer.toString();
-  }
-
-  @override
-  String generateDeserializer(String expression) {
-    final buffer = StringBuffer();
-
-    if (_isNullable) {
-      buffer.write('$expression != null ? ');
-    }
-
-    buffer.write('const $_name().fromXml($expression)');
-
-    if (_isNullable) {
-      buffer.write(' : null');
-    }
-
-    return buffer.toString();
-  }
-}
-
-/// Defines methods for generating serializers and deserializers for types that have an annotation of the form `@XmlSerializable()`.
-class _XmlSerializableSerializerGenerator extends SerializerGenerator {
-  /// If `false` (the default) then the type does not represent a nullable type.
-  final bool _isNullable;
-
-  /// The name of the type (including the prefix where applicable).
-  final String _name;
-
-  const _XmlSerializableSerializerGenerator(
-    this._name, {
-    bool isNullable = false,
-  }) : _isNullable = isNullable;
-
-  @override
-  String generateSerializer(String expression) => expression;
-
-  @override
-  String generateDeserializer(String expression) {
-    final buffer = StringBuffer();
-
-    if (_isNullable) {
-      buffer.write('$expression != null ? ');
-    }
-
-    buffer.write('$_name.fromXmlElement($expression)');
-
-    if (_isNullable) {
-      buffer.write(' : null');
-    }
-
-    return buffer.toString();
   }
 }

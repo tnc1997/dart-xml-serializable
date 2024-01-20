@@ -5,6 +5,7 @@ export 'package:xml_annotation/src/annotations/xml_attribute.dart';
 export 'package:xml_annotation/src/annotations/xml_cdata.dart';
 export 'package:xml_annotation/src/annotations/xml_converter.dart';
 export 'package:xml_annotation/src/annotations/xml_element.dart';
+export 'package:xml_annotation/src/annotations/xml_element_converter.dart';
 export 'package:xml_annotation/src/annotations/xml_enum.dart';
 export 'package:xml_annotation/src/annotations/xml_root_element.dart';
 export 'package:xml_annotation/src/annotations/xml_serializable.dart';

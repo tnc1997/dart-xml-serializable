@@ -8,9 +8,13 @@ import '../extensions/field_element_extensions.dart';
 import '../getter_generators/getter_generator.dart';
 import '../getter_generators/xml_attribute_getter_generator.dart';
 import '../getter_generators/xml_cdata_getter_generator.dart';
-import '../getter_generators/xml_element_getter_generator.dart';
-import '../getter_generators/xml_element_iterable_getter_generator.dart';
+import '../getter_generators/xml_element_converter_xml_element_getter_generator.dart';
+import '../getter_generators/xml_element_converter_xml_element_iterable_getter_generator.dart';
+import '../getter_generators/xml_serializable_xml_element_getter_generator.dart';
+import '../getter_generators/xml_serializable_xml_element_iterable_getter_generator.dart';
 import '../getter_generators/xml_text_getter_generator.dart';
+import '../getter_generators/xml_text_xml_element_getter_generator.dart';
+import '../getter_generators/xml_text_xml_element_iterable_getter_generator.dart';
 
 /// Creates a [GetterGenerator] from an [Element].
 typedef GetterGeneratorFactory = GetterGenerator Function(Element element);
@@ -86,28 +90,68 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
   if (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet) {
     final typeArgument = (type as ParameterizedType).typeArguments.single;
 
-    return typeArgument.element!.hasXmlSerializable
-        ? XmlSerializableXmlElementIterableGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          )
-        : XmlTextXmlElementIterableGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          );
+    for (final element1 in [
+      ...element.metadata.map((e) => e.element),
+      ...element.enclosingElement.metadata.map((e) => e.element)
+    ]) {
+      if (element1 is ConstructorElement) {
+        for (final supertype in element1.enclosingElement.allSupertypes) {
+          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
+            return XmlElementConverterXmlElementIterableGetterGenerator(
+              xmlElement.name ?? element.getEncodedFieldName(),
+              element1.enclosingElement.name,
+              namespace: xmlElement.namespace,
+              isNullable: type.isNullable,
+            );
+          }
+        }
+      }
+    }
+
+    if (typeArgument.element!.hasXmlSerializable) {
+      return XmlSerializableXmlElementIterableGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    } else {
+      return XmlTextXmlElementIterableGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    }
   } else {
-    return type.element!.hasXmlSerializable
-        ? XmlSerializableXmlElementGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          )
-        : XmlTextXmlElementGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          );
+    for (final element1 in [
+      ...element.metadata.map((e) => e.element),
+      ...element.enclosingElement.metadata.map((e) => e.element)
+    ]) {
+      if (element1 is ConstructorElement) {
+        for (final supertype in element1.enclosingElement.allSupertypes) {
+          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
+            return XmlElementConverterXmlElementGetterGenerator(
+              xmlElement.name ?? element.getEncodedFieldName(),
+              element1.enclosingElement.name,
+              namespace: xmlElement.namespace,
+              isNullable: type.isNullable,
+            );
+          }
+        }
+      }
+    }
+
+    if (type.element!.hasXmlSerializable) {
+      return XmlSerializableXmlElementGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    } else {
+      return XmlTextXmlElementGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    }
   }
 }
