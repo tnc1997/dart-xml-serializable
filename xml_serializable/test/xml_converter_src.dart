@@ -37,40 +37,6 @@ class AnnotatedClassConvertibleField {
 }
 
 @ShouldGenerate(r'''
-void _$AnnotatedClassNullableConvertibleFieldBuildXmlChildren(AnnotatedClassNullableConvertibleField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
-final value = instance.value;
-final valueSerialized = value;
-builder.element('value', nest: () { if (valueSerialized != null) { const AttributeDateTimeConverter().buildXmlChildren(valueSerialized, builder, namespaces: namespaces); } });
-}
-
-AnnotatedClassNullableConvertibleField _$AnnotatedClassNullableConvertibleFieldFromXmlElement(XmlElement element) {
-final value = element.getElement('value');
-return AnnotatedClassNullableConvertibleField(value: value != null ? const AttributeDateTimeConverter().fromXmlElement(value) : null);
-}
-
-List<XmlAttribute> _$AnnotatedClassNullableConvertibleFieldToXmlAttributes(AnnotatedClassNullableConvertibleField instance, {Map<String, String?> namespaces = const {}}) {
-final attributes = <XmlAttribute>[];
-return attributes;
-}
-
-List<XmlNode> _$AnnotatedClassNullableConvertibleFieldToXmlChildren(AnnotatedClassNullableConvertibleField instance, {Map<String, String?> namespaces = const {}}) {
-final children = <XmlNode>[];
-final value = instance.value;
-final valueSerialized = value;
-final valueConstructed = XmlElement(XmlName('value'), valueSerialized != null ? const AttributeDateTimeConverter().toXmlAttributes(valueSerialized, namespaces: namespaces) : [], valueSerialized != null ? const AttributeDateTimeConverter().toXmlChildren(valueSerialized, namespaces: namespaces) : []);
-children.add(valueConstructed);
-return children;
-}''')
-@annotation.XmlSerializable()
-@AttributeDateTimeConverter()
-class AnnotatedClassNullableConvertibleField {
-  @annotation.XmlElement()
-  DateTime? value;
-
-  AnnotatedClassNullableConvertibleField({this.value});
-}
-
-@ShouldGenerate(r'''
 void _$AnnotatedClassInconvertibleFieldBuildXmlChildren(AnnotatedClassInconvertibleField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
 final valueSerialized = value;
@@ -105,6 +71,40 @@ class AnnotatedClassInconvertibleField {
 }
 
 @ShouldGenerate(r'''
+void _$AnnotatedClassNullableConvertibleFieldBuildXmlChildren(AnnotatedClassNullableConvertibleField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+builder.element('value', nest: () { if (valueSerialized != null) { const AttributeDateTimeConverter().buildXmlChildren(valueSerialized, builder, namespaces: namespaces); } });
+}
+
+AnnotatedClassNullableConvertibleField _$AnnotatedClassNullableConvertibleFieldFromXmlElement(XmlElement element) {
+final value = element.getElement('value');
+return AnnotatedClassNullableConvertibleField(value: value != null ? const AttributeDateTimeConverter().fromXmlElement(value) : null);
+}
+
+List<XmlAttribute> _$AnnotatedClassNullableConvertibleFieldToXmlAttributes(AnnotatedClassNullableConvertibleField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$AnnotatedClassNullableConvertibleFieldToXmlChildren(AnnotatedClassNullableConvertibleField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = XmlElement(XmlName('value'), valueSerialized != null ? const AttributeDateTimeConverter().toXmlAttributes(valueSerialized, namespaces: namespaces) : [], valueSerialized != null ? const AttributeDateTimeConverter().toXmlChildren(valueSerialized, namespaces: namespaces) : []);
+children.add(valueConstructed);
+return children;
+}''')
+@annotation.XmlSerializable()
+@AttributeDateTimeConverter()
+class AnnotatedClassNullableConvertibleField {
+  @annotation.XmlElement()
+  DateTime? value;
+
+  AnnotatedClassNullableConvertibleField({this.value});
+}
+
+@ShouldGenerate(r'''
 void _$AnnotatedFieldConvertibleFieldBuildXmlChildren(AnnotatedFieldConvertibleField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
 final valueSerialized = value;
@@ -136,6 +136,40 @@ class AnnotatedFieldConvertibleField {
   DateTime value;
 
   AnnotatedFieldConvertibleField({required this.value});
+}
+
+@ShouldGenerate(r'''
+void _$AnnotatedFieldInconvertibleFieldBuildXmlChildren(AnnotatedFieldInconvertibleField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+builder.element('value', nest: () { builder.text(valueSerialized); });
+}
+
+AnnotatedFieldInconvertibleField _$AnnotatedFieldInconvertibleFieldFromXmlElement(XmlElement element) {
+final value = element.getElement('value')!.getText()!;
+return AnnotatedFieldInconvertibleField(value: value);
+}
+
+List<XmlAttribute> _$AnnotatedFieldInconvertibleFieldToXmlAttributes(AnnotatedFieldInconvertibleField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$AnnotatedFieldInconvertibleFieldToXmlChildren(AnnotatedFieldInconvertibleField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = XmlElement(XmlName('value'), [], [XmlText(valueSerialized)]);
+children.add(valueConstructed);
+return children;
+}''')
+@annotation.XmlSerializable()
+class AnnotatedFieldInconvertibleField {
+  @annotation.XmlElement()
+  @ElementDateTimeConverter()
+  String value;
+
+  AnnotatedFieldInconvertibleField({required this.value});
 }
 
 @ShouldGenerate(r'''

@@ -12,9 +12,10 @@ Future<void> main() async {
     const XmlSerializableGenerator(),
     expectedAnnotatedTests: [
       'AnnotatedClassConvertibleField',
-      'AnnotatedClassNullableConvertibleField',
       'AnnotatedClassInconvertibleField',
+      'AnnotatedClassNullableConvertibleField',
       'AnnotatedFieldConvertibleField',
+      'AnnotatedFieldInconvertibleField',
       'AnnotatedFieldNullableConvertibleField',
       'OverrideAnnotatedClass',
     ],
