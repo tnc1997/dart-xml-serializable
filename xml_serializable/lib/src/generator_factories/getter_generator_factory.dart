@@ -8,8 +8,8 @@ import '../extensions/field_element_extensions.dart';
 import '../getter_generators/getter_generator.dart';
 import '../getter_generators/xml_attribute_getter_generator.dart';
 import '../getter_generators/xml_cdata_getter_generator.dart';
-import '../getter_generators/xml_element_converter_xml_element_getter_generator.dart';
-import '../getter_generators/xml_element_converter_xml_element_iterable_getter_generator.dart';
+import '../getter_generators/xml_converter_xml_element_getter_generator.dart';
+import '../getter_generators/xml_converter_xml_element_iterable_getter_generator.dart';
 import '../getter_generators/xml_serializable_xml_element_getter_generator.dart';
 import '../getter_generators/xml_serializable_xml_element_iterable_getter_generator.dart';
 import '../getter_generators/xml_text_getter_generator.dart';
@@ -96,8 +96,8 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
-            return XmlElementConverterXmlElementIterableGetterGenerator(
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
+            return XmlConverterXmlElementIterableGetterGenerator(
               xmlElement.name ?? element.getEncodedFieldName(),
               element1.enclosingElement.name,
               namespace: xmlElement.namespace,
@@ -128,8 +128,8 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
-            return XmlElementConverterXmlElementGetterGenerator(
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
+            return XmlConverterXmlElementGetterGenerator(
               xmlElement.name ?? element.getEncodedFieldName(),
               element1.enclosingElement.name,
               namespace: xmlElement.namespace,

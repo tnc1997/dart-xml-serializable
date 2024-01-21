@@ -5,7 +5,7 @@ import '../constructor_generators/constructor_generator.dart';
 import '../constructor_generators/iterable_constructor_generator.dart';
 import '../constructor_generators/xml_attribute_constructor_generator.dart';
 import '../constructor_generators/xml_cdata_constructor_generator.dart';
-import '../constructor_generators/xml_element_converter_xml_element_constructor_generator.dart';
+import '../constructor_generators/xml_converter_xml_element_constructor_generator.dart';
 import '../constructor_generators/xml_root_element_constructor_generator.dart';
 import '../constructor_generators/xml_serializable_xml_element_constructor_generator.dart';
 import '../constructor_generators/xml_text_constructor_generator.dart';
@@ -111,9 +111,9 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
             return IterableConstructorGenerator(
-              XmlElementConverterXmlElementConstructorGenerator(
+              XmlConverterXmlElementConstructorGenerator(
                 xmlElement.name ?? element.getEncodedFieldName(),
                 element1.enclosingElement.name,
                 namespace: xmlElement.namespace,
@@ -158,8 +158,8 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
-            return XmlElementConverterXmlElementConstructorGenerator(
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
+            return XmlConverterXmlElementConstructorGenerator(
               xmlElement.name ?? element.getEncodedFieldName(),
               element1.enclosingElement.name,
               namespace: xmlElement.namespace,

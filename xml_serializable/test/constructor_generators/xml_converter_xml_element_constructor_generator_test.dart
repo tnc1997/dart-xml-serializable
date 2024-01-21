@@ -3,7 +3,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 void main() {
   group(
-    'XmlElementConverterXmlElementConstructorGenerator',
+    'XmlConverterXmlElementConstructorGenerator',
     () {
       group(
         'generateConstructor',
@@ -12,7 +12,7 @@ void main() {
             'should generate a constructor with a name if constructed with a name',
             () {
               expect(
-                XmlElementConverterXmlElementConstructorGenerator(
+                XmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
                 ).generateConstructor('value'),
@@ -27,7 +27,7 @@ void main() {
             'should generate a constructor with a name and namespace if constructed with a name and namespace',
             () {
               expect(
-                XmlElementConverterXmlElementConstructorGenerator(
+                XmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
                   namespace: 'https://www.example.com',
@@ -43,7 +43,7 @@ void main() {
             'should generate a constructor with a name and is self closing if constructed with a name and is self closing',
             () {
               expect(
-                XmlElementConverterXmlElementConstructorGenerator(
+                XmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
                   isSelfClosing: true,
@@ -59,7 +59,7 @@ void main() {
             'should generate a null-aware constructor if constructed with a nullable type',
             () {
               expect(
-                NullableXmlElementConverterXmlElementConstructorGenerator(
+                NullableXmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
                   includeIfNull: false,
@@ -75,7 +75,7 @@ void main() {
             'should generate a null-aware constructor if constructed with a nullable type and include if null',
             () {
               expect(
-                NullableXmlElementConverterXmlElementConstructorGenerator(
+                NullableXmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
                   includeIfNull: true,

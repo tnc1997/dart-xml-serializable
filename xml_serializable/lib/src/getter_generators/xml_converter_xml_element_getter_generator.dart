@@ -1,11 +1,10 @@
-import 'xml_element_iterable_getter_generator.dart';
+import 'xml_element_getter_generator.dart';
 
-class XmlElementConverterXmlElementIterableGetterGenerator
-    extends XmlElementIterableGetterGenerator {
+class XmlConverterXmlElementGetterGenerator extends XmlElementGetterGenerator {
   /// The name of the converter.
   final String _converter;
 
-  const XmlElementConverterXmlElementIterableGetterGenerator(
+  const XmlConverterXmlElementGetterGenerator(
     String name,
     this._converter, {
     String? namespace,
@@ -17,9 +16,9 @@ class XmlElementConverterXmlElementIterableGetterGenerator
         );
 }
 
-class NullableXmlElementConverterXmlElementIterableGetterGenerator
-    extends XmlElementConverterXmlElementIterableGetterGenerator {
-  const NullableXmlElementConverterXmlElementIterableGetterGenerator(
+class NullableXmlConverterXmlElementGetterGenerator
+    extends XmlConverterXmlElementGetterGenerator {
+  const NullableXmlConverterXmlElementGetterGenerator(
     String name,
     String converter, {
     String? namespace,

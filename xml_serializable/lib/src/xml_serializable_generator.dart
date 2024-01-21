@@ -14,8 +14,7 @@ import 'generator_factories/getter_generator_factory.dart';
 import 'generator_factories/serializer_generator_factory.dart';
 import 'serializer_generators/iterable_serializer_generator.dart';
 import 'serializer_generators/serializer_generator.dart';
-import 'serializer_generators/xml_converter_serializer_generator.dart';
-import 'serializer_generators/xml_element_converter_xml_element_serializer_generator.dart';
+import 'serializer_generators/xml_converter_xml_element_serializer_generator.dart';
 import 'serializer_generators/xml_serializable_xml_element_serializer_generator.dart';
 
 class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
@@ -362,13 +361,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
-            return XmlElementConverterXmlElementSerializerGenerator(
-              element1.enclosingElement.name,
-              isNullable: type.isNullable,
-            );
-          } else if (supertype.isXmlAnnotationXmlConverterForType(type)) {
-            return XmlConverterSerializerGenerator(
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
+            return XmlConverterXmlElementSerializerGenerator(
               element1.enclosingElement.name,
               isNullable: type.isNullable,
             );

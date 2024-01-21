@@ -2,7 +2,7 @@ import 'package:test/test.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 void main() {
-  group('XmlElementConverterXmlElementIterableGetterGenerator', () {
+  group('XmlConverterXmlElementIterableGetterGenerator', () {
     group(
       'generateGetter',
       () {
@@ -10,7 +10,7 @@ void main() {
           'should generate a getter with a name if constructed with a name',
           () {
             expect(
-              XmlElementConverterXmlElementIterableGetterGenerator(
+              XmlConverterXmlElementIterableGetterGenerator(
                 'name',
                 'TestConverter',
               ).generateGetter('element'),
@@ -25,7 +25,7 @@ void main() {
           'should generate a getter with a name and namespace if constructed with a name and namespace',
           () {
             expect(
-              XmlElementConverterXmlElementIterableGetterGenerator(
+              XmlConverterXmlElementIterableGetterGenerator(
                 'name',
                 'TestConverter',
                 namespace: 'https://www.example.com',
@@ -41,7 +41,7 @@ void main() {
           'should generate a null-aware getter if constructed with a nullable type',
           () {
             expect(
-              NullableXmlElementConverterXmlElementIterableGetterGenerator(
+              NullableXmlConverterXmlElementIterableGetterGenerator(
                 'name',
                 'TestConverter',
               ).generateGetter('element'),

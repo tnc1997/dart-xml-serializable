@@ -1,6 +1,6 @@
 import 'builder_generator.dart';
 
-class XmlElementConverterXmlElementBuilderGenerator extends BuilderGenerator {
+class XmlConverterXmlElementBuilderGenerator extends BuilderGenerator {
   /// The name of the element.
   final String _name;
 
@@ -19,7 +19,7 @@ class XmlElementConverterXmlElementBuilderGenerator extends BuilderGenerator {
   /// The name of the converter.
   final String _converter;
 
-  const XmlElementConverterXmlElementBuilderGenerator(
+  const XmlConverterXmlElementBuilderGenerator(
     this._name,
     this._converter, {
     String? namespace,
@@ -73,9 +73,9 @@ class XmlElementConverterXmlElementBuilderGenerator extends BuilderGenerator {
   }
 }
 
-class NullableXmlElementConverterXmlElementBuilderGenerator
-    extends XmlElementConverterXmlElementBuilderGenerator {
-  const NullableXmlElementConverterXmlElementBuilderGenerator(
+class NullableXmlConverterXmlElementBuilderGenerator
+    extends XmlConverterXmlElementBuilderGenerator {
+  const NullableXmlConverterXmlElementBuilderGenerator(
     String name,
     String converter, {
     String? namespace,

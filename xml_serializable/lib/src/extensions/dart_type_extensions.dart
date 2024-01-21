@@ -27,24 +27,11 @@ extension DartTypeExtensions on DartType {
   bool get isXmlAnnotationXmlConverter =>
       isXmlAnnotation && element?.name == 'XmlConverter';
 
-  /// Returns `true` if this type represents the type 'XmlElementConverter' defined in the xml_annotation library.
-  bool get isXmlAnnotationXmlElementConverter =>
-      isXmlAnnotation && element?.name == 'XmlElementConverter';
-
   /// Returns `true` if this type represents the type 'XmlConverter' defined in the xml_annotation library and is capable of converting the [type].
   bool isXmlAnnotationXmlConverterForType(DartType type) {
     final _ = this;
 
     return isXmlAnnotationXmlConverter &&
-        _ is ParameterizedType &&
-        _.typeArguments.single.element == type.element;
-  }
-
-  /// Returns `true` if this type represents the type 'XmlElementConverter' defined in the xml_annotation library and is capable of converting the [type].
-  bool isXmlAnnotationXmlElementConverterForType(DartType type) {
-    final _ = this;
-
-    return isXmlAnnotationXmlElementConverter &&
         _ is ParameterizedType &&
         _.typeArguments.single.element == type.element;
   }

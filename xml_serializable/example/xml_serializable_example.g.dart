@@ -190,8 +190,7 @@ void _$TitleBuildXmlChildren(Title instance, XmlBuilder builder,
     builder.attribute('lang', languageSerialized);
   }
   final text = instance.text;
-  final textSerialized =
-      text != null ? const Base64BinaryConverter().toXml(text) : null;
+  final textSerialized = text;
   if (textSerialized != null) {
     builder.text(textSerialized);
   }
@@ -217,7 +216,7 @@ Title _$TitleFromXmlElement(XmlElement element) {
                       '`$language` is not one of the supported values: ${$LanguageEnumMap.values.join(', ')}'))
               .key
           : null,
-      text: text != null ? const Base64BinaryConverter().fromXml(text) : null);
+      text: text);
 }
 
 List<XmlAttribute> _$TitleToXmlAttributes(Title instance,
@@ -239,8 +238,7 @@ List<XmlNode> _$TitleToXmlChildren(Title instance,
     {Map<String, String?> namespaces = const {}}) {
   final children = <XmlNode>[];
   final text = instance.text;
-  final textSerialized =
-      text != null ? const Base64BinaryConverter().toXml(text) : null;
+  final textSerialized = text;
   final textConstructed =
       textSerialized != null ? XmlText(textSerialized) : null;
   if (textConstructed != null) {

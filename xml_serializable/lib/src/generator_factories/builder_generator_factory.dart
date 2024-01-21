@@ -5,7 +5,7 @@ import '../builder_generators/builder_generator.dart';
 import '../builder_generators/iterable_builder_generator.dart';
 import '../builder_generators/xml_attribute_builder_generator.dart';
 import '../builder_generators/xml_cdata_builder_generator.dart';
-import '../builder_generators/xml_element_converter_xml_element_builder_generator.dart';
+import '../builder_generators/xml_converter_xml_element_builder_generator.dart';
 import '../builder_generators/xml_root_element_builder_generator.dart';
 import '../builder_generators/xml_serializable_xml_element_builder_generator.dart';
 import '../builder_generators/xml_text_builder_generator.dart';
@@ -105,9 +105,9 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
             return IterableBuilderGenerator(
-              XmlElementConverterXmlElementBuilderGenerator(
+              XmlConverterXmlElementBuilderGenerator(
                 xmlElement.name ?? element.getEncodedFieldName(),
                 element1.enclosingElement.name,
                 namespace: xmlElement.namespace,
@@ -152,8 +152,8 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
     ]) {
       if (element1 is ConstructorElement) {
         for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlElementConverterForType(type)) {
-            return XmlElementConverterXmlElementBuilderGenerator(
+          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
+            return XmlConverterXmlElementBuilderGenerator(
               xmlElement.name ?? element.getEncodedFieldName(),
               element1.enclosingElement.name,
               namespace: xmlElement.namespace,

@@ -1,16 +1,16 @@
 import 'serializer_generator.dart';
 
-class XmlElementConverterXmlElementSerializerGenerator extends SerializerGenerator {
+class XmlConverterXmlElementSerializerGenerator extends SerializerGenerator {
   /// The name of the converter.
   final String _converter;
 
   /// If `false` (the default) then the type does not represent a nullable type.
   final bool _isNullable;
 
-  const XmlElementConverterXmlElementSerializerGenerator(
-      this._converter, {
-        bool isNullable = false,
-      }) : _isNullable = isNullable;
+  const XmlConverterXmlElementSerializerGenerator(
+    this._converter, {
+    bool isNullable = false,
+  }) : _isNullable = isNullable;
 
   @override
   String generateSerializer(String expression) => expression;
@@ -33,12 +33,12 @@ class XmlElementConverterXmlElementSerializerGenerator extends SerializerGenerat
   }
 }
 
-class NullableXmlElementConverterXmlElementSerializerGenerator
-    extends XmlElementConverterXmlElementSerializerGenerator {
-  const NullableXmlElementConverterXmlElementSerializerGenerator(
-      String converter,
-      ) : super(
-    converter,
-    isNullable: true,
-  );
+class NullableXmlConverterXmlElementSerializerGenerator
+    extends XmlConverterXmlElementSerializerGenerator {
+  const NullableXmlConverterXmlElementSerializerGenerator(
+    String converter,
+  ) : super(
+          converter,
+          isNullable: true,
+        );
 }

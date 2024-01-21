@@ -25,7 +25,8 @@ void main() {
             'should generate a null-aware serializer if constructed with a nullable type',
             () {
               expect(
-                NullableXmlSerializableXmlElementSerializerGenerator('TestClass')
+                NullableXmlSerializableXmlElementSerializerGenerator(
+                        'TestClass')
                     .generateSerializer('value'),
                 equals(
                   'value',
@@ -56,7 +57,8 @@ void main() {
             'should generate a null-aware deserializer if constructed with a nullable type',
             () {
               expect(
-                NullableXmlSerializableXmlElementSerializerGenerator('TestClass')
+                NullableXmlSerializableXmlElementSerializerGenerator(
+                        'TestClass')
                     .generateDeserializer('value'),
                 equals(
                   'value != null ? TestClass.fromXmlElement(value) : null',

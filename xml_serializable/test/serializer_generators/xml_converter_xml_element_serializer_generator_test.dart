@@ -3,7 +3,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 void main() {
   group(
-    'XmlConverterSerializerGenerator',
+    'XmlConverterXmlElementSerializerGenerator',
     () {
       group(
         'generateSerializer',
@@ -12,10 +12,10 @@ void main() {
             'should generate a serializer if constructed with a type',
             () {
               expect(
-                XmlConverterSerializerGenerator('TestConverter')
+                XmlConverterXmlElementSerializerGenerator('TestConverter')
                     .generateSerializer('value'),
                 equals(
-                  'const TestConverter().toXml(value)',
+                  'value',
                 ),
               );
             },
@@ -25,10 +25,11 @@ void main() {
             'should generate a null-aware serializer if constructed with a nullable type',
             () {
               expect(
-                NullableXmlConverterSerializerGenerator('TestConverter')
+                NullableXmlConverterXmlElementSerializerGenerator(
+                        'TestConverter')
                     .generateSerializer('value'),
                 equals(
-                  'value != null ? const TestConverter().toXml(value) : null',
+                  'value',
                 ),
               );
             },
@@ -43,10 +44,10 @@ void main() {
             'should generate a deserializer if constructed with a type',
             () {
               expect(
-                XmlConverterSerializerGenerator('TestConverter')
+                XmlConverterXmlElementSerializerGenerator('TestConverter')
                     .generateDeserializer('value'),
                 equals(
-                  'const TestConverter().fromXml(value)',
+                  'const TestConverter().fromXmlElement(value)',
                 ),
               );
             },
@@ -56,10 +57,11 @@ void main() {
             'should generate a null-aware deserializer if constructed with a nullable type',
             () {
               expect(
-                NullableXmlConverterSerializerGenerator('TestConverter')
+                NullableXmlConverterXmlElementSerializerGenerator(
+                        'TestConverter')
                     .generateDeserializer('value'),
                 equals(
-                  'value != null ? const TestConverter().fromXml(value) : null',
+                  'value != null ? const TestConverter().fromXmlElement(value) : null',
                 ),
               );
             },
