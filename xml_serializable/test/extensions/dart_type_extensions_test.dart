@@ -164,168 +164,42 @@ void main() {
       );
 
       group(
-        'isXmlAnnotation',
-        () {
-          test(
-            'should return true if the type is a type defined in the xml_annotation library',
-            () {
-              expect(
-                FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                ).isXmlAnnotation,
-                isTrue,
-              );
-            },
-          );
-
-          test(
-            'should return false if the type is not a type defined in the xml_annotation library',
-            () {
-              expect(
-                FakeInterfaceType().isXmlAnnotation,
-                isFalse,
-              );
-            },
-          );
-        },
-      );
-
-      group(
         'isXmlAnnotationXmlConverter',
         () {
           test(
-            'should return true if the type is the type `XmlConverter` defined in the xml_annotation library',
+            'should return true if the type implements the type `XmlConverter` defined in the xml_annotation library',
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                ).isXmlAnnotationXmlConverter,
-                isTrue,
-              );
-            },
-          );
-
-          test(
-            'should return false if the type is not the type `XmlConverter` defined in the xml_annotation library',
-            () {
-              expect(
-                FakeInterfaceType().isXmlAnnotationXmlConverter,
-                isFalse,
-              );
-            },
-          );
-        },
-      );
-
-      group(
-        'isXmlAnnotationXmlConverterForType',
-        () {
-          test(
-            'should return true if the type is the type `XmlConverter` defined in the xml_annotation library and is capable of converting the type',
-            () {
-              var element = FakeStringClassElement();
-
-              expect(
-                FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                  typeArguments: [
+                  allSupertypes: [
                     FakeInterfaceType(
-                      element: element,
-                    )
-                  ],
-                ).isXmlAnnotationXmlConverterForType(
-                  FakeInterfaceType(
-                    element: element,
-                  ),
-                ),
-                isTrue,
-              );
-            },
-          );
-
-          test(
-            'should return false if the type is not the type `XmlConverter` defined in the xml_annotation library',
-            () {
-              expect(
-                FakeInterfaceType().isXmlAnnotationXmlConverterForType(
-                  FakeInterfaceType(
-                    element: FakeStringClassElement(),
-                  ),
-                ),
-                isFalse,
-              );
-            },
-          );
-
-          test(
-            'should return false if the type is not capable of converting the type',
-            () {
-              expect(
-                FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                  typeArguments: [
-                    FakeInterfaceType(
-                      element: FakeIntClassElement(),
+                      element: FakeXmlConverterClassElement(),
                     ),
                   ],
-                ).isXmlAnnotationXmlConverterForType(
-                  FakeInterfaceType(
-                    element: FakeStringClassElement(),
-                  ),
-                ),
-                isFalse,
-              );
-            },
-          );
-        },
-      );
-
-      group(
-        'isXmlAnnotationXmlConverter',
-        () {
-          test(
-            'should return true if the type is the type `XmlConverter` defined in the xml_annotation library',
-            () {
-              expect(
-                FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                ).isXmlAnnotationXmlConverter,
+                ).isXmlAnnotationXmlConverter(),
                 isTrue,
               );
             },
           );
 
           test(
-            'should return false if the type is not the type `XmlConverter` defined in the xml_annotation library',
+            'should return true if the type implements the type `XmlConverter` defined in the xml_annotation library and can convert the type',
             () {
-              expect(
-                FakeInterfaceType().isXmlAnnotationXmlConverter,
-                isFalse,
-              );
-            },
-          );
-        },
-      );
-
-      group(
-        'isXmlAnnotationXmlConverterForType',
-        () {
-          test(
-            'should return true if the type is the type `XmlConverter` defined in the xml_annotation library and is capable of converting the type',
-            () {
-              var element = FakeStringClassElement();
-
               expect(
                 FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                  typeArguments: [
+                  allSupertypes: [
                     FakeInterfaceType(
-                      element: element,
+                      element: FakeXmlConverterClassElement(),
+                      typeArguments: [
+                        FakeInterfaceType(
+                          element: FakeStringClassElement(),
+                        ),
+                      ],
                     ),
                   ],
-                ).isXmlAnnotationXmlConverterForType(
-                  FakeInterfaceType(
-                    element: element,
+                ).isXmlAnnotationXmlConverter(
+                  type: FakeInterfaceType(
+                    element: FakeStringClassElement(),
                   ),
                 ),
                 isTrue,
@@ -334,32 +208,32 @@ void main() {
           );
 
           test(
-            'should return false if the type is not the type `XmlConverter` defined in the xml_annotation library',
+            'should return false if the type does not implement the type `XmlConverter` defined in the xml_annotation library',
             () {
               expect(
-                FakeInterfaceType().isXmlAnnotationXmlConverterForType(
-                  FakeInterfaceType(
-                    element: FakeStringClassElement(),
-                  ),
-                ),
+                FakeInterfaceType().isXmlAnnotationXmlConverter(),
                 isFalse,
               );
             },
           );
 
           test(
-            'should return false if the type is not capable of converting the type',
+            'should return false if the type cannot convert the type',
             () {
               expect(
                 FakeInterfaceType(
-                  element: FakeXmlConverterClassElement(),
-                  typeArguments: [
+                  allSupertypes: [
                     FakeInterfaceType(
-                      element: FakeIntClassElement(),
-                    )
+                      element: FakeXmlConverterClassElement(),
+                      typeArguments: [
+                        FakeInterfaceType(
+                          element: FakeIntClassElement(),
+                        ),
+                      ],
+                    ),
                   ],
-                ).isXmlAnnotationXmlConverterForType(
-                  FakeInterfaceType(
+                ).isXmlAnnotationXmlConverter(
+                  type: FakeInterfaceType(
                     element: FakeStringClassElement(),
                   ),
                 ),

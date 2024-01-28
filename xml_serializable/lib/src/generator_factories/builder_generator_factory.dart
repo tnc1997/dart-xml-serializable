@@ -95,41 +95,29 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
   final xmlElement = element.getXmlElement()!.toXmlElementValue()!;
 
   final type = element.type;
-
-  if (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet) {
-    final typeArgument = (type as ParameterizedType).typeArguments.single;
-
-    for (final element1 in [
-      ...element.metadata.map((e) => e.element),
-      ...element.enclosingElement.metadata.map((e) => e.element)
-    ]) {
-      if (element1 is ConstructorElement) {
-        for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
-            return IterableBuilderGenerator(
-              XmlConverterXmlElementBuilderGenerator(
-                xmlElement.name ?? element.getEncodedFieldName(),
-                element1.enclosingElement.name,
-                namespace: xmlElement.namespace,
-                isSelfClosing: xmlElement.isSelfClosing,
-                includeIfNull: xmlElement.includeIfNull,
-                isNullable: typeArgument.isNullable,
-              ),
-              isNullable: type.isNullable,
-            );
-          }
-        }
-      }
-    }
-
-    if (typeArgument.element!.hasXmlSerializable) {
+  if (type is ParameterizedType &&
+      (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet)) {
+    final converterElement = element.getXmlConverterElement(type: type);
+    if (converterElement != null) {
+      return IterableBuilderGenerator(
+        XmlConverterXmlElementBuilderGenerator(
+          xmlElement.name ?? element.getEncodedFieldName(),
+          converterElement.name!,
+          namespace: xmlElement.namespace,
+          isSelfClosing: xmlElement.isSelfClosing,
+          includeIfNull: xmlElement.includeIfNull,
+          isNullable: type.typeArguments.single.isNullable,
+        ),
+        isNullable: type.isNullable,
+      );
+    } else if (type.typeArguments.single.element!.hasXmlSerializable) {
       return IterableBuilderGenerator(
         XmlSerializableXmlElementBuilderGenerator(
           xmlElement.name ?? element.getEncodedFieldName(),
           namespace: xmlElement.namespace,
           isSelfClosing: xmlElement.isSelfClosing,
           includeIfNull: xmlElement.includeIfNull,
-          isNullable: typeArgument.isNullable,
+          isNullable: type.typeArguments.single.isNullable,
         ),
         isNullable: type.isNullable,
       );
@@ -140,33 +128,23 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
           namespace: xmlElement.namespace,
           isSelfClosing: xmlElement.isSelfClosing,
           includeIfNull: xmlElement.includeIfNull,
-          isNullable: typeArgument.isNullable,
+          isNullable: type.typeArguments.single.isNullable,
         ),
         isNullable: type.isNullable,
       );
     }
   } else {
-    for (final element1 in [
-      ...element.metadata.map((e) => e.element),
-      ...element.enclosingElement.metadata.map((e) => e.element)
-    ]) {
-      if (element1 is ConstructorElement) {
-        for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
-            return XmlConverterXmlElementBuilderGenerator(
-              xmlElement.name ?? element.getEncodedFieldName(),
-              element1.enclosingElement.name,
-              namespace: xmlElement.namespace,
-              isSelfClosing: xmlElement.isSelfClosing,
-              includeIfNull: xmlElement.includeIfNull,
-              isNullable: type.isNullable,
-            );
-          }
-        }
-      }
-    }
-
-    if (type.element!.hasXmlSerializable) {
+    final converterElement = element.getXmlConverterElement(type: type);
+    if (converterElement != null) {
+      return XmlConverterXmlElementBuilderGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        converterElement.name!,
+        namespace: xmlElement.namespace,
+        isSelfClosing: xmlElement.isSelfClosing,
+        includeIfNull: xmlElement.includeIfNull,
+        isNullable: type.isNullable,
+      );
+    } else if (type.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementBuilderGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),
         namespace: xmlElement.namespace,

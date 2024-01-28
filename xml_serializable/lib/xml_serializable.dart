@@ -26,7 +26,6 @@ export 'package:xml_serializable/src/extensions/dart_type_extensions.dart';
 export 'package:xml_serializable/src/extensions/element_annotation_extensions.dart';
 export 'package:xml_serializable/src/extensions/element_extensions.dart';
 export 'package:xml_serializable/src/extensions/field_element_extensions.dart';
-export 'package:xml_serializable/src/extensions/library_element_extensions.dart';
 export 'package:xml_serializable/src/generator_factories/builder_generator_factory.dart';
 export 'package:xml_serializable/src/generator_factories/constructor_generator_factory.dart';
 export 'package:xml_serializable/src/generator_factories/getter_generator_factory.dart';

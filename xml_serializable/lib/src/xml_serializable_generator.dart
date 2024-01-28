@@ -355,23 +355,13 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }) {
     type ??= element.type;
 
-    for (final element1 in [
-      ...element.metadata.map((e) => e.element),
-      ...element.enclosingElement.metadata.map((e) => e.element)
-    ]) {
-      if (element1 is ConstructorElement) {
-        for (final supertype in element1.enclosingElement.allSupertypes) {
-          if (supertype.isXmlAnnotationXmlConverterForType(type)) {
-            return XmlConverterXmlElementSerializerGenerator(
-              element1.enclosingElement.name,
-              isNullable: type.isNullable,
-            );
-          }
-        }
-      }
-    }
-
-    if (type is InterfaceType && type.element.hasXmlSerializable) {
+    final converterElement = element.getXmlConverterElement(type: type);
+    if (converterElement != null) {
+      return XmlConverterXmlElementSerializerGenerator(
+        converterElement.name!,
+        isNullable: type.isNullable,
+      );
+    } else if (type is InterfaceType && type.element.hasXmlSerializable) {
       for (final element in element.library.topLevelElements) {
         if (element == type.element) {
           return XmlSerializableXmlElementSerializerGenerator(

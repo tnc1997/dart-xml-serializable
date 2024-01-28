@@ -1,3 +1,5 @@
+import 'xml_converter.dart';
+
 /// Values for the automatic field renaming behavior for [XmlSerializable].
 enum FieldRename {
   /// Use the field name without changes.
@@ -15,6 +17,48 @@ enum FieldRename {
 
 /// An annotation used to specify that a class is serializable.
 class XmlSerializable {
+  /// A list of [XmlConverter]s to apply to this class.
+  ///
+  /// Writing:
+  ///
+  /// ```dart
+  /// @XmlSerializable(converters: [TitleConverter()])
+  /// class Book {
+  ///   @XmlElement()
+  ///   Title? title;
+  /// }
+  /// ```
+  ///
+  /// is equivalent to writing:
+  ///
+  /// ```dart
+  /// @TitleConverter()
+  /// @XmlSerializable()
+  /// class Book {
+  ///   @XmlElement()
+  ///   Title? title;
+  /// }
+  /// ```
+  ///
+  /// The main difference is that this allows reusing a custom [XmlSerializable] over multiple classes:
+  ///
+  /// ```dart
+  /// const serializable = XmlSerializable(converters: [TitleConverter()]);
+  ///
+  /// @serializable
+  /// class Book1 {
+  ///   @XmlElement()
+  ///   Title? title;
+  /// }
+  ///
+  /// @serializable
+  /// class Book2 {
+  ///   @XmlElement()
+  ///   Title? title;
+  /// }
+  /// ```
+  final List<XmlConverter>? converters;
+
   /// If `true` (not the default) then a mixin will be created that contains the serialization methods.
   ///
   /// ```dart
@@ -41,6 +85,7 @@ class XmlSerializable {
   final FieldRename? fieldRename;
 
   const XmlSerializable({
+    this.converters,
     this.createMixin,
     this.fieldRename,
   });
