@@ -71,10 +71,7 @@ extension DartTypeExtensions on DartType {
         if ((element.library.identifier == '$_prefix/xml_converter.dart' &&
                 element.name == 'XmlConverter') &&
             (type == null ||
-                (supertype.typeArguments[0].element?.library?.identifier ==
-                        type.element?.library?.identifier &&
-                    supertype.typeArguments[0].element?.name ==
-                        type.element?.name &&
+                (supertype.typeArguments[0].element == type.element &&
                     ((supertype.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.none &&
                             type.nullabilitySuffix == NullabilitySuffix.none) ||

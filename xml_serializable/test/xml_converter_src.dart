@@ -3,6 +3,40 @@ import 'package:xml/xml.dart';
 import 'package:xml_annotation/xml_annotation.dart' as annotation;
 
 @ShouldGenerate(r'''
+void _$AnnotatedClassAttributeFieldBuildXmlChildren(AnnotatedClassAttributeField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value.toIso8601String();
+builder.attribute('value', valueSerialized);
+}
+
+AnnotatedClassAttributeField _$AnnotatedClassAttributeFieldFromXmlElement(XmlElement element) {
+final value = element.getAttribute('value')!;
+return AnnotatedClassAttributeField(value: DateTime.parse(value));
+}
+
+List<XmlAttribute> _$AnnotatedClassAttributeFieldToXmlAttributes(AnnotatedClassAttributeField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+final value = instance.value;
+final valueSerialized = value.toIso8601String();
+final valueConstructed = XmlAttribute(XmlName('value'), valueSerialized);
+attributes.add(valueConstructed);
+return attributes;
+}
+
+List<XmlNode> _$AnnotatedClassAttributeFieldToXmlChildren(AnnotatedClassAttributeField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+return children;
+}''')
+@annotation.XmlSerializable()
+@AttributeDateTimeConverter()
+class AnnotatedClassAttributeField {
+  @annotation.XmlAttribute()
+  DateTime value;
+
+  AnnotatedClassAttributeField({required this.value});
+}
+
+@ShouldGenerate(r'''
 void _$AnnotatedClassConvertibleFieldBuildXmlChildren(AnnotatedClassConvertibleField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
 final valueSerialized = value;
@@ -102,6 +136,40 @@ class AnnotatedClassNullableConvertibleField {
   DateTime? value;
 
   AnnotatedClassNullableConvertibleField({this.value});
+}
+
+@ShouldGenerate(r'''
+void _$AnnotatedFieldAttributeFieldBuildXmlChildren(AnnotatedFieldAttributeField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value.toIso8601String();
+builder.attribute('value', valueSerialized);
+}
+
+AnnotatedFieldAttributeField _$AnnotatedFieldAttributeFieldFromXmlElement(XmlElement element) {
+final value = element.getAttribute('value')!;
+return AnnotatedFieldAttributeField(value: DateTime.parse(value));
+}
+
+List<XmlAttribute> _$AnnotatedFieldAttributeFieldToXmlAttributes(AnnotatedFieldAttributeField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+final value = instance.value;
+final valueSerialized = value.toIso8601String();
+final valueConstructed = XmlAttribute(XmlName('value'), valueSerialized);
+attributes.add(valueConstructed);
+return attributes;
+}
+
+List<XmlNode> _$AnnotatedFieldAttributeFieldToXmlChildren(AnnotatedFieldAttributeField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+return children;
+}''')
+@annotation.XmlSerializable()
+class AnnotatedFieldAttributeField {
+  @annotation.XmlAttribute()
+  @ElementDateTimeConverter()
+  DateTime value;
+
+  AnnotatedFieldAttributeField({required this.value});
 }
 
 @ShouldGenerate(r'''

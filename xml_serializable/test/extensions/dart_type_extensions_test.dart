@@ -185,6 +185,8 @@ void main() {
           test(
             'should return true if the type implements the type `XmlConverter` defined in the xml_annotation library and can convert the type',
             () {
+              final element = FakeStringClassElement();
+
               expect(
                 FakeInterfaceType(
                   allSupertypes: [
@@ -192,14 +194,14 @@ void main() {
                       element: FakeXmlConverterClassElement(),
                       typeArguments: [
                         FakeInterfaceType(
-                          element: FakeStringClassElement(),
+                          element: element,
                         ),
                       ],
                     ),
                   ],
                 ).isXmlAnnotationXmlConverter(
                   type: FakeInterfaceType(
-                    element: FakeStringClassElement(),
+                    element: element,
                   ),
                 ),
                 isTrue,
