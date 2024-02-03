@@ -77,6 +77,8 @@ extension ElementExtensions on Element {
   ///   Title? title;
   /// }
   /// ```
+  ///
+  /// Throws a [StateError] if this element does not have an annotation that implements `XmlConverter` and can convert the [type]. Returns `null` if the value of the annotation could not be computed because of errors.
   DartObject? getXmlConverter({
     DartType? type,
   }) {
@@ -95,7 +97,7 @@ extension ElementExtensions on Element {
       }
     }
 
-    return null;
+    throw StateError("No element");
   }
 
   /// Gets the element that represents the class that can convert the [type] as an annotation on this element for example:
