@@ -8,9 +8,13 @@ import '../extensions/field_element_extensions.dart';
 import '../getter_generators/getter_generator.dart';
 import '../getter_generators/xml_attribute_getter_generator.dart';
 import '../getter_generators/xml_cdata_getter_generator.dart';
-import '../getter_generators/xml_element_getter_generator.dart';
-import '../getter_generators/xml_element_iterable_getter_generator.dart';
+import '../getter_generators/xml_converter_xml_element_getter_generator.dart';
+import '../getter_generators/xml_converter_xml_element_iterable_getter_generator.dart';
+import '../getter_generators/xml_serializable_xml_element_getter_generator.dart';
+import '../getter_generators/xml_serializable_xml_element_iterable_getter_generator.dart';
 import '../getter_generators/xml_text_getter_generator.dart';
+import '../getter_generators/xml_text_xml_element_getter_generator.dart';
+import '../getter_generators/xml_text_xml_element_iterable_getter_generator.dart';
 
 /// Creates a [GetterGenerator] from an [Element].
 typedef GetterGeneratorFactory = GetterGenerator Function(Element element);
@@ -82,32 +86,50 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
   final xmlElement = element.getXmlElement()!.toXmlElementValue()!;
 
   final type = element.type;
-
-  if (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet) {
-    final typeArgument = (type as ParameterizedType).typeArguments.single;
-
-    return typeArgument.element!.hasXmlSerializable
-        ? XmlSerializableXmlElementIterableGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          )
-        : XmlTextXmlElementIterableGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          );
+  if (type is ParameterizedType &&
+      (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet)) {
+    final converterElement = element.getXmlConverterElement(type: type);
+    if (converterElement != null) {
+      return XmlConverterXmlElementIterableGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        converterElement.name!,
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    } else if (type.typeArguments.single.element!.hasXmlSerializable) {
+      return XmlSerializableXmlElementIterableGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    } else {
+      return XmlTextXmlElementIterableGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    }
   } else {
-    return type.element!.hasXmlSerializable
-        ? XmlSerializableXmlElementGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          )
-        : XmlTextXmlElementGetterGenerator(
-            xmlElement.name ?? element.getEncodedFieldName(),
-            namespace: xmlElement.namespace,
-            isNullable: type.isNullable,
-          );
+    final converterElement = element.getXmlConverterElement(type: type);
+    if (converterElement != null) {
+      return XmlConverterXmlElementGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        converterElement.name!,
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    } else if (type.element!.hasXmlSerializable) {
+      return XmlSerializableXmlElementGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    } else {
+      return XmlTextXmlElementGetterGenerator(
+        xmlElement.name ?? element.getEncodedFieldName(),
+        namespace: xmlElement.namespace,
+        isNullable: type.isNullable,
+      );
+    }
   }
 }

@@ -10,6 +10,15 @@ class FakeInterfaceType extends Fake implements InterfaceType {
   final List<InterfaceType> allSupertypes;
 
   @override
+  final List<InterfaceType> interfaces;
+
+  @override
+  final List<InterfaceType> mixins;
+
+  @override
+  final InterfaceType? superclass;
+
+  @override
   InterfaceElement get element =>
       _element ??
       FakeClassElement(
@@ -68,6 +77,9 @@ class FakeInterfaceType extends Fake implements InterfaceType {
 
   FakeInterfaceType({
     List<InterfaceType>? allSupertypes,
+    List<InterfaceType>? interfaces,
+    List<InterfaceType>? mixins,
+    this.superclass,
     InterfaceElement? element,
     bool? isDartCoreBool,
     bool? isDartCoreDouble,
@@ -86,6 +98,8 @@ class FakeInterfaceType extends Fake implements InterfaceType {
     NullabilitySuffix? nullabilitySuffix,
     List<DartType>? typeArguments,
   })  : allSupertypes = allSupertypes ?? [],
+        interfaces = interfaces ?? [],
+        mixins = mixins ?? [],
         isDartCoreBool = isDartCoreBool ?? false,
         isDartCoreDouble = isDartCoreDouble ?? false,
         isDartCoreEnum = isDartCoreEnum ?? false,

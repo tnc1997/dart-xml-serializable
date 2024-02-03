@@ -14,6 +14,8 @@ import 'generator_factories/getter_generator_factory.dart';
 import 'generator_factories/serializer_generator_factory.dart';
 import 'serializer_generators/iterable_serializer_generator.dart';
 import 'serializer_generators/serializer_generator.dart';
+import 'serializer_generators/xml_converter_xml_element_serializer_generator.dart';
+import 'serializer_generators/xml_serializable_xml_element_serializer_generator.dart';
 
 class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   final BuilderGeneratorFactory _builderGeneratorFactory;
@@ -353,91 +355,65 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
   }) {
     type ??= element.type;
 
-    if (type is InterfaceType && type.element.hasXmlSerializable) {
-      for (final element in element.library.topLevelElements) {
-        if (element == type.element) {
-          return _XmlSerializableSerializerGenerator(
-            element.name!,
-            isNullable: type.isNullable,
-          );
-        }
-      }
-
-      for (final import in element.library.libraryImports) {
-        for (final entry in import.namespace.definedNames.entries) {
-          if (entry.value == type.element) {
-            return _XmlSerializableSerializerGenerator(
-              entry.key,
+    if (element.hasXmlElement) {
+      final converterElement = element.getXmlConverterElement(type: type);
+      if (converterElement != null) {
+        return XmlConverterXmlElementSerializerGenerator(
+          converterElement.name!,
+          isNullable: type.isNullable,
+        );
+      } else if (type is InterfaceType && type.element.hasXmlSerializable) {
+        for (final element in element.library.topLevelElements) {
+          if (element == type.element) {
+            return XmlSerializableXmlElementSerializerGenerator(
+              element.name!,
               isNullable: type.isNullable,
             );
           }
         }
+
+        for (final import in element.library.libraryImports) {
+          for (final entry in import.namespace.definedNames.entries) {
+            if (entry.value == type.element) {
+              return XmlSerializableXmlElementSerializerGenerator(
+                entry.key,
+                isNullable: type.isNullable,
+              );
+            }
+          }
+        }
+
+        return XmlSerializableXmlElementSerializerGenerator(
+          type.element.name,
+          isNullable: type.isNullable,
+        );
+      } else if (type is ParameterizedType && type.isDartCoreIterable) {
+        return IterableSerializerGenerator(
+          _xmlSerializableSerializerGeneratorFactory(
+            element,
+            type: type.typeArguments.single,
+          ),
+          isNullable: type.isNullable,
+        );
+      } else if (type is ParameterizedType && type.isDartCoreList) {
+        return ListSerializerGenerator(
+          _xmlSerializableSerializerGeneratorFactory(
+            element,
+            type: type.typeArguments.single,
+          ),
+          isNullable: type.isNullable,
+        );
+      } else if (type is ParameterizedType && type.isDartCoreSet) {
+        return SetSerializerGenerator(
+          _xmlSerializableSerializerGeneratorFactory(
+            element,
+            type: type.typeArguments.single,
+          ),
+          isNullable: type.isNullable,
+        );
       }
-
-      return _XmlSerializableSerializerGenerator(
-        type.element.name,
-        isNullable: type.isNullable,
-      );
-    } else if (type is ParameterizedType && type.isDartCoreIterable) {
-      return IterableSerializerGenerator(
-        _xmlSerializableSerializerGeneratorFactory(
-          element,
-          type: type.typeArguments.single,
-        ),
-        isNullable: type.isNullable,
-      );
-    } else if (type is ParameterizedType && type.isDartCoreList) {
-      return ListSerializerGenerator(
-        _xmlSerializableSerializerGeneratorFactory(
-          element,
-          type: type.typeArguments.single,
-        ),
-        isNullable: type.isNullable,
-      );
-    } else if (type is ParameterizedType && type.isDartCoreSet) {
-      return SetSerializerGenerator(
-        _xmlSerializableSerializerGeneratorFactory(
-          element,
-          type: type.typeArguments.single,
-        ),
-        isNullable: type.isNullable,
-      );
-    } else {
-      return _serializerGeneratorFactory(type);
-    }
-  }
-}
-
-/// Defines methods for generating serializers and deserializers for types that have an annotation of the form `@XmlSerializable()`.
-class _XmlSerializableSerializerGenerator extends SerializerGenerator {
-  /// If `false` (the default) then the type does not represent a nullable type.
-  final bool _isNullable;
-
-  /// The name of the type (including the prefix where applicable).
-  final String _name;
-
-  const _XmlSerializableSerializerGenerator(
-    this._name, {
-    bool isNullable = false,
-  }) : _isNullable = isNullable;
-
-  @override
-  String generateSerializer(String expression) => expression;
-
-  @override
-  String generateDeserializer(String expression) {
-    final buffer = StringBuffer();
-
-    if (_isNullable) {
-      buffer.write('$expression != null ? ');
     }
 
-    buffer.write('$_name.fromXmlElement($expression)');
-
-    if (_isNullable) {
-      buffer.write(' : null');
-    }
-
-    return buffer.toString();
+    return _serializerGeneratorFactory(type);
   }
 }

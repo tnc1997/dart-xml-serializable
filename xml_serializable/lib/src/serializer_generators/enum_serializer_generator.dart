@@ -3,14 +3,14 @@ import 'package:recase/recase.dart';
 import 'serializer_generator.dart';
 
 class EnumSerializerGenerator extends SerializerGenerator {
+  /// The name of the type.
+  final String _type;
+
   /// If `false` (the default) then the type does not represent a nullable type.
   final bool _isNullable;
 
-  /// The name of the type.
-  final String _name;
-
   const EnumSerializerGenerator(
-    this._name, {
+    this._type, {
     bool isNullable = false,
   }) : _isNullable = isNullable;
 
@@ -22,7 +22,7 @@ class EnumSerializerGenerator extends SerializerGenerator {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write('\$${_name}EnumMap[$expression]!');
+    buffer.write('\$${_type}EnumMap[$expression]!');
 
     if (_isNullable) {
       buffer.write(' : null');
@@ -40,7 +40,7 @@ class EnumSerializerGenerator extends SerializerGenerator {
     }
 
     buffer.write(
-      '\$${_name}EnumMap.entries.singleWhere((${_name.camelCase}EnumMapEntry) => ${_name.camelCase}EnumMapEntry.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${\$${_name}EnumMap.values.join(\', \')}\')).key',
+      '\$${_type}EnumMap.entries.singleWhere((${_type.camelCase}EnumMapEntry) => ${_type.camelCase}EnumMapEntry.value == $expression, orElse: () => throw ArgumentError(\'`\$$expression` is not one of the supported values: \${\$${_type}EnumMap.values.join(\', \')}\')).key',
     );
 
     if (_isNullable) {

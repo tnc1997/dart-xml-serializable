@@ -2,9 +2,6 @@ import 'serializer_generator.dart';
 
 /// Unifies the implementations for types that are able to be converted to/from a [String] using a `toString()` function and a `parse` constructor respectively.
 abstract class StringableSerializerGenerator extends SerializerGenerator {
-  /// If `false` (the default) then the type does not represent a nullable type.
-  final bool _isNullable;
-
   /// Represents an invocation on an instance of the type that returns a [String].
   ///
   /// Example: `toIso8601String()`.
@@ -16,6 +13,9 @@ abstract class StringableSerializerGenerator extends SerializerGenerator {
   ///
   /// Example: `DateTime.parse`.
   final String _parse;
+
+  /// If `false` (the default) then the type does not represent a nullable type.
+  final bool _isNullable;
 
   const StringableSerializerGenerator(
     this._toString,

@@ -3,7 +3,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 
 void main() {
   group(
-    'XmlSerializableXmlElementBuilderGenerator',
+    'XmlConverterXmlElementBuilderGenerator',
     () {
       group(
         'generateBuilder',
@@ -12,10 +12,12 @@ void main() {
             'should generate a builder with a name if constructed with a name',
             () {
               expect(
-                XmlSerializableXmlElementBuilderGenerator('name')
-                    .generateBuilder('value'),
+                XmlConverterXmlElementBuilderGenerator(
+                  'name',
+                  'TestConverter',
+                ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', nest: () { value.buildXmlChildren(builder, namespaces: namespaces); });',
+                  'builder.element(\'name\', nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); });',
                 ),
               );
             },
@@ -25,12 +27,13 @@ void main() {
             'should generate a builder with a name and namespace if constructed with a name and namespace',
             () {
               expect(
-                XmlSerializableXmlElementBuilderGenerator(
+                XmlConverterXmlElementBuilderGenerator(
                   'name',
+                  'TestConverter',
                   namespace: 'https://www.example.com',
                 ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', namespace: \'https://www.example.com\', nest: () { value.buildXmlChildren(builder, namespaces: namespaces); });',
+                  'builder.element(\'name\', namespace: \'https://www.example.com\', nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); });',
                 ),
               );
             },
@@ -40,12 +43,13 @@ void main() {
             'should generate a builder with a name and is self closing if constructed with a name and is self closing',
             () {
               expect(
-                XmlSerializableXmlElementBuilderGenerator(
+                XmlConverterXmlElementBuilderGenerator(
                   'name',
+                  'TestConverter',
                   isSelfClosing: true,
                 ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', isSelfClosing: true, nest: () { value.buildXmlChildren(builder, namespaces: namespaces); });',
+                  'builder.element(\'name\', isSelfClosing: true, nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); });',
                 ),
               );
             },
@@ -55,12 +59,13 @@ void main() {
             'should generate a null-aware builder if constructed with a nullable type',
             () {
               expect(
-                NullableXmlSerializableXmlElementBuilderGenerator(
+                NullableXmlConverterXmlElementBuilderGenerator(
                   'name',
+                  'TestConverter',
                   includeIfNull: false,
                 ).generateBuilder('value'),
                 equals(
-                  'if (value != null) { builder.element(\'name\', nest: () { value.buildXmlChildren(builder, namespaces: namespaces); }); }',
+                  'if (value != null) { builder.element(\'name\', nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); }); }',
                 ),
               );
             },
@@ -70,12 +75,13 @@ void main() {
             'should generate a null-aware builder if constructed with a nullable type and include if null',
             () {
               expect(
-                NullableXmlSerializableXmlElementBuilderGenerator(
+                NullableXmlConverterXmlElementBuilderGenerator(
                   'name',
+                  'TestConverter',
                   includeIfNull: true,
                 ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', nest: () { if (value != null) { value.buildXmlChildren(builder, namespaces: namespaces); } });',
+                  'builder.element(\'name\', nest: () { if (value != null) { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); } });',
                 ),
               );
             },

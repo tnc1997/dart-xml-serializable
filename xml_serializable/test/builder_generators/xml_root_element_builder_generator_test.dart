@@ -14,7 +14,8 @@ void main() {
               expect(
                 XmlRootElementBuilderGenerator('name').generateBuilder('value'),
                 equals(
-                    'builder.element(\'name\', namespaces: namespaces, nest: () { value.buildXmlChildren(builder, namespaces: namespaces); });'),
+                  'builder.element(\'name\', namespaces: namespaces, nest: () { value.buildXmlChildren(builder, namespaces: namespaces); });',
+                ),
               );
             },
           );

@@ -28,69 +28,69 @@ class FakeDartObject<T> extends Fake implements DartObject {
   bool? toBoolValue() {
     final value = _value;
 
-    return value is bool? ? value : null;
+    return value is bool ? value : null;
   }
 
   @override
   double? toDoubleValue() {
     final value = _value;
 
-    return value is double? ? value : null;
+    return value is double ? value : null;
   }
 
   @override
   ExecutableElement? toFunctionValue() {
     final value = _value;
 
-    return value is ExecutableElement? ? value : null;
+    return value is ExecutableElement ? value : null;
   }
 
   @override
   int? toIntValue() {
     final value = _value;
 
-    return value is int? ? value : null;
+    return value is int ? value : null;
   }
 
   @override
   List<DartObject>? toListValue() {
     final value = _value;
 
-    return value is List<DartObject>? ? value : null;
+    return value is List<DartObject> ? value : null;
   }
 
   @override
   Map<DartObject?, DartObject?>? toMapValue() {
     final value = _value;
 
-    return value is Map<DartObject?, DartObject?>? ? value : null;
+    return value is Map<DartObject?, DartObject?> ? value : null;
   }
 
   @override
   Set<DartObject>? toSetValue() {
     final value = _value;
 
-    return value is Set<DartObject>? ? value : null;
+    return value is Set<DartObject> ? value : null;
   }
 
   @override
   String? toStringValue() {
     final value = _value;
 
-    return value is String? ? value : null;
+    return value is String ? value : null;
   }
 
   @override
   String? toSymbolValue() {
     final value = _value;
 
-    return value is String? ? value : null;
+    return value is String ? value : null;
   }
 
   @override
   DartType? toTypeValue() {
     final value = _value;
 
-    return value is DartType? ? value : null;
+    return value is DartType ? value : null;
   }
 }
