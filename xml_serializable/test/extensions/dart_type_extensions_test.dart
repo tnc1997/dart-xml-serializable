@@ -171,7 +171,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  allSupertypes: [
+                  interfaces: [
                     FakeInterfaceType(
                       element: FakeXmlConverterClassElement(),
                     ),
@@ -189,7 +189,7 @@ void main() {
 
               expect(
                 FakeInterfaceType(
-                  allSupertypes: [
+                  interfaces: [
                     FakeInterfaceType(
                       element: FakeXmlConverterClassElement(),
                       typeArguments: [
@@ -224,7 +224,7 @@ void main() {
             () {
               expect(
                 FakeInterfaceType(
-                  allSupertypes: [
+                  interfaces: [
                     FakeInterfaceType(
                       element: FakeXmlConverterClassElement(),
                       typeArguments: [

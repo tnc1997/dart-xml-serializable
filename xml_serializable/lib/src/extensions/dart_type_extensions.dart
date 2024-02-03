@@ -60,29 +60,47 @@ extension DartTypeExtensions on DartType {
       element?.library?.identifier == '$_prefix/xml_value.dart' &&
       element?.name == 'XmlValue';
 
-  /// Returns `true` if this type represents a type that implements the type 'XmlConverter' defined in the xml_annotation library and can convert the [type].
+  /// Returns `true` if this type represents the type 'XmlConverter' defined in the xml_annotation library and can convert the [type] or this type represents a type that implements the type 'XmlConverter' defined in the xml_annotation library and can convert the [type].
   bool isXmlAnnotationXmlConverter({
     DartType? type,
   }) {
     final _ = this;
-    if (_ is InterfaceType) {
-      for (final supertype in _.allSupertypes) {
-        final element = supertype.element;
-        if ((element.library.identifier == '$_prefix/xml_converter.dart' &&
-                element.name == 'XmlConverter') &&
-            (type == null ||
-                (supertype.typeArguments[0].element == type.element &&
-                    ((supertype.typeArguments[0].nullabilitySuffix ==
+
+    if (element?.library?.identifier == '$_prefix/xml_converter.dart' &&
+        element?.name == 'XmlConverter' &&
+        (type == null ||
+            (_ is InterfaceType &&
+                (_.typeArguments[0].element == type.element &&
+                    ((_.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.none &&
                             type.nullabilitySuffix == NullabilitySuffix.none) ||
-                        (supertype.typeArguments[0].nullabilitySuffix ==
+                        (_.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.none &&
                             type.nullabilitySuffix ==
                                 NullabilitySuffix.question) ||
-                        (supertype.typeArguments[0].nullabilitySuffix ==
+                        (_.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.question &&
                             type.nullabilitySuffix ==
-                                NullabilitySuffix.question))))) {
+                                NullabilitySuffix.question)))))) {
+      return true;
+    }
+
+    if (_ is InterfaceType) {
+      final superclass = _.superclass;
+      if (superclass != null) {
+        if (superclass.isXmlAnnotationXmlConverter(type: type)) {
+          return true;
+        }
+      }
+
+      for (final interface in _.interfaces) {
+        if (interface.isXmlAnnotationXmlConverter(type: type)) {
+          return true;
+        }
+      }
+
+      for (final mixin in _.mixins) {
+        if (mixin.isXmlAnnotationXmlConverter(type: type)) {
           return true;
         }
       }
