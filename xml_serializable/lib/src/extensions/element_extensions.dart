@@ -320,7 +320,7 @@ extension ElementExtensions on Element {
   /// ```
   Element? getXmlValueElement() {
     for (final annotation in metadata) {
-      if (annotation.isXmlCDATA) {
+      if (annotation.isXmlValue) {
         final element = annotation.element;
         if (element is ConstructorElement) {
           return element.enclosingElement;
