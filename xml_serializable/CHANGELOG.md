@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.5.0 (2024-02-04)
+
+### Features
+
+* add support for custom converters ([#56](https://github.com/tnc1997/dart-xml-serializable/issues/56)) ([dc09f99](https://github.com/tnc1997/dart-xml-serializable/commit/dc09f99a4f8d039678e1477d44d163b05d5c5bf6))
+
+### Tests
+
+* add xml converter and update fakes ([#57](https://github.com/tnc1997/dart-xml-serializable/issues/57)) ([0615769](https://github.com/tnc1997/dart-xml-serializable/commit/0615769a7a61dea8445711023be4f0ff71da481c))
+
 ## 2.4.1 (2023-12-13)
 
 ### Builds
