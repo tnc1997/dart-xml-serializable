@@ -1,25 +1,33 @@
-import 'fake_class_element.dart';
-import 'fake_constructor_element.dart';
-import 'fake_element_annotation.dart';
-import 'fake_library_element.dart';
+import 'package:xml_annotation/xml_annotation.dart';
+
+import 'fake_constructor_element_element_annotation.dart';
+import 'fake_interface_type.dart';
+import 'fake_property_accessor_element_element_annotation.dart';
+import 'fake_xml_text_class_element.dart';
 import 'fake_xml_text_dart_object.dart';
 
-class FakeXmlTextElementAnnotation extends FakeElementAnnotation {
-  FakeXmlTextElementAnnotation()
-      : super(
-          element: FakeConstructorElement(
-            enclosingElement: FakeClassElement(
-              library: FakeLibraryElement(
-                identifier:
-                    'package:xml_annotation/src/annotations/xml_text.dart',
-              ),
-              name: 'XmlText',
-            ),
-            library: FakeLibraryElement(
-              identifier:
-                  'package:xml_annotation/src/annotations/xml_text.dart',
-            ),
+class FakeXmlTextConstructorElementElementAnnotation
+    extends FakeConstructorElementElementAnnotation {
+  FakeXmlTextConstructorElementElementAnnotation({
+    required XmlText value,
+  }) : super(
+          enclosingElement: FakeXmlTextClassElement(),
+          value: FakeXmlTextDartObject(
+            value: value,
           ),
-          value: FakeXmlTextDartObject(),
+        );
+}
+
+class FakeXmlTextPropertyAccessorElementElementAnnotation
+    extends FakePropertyAccessorElementElementAnnotation {
+  FakeXmlTextPropertyAccessorElementElementAnnotation({
+    required XmlText value,
+  }) : super(
+          returnType: FakeInterfaceType(
+            element: FakeXmlTextClassElement(),
+          ),
+          value: FakeXmlTextDartObject(
+            value: value,
+          ),
         );
 }

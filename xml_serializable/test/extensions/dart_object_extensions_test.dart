@@ -135,8 +135,7 @@ void main() {
             () {
               expect(
                 FakeFieldRenameDartObject(
-                  index: FieldRename.none.index,
-                  name: FieldRename.none.name,
+                  value: FieldRename.none,
                 ).toFieldRenameValue(),
                 FieldRename.none,
               );
@@ -177,7 +176,9 @@ void main() {
             () {
               expect(
                 FakeXmlAttributeDartObject(
-                  name: 'HelloWorld',
+                  value: XmlAttribute(
+                    name: 'HelloWorld',
+                  ),
                 ).toXmlAttributeValue(),
                 predicate<XmlAttribute>(
                   (value) => value.name == 'HelloWorld',
@@ -231,7 +232,9 @@ void main() {
             () {
               expect(
                 FakeXmlElementDartObject(
-                  name: 'HelloWorld',
+                  value: XmlElement(
+                    name: 'HelloWorld',
+                  ),
                 ).toXmlElementValue(),
                 predicate<XmlElement>(
                   (value) => value.name == 'HelloWorld',
@@ -260,7 +263,9 @@ void main() {
             () {
               expect(
                 FakeXmlEnumDartObject(
-                  fieldRename: FieldRename.none,
+                  value: XmlEnum(
+                    fieldRename: FieldRename.none,
+                  ),
                 ).toXmlEnumValue(),
                 predicate<XmlEnum>(
                   (value) => value.fieldRename == FieldRename.none,
@@ -289,7 +294,9 @@ void main() {
             () {
               expect(
                 FakeXmlRootElementDartObject(
-                  name: 'HelloWorld',
+                  value: XmlRootElement(
+                    name: 'HelloWorld',
+                  ),
                 ).toXmlRootElementValue(),
                 predicate<XmlRootElement>(
                   (value) => value.name == 'HelloWorld',
@@ -318,7 +325,9 @@ void main() {
             () {
               expect(
                 FakeXmlSerializableDartObject(
-                  fieldRename: FieldRename.none,
+                  value: XmlSerializable(
+                    fieldRename: FieldRename.none,
+                  ),
                 ).toXmlSerializableValue(),
                 predicate<XmlSerializable>(
                   (value) => value.fieldRename == FieldRename.none,
@@ -371,7 +380,9 @@ void main() {
             'should return an `XmlValue` if the object being represented is of type `XmlValue`',
             () {
               expect(
-                FakeXmlValueDartObject('value').toXmlValueValue(),
+                FakeXmlValueDartObject(
+                  value: XmlValue('value'),
+                ).toXmlValueValue(),
                 predicate<XmlValue>(
                   (value) => value.value == 'value',
                 ),

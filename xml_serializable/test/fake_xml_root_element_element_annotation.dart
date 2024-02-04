@@ -1,32 +1,33 @@
-import 'fake_class_element.dart';
-import 'fake_constructor_element.dart';
-import 'fake_element_annotation.dart';
-import 'fake_library_element.dart';
+import 'package:xml_annotation/xml_annotation.dart';
+
+import 'fake_constructor_element_element_annotation.dart';
+import 'fake_interface_type.dart';
+import 'fake_property_accessor_element_element_annotation.dart';
+import 'fake_xml_root_element_class_element.dart';
 import 'fake_xml_root_element_dart_object.dart';
 
-class FakeXmlRootElementElementAnnotation extends FakeElementAnnotation {
-  FakeXmlRootElementElementAnnotation({
-    String? name,
-    String? namespace,
-    bool? isSelfClosing,
+class FakeXmlRootElementConstructorElementElementAnnotation
+    extends FakeConstructorElementElementAnnotation {
+  FakeXmlRootElementConstructorElementElementAnnotation({
+    required XmlRootElement value,
   }) : super(
-          element: FakeConstructorElement(
-            enclosingElement: FakeClassElement(
-              library: FakeLibraryElement(
-                identifier:
-                    'package:xml_annotation/src/annotations/xml_root_element.dart',
-              ),
-              name: 'XmlRootElement',
-            ),
-            library: FakeLibraryElement(
-              identifier:
-                  'package:xml_annotation/src/annotations/xml_root_element.dart',
-            ),
+          enclosingElement: FakeXmlRootElementClassElement(),
+          value: FakeXmlRootElementDartObject(
+            value: value,
+          ),
+        );
+}
+
+class FakeXmlRootElementPropertyAccessorElementElementAnnotation
+    extends FakePropertyAccessorElementElementAnnotation {
+  FakeXmlRootElementPropertyAccessorElementElementAnnotation({
+    required XmlRootElement value,
+  }) : super(
+          returnType: FakeInterfaceType(
+            element: FakeXmlRootElementClassElement(),
           ),
           value: FakeXmlRootElementDartObject(
-            name: name,
-            namespace: namespace,
-            isSelfClosing: isSelfClosing,
+            value: value,
           ),
         );
 }

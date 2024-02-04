@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:xml_annotation/xml_annotation.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_field_element.dart';
@@ -19,12 +20,30 @@ void main() {
         'getXmlAttribute',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlAttribute`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlAttribute`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlAttributeElementAnnotation(),
+                    FakeXmlAttributeConstructorElementElementAnnotation(
+                      value: XmlAttribute(),
+                    ),
+                  ],
+                ).getXmlAttribute(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlAttribute`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlAttributePropertyAccessorElementElementAnnotation(
+                      value: XmlAttribute(),
+                    ),
                   ],
                 ).getXmlAttribute(),
                 isNotNull,
@@ -48,12 +67,30 @@ void main() {
         'getXmlCDATA',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlCDATA`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlCDATA`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlCDATAElementAnnotation(),
+                    FakeXmlCDATAConstructorElementElementAnnotation(
+                      value: XmlCDATA(),
+                    ),
+                  ],
+                ).getXmlCDATA(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlCDATA`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlCDATAPropertyAccessorElementElementAnnotation(
+                      value: XmlCDATA(),
+                    ),
                   ],
                 ).getXmlCDATA(),
                 isNotNull,
@@ -77,12 +114,30 @@ void main() {
         'getXmlElement',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlElement`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlElement`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlElementElementAnnotation(),
+                    FakeXmlElementConstructorElementElementAnnotation(
+                      value: XmlElement(),
+                    ),
+                  ],
+                ).getXmlElement(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlElement`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlElementPropertyAccessorElementElementAnnotation(
+                      value: XmlElement(),
+                    ),
                   ],
                 ).getXmlElement(),
                 isNotNull,
@@ -106,12 +161,30 @@ void main() {
         'getXmlEnum',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlEnum`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlEnum`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlEnumElementAnnotation(),
+                    FakeXmlEnumConstructorElementElementAnnotation(
+                      value: XmlEnum(),
+                    ),
+                  ],
+                ).getXmlEnum(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlEnum`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlEnumPropertyAccessorElementElementAnnotation(
+                      value: XmlEnum(),
+                    ),
                   ],
                 ).getXmlEnum(),
                 isNotNull,
@@ -135,12 +208,30 @@ void main() {
         'getXmlRootElement',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlRootElement`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlRootElement`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlRootElementElementAnnotation(),
+                    FakeXmlRootElementConstructorElementElementAnnotation(
+                      value: XmlRootElement(),
+                    ),
+                  ],
+                ).getXmlRootElement(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlRootElement`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlRootElementPropertyAccessorElementElementAnnotation(
+                      value: XmlRootElement(),
+                    ),
                   ],
                 ).getXmlRootElement(),
                 isNotNull,
@@ -164,12 +255,30 @@ void main() {
         'getXmlSerializable',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlSerializable`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlSerializable`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlSerializableElementAnnotation(),
+                    FakeXmlSerializableConstructorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
+                  ],
+                ).getXmlSerializable(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlSerializable`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlSerializablePropertyAccessorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
                   ],
                 ).getXmlSerializable(),
                 isNotNull,
@@ -193,12 +302,30 @@ void main() {
         'getXmlText',
         () {
           test(
-            'should return the annotation if the element has an annotation of the form `@XmlText`',
+            'should return the annotation if the element has a constructor based annotation of the form `@XmlText`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlTextElementAnnotation(),
+                    FakeXmlTextConstructorElementElementAnnotation(
+                      value: XmlText(),
+                    ),
+                  ],
+                ).getXmlText(),
+                isNotNull,
+              );
+            },
+          );
+
+          test(
+            'should return the annotation if the element has a property accessor based annotation of the form `@XmlText`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlTextPropertyAccessorElementElementAnnotation(
+                      value: XmlText(),
+                    ),
                   ],
                 ).getXmlText(),
                 isNotNull,
@@ -222,12 +349,30 @@ void main() {
         'hasXmlAttribute',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlAttribute()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlAttribute()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlAttributeElementAnnotation(),
+                    FakeXmlAttributeConstructorElementElementAnnotation(
+                      value: XmlAttribute(),
+                    ),
+                  ],
+                ).hasXmlAttribute,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlAttribute()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlAttributePropertyAccessorElementElementAnnotation(
+                      value: XmlAttribute(),
+                    ),
                   ],
                 ).hasXmlAttribute,
                 isTrue,
@@ -251,12 +396,30 @@ void main() {
         'hasXmlCDATA',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlCDATA()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlCDATA()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlCDATAElementAnnotation(),
+                    FakeXmlCDATAConstructorElementElementAnnotation(
+                      value: XmlCDATA(),
+                    ),
+                  ],
+                ).hasXmlCDATA,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlCDATA()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlCDATAPropertyAccessorElementElementAnnotation(
+                      value: XmlCDATA(),
+                    ),
                   ],
                 ).hasXmlCDATA,
                 isTrue,
@@ -280,12 +443,30 @@ void main() {
         'hasXmlElement',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlElement()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlElement()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlElementElementAnnotation(),
+                    FakeXmlElementConstructorElementElementAnnotation(
+                      value: XmlElement(),
+                    ),
+                  ],
+                ).hasXmlElement,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlElement()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlElementPropertyAccessorElementElementAnnotation(
+                      value: XmlElement(),
+                    ),
                   ],
                 ).hasXmlElement,
                 isTrue,
@@ -309,12 +490,30 @@ void main() {
         'hasXmlEnum',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlEnum()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlEnum()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlEnumElementAnnotation(),
+                    FakeXmlEnumConstructorElementElementAnnotation(
+                      value: XmlEnum(),
+                    ),
+                  ],
+                ).hasXmlEnum,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlEnum()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlEnumPropertyAccessorElementElementAnnotation(
+                      value: XmlEnum(),
+                    ),
                   ],
                 ).hasXmlEnum,
                 isTrue,
@@ -338,12 +537,30 @@ void main() {
         'hasXmlRootElement',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlRootElement()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlRootElement()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlRootElementElementAnnotation(),
+                    FakeXmlRootElementConstructorElementElementAnnotation(
+                      value: XmlRootElement(),
+                    ),
+                  ],
+                ).hasXmlRootElement,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlRootElement()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlRootElementPropertyAccessorElementElementAnnotation(
+                      value: XmlRootElement(),
+                    ),
                   ],
                 ).hasXmlRootElement,
                 isTrue,
@@ -367,12 +584,30 @@ void main() {
         'hasXmlSerializable',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlSerializable()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlSerializable()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlSerializableElementAnnotation(),
+                    FakeXmlSerializableConstructorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
+                  ],
+                ).hasXmlSerializable,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlSerializable()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlSerializablePropertyAccessorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
                   ],
                 ).hasXmlSerializable,
                 isTrue,
@@ -396,12 +631,30 @@ void main() {
         'hasXmlText',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlText()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlText()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlTextElementAnnotation(),
+                    FakeXmlTextConstructorElementElementAnnotation(
+                      value: XmlText(),
+                    ),
+                  ],
+                ).hasXmlText,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlText()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlTextPropertyAccessorElementElementAnnotation(
+                      value: XmlText(),
+                    ),
                   ],
                 ).hasXmlText,
                 isTrue,
@@ -425,12 +678,30 @@ void main() {
         'hasXmlValue',
         () {
           test(
-            'should return true if the element has an annotation of the form `@XmlValue()`',
+            'should return true if the element has a constructor based annotation of the form `@XmlValue()`',
             () {
               expect(
                 FakeFieldElement(
                   metadata: [
-                    FakeXmlValueElementAnnotation('value'),
+                    FakeXmlValueConstructorElementElementAnnotation(
+                      value: XmlValue('value'),
+                    ),
+                  ],
+                ).hasXmlValue,
+                isTrue,
+              );
+            },
+          );
+
+          test(
+            'should return true if the element has a property accessor based annotation of the form `@XmlValue()`',
+            () {
+              expect(
+                FakeFieldElement(
+                  metadata: [
+                    FakeXmlValuePropertyAccessorElementElementAnnotation(
+                      value: XmlValue('value'),
+                    ),
                   ],
                 ).hasXmlValue,
                 isTrue,

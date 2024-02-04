@@ -21,7 +21,17 @@ jobs:
       - name: Run tests
         run: |
           cd xml_serializable
-          dart test
+          dart test --coverage './coverage'
+      - name: Format coverage
+        run: |
+          cd xml_serializable
+          dart pub global activate coverage
+          dart pub global run coverage:format_coverage --report-on 'lib' --lcov --out './coverage/lcov.info' --in './coverage'
+      - name: Upload coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-${{ matrix.os }}-${{ matrix.sdk }}
+          path: ./xml_serializable/coverage/lcov.info
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]

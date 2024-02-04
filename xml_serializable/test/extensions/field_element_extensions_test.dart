@@ -22,8 +22,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeClassElement(
                     metadata: [
-                      FakeXmlSerializableElementAnnotation(
-                        fieldRename: FieldRename.kebab,
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(
+                          fieldRename: FieldRename.kebab,
+                        ),
                       ),
                     ],
                   ),
@@ -41,8 +43,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeClassElement(
                     metadata: [
-                      FakeXmlSerializableElementAnnotation(
-                        fieldRename: FieldRename.snake,
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(
+                          fieldRename: FieldRename.snake,
+                        ),
                       ),
                     ],
                   ),
@@ -60,8 +64,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeClassElement(
                     metadata: [
-                      FakeXmlSerializableElementAnnotation(
-                        fieldRename: FieldRename.pascal,
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(
+                          fieldRename: FieldRename.pascal,
+                        ),
                       ),
                     ],
                   ),
@@ -79,8 +85,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeClassElement(
                     metadata: [
-                      FakeXmlSerializableElementAnnotation(
-                        fieldRename: FieldRename.none,
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(
+                          fieldRename: FieldRename.none,
+                        ),
                       ),
                     ],
                   ),
@@ -98,7 +106,9 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeClassElement(
                     metadata: [
-                      FakeXmlSerializableElementAnnotation(),
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
                     ],
                   ),
                   name: 'helloWorld',
@@ -127,8 +137,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeEnumElement(
                     metadata: [
-                      FakeXmlEnumElementAnnotation(
-                        fieldRename: FieldRename.kebab,
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(
+                          fieldRename: FieldRename.kebab,
+                        ),
                       ),
                     ],
                   ),
@@ -146,8 +158,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeEnumElement(
                     metadata: [
-                      FakeXmlEnumElementAnnotation(
-                        fieldRename: FieldRename.snake,
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(
+                          fieldRename: FieldRename.snake,
+                        ),
                       ),
                     ],
                   ),
@@ -165,8 +179,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeEnumElement(
                     metadata: [
-                      FakeXmlEnumElementAnnotation(
-                        fieldRename: FieldRename.pascal,
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(
+                          fieldRename: FieldRename.pascal,
+                        ),
                       ),
                     ],
                   ),
@@ -184,8 +200,10 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeEnumElement(
                     metadata: [
-                      FakeXmlEnumElementAnnotation(
-                        fieldRename: FieldRename.none,
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(
+                          fieldRename: FieldRename.none,
+                        ),
                       ),
                     ],
                   ),
@@ -203,7 +221,9 @@ void main() {
                 FakeFieldElement(
                   enclosingElement: FakeEnumElement(
                     metadata: [
-                      FakeXmlEnumElementAnnotation(),
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(),
+                      ),
                     ],
                   ),
                   name: 'helloWorld',

@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+import 'package:xml_annotation/xml_annotation.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_class_element.dart';
@@ -23,7 +24,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlAttributeElementAnnotation(),
+                FakeXmlAttributeConstructorElementElementAnnotation(
+                  value: XmlAttribute(),
+                ),
               ],
               name: 'value',
             ),
@@ -47,8 +50,10 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlAttributeElementAnnotation(
-                  name: 'name',
+                FakeXmlAttributeConstructorElementElementAnnotation(
+                  value: XmlAttribute(
+                    name: 'name',
+                  ),
                 ),
               ],
               name: 'value',
@@ -73,9 +78,11 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlAttributeElementAnnotation(
-                  name: 'name',
-                  namespace: 'https://www.example.com',
+                FakeXmlAttributeConstructorElementElementAnnotation(
+                  value: XmlAttribute(
+                    name: 'name',
+                    namespace: 'https://www.example.com',
+                  ),
                 ),
               ],
               name: 'value',
@@ -103,7 +110,9 @@ void main() {
             () => constructorGeneratorFactory(
               FakeClassElement(
                 metadata: [
-                  FakeXmlAttributeElementAnnotation(),
+                  FakeXmlAttributeConstructorElementElementAnnotation(
+                    value: XmlAttribute(),
+                  ),
                 ],
               ),
             ),
@@ -118,7 +127,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlCDATAElementAnnotation(),
+                FakeXmlCDATAConstructorElementElementAnnotation(
+                  value: XmlCDATA(),
+                ),
               ],
               name: 'value',
             ),
@@ -145,7 +156,9 @@ void main() {
             () => constructorGeneratorFactory(
               FakeClassElement(
                 metadata: [
-                  FakeXmlCDATAElementAnnotation(),
+                  FakeXmlCDATAConstructorElementElementAnnotation(
+                    value: XmlCDATA(),
+                  ),
                 ],
               ),
             ),
@@ -160,13 +173,17 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(),
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(),
+                ),
               ],
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeClassElement(
                   metadata: [
-                    FakeXmlSerializableElementAnnotation(),
+                    FakeXmlSerializableConstructorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
                   ],
                 ),
               ),
@@ -193,15 +210,19 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                  ),
                 ),
               ],
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeClassElement(
                   metadata: [
-                    FakeXmlSerializableElementAnnotation(),
+                    FakeXmlSerializableConstructorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
                   ],
                 ),
               ),
@@ -228,16 +249,20 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
-                  namespace: 'https://www.example.com',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                    namespace: 'https://www.example.com',
+                  ),
                 ),
               ],
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeClassElement(
                   metadata: [
-                    FakeXmlSerializableElementAnnotation(),
+                    FakeXmlSerializableConstructorElementElementAnnotation(
+                      value: XmlSerializable(),
+                    ),
                   ],
                 ),
               ),
@@ -264,7 +289,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(),
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(),
+                ),
               ],
               name: 'value',
               type: FakeInterfaceType(
@@ -274,7 +301,9 @@ void main() {
                   FakeInterfaceType(
                     element: FakeClassElement(
                       metadata: [
-                        FakeXmlSerializableElementAnnotation(),
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(),
+                        ),
                       ],
                     ),
                   ),
@@ -303,8 +332,10 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                  ),
                 ),
               ],
               name: 'value',
@@ -315,7 +346,9 @@ void main() {
                   FakeInterfaceType(
                     element: FakeClassElement(
                       metadata: [
-                        FakeXmlSerializableElementAnnotation(),
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(),
+                        ),
                       ],
                     ),
                   ),
@@ -344,9 +377,11 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
-                  namespace: 'https://www.example.com',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                    namespace: 'https://www.example.com',
+                  ),
                 ),
               ],
               name: 'value',
@@ -357,7 +392,9 @@ void main() {
                   FakeInterfaceType(
                     element: FakeClassElement(
                       metadata: [
-                        FakeXmlSerializableElementAnnotation(),
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(),
+                        ),
                       ],
                     ),
                   ),
@@ -386,7 +423,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(),
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(),
+                ),
               ],
               name: 'value',
             ),
@@ -410,8 +449,10 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                  ),
                 ),
               ],
               name: 'value',
@@ -436,9 +477,11 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
-                  namespace: 'https://www.example.com',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                    namespace: 'https://www.example.com',
+                  ),
                 ),
               ],
               name: 'value',
@@ -465,7 +508,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(),
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(),
+                ),
               ],
               name: 'value',
               type: FakeInterfaceType(
@@ -501,8 +546,10 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                  ),
                 ),
               ],
               name: 'value',
@@ -539,9 +586,11 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlElementElementAnnotation(
-                  name: 'name',
-                  namespace: 'https://www.example.com',
+                FakeXmlElementConstructorElementElementAnnotation(
+                  value: XmlElement(
+                    name: 'name',
+                    namespace: 'https://www.example.com',
+                  ),
                 ),
               ],
               name: 'value',
@@ -579,7 +628,9 @@ void main() {
             () => constructorGeneratorFactory(
               FakeClassElement(
                 metadata: [
-                  FakeXmlElementElementAnnotation(),
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(),
+                  ),
                 ],
               ),
             ),
@@ -594,7 +645,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeClassElement(
               metadata: [
-                FakeXmlRootElementElementAnnotation(),
+                FakeXmlRootElementConstructorElementElementAnnotation(
+                  value: XmlRootElement(),
+                ),
               ],
               name: 'HelloWorld',
             ),
@@ -620,8 +673,10 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeClassElement(
               metadata: [
-                FakeXmlRootElementElementAnnotation(
-                  name: 'name',
+                FakeXmlRootElementConstructorElementElementAnnotation(
+                  value: XmlRootElement(
+                    name: 'name',
+                  ),
                 ),
               ],
               name: 'HelloWorld',
@@ -648,9 +703,11 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeClassElement(
               metadata: [
-                FakeXmlRootElementElementAnnotation(
-                  name: 'name',
-                  namespace: 'https://www.example.com',
+                FakeXmlRootElementConstructorElementElementAnnotation(
+                  value: XmlRootElement(
+                    name: 'name',
+                    namespace: 'https://www.example.com',
+                  ),
                 ),
               ],
               name: 'HelloWorld',
@@ -678,7 +735,9 @@ void main() {
             () => constructorGeneratorFactory(
               FakeFieldElement(
                 metadata: [
-                  FakeXmlRootElementElementAnnotation(),
+                  FakeXmlRootElementConstructorElementElementAnnotation(
+                    value: XmlRootElement(),
+                  ),
                 ],
               ),
             ),
@@ -693,7 +752,9 @@ void main() {
           final generator = constructorGeneratorFactory(
             FakeFieldElement(
               metadata: [
-                FakeXmlTextElementAnnotation(),
+                FakeXmlTextConstructorElementElementAnnotation(
+                  value: XmlText(),
+                ),
               ],
               name: 'value',
             ),
@@ -720,7 +781,9 @@ void main() {
             () => constructorGeneratorFactory(
               FakeClassElement(
                 metadata: [
-                  FakeXmlTextElementAnnotation(),
+                  FakeXmlTextConstructorElementElementAnnotation(
+                    value: XmlText(),
+                  ),
                 ],
               ),
             ),
