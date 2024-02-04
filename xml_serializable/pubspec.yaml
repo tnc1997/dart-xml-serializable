@@ -30,5 +30,5 @@ dependency_overrides:
   xml_annotation:
     git:
       path: xml_annotation
-      ref: feat/49
+      ref: main
       url: https://github.com/tnc1997/dart-xml-serializable.git
