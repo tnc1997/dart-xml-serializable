@@ -20,6 +20,11 @@ extension DartTypeExtensions on DartType {
   bool get isNullable =>
       this is DynamicType || nullabilitySuffix == NullabilitySuffix.question;
 
+  /// Returns `true` if this type represents the type 'FieldRename' defined in the xml_annotation library.
+  bool get isXmlAnnotationFieldRename =>
+      element?.library?.identifier == '$_prefix/xml_serializable.dart' &&
+      element?.name == 'FieldRename';
+
   /// Returns `true` if this type represents the type 'XmlAttribute' defined in the xml_annotation library.
   bool get isXmlAnnotationXmlAttribute =>
       element?.library?.identifier == '$_prefix/xml_attribute.dart' &&

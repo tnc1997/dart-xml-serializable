@@ -1,42 +1,23 @@
-import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/type.dart';
-import 'package:test/fake.dart';
+import 'package:xml_annotation/xml_annotation.dart';
 
-import 'fake_class_element.dart';
 import 'fake_dart_object.dart';
 import 'fake_interface_type.dart';
-import 'fake_library_element.dart';
+import 'fake_xml_attribute_class_element.dart';
 
-class FakeXmlAttributeDartObject extends Fake implements DartObject {
-  @override
-  final DartType type = FakeInterfaceType(
-    element: FakeClassElement(
-      library: FakeLibraryElement(
-        identifier: 'package:xml_annotation/src/annotations/xml_attribute.dart',
-      ),
-      name: 'XmlAttribute',
-    ),
-  );
-
-  final String? _name;
-
-  final String? _namespace;
-
+class FakeXmlAttributeDartObject extends FakeDartObject<XmlAttribute> {
   FakeXmlAttributeDartObject({
-    String? name,
-    String? namespace,
-  })  : _name = name,
-        _namespace = namespace;
-
-  @override
-  DartObject? getField(String name) {
-    switch (name) {
-      case 'name':
-        return FakeDartObject(value: _name);
-      case 'namespace':
-        return FakeDartObject(value: _namespace);
-      default:
-        return null;
-    }
-  }
+    super.value,
+  }) : super(
+          type: FakeInterfaceType(
+            element: FakeXmlAttributeClassElement(),
+          ),
+          fields: {
+            'name': FakeDartObject(
+              value: value?.name,
+            ),
+            'namespace': FakeDartObject(
+              value: value?.namespace,
+            ),
+          },
+        );
 }

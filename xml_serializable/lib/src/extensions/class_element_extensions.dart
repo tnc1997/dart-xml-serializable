@@ -7,7 +7,7 @@ extension ClassElementExtensions on ClassElement {
       for (var field in fields) field.name: field,
     };
 
-    for (var supertype in allSupertypes) {
+    for (var supertype in thisType.allSupertypes) {
       for (var field in supertype.element.fields) {
         allFields.putIfAbsent(field.name, () => field);
       }

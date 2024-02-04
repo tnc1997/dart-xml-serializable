@@ -1,32 +1,33 @@
 import 'package:xml_annotation/xml_annotation.dart';
 
-import 'fake_class_element.dart';
-import 'fake_constructor_element.dart';
-import 'fake_element_annotation.dart';
-import 'fake_library_element.dart';
+import 'fake_constructor_element_element_annotation.dart';
+import 'fake_interface_type.dart';
+import 'fake_property_accessor_element_element_annotation.dart';
+import 'fake_xml_serializable_class_element.dart';
 import 'fake_xml_serializable_dart_object.dart';
 
-class FakeXmlSerializableElementAnnotation extends FakeElementAnnotation {
-  FakeXmlSerializableElementAnnotation({
-    bool? createMixin,
-    FieldRename? fieldRename,
+class FakeXmlSerializableConstructorElementElementAnnotation
+    extends FakeConstructorElementElementAnnotation {
+  FakeXmlSerializableConstructorElementElementAnnotation({
+    required XmlSerializable value,
   }) : super(
-          element: FakeConstructorElement(
-            enclosingElement: FakeClassElement(
-              library: FakeLibraryElement(
-                identifier:
-                    'package:xml_annotation/src/annotations/xml_serializable.dart',
-              ),
-              name: 'XmlSerializable',
-            ),
-            library: FakeLibraryElement(
-              identifier:
-                  'package:xml_annotation/src/annotations/xml_serializable.dart',
-            ),
+          enclosingElement: FakeXmlSerializableClassElement(),
+          value: FakeXmlSerializableDartObject(
+            value: value,
+          ),
+        );
+}
+
+class FakeXmlSerializablePropertyAccessorElementElementAnnotation
+    extends FakePropertyAccessorElementElementAnnotation {
+  FakeXmlSerializablePropertyAccessorElementElementAnnotation({
+    required XmlSerializable value,
+  }) : super(
+          returnType: FakeInterfaceType(
+            element: FakeXmlSerializableClassElement(),
           ),
           value: FakeXmlSerializableDartObject(
-            createMixin: createMixin,
-            fieldRename: fieldRename,
+            value: value,
           ),
         );
 }

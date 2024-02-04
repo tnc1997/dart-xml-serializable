@@ -1,30 +1,33 @@
 import 'package:xml_annotation/xml_annotation.dart';
 
-import 'fake_class_element.dart';
-import 'fake_constructor_element.dart';
-import 'fake_element_annotation.dart';
-import 'fake_library_element.dart';
+import 'fake_constructor_element_element_annotation.dart';
+import 'fake_interface_type.dart';
+import 'fake_property_accessor_element_element_annotation.dart';
+import 'fake_xml_enum_class_element.dart';
 import 'fake_xml_enum_dart_object.dart';
 
-class FakeXmlEnumElementAnnotation extends FakeElementAnnotation {
-  FakeXmlEnumElementAnnotation({
-    FieldRename? fieldRename,
+class FakeXmlEnumConstructorElementElementAnnotation
+    extends FakeConstructorElementElementAnnotation {
+  FakeXmlEnumConstructorElementElementAnnotation({
+    required XmlEnum value,
   }) : super(
-          element: FakeConstructorElement(
-            enclosingElement: FakeClassElement(
-              library: FakeLibraryElement(
-                identifier:
-                    'package:xml_annotation/src/annotations/xml_enum.dart',
-              ),
-              name: 'XmlEnum',
-            ),
-            library: FakeLibraryElement(
-              identifier:
-                  'package:xml_annotation/src/annotations/xml_enum.dart',
-            ),
+          enclosingElement: FakeXmlEnumClassElement(),
+          value: FakeXmlEnumDartObject(
+            value: value,
+          ),
+        );
+}
+
+class FakeXmlEnumPropertyAccessorElementElementAnnotation
+    extends FakePropertyAccessorElementElementAnnotation {
+  FakeXmlEnumPropertyAccessorElementElementAnnotation({
+    required XmlEnum value,
+  }) : super(
+          returnType: FakeInterfaceType(
+            element: FakeXmlEnumClassElement(),
           ),
           value: FakeXmlEnumDartObject(
-            fieldRename: fieldRename,
+            value: value,
           ),
         );
 }

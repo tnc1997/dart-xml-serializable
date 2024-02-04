@@ -1,6 +1,6 @@
 import 'fake_enum_element.dart';
 import 'fake_field_element.dart';
-import 'fake_library_element.dart';
+import 'fake_xml_serializable_library_element.dart';
 
 class FakeFieldRenameEnumElement extends FakeEnumElement {
   FakeFieldRenameEnumElement()
@@ -23,10 +23,7 @@ class FakeFieldRenameEnumElement extends FakeEnumElement {
               isEnumConstant: true,
             ),
           ],
-          library: FakeLibraryElement(
-            identifier:
-                'package:xml_annotation/src/annotations/xml_serializable.dart',
-          ),
+          library: FakeXmlSerializableLibraryElement(),
           name: 'FieldRename',
         );
 }

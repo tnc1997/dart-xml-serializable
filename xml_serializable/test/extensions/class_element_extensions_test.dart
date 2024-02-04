@@ -17,10 +17,7 @@ void main() {
             () {
               final fields = [
                 FakeFieldElement(
-                  name: 'field1',
-                ),
-                FakeFieldElement(
-                  name: 'field2',
+                  name: 'field',
                 ),
               ];
 
@@ -28,187 +25,108 @@ void main() {
                 FakeClassElement(
                   fields: fields,
                 ).allFields,
-                containsAll(
-                  [
-                    ...fields,
-                  ],
-                ),
+                [
+                  ...fields,
+                ],
               );
             },
           );
 
           test(
-            'should return all of the fields in the superclass',
+            'should return all of the fields in all of the supertypes',
             () {
-              final superclass1Fields = [
+              final superfields = [
                 FakeFieldElement(
-                  name: 'superclass1Field1',
-                ),
-                FakeFieldElement(
-                  name: 'superclass1Field2',
+                  name: 'superfield',
                 ),
               ];
 
               expect(
                 FakeClassElement(
-                  allSupertypes: [
-                    FakeInterfaceType(
-                      element: FakeClassElement(
-                        fields: superclass1Fields,
+                  thisType: FakeInterfaceType(
+                    allSupertypes: [
+                      FakeInterfaceType(
+                        element: FakeClassElement(
+                          fields: superfields,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ).allFields,
-                containsAll(
-                  [
-                    ...superclass1Fields,
-                  ],
-                ),
+                [
+                  ...superfields,
+                ],
               );
             },
           );
 
           test(
-            'should return all of the fields in the class and the superclass',
+            'should return all of the fields in the class and all of the supertypes',
             () {
               final fields = [
                 FakeFieldElement(
-                  name: 'field1',
-                ),
-                FakeFieldElement(
-                  name: 'field2',
+                  name: 'field',
                 ),
               ];
 
-              final superclass1Fields = [
+              final superfields = [
                 FakeFieldElement(
-                  name: 'superclass1Field1',
-                ),
-                FakeFieldElement(
-                  name: 'superclass1Field2',
+                  name: 'superfield',
                 ),
               ];
 
               expect(
                 FakeClassElement(
                   fields: fields,
-                  allSupertypes: [
-                    FakeInterfaceType(
-                      element: FakeClassElement(
-                        fields: superclass1Fields,
+                  thisType: FakeInterfaceType(
+                    allSupertypes: [
+                      FakeInterfaceType(
+                        element: FakeClassElement(
+                          fields: superfields,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ).allFields,
-                containsAll(
-                  [
-                    ...fields,
-                    ...superclass1Fields,
-                  ],
-                ),
+                [
+                  ...fields,
+                  ...superfields,
+                ],
               );
             },
           );
 
           test(
-            'should return all of the fields in all of the superclasses',
-            () {
-              final superclass1Fields = [
-                FakeFieldElement(
-                  name: 'superclass1Field1',
-                ),
-                FakeFieldElement(
-                  name: 'superclass1Field2',
-                ),
-              ];
-
-              final superclass2Fields = [
-                FakeFieldElement(
-                  name: 'superclass2Field1',
-                ),
-                FakeFieldElement(
-                  name: 'superclass2Field2',
-                ),
-              ];
-
-              expect(
-                FakeClassElement(
-                  allSupertypes: [
-                    FakeInterfaceType(
-                      element: FakeClassElement(
-                        fields: superclass1Fields,
-                      ),
-                    ),
-                    FakeInterfaceType(
-                      element: FakeClassElement(
-                        fields: superclass2Fields,
-                      ),
-                    ),
-                  ],
-                ).allFields,
-                containsAll(
-                  [
-                    ...superclass1Fields,
-                    ...superclass2Fields,
-                  ],
-                ),
-              );
-            },
-          );
-
-          test(
-            'should return all of the fields in the class and all of the superclasses',
+            'should not return duplicate overridden fields',
             () {
               final fields = [
                 FakeFieldElement(
-                  name: 'field1',
-                ),
-                FakeFieldElement(
-                  name: 'field2',
+                  name: 'field',
                 ),
               ];
 
-              final superclass1Fields = [
+              final superfields = [
                 FakeFieldElement(
-                  name: 'superclass1Field1',
-                ),
-                FakeFieldElement(
-                  name: 'superclass1Field2',
-                ),
-              ];
-
-              final superclass2Fields = [
-                FakeFieldElement(
-                  name: 'superclass2Field1',
-                ),
-                FakeFieldElement(
-                  name: 'superclass2Field2',
+                  name: 'field',
                 ),
               ];
 
               expect(
                 FakeClassElement(
                   fields: fields,
-                  allSupertypes: [
-                    FakeInterfaceType(
-                      element: FakeClassElement(
-                        fields: superclass1Fields,
+                  thisType: FakeInterfaceType(
+                    allSupertypes: [
+                      FakeInterfaceType(
+                        element: FakeClassElement(
+                          fields: superfields,
+                        ),
                       ),
-                    ),
-                    FakeInterfaceType(
-                      element: FakeClassElement(
-                        fields: superclass2Fields,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ).allFields,
-                containsAll(
-                  [
-                    ...fields,
-                    ...superclass1Fields,
-                    ...superclass2Fields,
-                  ],
-                ),
+                [
+                  ...fields,
+                ],
               );
             },
           );

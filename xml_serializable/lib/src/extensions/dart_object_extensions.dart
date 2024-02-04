@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:xml_annotation/xml_annotation.dart';
+
+import 'dart_type_extensions.dart';
 
 extension DartObjectExtensions on DartObject {
   /// Returns the value of the field with the given [name] as a [bool] or `null` if the field is not a [bool].
@@ -30,19 +30,10 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns a [FieldRename] corresponding to the value of the object being represented or `null` if this object is not of type [FieldRename] or the value of the object being represented is `null`.
   FieldRename? toFieldRenameValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is EnumElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'FieldRename') {
-        final index = getField('index')?.toIntValue();
-
-        if (index != null) {
-          return FieldRename.values[index];
-        }
+    if (type?.isXmlAnnotationFieldRename == true) {
+      final index = getField('index')?.toIntValue();
+      if (index != null) {
+        return FieldRename.values[index];
       }
     }
 
@@ -51,19 +42,11 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlAttribute] corresponding to the value of the object being represented or `null` if this object is not of type [XmlAttribute].
   XmlAttribute? toXmlAttributeValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlAttribute') {
-        return XmlAttribute(
-          name: getField('name')?.toStringValue(),
-          namespace: getField('namespace')?.toStringValue(),
-        );
-      }
+    if (type?.isXmlAnnotationXmlAttribute == true) {
+      return XmlAttribute(
+        name: getField('name')?.toStringValue(),
+        namespace: getField('namespace')?.toStringValue(),
+      );
     }
 
     return null;
@@ -71,16 +54,8 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlCDATA] corresponding to the value of the object being represented or `null` if this object is not of type [XmlCDATA].
   XmlCDATA? toXmlCDATAValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlCDATA') {
-        return XmlCDATA();
-      }
+    if (type?.isXmlAnnotationXmlCDATA == true) {
+      return XmlCDATA();
     }
 
     return null;
@@ -88,21 +63,13 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlElement] corresponding to the value of the object being represented or `null` if this object is not of type [XmlElement].
   XmlElement? toXmlElementValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlElement') {
-        return XmlElement(
-          name: getField('name')?.toStringValue(),
-          namespace: getField('namespace')?.toStringValue(),
-          isSelfClosing: getField('isSelfClosing')?.toBoolValue(),
-          includeIfNull: getField('includeIfNull')?.toBoolValue(),
-        );
-      }
+    if (type?.isXmlAnnotationXmlElement == true) {
+      return XmlElement(
+        name: getField('name')?.toStringValue(),
+        namespace: getField('namespace')?.toStringValue(),
+        isSelfClosing: getField('isSelfClosing')?.toBoolValue(),
+        includeIfNull: getField('includeIfNull')?.toBoolValue(),
+      );
     }
 
     return null;
@@ -110,18 +77,10 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlEnum] corresponding to the value of the object being represented or `null` if this object is not of type [XmlEnum].
   XmlEnum? toXmlEnumValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlEnum') {
-        return XmlEnum(
-          fieldRename: getField('fieldRename')?.toFieldRenameValue(),
-        );
-      }
+    if (type?.isXmlAnnotationXmlEnum == true) {
+      return XmlEnum(
+        fieldRename: getField('fieldRename')?.toFieldRenameValue(),
+      );
     }
 
     return null;
@@ -129,20 +88,12 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlRootElement] corresponding to the value of the object being represented or `null` if this object is not of type [XmlRootElement].
   XmlRootElement? toXmlRootElementValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlRootElement') {
-        return XmlRootElement(
-          name: getField('name')?.toStringValue(),
-          namespace: getField('namespace')?.toStringValue(),
-          isSelfClosing: getField('isSelfClosing')?.toBoolValue(),
-        );
-      }
+    if (type?.isXmlAnnotationXmlRootElement == true) {
+      return XmlRootElement(
+        name: getField('name')?.toStringValue(),
+        namespace: getField('namespace')?.toStringValue(),
+        isSelfClosing: getField('isSelfClosing')?.toBoolValue(),
+      );
     }
 
     return null;
@@ -150,19 +101,11 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlSerializable] corresponding to the value of the object being represented or `null` if this object is not of type [XmlSerializable].
   XmlSerializable? toXmlSerializableValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlSerializable') {
-        return XmlSerializable(
-          createMixin: getField('createMixin')?.toBoolValue(),
-          fieldRename: getField('fieldRename')?.toFieldRenameValue(),
-        );
-      }
+    if (type?.isXmlAnnotationXmlSerializable == true) {
+      return XmlSerializable(
+        createMixin: getField('createMixin')?.toBoolValue(),
+        fieldRename: getField('fieldRename')?.toFieldRenameValue(),
+      );
     }
 
     return null;
@@ -170,16 +113,8 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlText] corresponding to the value of the object being represented or `null` if this object is not of type [XmlText].
   XmlText? toXmlTextValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlText') {
-        return XmlText();
-      }
+    if (type?.isXmlAnnotationXmlText == true) {
+      return XmlText();
     }
 
     return null;
@@ -187,16 +122,8 @@ extension DartObjectExtensions on DartObject {
 
   /// Returns an [XmlValue] corresponding to the value of the object being represented or `null` if this object is not of type [XmlValue].
   XmlValue? toXmlValueValue() {
-    final type = this.type;
-
-    if (type is InterfaceType) {
-      final element = type.element;
-
-      if (element is ClassElement &&
-          element.library.identifier.startsWith('package:xml_annotation') &&
-          element.name == 'XmlValue') {
-        return XmlValue(getField('value')!.toStringValue()!);
-      }
+    if (type?.isXmlAnnotationXmlValue == true) {
+      return XmlValue(getField('value')!.toStringValue()!);
     }
 
     return null;

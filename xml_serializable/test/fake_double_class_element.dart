@@ -1,15 +1,10 @@
-import 'package:analyzer/dart/element/element.dart';
-import 'package:test/fake.dart';
-
+import 'fake_class_element.dart';
 import 'fake_dart_core_library_element.dart';
 
-class FakeDoubleClassElement extends Fake implements ClassElement {
-  @override
-  final library = FakeDartCoreLibraryElement();
-
-  @override
-  final metadata = [];
-
-  @override
-  final name = 'double';
+class FakeDoubleClassElement extends FakeClassElement {
+  FakeDoubleClassElement()
+      : super(
+          library: FakeDartCoreLibraryElement(),
+          name: 'double',
+        );
 }

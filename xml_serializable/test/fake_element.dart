@@ -13,7 +13,7 @@ class FakeElement extends Fake implements Element {
 
   FakeElement({
     this.library,
-    List<ElementAnnotation>? metadata,
+    this.metadata = const [],
     this.name,
-  }) : metadata = metadata ?? [];
+  });
 }

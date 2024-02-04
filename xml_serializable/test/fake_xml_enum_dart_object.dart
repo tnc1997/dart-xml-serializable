@@ -1,40 +1,21 @@
-import 'package:analyzer/dart/constant/value.dart';
-import 'package:analyzer/dart/element/type.dart';
-import 'package:test/fake.dart';
 import 'package:xml_annotation/xml_annotation.dart';
 
-import 'fake_class_element.dart';
+import 'fake_dart_object.dart';
 import 'fake_field_rename_dart_object.dart';
 import 'fake_interface_type.dart';
-import 'fake_library_element.dart';
+import 'fake_xml_enum_class_element.dart';
 
-class FakeXmlEnumDartObject extends Fake implements DartObject {
-  @override
-  final DartType type = FakeInterfaceType(
-    element: FakeClassElement(
-      library: FakeLibraryElement(
-        identifier: 'package:xml_annotation/src/annotations/xml_enum.dart',
-      ),
-      name: 'XmlEnum',
-    ),
-  );
-
-  final FieldRename? _fieldRename;
-
+class FakeXmlEnumDartObject extends FakeDartObject<XmlEnum> {
   FakeXmlEnumDartObject({
-    FieldRename? fieldRename,
-  }) : _fieldRename = fieldRename;
-
-  @override
-  DartObject? getField(String name) {
-    switch (name) {
-      case 'fieldRename':
-        return FakeFieldRenameDartObject(
-          index: _fieldRename?.index,
-          name: _fieldRename?.name,
+    super.value,
+  }) : super(
+          type: FakeInterfaceType(
+            element: FakeXmlEnumClassElement(),
+          ),
+          fields: {
+            'fieldRename': FakeFieldRenameDartObject(
+              value: value?.fieldRename,
+            ),
+          },
         );
-      default:
-        return null;
-    }
-  }
 }
