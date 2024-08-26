@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.5.1 (2024-08-26)
+
+### Bug Fixes
+
+* escape strings containing reserved characters ([#60](https://github.com/tnc1997/dart-xml-serializable/issues/60)) ([0cf42f8](https://github.com/tnc1997/dart-xml-serializable/commit/0cf42f891dc18d76e67afa26e651cbe344b76f2e))
+
 ## 2.5.0 (2024-02-04)
 
 ### Features
