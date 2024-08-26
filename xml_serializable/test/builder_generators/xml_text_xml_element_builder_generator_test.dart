@@ -52,6 +52,34 @@ void main() {
           );
 
           test(
+            'should generate a builder with an escaped name if constructed with a name that contains a reserved character',
+            () {
+              expect(
+                XmlTextXmlElementBuilderGenerator('\$name')
+                    .generateBuilder('value'),
+                equals(
+                  'builder.element(r\'\$name\', nest: () { builder.text(value); });',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a builder with an escaped name and namespace if constructed with a name and namespace that contain a reserved character',
+            () {
+              expect(
+                XmlTextXmlElementBuilderGenerator(
+                  '\$name',
+                  namespace: '\$https://www.example.com',
+                ).generateBuilder('value'),
+                equals(
+                  'builder.element(r\'\$name\', namespace: r\'\$https://www.example.com\', nest: () { builder.text(value); });',
+                ),
+              );
+            },
+          );
+
+          test(
             'should generate a null-aware builder if constructed with a nullable type',
             () {
               expect(

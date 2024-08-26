@@ -40,6 +40,37 @@ void main() {
           );
 
           test(
+            'should generate a getter with an escaped name if constructed with a name that contains a reserved character',
+            () {
+              expect(
+                XmlConverterXmlElementIterableGetterGenerator(
+                  '\$name',
+                  'TestConverter',
+                ).generateGetter('element'),
+                equals(
+                  'element.getElements(r\'\$name\')!',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a getter with an escaped name and namespace if constructed with a name and namespace that contain a reserved character',
+            () {
+              expect(
+                XmlConverterXmlElementIterableGetterGenerator(
+                  '\$name',
+                  'TestConverter',
+                  namespace: '\$https://www.example.com',
+                ).generateGetter('element'),
+                equals(
+                  'element.getElements(r\'\$name\', namespace: r\'\$https://www.example.com\')!',
+                ),
+              );
+            },
+          );
+
+          test(
             'should generate a null-aware getter if constructed with a nullable type',
             () {
               expect(
