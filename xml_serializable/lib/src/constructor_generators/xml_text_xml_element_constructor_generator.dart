@@ -1,3 +1,5 @@
+import 'package:source_helper/source_helper.dart';
+
 import 'constructor_generator.dart';
 
 class XmlTextXmlElementConstructorGenerator extends ConstructorGenerator {
@@ -35,10 +37,10 @@ class XmlTextXmlElementConstructorGenerator extends ConstructorGenerator {
       buffer.write('$expression != null ? ');
     }
 
-    buffer.write('XmlElement(XmlName(\'$_name\'');
+    buffer.write('XmlElement(XmlName(${escapeDartString(_name)}');
 
     if (_namespace != null) {
-      buffer.write(', namespaces[\'$_namespace\']');
+      buffer.write(', namespaces[${escapeDartString(_namespace!)}]');
     }
 
     buffer.write('), [], ');

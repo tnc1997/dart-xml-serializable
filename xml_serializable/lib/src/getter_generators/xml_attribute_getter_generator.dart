@@ -1,3 +1,5 @@
+import 'package:source_helper/source_helper.dart';
+
 import 'getter_generator.dart';
 
 class XmlAttributeGetterGenerator extends GetterGenerator {
@@ -21,10 +23,10 @@ class XmlAttributeGetterGenerator extends GetterGenerator {
   String generateGetter(String expression) {
     final buffer = StringBuffer(expression);
 
-    buffer.write('.getAttribute(\'$_name\'');
+    buffer.write('.getAttribute(${escapeDartString(_name)}');
 
     if (_namespace != null) {
-      buffer.write(', namespace: \'$_namespace\'');
+      buffer.write(', namespace: ${escapeDartString(_namespace!)}');
     }
 
     buffer.write(')');

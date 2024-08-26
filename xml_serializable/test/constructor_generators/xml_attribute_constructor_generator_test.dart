@@ -37,6 +37,34 @@ void main() {
           );
 
           test(
+            'should generate a constructor with an escaped name if constructed with a name that contains a reserved character',
+            () {
+              expect(
+                XmlAttributeConstructorGenerator('\$name')
+                    .generateConstructor('value'),
+                equals(
+                  'XmlAttribute(XmlName(r\'\$name\'), value)',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a constructor with an escaped name and namespace if constructed with a name and namespace that contain a reserved character',
+            () {
+              expect(
+                XmlAttributeConstructorGenerator(
+                  '\$name',
+                  namespace: '\$https://www.example.com',
+                ).generateConstructor('value'),
+                equals(
+                  'XmlAttribute(XmlName(r\'\$name\', namespaces[r\'\$https://www.example.com\']), value)',
+                ),
+              );
+            },
+          );
+
+          test(
             'should generate a null-aware constructor if constructed with a nullable type',
             () {
               expect(
