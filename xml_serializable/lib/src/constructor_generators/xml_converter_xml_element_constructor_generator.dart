@@ -21,6 +21,9 @@ class XmlConverterXmlElementConstructorGenerator extends ConstructorGenerator {
   /// The name of the converter.
   final String _converter;
 
+  /// If `false` (the default) then the type of the converter does not represent a nullable type.
+  final bool _isConverterNullable;
+
   const XmlConverterXmlElementConstructorGenerator(
     this._name,
     this._converter, {
@@ -28,10 +31,12 @@ class XmlConverterXmlElementConstructorGenerator extends ConstructorGenerator {
     bool? isSelfClosing,
     bool? includeIfNull,
     bool isNullable = false,
+    bool isConverterNullable = false,
   })  : _namespace = namespace,
         _isSelfClosing = isSelfClosing,
         _includeIfNull = includeIfNull,
-        _isNullable = isNullable;
+        _isNullable = isNullable,
+        _isConverterNullable = isConverterNullable;
 
   @override
   String generateConstructor(String expression) {
@@ -49,7 +54,7 @@ class XmlConverterXmlElementConstructorGenerator extends ConstructorGenerator {
 
     buffer.write('), ');
 
-    if (_isNullable && _includeIfNull != false) {
+    if (_isNullable && !_isConverterNullable && _includeIfNull != false) {
       buffer.write('$expression != null ? ');
     }
 
@@ -57,13 +62,13 @@ class XmlConverterXmlElementConstructorGenerator extends ConstructorGenerator {
       'const $_converter().toXmlAttributes($expression, namespaces: namespaces)',
     );
 
-    if (_isNullable && _includeIfNull != false) {
+    if (_isNullable && !_isConverterNullable && _includeIfNull != false) {
       buffer.write(' : []');
     }
 
     buffer.write(', ');
 
-    if (_isNullable && _includeIfNull != false) {
+    if (_isNullable && !_isConverterNullable && _includeIfNull != false) {
       buffer.write('$expression != null ? ');
     }
 
@@ -71,7 +76,7 @@ class XmlConverterXmlElementConstructorGenerator extends ConstructorGenerator {
       'const $_converter().toXmlChildren($expression, namespaces: namespaces)',
     );
 
-    if (_isNullable && _includeIfNull != false) {
+    if (_isNullable && !_isConverterNullable && _includeIfNull != false) {
       buffer.write(' : []');
     }
 
@@ -104,5 +109,6 @@ class NullableXmlConverterXmlElementConstructorGenerator
           isSelfClosing: isSelfClosing,
           includeIfNull: includeIfNull,
           isNullable: true,
+          isConverterNullable: true,
         );
 }

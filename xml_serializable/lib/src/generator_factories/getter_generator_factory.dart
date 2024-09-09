@@ -89,12 +89,19 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
   if (type is ParameterizedType &&
       (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet)) {
     final converterElement = element.getXmlConverterElement(type: type);
-    if (converterElement != null) {
+    if (converterElement is ClassElement) {
       return XmlConverterXmlElementIterableGetterGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),
-        converterElement.name!,
+        converterElement.name,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
+        isConverterNullable: converterElement.thisType.allSupertypes.any(
+          (supertype) =>
+              supertype.element.library.identifier ==
+                  'package:xml_annotation/src/annotations/xml_converter.dart' &&
+              supertype.element.name == 'XmlConverter' &&
+              supertype.typeArguments.single.isNullable,
+        ),
       );
     } else if (type.typeArguments.single.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementIterableGetterGenerator(
@@ -111,12 +118,19 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
     }
   } else {
     final converterElement = element.getXmlConverterElement(type: type);
-    if (converterElement != null) {
+    if (converterElement is ClassElement) {
       return XmlConverterXmlElementGetterGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),
-        converterElement.name!,
+        converterElement.name,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
+        isConverterNullable: converterElement.thisType.allSupertypes.any(
+          (supertype) =>
+              supertype.element.library.identifier ==
+                  'package:xml_annotation/src/annotations/xml_converter.dart' &&
+              supertype.element.name == 'XmlConverter' &&
+              supertype.typeArguments.single.isNullable,
+        ),
       );
     } else if (type.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementGetterGenerator(

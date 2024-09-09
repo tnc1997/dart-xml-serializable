@@ -5,12 +5,17 @@ class XmlConverterXmlElementIterableGetterGenerator
   /// The name of the converter.
   final String _converter;
 
+  /// If `false` (the default) then the type of the converter does not represent a nullable type.
+  final bool _isConverterNullable;
+
   const XmlConverterXmlElementIterableGetterGenerator(
     String name,
     this._converter, {
     String? namespace,
     bool isNullable = false,
-  }) : super(
+    bool isConverterNullable = false,
+  })  : _isConverterNullable = isConverterNullable,
+        super(
           name,
           namespace: namespace,
           isNullable: isNullable,
@@ -28,5 +33,6 @@ class NullableXmlConverterXmlElementIterableGetterGenerator
           converter,
           namespace: namespace,
           isNullable: true,
+          isConverterNullable: true,
         );
 }

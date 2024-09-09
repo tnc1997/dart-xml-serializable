@@ -78,11 +78,19 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   ///
+  /// or as a converter that is contained within the annotation of the form `@XmlSerializable(converters: [...])` for example:
+  ///
+  /// ```dart
+  /// @XmlSerializable(converters: [TitleConverter()])
+  /// class Book {
+  ///   Title? title;
+  /// }
+  ///
   /// Throws a [StateError] if this element does not have an annotation that implements `XmlConverter` and can convert the [type]. Returns `null` if the value of the annotation could not be computed because of errors.
   DartObject? getXmlConverter({
     DartType? type,
   }) {
-    for (var annotation in metadata) {
+    for (final annotation in metadata) {
       if (annotation.isXmlConverter(type: type)) {
         return annotation.computeConstantValue();
       }
@@ -90,14 +98,28 @@ extension ElementExtensions on Element {
 
     final enclosingElement = this.enclosingElement;
     if (enclosingElement != null) {
-      for (var annotation in metadata) {
+      for (final annotation in enclosingElement.metadata) {
         if (annotation.isXmlConverter(type: type)) {
           return annotation.computeConstantValue();
+        }
+
+        if (annotation.isXmlSerializable) {
+          final converters = annotation
+              .computeConstantValue()
+              ?.getField('converters')
+              ?.toListValue();
+          if (converters != null) {
+            for (final converter in converters) {
+              if (converter.type!.isXmlAnnotationXmlConverter(type: type)) {
+                return converter;
+              }
+            }
+          }
         }
       }
     }
 
-    throw StateError("No element");
+    throw StateError('No element');
   }
 
   /// Gets the element that represents the class that can convert the [type] as an annotation on this element for example:

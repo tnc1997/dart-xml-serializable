@@ -83,27 +83,28 @@ void main() {
             'should generate a null-aware builder if constructed with a nullable type',
             () {
               expect(
-                NullableXmlTextXmlElementBuilderGenerator(
+                XmlTextXmlElementBuilderGenerator(
                   'name',
-                  includeIfNull: false,
+                  isNullable: true,
                 ).generateBuilder('value'),
                 equals(
-                  'if (value != null) { builder.element(\'name\', nest: () { builder.text(value); }); }',
+                  'builder.element(\'name\', nest: () { if (value != null) { builder.text(value); } });',
                 ),
               );
             },
           );
 
           test(
-            'should generate a null-aware builder if constructed with a nullable type and include if null',
+            'should generate a null-aware builder if constructed with a nullable type and exclude if null',
             () {
               expect(
-                NullableXmlTextXmlElementBuilderGenerator(
+                XmlTextXmlElementBuilderGenerator(
                   'name',
-                  includeIfNull: true,
+                  includeIfNull: false,
+                  isNullable: true,
                 ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', nest: () { if (value != null) { builder.text(value); } });',
+                  'if (value != null) { builder.element(\'name\', nest: () { builder.text(value); }); }',
                 ),
               );
             },

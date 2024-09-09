@@ -90,29 +90,47 @@ void main() {
             'should generate a null-aware constructor if constructed with a nullable type',
             () {
               expect(
-                NullableXmlConverterXmlElementConstructorGenerator(
+                XmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
-                  includeIfNull: false,
+                  isNullable: true,
                 ).generateConstructor('value'),
                 equals(
-                  'value != null ? XmlElement(XmlName(\'name\'), const TestConverter().toXmlAttributes(value, namespaces: namespaces), const TestConverter().toXmlChildren(value, namespaces: namespaces)) : null',
+                  'XmlElement(XmlName(\'name\'), value != null ? const TestConverter().toXmlAttributes(value, namespaces: namespaces) : [], value != null ? const TestConverter().toXmlChildren(value, namespaces: namespaces) : [])',
                 ),
               );
             },
           );
 
           test(
-            'should generate a null-aware constructor if constructed with a nullable type and include if null',
+            'should generate a null-aware constructor if constructed with a nullable type and a nullable converter type',
             () {
               expect(
-                NullableXmlConverterXmlElementConstructorGenerator(
+                XmlConverterXmlElementConstructorGenerator(
                   'name',
                   'TestConverter',
-                  includeIfNull: true,
+                  isNullable: true,
+                  isConverterNullable: true,
                 ).generateConstructor('value'),
                 equals(
-                  'XmlElement(XmlName(\'name\'), value != null ? const TestConverter().toXmlAttributes(value, namespaces: namespaces) : [], value != null ? const TestConverter().toXmlChildren(value, namespaces: namespaces) : [])',
+                  'XmlElement(XmlName(\'name\'), const TestConverter().toXmlAttributes(value, namespaces: namespaces), const TestConverter().toXmlChildren(value, namespaces: namespaces))',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a null-aware constructor if constructed with a nullable type and exclude if null',
+            () {
+              expect(
+                XmlConverterXmlElementConstructorGenerator(
+                  'name',
+                  'TestConverter',
+                  includeIfNull: false,
+                  isNullable: true,
+                ).generateConstructor('value'),
+                equals(
+                  'value != null ? XmlElement(XmlName(\'name\'), const TestConverter().toXmlAttributes(value, namespaces: namespaces), const TestConverter().toXmlChildren(value, namespaces: namespaces)) : null',
                 ),
               );
             },
