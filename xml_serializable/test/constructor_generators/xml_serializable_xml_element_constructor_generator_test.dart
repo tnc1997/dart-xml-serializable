@@ -83,27 +83,28 @@ void main() {
             'should generate a null-aware constructor if constructed with a nullable type',
             () {
               expect(
-                NullableXmlSerializableXmlElementConstructorGenerator(
+                XmlSerializableXmlElementConstructorGenerator(
                   'name',
-                  includeIfNull: false,
+                  isNullable: true,
                 ).generateConstructor('value'),
                 equals(
-                  'value != null ? XmlElement(XmlName(\'name\'), value.toXmlAttributes(namespaces: namespaces), value.toXmlChildren(namespaces: namespaces)) : null',
+                  'XmlElement(XmlName(\'name\'), value?.toXmlAttributes(namespaces: namespaces) ?? [], value?.toXmlChildren(namespaces: namespaces) ?? [])',
                 ),
               );
             },
           );
 
           test(
-            'should generate a null-aware constructor if constructed with a nullable type and include if null',
+            'should generate a null-aware constructor if constructed with a nullable type and exclude if null',
             () {
               expect(
-                NullableXmlSerializableXmlElementConstructorGenerator(
+                XmlSerializableXmlElementConstructorGenerator(
                   'name',
-                  includeIfNull: true,
+                  includeIfNull: false,
+                  isNullable: true,
                 ).generateConstructor('value'),
                 equals(
-                  'XmlElement(XmlName(\'name\'), value?.toXmlAttributes(namespaces: namespaces) ?? [], value?.toXmlChildren(namespaces: namespaces) ?? [])',
+                  'value != null ? XmlElement(XmlName(\'name\'), value.toXmlAttributes(namespaces: namespaces), value.toXmlChildren(namespaces: namespaces)) : null',
                 ),
               );
             },

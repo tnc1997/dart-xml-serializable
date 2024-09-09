@@ -21,6 +21,9 @@ class XmlConverterXmlElementBuilderGenerator extends BuilderGenerator {
   /// The name of the converter.
   final String _converter;
 
+  /// If `false` (the default) then the type of the converter does not represent a nullable type.
+  final bool _isConverterNullable;
+
   const XmlConverterXmlElementBuilderGenerator(
     this._name,
     this._converter, {
@@ -28,10 +31,12 @@ class XmlConverterXmlElementBuilderGenerator extends BuilderGenerator {
     bool? isSelfClosing,
     bool? includeIfNull,
     bool isNullable = false,
+    bool isConverterNullable = false,
   })  : _namespace = namespace,
         _isSelfClosing = isSelfClosing,
         _includeIfNull = includeIfNull,
-        _isNullable = isNullable;
+        _isNullable = isNullable,
+        _isConverterNullable = isConverterNullable;
 
   @override
   String generateBuilder(String expression, {String builder = 'builder'}) {
@@ -53,7 +58,7 @@ class XmlConverterXmlElementBuilderGenerator extends BuilderGenerator {
 
     buffer.write(', nest: () { ');
 
-    if (_isNullable && _includeIfNull != false) {
+    if (_isNullable && !_isConverterNullable && _includeIfNull != false) {
       buffer.write('if ($expression != null) { ');
     }
 
@@ -61,7 +66,7 @@ class XmlConverterXmlElementBuilderGenerator extends BuilderGenerator {
       'const $_converter().buildXmlChildren($expression, $builder, namespaces: namespaces);',
     );
 
-    if (_isNullable && _includeIfNull != false) {
+    if (_isNullable && !_isConverterNullable && _includeIfNull != false) {
       buffer.write(' }');
     }
 
@@ -90,5 +95,6 @@ class NullableXmlConverterXmlElementBuilderGenerator
           isSelfClosing: isSelfClosing,
           includeIfNull: includeIfNull,
           isNullable: true,
+          isConverterNullable: true,
         );
 }

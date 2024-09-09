@@ -83,27 +83,28 @@ void main() {
             'should generate a null-aware builder if constructed with a nullable type',
             () {
               expect(
-                NullableXmlSerializableXmlElementBuilderGenerator(
+                XmlSerializableXmlElementBuilderGenerator(
                   'name',
-                  includeIfNull: false,
+                  isNullable: true,
                 ).generateBuilder('value'),
                 equals(
-                  'if (value != null) { builder.element(\'name\', nest: () { value.buildXmlChildren(builder, namespaces: namespaces); }); }',
+                  'builder.element(\'name\', nest: () { if (value != null) { value.buildXmlChildren(builder, namespaces: namespaces); } });',
                 ),
               );
             },
           );
 
           test(
-            'should generate a null-aware builder if constructed with a nullable type and include if null',
+            'should generate a null-aware builder if constructed with a nullable type and exclude if null',
             () {
               expect(
-                NullableXmlSerializableXmlElementBuilderGenerator(
+                XmlSerializableXmlElementBuilderGenerator(
                   'name',
-                  includeIfNull: true,
+                  includeIfNull: false,
+                  isNullable: true,
                 ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', nest: () { if (value != null) { value.buildXmlChildren(builder, namespaces: namespaces); } });',
+                  'if (value != null) { builder.element(\'name\', nest: () { value.buildXmlChildren(builder, namespaces: namespaces); }); }',
                 ),
               );
             },

@@ -7,10 +7,15 @@ class XmlConverterXmlElementSerializerGenerator extends SerializerGenerator {
   /// If `false` (the default) then the type does not represent a nullable type.
   final bool _isNullable;
 
+  /// If `false` (the default) then the type of the converter does not represent a nullable type.
+  final bool _isConverterNullable;
+
   const XmlConverterXmlElementSerializerGenerator(
     this._converter, {
     bool isNullable = false,
-  }) : _isNullable = isNullable;
+    bool isConverterNullable = false,
+  })  : _isNullable = isNullable,
+        _isConverterNullable = isConverterNullable;
 
   @override
   String generateSerializer(String expression) => expression;
@@ -40,5 +45,6 @@ class NullableXmlConverterXmlElementSerializerGenerator
   ) : super(
           converter,
           isNullable: true,
+          isConverterNullable: true,
         );
 }

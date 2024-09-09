@@ -25,9 +25,26 @@ void main() {
             'should generate a null-aware serializer if constructed with a nullable type',
             () {
               expect(
-                NullableXmlConverterXmlElementSerializerGenerator(
-                        'TestConverter')
-                    .generateSerializer('value'),
+                XmlConverterXmlElementSerializerGenerator(
+                  'TestConverter',
+                  isNullable: true,
+                ).generateSerializer('value'),
+                equals(
+                  'value',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a null-aware serializer if constructed with a nullable type and a nullable converter type',
+            () {
+              expect(
+                XmlConverterXmlElementSerializerGenerator(
+                  'TestConverter',
+                  isNullable: true,
+                  isConverterNullable: true,
+                ).generateSerializer('value'),
                 equals(
                   'value',
                 ),
@@ -57,9 +74,26 @@ void main() {
             'should generate a null-aware deserializer if constructed with a nullable type',
             () {
               expect(
-                NullableXmlConverterXmlElementSerializerGenerator(
-                        'TestConverter')
-                    .generateDeserializer('value'),
+                XmlConverterXmlElementSerializerGenerator(
+                  'TestConverter',
+                  isNullable: true,
+                ).generateDeserializer('value'),
+                equals(
+                  'value != null ? const TestConverter().fromXmlElement(value) : null',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a null-aware deserializer if constructed with a nullable type and a nullable converter type',
+            () {
+              expect(
+                XmlConverterXmlElementSerializerGenerator(
+                  'TestConverter',
+                  isNullable: true,
+                  isConverterNullable: true,
+                ).generateDeserializer('value'),
                 equals(
                   'value != null ? const TestConverter().fromXmlElement(value) : null',
                 ),

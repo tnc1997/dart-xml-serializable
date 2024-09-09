@@ -90,29 +90,47 @@ void main() {
             'should generate a null-aware builder if constructed with a nullable type',
             () {
               expect(
-                NullableXmlConverterXmlElementBuilderGenerator(
+                XmlConverterXmlElementBuilderGenerator(
                   'name',
                   'TestConverter',
-                  includeIfNull: false,
+                  isNullable: true,
                 ).generateBuilder('value'),
                 equals(
-                  'if (value != null) { builder.element(\'name\', nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); }); }',
+                  'builder.element(\'name\', nest: () { if (value != null) { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); } });',
                 ),
               );
             },
           );
 
           test(
-            'should generate a null-aware builder if constructed with a nullable type and include if null',
+            'should generate a null-aware builder if constructed with a nullable type and a nullable converter type',
             () {
               expect(
-                NullableXmlConverterXmlElementBuilderGenerator(
+                XmlConverterXmlElementBuilderGenerator(
                   'name',
                   'TestConverter',
-                  includeIfNull: true,
+                  isNullable: true,
+                  isConverterNullable: true,
                 ).generateBuilder('value'),
                 equals(
-                  'builder.element(\'name\', nest: () { if (value != null) { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); } });',
+                  'builder.element(\'name\', nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); });',
+                ),
+              );
+            },
+          );
+
+          test(
+            'should generate a null-aware builder if constructed with a nullable type and exclude if null',
+            () {
+              expect(
+                XmlConverterXmlElementBuilderGenerator(
+                  'name',
+                  'TestConverter',
+                  includeIfNull: false,
+                  isNullable: true,
+                ).generateBuilder('value'),
+                equals(
+                  'if (value != null) { builder.element(\'name\', nest: () { const TestConverter().buildXmlChildren(value, builder, namespaces: namespaces); }); }',
                 ),
               );
             },

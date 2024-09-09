@@ -357,10 +357,17 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
 
     if (element.hasXmlElement) {
       final converterElement = element.getXmlConverterElement(type: type);
-      if (converterElement != null) {
+      if (converterElement is ClassElement) {
         return XmlConverterXmlElementSerializerGenerator(
-          converterElement.name!,
+          converterElement.name,
           isNullable: type.isNullable,
+          isConverterNullable: converterElement.thisType.allSupertypes.any(
+            (supertype) =>
+                supertype.element.library.identifier ==
+                    'package:xml_annotation/src/annotations/xml_converter.dart' &&
+                supertype.element.name == 'XmlConverter' &&
+                supertype.typeArguments.single.isNullable,
+          ),
         );
       } else if (type is InterfaceType && type.element.hasXmlSerializable) {
         for (final element in element.library.topLevelElements) {

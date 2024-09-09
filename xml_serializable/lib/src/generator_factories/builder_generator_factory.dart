@@ -98,15 +98,22 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
   if (type is ParameterizedType &&
       (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet)) {
     final converterElement = element.getXmlConverterElement(type: type);
-    if (converterElement != null) {
+    if (converterElement is ClassElement) {
       return IterableBuilderGenerator(
         XmlConverterXmlElementBuilderGenerator(
           xmlElement.name ?? element.getEncodedFieldName(),
-          converterElement.name!,
+          converterElement.name,
           namespace: xmlElement.namespace,
           isSelfClosing: xmlElement.isSelfClosing,
           includeIfNull: xmlElement.includeIfNull,
           isNullable: type.typeArguments.single.isNullable,
+          isConverterNullable: converterElement.thisType.allSupertypes.any(
+            (supertype) =>
+                supertype.element.library.identifier ==
+                    'package:xml_annotation/src/annotations/xml_converter.dart' &&
+                supertype.element.name == 'XmlConverter' &&
+                supertype.typeArguments.single.isNullable,
+          ),
         ),
         isNullable: type.isNullable,
       );
@@ -135,14 +142,21 @@ BuilderGenerator xmlElementBuilderGeneratorFactory(FieldElement element) {
     }
   } else {
     final converterElement = element.getXmlConverterElement(type: type);
-    if (converterElement != null) {
+    if (converterElement is ClassElement) {
       return XmlConverterXmlElementBuilderGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),
-        converterElement.name!,
+        converterElement.name,
         namespace: xmlElement.namespace,
         isSelfClosing: xmlElement.isSelfClosing,
         includeIfNull: xmlElement.includeIfNull,
         isNullable: type.isNullable,
+        isConverterNullable: converterElement.thisType.allSupertypes.any(
+          (supertype) =>
+              supertype.element.library.identifier ==
+                  'package:xml_annotation/src/annotations/xml_converter.dart' &&
+              supertype.element.name == 'XmlConverter' &&
+              supertype.typeArguments.single.isNullable,
+        ),
       );
     } else if (type.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementBuilderGenerator(
