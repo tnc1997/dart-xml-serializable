@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.5.2 (2024-09-09)
+
+### Bug Fixes
+
+* nullable converter types include if null ([#62](https://github.com/tnc1997/dart-xml-serializable/issues/62)) ([273ead3](https://github.com/tnc1997/dart-xml-serializable/commit/273ead37a07afde1bac01f2bda3c8460b9a3bb41))
+
 ## 2.5.1 (2024-08-26)
 
 ### Bug Fixes
