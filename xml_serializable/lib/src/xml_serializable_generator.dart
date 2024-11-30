@@ -356,7 +356,9 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     type ??= element.type;
 
     if (element.hasXmlElement) {
-      final converterElement = element.getXmlConverterElement(type: type);
+      final converterElement = element.getXmlConverterElement(
+        type: type,
+      );
       if (converterElement is ClassElement) {
         return XmlConverterXmlElementSerializerGenerator(
           converterElement.name,
