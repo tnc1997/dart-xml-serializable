@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.5.3 (2024-12-04)
+
+### Bug Fixes
+
+* xml converter iterable fields ([#64](https://github.com/tnc1997/dart-xml-serializable/issues/64)) ([9393522](https://github.com/tnc1997/dart-xml-serializable/commit/9393522b5d4329ac83420d76a900449f9c1de701))
+
 ## 2.5.2 (2024-09-09)
 
 ### Bug Fixes

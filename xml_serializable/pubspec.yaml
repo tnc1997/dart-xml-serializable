@@ -1,6 +1,6 @@
 name: xml_serializable
 description: Automatically generate code for converting to and from XML by annotating Dart classes.
-version: 2.5.2
+version: 2.5.3
 homepage: https://github.com/tnc1997/dart-xml-serializable
 
 environment:
