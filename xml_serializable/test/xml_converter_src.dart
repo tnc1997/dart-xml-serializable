@@ -105,6 +105,40 @@ class ClassAnnotationInconvertibleElementField {
 }
 
 @ShouldGenerate(r'''
+void _$ClassAnnotationIterableElementFieldBuildXmlChildren(ClassAnnotationIterableElementField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+for (final value in valueSerialized) { builder.element('value', nest: () { const ElementDateTimeConverter().buildXmlChildren(value, builder, namespaces: namespaces); }); }
+}
+
+ClassAnnotationIterableElementField _$ClassAnnotationIterableElementFieldFromXmlElement(XmlElement element) {
+final value = element.getElements('value')!;
+return ClassAnnotationIterableElementField(value: value.map((e) => const ElementDateTimeConverter().fromXmlElement(e)).toList());
+}
+
+List<XmlAttribute> _$ClassAnnotationIterableElementFieldToXmlAttributes(ClassAnnotationIterableElementField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$ClassAnnotationIterableElementFieldToXmlChildren(ClassAnnotationIterableElementField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = valueSerialized.map((e) => XmlElement(XmlName('value'), const ElementDateTimeConverter().toXmlAttributes(e, namespaces: namespaces), const ElementDateTimeConverter().toXmlChildren(e, namespaces: namespaces)));
+children.addAll(valueConstructed);
+return children;
+}''')
+@annotation.XmlSerializable()
+@ElementDateTimeConverter()
+class ClassAnnotationIterableElementField {
+  @annotation.XmlElement()
+  List<DateTime> value;
+
+  ClassAnnotationIterableElementField({required this.value});
+}
+
+@ShouldGenerate(r'''
 void _$ClassAnnotationNullableElementFieldBuildXmlChildren(ClassAnnotationNullableElementField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
 final value = instance.value;
 final valueSerialized = value;
@@ -238,6 +272,40 @@ class FieldAnnotationInconvertibleElementField {
   String value;
 
   FieldAnnotationInconvertibleElementField({required this.value});
+}
+
+@ShouldGenerate(r'''
+void _$FieldAnnotationIterableElementFieldBuildXmlChildren(FieldAnnotationIterableElementField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+for (final value in valueSerialized) { builder.element('value', nest: () { const ElementDateTimeConverter().buildXmlChildren(value, builder, namespaces: namespaces); }); }
+}
+
+FieldAnnotationIterableElementField _$FieldAnnotationIterableElementFieldFromXmlElement(XmlElement element) {
+final value = element.getElements('value')!;
+return FieldAnnotationIterableElementField(value: value.map((e) => const ElementDateTimeConverter().fromXmlElement(e)).toList());
+}
+
+List<XmlAttribute> _$FieldAnnotationIterableElementFieldToXmlAttributes(FieldAnnotationIterableElementField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$FieldAnnotationIterableElementFieldToXmlChildren(FieldAnnotationIterableElementField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = valueSerialized.map((e) => XmlElement(XmlName('value'), const ElementDateTimeConverter().toXmlAttributes(e, namespaces: namespaces), const ElementDateTimeConverter().toXmlChildren(e, namespaces: namespaces)));
+children.addAll(valueConstructed);
+return children;
+}''')
+@annotation.XmlSerializable()
+class FieldAnnotationIterableElementField {
+  @annotation.XmlElement()
+  @ElementDateTimeConverter()
+  List<DateTime> value;
+
+  FieldAnnotationIterableElementField({required this.value});
 }
 
 @ShouldGenerate(r'''
@@ -628,6 +696,43 @@ class SerializableConverterInconvertibleElementField {
   String value;
 
   SerializableConverterInconvertibleElementField({required this.value});
+}
+
+@ShouldGenerate(r'''
+void _$SerializableConverterIterableElementFieldBuildXmlChildren(SerializableConverterIterableElementField instance, XmlBuilder builder, {Map<String, String> namespaces = const {}}) {
+final value = instance.value;
+final valueSerialized = value;
+for (final value in valueSerialized) { builder.element('value', nest: () { const ElementDateTimeConverter().buildXmlChildren(value, builder, namespaces: namespaces); }); }
+}
+
+SerializableConverterIterableElementField _$SerializableConverterIterableElementFieldFromXmlElement(XmlElement element) {
+final value = element.getElements('value')!;
+return SerializableConverterIterableElementField(value: value.map((e) => const ElementDateTimeConverter().fromXmlElement(e)).toList());
+}
+
+List<XmlAttribute> _$SerializableConverterIterableElementFieldToXmlAttributes(SerializableConverterIterableElementField instance, {Map<String, String?> namespaces = const {}}) {
+final attributes = <XmlAttribute>[];
+return attributes;
+}
+
+List<XmlNode> _$SerializableConverterIterableElementFieldToXmlChildren(SerializableConverterIterableElementField instance, {Map<String, String?> namespaces = const {}}) {
+final children = <XmlNode>[];
+final value = instance.value;
+final valueSerialized = value;
+final valueConstructed = valueSerialized.map((e) => XmlElement(XmlName('value'), const ElementDateTimeConverter().toXmlAttributes(e, namespaces: namespaces), const ElementDateTimeConverter().toXmlChildren(e, namespaces: namespaces)));
+children.addAll(valueConstructed);
+return children;
+}''')
+@annotation.XmlSerializable(
+  converters: [
+    ElementDateTimeConverter(),
+  ],
+)
+class SerializableConverterIterableElementField {
+  @annotation.XmlElement()
+  List<DateTime> value;
+
+  SerializableConverterIterableElementField({required this.value});
 }
 
 @ShouldGenerate(r'''

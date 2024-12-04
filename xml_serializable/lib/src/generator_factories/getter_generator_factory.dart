@@ -88,7 +88,9 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
   final type = element.type;
   if (type is ParameterizedType &&
       (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet)) {
-    final converterElement = element.getXmlConverterElement(type: type);
+    final converterElement = element.getXmlConverterElement(
+      type: type.typeArguments.single,
+    );
     if (converterElement is ClassElement) {
       return XmlConverterXmlElementIterableGetterGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),
@@ -117,7 +119,9 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
       );
     }
   } else {
-    final converterElement = element.getXmlConverterElement(type: type);
+    final converterElement = element.getXmlConverterElement(
+      type: type,
+    );
     if (converterElement is ClassElement) {
       return XmlConverterXmlElementGetterGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),

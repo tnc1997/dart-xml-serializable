@@ -103,7 +103,9 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
   final type = element.type;
   if (type is ParameterizedType &&
       (type.isDartCoreIterable || type.isDartCoreList || type.isDartCoreSet)) {
-    final converterElement = element.getXmlConverterElement(type: type);
+    final converterElement = element.getXmlConverterElement(
+      type: type.typeArguments.single,
+    );
     if (converterElement is ClassElement) {
       return IterableConstructorGenerator(
         XmlConverterXmlElementConstructorGenerator(
@@ -147,7 +149,9 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
       );
     }
   } else {
-    final converterElement = element.getXmlConverterElement(type: type);
+    final converterElement = element.getXmlConverterElement(
+      type: type,
+    );
     if (converterElement is ClassElement) {
       return XmlConverterXmlElementConstructorGenerator(
         xmlElement.name ?? element.getEncodedFieldName(),
