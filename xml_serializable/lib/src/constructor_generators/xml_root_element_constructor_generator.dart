@@ -59,13 +59,10 @@ class XmlRootElementConstructorGenerator extends ConstructorGenerator {
 class NullableXmlRootElementConstructorGenerator
     extends XmlRootElementConstructorGenerator {
   const NullableXmlRootElementConstructorGenerator(
-    String name, {
-    String? namespace,
-    bool? isSelfClosing,
+    super.name, {
+    super.namespace,
+    super.isSelfClosing,
   }) : super(
-          name,
-          namespace: namespace,
-          isSelfClosing: isSelfClosing,
           isNullable: true,
         );
 }

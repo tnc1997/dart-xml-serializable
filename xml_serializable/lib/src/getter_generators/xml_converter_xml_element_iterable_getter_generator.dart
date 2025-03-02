@@ -9,29 +9,21 @@ class XmlConverterXmlElementIterableGetterGenerator
   final bool _isConverterNullable;
 
   const XmlConverterXmlElementIterableGetterGenerator(
-    String name,
+    super.name,
     this._converter, {
-    String? namespace,
-    bool isNullable = false,
+    super.namespace,
+    super.isNullable,
     bool isConverterNullable = false,
-  })  : _isConverterNullable = isConverterNullable,
-        super(
-          name,
-          namespace: namespace,
-          isNullable: isNullable,
-        );
+  })  : _isConverterNullable = isConverterNullable;
 }
 
 class NullableXmlConverterXmlElementIterableGetterGenerator
     extends XmlConverterXmlElementIterableGetterGenerator {
   const NullableXmlConverterXmlElementIterableGetterGenerator(
-    String name,
-    String converter, {
-    String? namespace,
+    super.name,
+    super.converter, {
+    super.namespace,
   }) : super(
-          name,
-          converter,
-          namespace: namespace,
           isNullable: true,
           isConverterNullable: true,
         );

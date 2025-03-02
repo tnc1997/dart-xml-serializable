@@ -36,6 +36,6 @@ class IterableConstructorGenerator extends ConstructorGenerator {
 
 class NullableIterableConstructorGenerator
     extends IterableConstructorGenerator {
-  const NullableIterableConstructorGenerator(ConstructorGenerator generator)
-      : super(generator, isNullable: true);
+  const NullableIterableConstructorGenerator(super.generator)
+      : super(isNullable: true);
 }

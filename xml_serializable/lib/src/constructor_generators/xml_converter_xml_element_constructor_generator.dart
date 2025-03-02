@@ -97,17 +97,12 @@ class XmlConverterXmlElementConstructorGenerator extends ConstructorGenerator {
 class NullableXmlConverterXmlElementConstructorGenerator
     extends XmlConverterXmlElementConstructorGenerator {
   const NullableXmlConverterXmlElementConstructorGenerator(
-    String name,
-    String converter, {
-    String? namespace,
-    bool? isSelfClosing,
-    bool? includeIfNull,
+    super.name,
+    super.converter, {
+    super.namespace,
+    super.isSelfClosing,
+    super.includeIfNull,
   }) : super(
-          name,
-          converter,
-          namespace: namespace,
-          isSelfClosing: isSelfClosing,
-          includeIfNull: includeIfNull,
           isNullable: true,
           isConverterNullable: true,
         );

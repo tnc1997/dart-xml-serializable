@@ -5,15 +5,10 @@ class XmlTextXmlElementGetterGenerator extends XmlElementGetterGenerator {
   final bool _isNullable;
 
   const XmlTextXmlElementGetterGenerator(
-    String name, {
-    String? namespace,
-    bool isNullable = false,
-  })  : _isNullable = isNullable,
-        super(
-          name,
-          namespace: namespace,
-          isNullable: isNullable,
-        );
+    super.name, {
+    super.namespace,
+    super.isNullable,
+  })  : _isNullable = isNullable;
 
   @override
   String generateGetter(String expression) {
@@ -36,11 +31,9 @@ class XmlTextXmlElementGetterGenerator extends XmlElementGetterGenerator {
 class NullableXmlTextXmlElementGetterGenerator
     extends XmlTextXmlElementGetterGenerator {
   const NullableXmlTextXmlElementGetterGenerator(
-    String name, {
-    String? namespace,
+    super.name, {
+    super.namespace,
   }) : super(
-          name,
-          namespace: namespace,
           isNullable: true,
         );
 }

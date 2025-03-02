@@ -41,11 +41,9 @@ class XmlAttributeGetterGenerator extends GetterGenerator {
 
 class NullableXmlAttributeGetterGenerator extends XmlAttributeGetterGenerator {
   const NullableXmlAttributeGetterGenerator(
-    String name, {
-    String? namespace,
+    super.name, {
+    super.namespace,
   }) : super(
-          name,
-          namespace: namespace,
           isNullable: true,
         );
 }

@@ -72,15 +72,11 @@ class XmlTextXmlElementConstructorGenerator extends ConstructorGenerator {
 class NullableXmlTextXmlElementConstructorGenerator
     extends XmlTextXmlElementConstructorGenerator {
   const NullableXmlTextXmlElementConstructorGenerator(
-    String name, {
-    String? namespace,
-    bool? isSelfClosing,
-    bool? includeIfNull,
+    super.name, {
+    super.namespace,
+    super.isSelfClosing,
+    super.includeIfNull,
   }) : super(
-          name,
-          namespace: namespace,
-          isSelfClosing: isSelfClosing,
-          includeIfNull: includeIfNull,
           isNullable: true,
         );
 }

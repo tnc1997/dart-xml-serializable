@@ -41,9 +41,8 @@ class XmlConverterXmlElementSerializerGenerator extends SerializerGenerator {
 class NullableXmlConverterXmlElementSerializerGenerator
     extends XmlConverterXmlElementSerializerGenerator {
   const NullableXmlConverterXmlElementSerializerGenerator(
-    String converter,
+    super.converter,
   ) : super(
-          converter,
           isNullable: true,
           isConverterNullable: true,
         );

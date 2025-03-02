@@ -36,9 +36,8 @@ class XmlSerializableXmlElementSerializerGenerator extends SerializerGenerator {
 class NullableXmlSerializableXmlElementSerializerGenerator
     extends XmlSerializableXmlElementSerializerGenerator {
   const NullableXmlSerializableXmlElementSerializerGenerator(
-    String name,
+    super.name,
   ) : super(
-          name,
           isNullable: true,
         );
 }

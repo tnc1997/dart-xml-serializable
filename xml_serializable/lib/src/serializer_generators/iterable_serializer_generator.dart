@@ -53,15 +53,15 @@ class IterableSerializerGenerator extends SerializerGenerator {
 }
 
 class NullableIterableSerializerGenerator extends IterableSerializerGenerator {
-  const NullableIterableSerializerGenerator(SerializerGenerator generator)
-      : super(generator, isNullable: true);
+  const NullableIterableSerializerGenerator(super.generator)
+      : super(isNullable: true);
 }
 
 class ListSerializerGenerator extends IterableSerializerGenerator {
   const ListSerializerGenerator(
-    SerializerGenerator generator, {
-    bool isNullable = false,
-  }) : super(generator, isNullable: isNullable);
+    super.generator, {
+    super.isNullable,
+  });
 
   @override
   String generateDeserializer(String expression) {
@@ -85,15 +85,15 @@ class ListSerializerGenerator extends IterableSerializerGenerator {
 }
 
 class NullableListSerializerGenerator extends ListSerializerGenerator {
-  const NullableListSerializerGenerator(SerializerGenerator generator)
-      : super(generator, isNullable: true);
+  const NullableListSerializerGenerator(super.generator)
+      : super(isNullable: true);
 }
 
 class SetSerializerGenerator extends IterableSerializerGenerator {
   const SetSerializerGenerator(
-    SerializerGenerator generator, {
-    bool isNullable = false,
-  }) : super(generator, isNullable: isNullable);
+    super.generator, {
+    super.isNullable,
+  });
 
   @override
   String generateDeserializer(String expression) {
@@ -117,6 +117,6 @@ class SetSerializerGenerator extends IterableSerializerGenerator {
 }
 
 class NullableSetSerializerGenerator extends SetSerializerGenerator {
-  const NullableSetSerializerGenerator(SerializerGenerator generator)
-      : super(generator, isNullable: true);
+  const NullableSetSerializerGenerator(super.generator)
+      : super(isNullable: true);
 }
