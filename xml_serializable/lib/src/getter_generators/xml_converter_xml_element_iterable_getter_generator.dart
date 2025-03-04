@@ -14,7 +14,7 @@ class XmlConverterXmlElementIterableGetterGenerator
     super.namespace,
     super.isNullable,
     bool isConverterNullable = false,
-  })  : _isConverterNullable = isConverterNullable;
+  }) : _isConverterNullable = isConverterNullable;
 }
 
 class NullableXmlConverterXmlElementIterableGetterGenerator

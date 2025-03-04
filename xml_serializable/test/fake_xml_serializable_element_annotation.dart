@@ -11,7 +11,7 @@ class FakeXmlSerializableConstructorElementElementAnnotation
   FakeXmlSerializableConstructorElementElementAnnotation({
     required XmlSerializable value,
   }) : super(
-          enclosingElement: FakeXmlSerializableClassElement(),
+          enclosingElement3: FakeXmlSerializableClassElement(),
           value: FakeXmlSerializableDartObject(
             value: value,
           ),

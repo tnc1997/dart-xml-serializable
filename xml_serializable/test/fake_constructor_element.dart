@@ -5,7 +5,7 @@ import 'fake_library_element.dart';
 
 class FakeConstructorElement extends FakeElement implements ConstructorElement {
   @override
-  final InterfaceElement enclosingElement;
+  final InterfaceElement enclosingElement3;
 
   @override
   final LibraryElement library;
@@ -14,7 +14,7 @@ class FakeConstructorElement extends FakeElement implements ConstructorElement {
   final String name;
 
   FakeConstructorElement({
-    required this.enclosingElement,
+    required this.enclosingElement3,
     LibraryElement? library,
     this.name = 'HelloWorld',
   }) : library = library ?? FakeLibraryElement();

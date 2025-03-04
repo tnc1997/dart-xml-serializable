@@ -16,13 +16,6 @@ class XmlEnumGenerator extends GeneratorForAnnotation<XmlEnum> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (!element.library!.isNonNullableByDefault) {
-      throw InvalidGenerationSourceError(
-        'Generator cannot target libraries that have not been migrated to null-safety.',
-        element: element,
-      );
-    }
-
     if (element is! EnumElement) {
       throw InvalidGenerationSourceError(
         '`@XmlEnum` can only be used on enums.',

@@ -7,13 +7,13 @@ import 'element_extensions.dart';
 
 extension FieldElementExtensions on FieldElement {
   String getEncodedFieldName() {
-    final fieldRename = enclosingElement.hasXmlSerializable
-        ? enclosingElement
+    final fieldRename = enclosingElement3.hasXmlSerializable
+        ? enclosingElement3
             .getXmlSerializable()
             ?.toXmlSerializableValue()
             ?.fieldRename
-        : enclosingElement.hasXmlEnum
-            ? enclosingElement.getXmlEnum()?.toXmlEnumValue()?.fieldRename
+        : enclosingElement3.hasXmlEnum
+            ? enclosingElement3.getXmlEnum()?.toXmlEnumValue()?.fieldRename
             : null;
 
     switch (fieldRename) {

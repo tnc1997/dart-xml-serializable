@@ -11,7 +11,7 @@ class FakeXmlTextConstructorElementElementAnnotation
   FakeXmlTextConstructorElementElementAnnotation({
     required XmlText value,
   }) : super(
-          enclosingElement: FakeXmlTextClassElement(),
+          enclosingElement3: FakeXmlTextClassElement(),
           value: FakeXmlTextDartObject(
             value: value,
           ),

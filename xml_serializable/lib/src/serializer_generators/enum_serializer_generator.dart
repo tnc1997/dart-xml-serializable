@@ -52,6 +52,5 @@ class EnumSerializerGenerator extends SerializerGenerator {
 }
 
 class NullableEnumSerializerGenerator extends EnumSerializerGenerator {
-  const NullableEnumSerializerGenerator(super.name)
-      : super(isNullable: true);
+  const NullableEnumSerializerGenerator(super.name) : super(isNullable: true);
 }

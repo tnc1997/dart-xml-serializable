@@ -13,7 +13,7 @@ class XmlConverterXmlElementGetterGenerator extends XmlElementGetterGenerator {
     super.namespace,
     super.isNullable,
     bool isConverterNullable = false,
-  })  : _isConverterNullable = isConverterNullable;
+  }) : _isConverterNullable = isConverterNullable;
 }
 
 class NullableXmlConverterXmlElementGetterGenerator

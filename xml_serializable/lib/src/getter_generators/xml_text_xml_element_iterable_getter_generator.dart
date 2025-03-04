@@ -9,7 +9,7 @@ class XmlTextXmlElementIterableGetterGenerator
     super.name, {
     super.namespace,
     super.isNullable,
-  })  : _isNullable = isNullable;
+  }) : _isNullable = isNullable;
 
   @override
   String generateGetter(String expression) {

@@ -20,7 +20,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeClassElement(
+                  enclosingElement3: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableConstructorElementElementAnnotation(
                         value: XmlSerializable(
@@ -41,7 +41,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeClassElement(
+                  enclosingElement3: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableConstructorElementElementAnnotation(
                         value: XmlSerializable(
@@ -62,7 +62,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeClassElement(
+                  enclosingElement3: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableConstructorElementElementAnnotation(
                         value: XmlSerializable(
@@ -83,7 +83,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeClassElement(
+                  enclosingElement3: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableConstructorElementElementAnnotation(
                         value: XmlSerializable(
@@ -104,7 +104,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeClassElement(
+                  enclosingElement3: FakeClassElement(
                     metadata: [
                       FakeXmlSerializableConstructorElementElementAnnotation(
                         value: XmlSerializable(),
@@ -135,7 +135,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeEnumElement(
+                  enclosingElement3: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumConstructorElementElementAnnotation(
                         value: XmlEnum(
@@ -156,7 +156,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeEnumElement(
+                  enclosingElement3: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumConstructorElementElementAnnotation(
                         value: XmlEnum(
@@ -177,7 +177,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeEnumElement(
+                  enclosingElement3: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumConstructorElementElementAnnotation(
                         value: XmlEnum(
@@ -198,7 +198,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeEnumElement(
+                  enclosingElement3: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumConstructorElementElementAnnotation(
                         value: XmlEnum(
@@ -219,7 +219,7 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement: FakeEnumElement(
+                  enclosingElement3: FakeEnumElement(
                     metadata: [
                       FakeXmlEnumConstructorElementElementAnnotation(
                         value: XmlEnum(),

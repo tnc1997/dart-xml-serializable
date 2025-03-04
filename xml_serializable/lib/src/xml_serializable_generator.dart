@@ -44,13 +44,6 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     ConstantReader annotation,
     BuildStep buildStep,
   ) {
-    if (!element.library!.isNonNullableByDefault) {
-      throw InvalidGenerationSourceError(
-        'Generator cannot target libraries that have not been migrated to null-safety.',
-        element: element,
-      );
-    }
-
     if (element is ClassElement) {
       final xmlSerializable =
           element.getXmlSerializable()!.toXmlSerializableValue()!;
@@ -381,7 +374,8 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           }
         }
 
-        for (final import in element.library.libraryImports) {
+        for (final import
+            in element.library.definingCompilationUnit.libraryImports) {
           for (final entry in import.namespace.definedNames.entries) {
             if (entry.value == type.element) {
               return XmlSerializableXmlElementSerializerGenerator(

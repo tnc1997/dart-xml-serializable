@@ -11,7 +11,7 @@ class FakeXmlConverterConstructorElementElementAnnotation<T>
   FakeXmlConverterConstructorElementElementAnnotation({
     XmlConverter<T>? value,
   }) : super(
-          enclosingElement: FakeXmlConverterClassElement(),
+          enclosingElement3: FakeXmlConverterClassElement(),
           value: FakeXmlConverterDartObject(
             value: value,
           ),

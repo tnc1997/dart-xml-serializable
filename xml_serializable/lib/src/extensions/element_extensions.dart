@@ -23,7 +23,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlAttribute) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -50,7 +50,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlCDATA) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -96,9 +96,9 @@ extension ElementExtensions on Element {
       }
     }
 
-    final enclosingElement = this.enclosingElement;
-    if (enclosingElement != null) {
-      for (final annotation in enclosingElement.metadata) {
+    final enclosingElement3 = this.enclosingElement3;
+    if (enclosingElement3 != null) {
+      for (final annotation in enclosingElement3.metadata) {
         if (annotation.isXmlConverter(type: type)) {
           return annotation.computeConstantValue();
         }
@@ -155,20 +155,20 @@ extension ElementExtensions on Element {
       if (annotation.isXmlConverter(type: type)) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
       }
     }
 
-    final enclosingElement = this.enclosingElement;
-    if (enclosingElement != null) {
-      for (final annotation in enclosingElement.metadata) {
+    final enclosingElement3 = this.enclosingElement3;
+    if (enclosingElement3 != null) {
+      for (final annotation in enclosingElement3.metadata) {
         if (annotation.isXmlConverter(type: type)) {
           final element = annotation.element;
           if (element is ConstructorElement) {
-            return element.enclosingElement;
+            return element.enclosingElement3;
           } else if (element is PropertyAccessorElement) {
             return element.returnType.element;
           }
@@ -210,7 +210,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlElement) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -237,7 +237,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlEnum) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -264,7 +264,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlRootElement) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -291,7 +291,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlSerializable) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -318,7 +318,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlText) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -345,7 +345,7 @@ extension ElementExtensions on Element {
       if (annotation.isXmlValue) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement;
+          return element.enclosingElement3;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -387,8 +387,8 @@ extension ElementExtensions on Element {
       }
     }
 
-    final enclosingElement = this.enclosingElement;
-    if (enclosingElement != null) {
+    final enclosingElement3 = this.enclosingElement3;
+    if (enclosingElement3 != null) {
       for (var annotation in metadata) {
         if (annotation.isXmlConverter(type: type)) {
           return true;

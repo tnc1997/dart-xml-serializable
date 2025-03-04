@@ -8,7 +8,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlAttribute {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlAttribute;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlAttribute;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlAttribute;
     }
@@ -20,7 +20,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlCDATA {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlCDATA;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlCDATA;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlCDATA;
     }
@@ -32,7 +32,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlElement {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlElement;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlElement;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlElement;
     }
@@ -44,7 +44,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlEnum {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlEnum;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlEnum;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlEnum;
     }
@@ -56,7 +56,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlRootElement {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlRootElement;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlRootElement;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlRootElement;
     }
@@ -68,7 +68,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlSerializable {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlSerializable;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlSerializable;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlSerializable;
     }
@@ -80,7 +80,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlText {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlText;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlText;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlText;
     }
@@ -92,7 +92,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   bool get isXmlValue {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlValue;
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlValue;
     } else if (element is PropertyAccessorElement) {
       return element.returnType.isXmlAnnotationXmlValue;
     }
@@ -106,7 +106,7 @@ extension ElementAnnotationExtensions on ElementAnnotation {
   }) {
     final element = this.element;
     if (element is ConstructorElement) {
-      return element.enclosingElement.thisType.isXmlAnnotationXmlConverter(
+      return element.enclosingElement3.thisType.isXmlAnnotationXmlConverter(
         type: type,
       );
     } else if (element is PropertyAccessorElement) {
