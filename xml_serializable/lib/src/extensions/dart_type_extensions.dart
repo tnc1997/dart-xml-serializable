@@ -69,42 +69,42 @@ extension DartTypeExtensions on DartType {
   bool isXmlAnnotationXmlConverter({
     DartType? type,
   }) {
-    final _ = this;
+    final this_ = this;
 
     if (element?.library?.identifier == '$_prefix/xml_converter.dart' &&
         element?.name == 'XmlConverter' &&
         (type == null ||
-            (_ is InterfaceType &&
-                (_.typeArguments[0].element == type.element &&
-                    ((_.typeArguments[0].nullabilitySuffix ==
+            (this_ is InterfaceType &&
+                (this_.typeArguments[0].element == type.element &&
+                    ((this_.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.none &&
                             type.nullabilitySuffix == NullabilitySuffix.none) ||
-                        (_.typeArguments[0].nullabilitySuffix ==
+                        (this_.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.none &&
                             type.nullabilitySuffix ==
                                 NullabilitySuffix.question) ||
-                        (_.typeArguments[0].nullabilitySuffix ==
+                        (this_.typeArguments[0].nullabilitySuffix ==
                                 NullabilitySuffix.question &&
                             type.nullabilitySuffix ==
                                 NullabilitySuffix.question)))))) {
       return true;
     }
 
-    if (_ is InterfaceType) {
-      final superclass = _.superclass;
+    if (this_ is InterfaceType) {
+      final superclass = this_.superclass;
       if (superclass != null) {
         if (superclass.isXmlAnnotationXmlConverter(type: type)) {
           return true;
         }
       }
 
-      for (final interface in _.interfaces) {
+      for (final interface in this_.interfaces) {
         if (interface.isXmlAnnotationXmlConverter(type: type)) {
           return true;
         }
       }
 
-      for (final mixin in _.mixins) {
+      for (final mixin in this_.mixins) {
         if (mixin.isXmlAnnotationXmlConverter(type: type)) {
           return true;
         }
