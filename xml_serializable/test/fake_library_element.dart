@@ -9,12 +9,6 @@ class FakeLibraryElement extends Fake implements LibraryElement {
   final bool isDartCore;
 
   @override
-  final bool isNonNullableByDefault;
-
-  @override
-  final List<LibraryImportElement> libraryImports;
-
-  @override
   final String name;
 
   @override
@@ -23,14 +17,10 @@ class FakeLibraryElement extends Fake implements LibraryElement {
   FakeLibraryElement({
     String? identifier,
     bool? isDartCore,
-    bool? isNonNullableByDefault,
-    List<LibraryImportElement>? libraryImports,
     String? name,
     Iterable<Element>? topLevelElements,
   })  : identifier = identifier ?? '',
         isDartCore = isDartCore ?? false,
-        libraryImports = libraryImports ?? [],
-        isNonNullableByDefault = isNonNullableByDefault ?? true,
         name = name ?? '',
         topLevelElements = topLevelElements ?? [];
 }
