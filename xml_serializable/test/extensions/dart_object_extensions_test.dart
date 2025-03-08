@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use_from_same_package
+
 import 'package:test/test.dart';
 import 'package:xml_annotation/xml_annotation.dart';
 import 'package:xml_serializable/xml_serializable.dart';
