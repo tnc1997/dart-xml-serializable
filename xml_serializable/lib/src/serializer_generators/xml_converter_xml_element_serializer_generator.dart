@@ -8,6 +8,7 @@ class XmlConverterXmlElementSerializerGenerator extends SerializerGenerator {
   final bool _isNullable;
 
   /// If `false` (the default) then the type of the converter does not represent a nullable type.
+  // ignore: unused_field
   final bool _isConverterNullable;
 
   const XmlConverterXmlElementSerializerGenerator(

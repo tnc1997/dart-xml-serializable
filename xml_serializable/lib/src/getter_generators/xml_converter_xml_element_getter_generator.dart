@@ -2,9 +2,11 @@ import 'xml_element_getter_generator.dart';
 
 class XmlConverterXmlElementGetterGenerator extends XmlElementGetterGenerator {
   /// The name of the converter.
+  // ignore: unused_field
   final String _converter;
 
   /// If `false` (the default) then the type of the converter does not represent a nullable type.
+  // ignore: unused_field
   final bool _isConverterNullable;
 
   const XmlConverterXmlElementGetterGenerator(
