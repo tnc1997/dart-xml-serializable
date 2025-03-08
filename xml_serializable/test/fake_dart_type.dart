@@ -3,11 +3,11 @@ import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:test/fake.dart';
 
-import 'fake_element.dart';
+import 'fake_field_element.dart';
 
 class FakeDartType extends Fake implements DartType {
   @override
-  Element get element => _element ?? FakeElement();
+  Element get element => _element ?? FakeFieldElement();
 
   @override
   final bool isDartCoreBool;
