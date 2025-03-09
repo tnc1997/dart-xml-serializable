@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.5.4 (2025-03-09)
+
+### Code Refactoring
+
+* resolve analyzer no_wildcard_variable_uses ([42ca666](https://github.com/tnc1997/dart-xml-serializable/commit/42ca666dfdf34268526202417c8e9bb53a7b1812))
+* resolve analyzer override_on_non_overriding_member ([6a5b8f3](https://github.com/tnc1997/dart-xml-serializable/commit/6a5b8f380b9e86b04f415eabfc673f546caeb253))
+* resolve analyzer overridden_fields ([ca6f6ad](https://github.com/tnc1997/dart-xml-serializable/commit/ca6f6ad05f3600f2b98fec50fdb46128e57d0a39))
+* resolve analyzer subtype_of_sealed_class ([65715f5](https://github.com/tnc1997/dart-xml-serializable/commit/65715f53137242af594ef500360440561fa9ba60))
+* ignore analyzer deprecated_member_use_from_same_package ([2312f8c](https://github.com/tnc1997/dart-xml-serializable/commit/2312f8cefcfc66464e03ca705b17788265a52e54))
+* ignore analyzer unused_field ([327d6e1](https://github.com/tnc1997/dart-xml-serializable/commit/327d6e19eb9c6b062ead06f78445292c8f1b4108))
+
+### Builds
+
+* **deps:** bump source_gen ([6925799](https://github.com/tnc1997/dart-xml-serializable/commit/6925799428b740d6894c5bb41e9dc5dcab08cbf1))
+* **deps:** bump analyzer ([5dfbc6d](https://github.com/tnc1997/dart-xml-serializable/commit/5dfbc6dc8830e5096ffc92dc767c04c7d3a50722))
+
 ## 2.5.3 (2024-12-04)
 
 ### Bug Fixes
