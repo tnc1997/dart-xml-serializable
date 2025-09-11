@@ -5,6 +5,7 @@ import 'package:xml_serializable/xml_serializable.dart';
 import '../fake_class_element.dart';
 import '../fake_enum_element.dart';
 import '../fake_field_element.dart';
+import '../fake_metadata.dart';
 import '../fake_xml_enum_element_annotation.dart';
 import '../fake_xml_serializable_element_annotation.dart';
 
@@ -20,14 +21,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
-                    metadata: [
-                      FakeXmlSerializableConstructorElementElementAnnotation(
-                        value: XmlSerializable(
-                          fieldRename: FieldRename.kebab,
+                  enclosingElement: FakeClassElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(
+                            fieldRename: FieldRename.kebab,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -41,14 +44,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
-                    metadata: [
-                      FakeXmlSerializableConstructorElementElementAnnotation(
-                        value: XmlSerializable(
-                          fieldRename: FieldRename.snake,
+                  enclosingElement: FakeClassElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(
+                            fieldRename: FieldRename.snake,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -62,14 +67,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
-                    metadata: [
-                      FakeXmlSerializableConstructorElementElementAnnotation(
-                        value: XmlSerializable(
-                          fieldRename: FieldRename.pascal,
+                  enclosingElement: FakeClassElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(
+                            fieldRename: FieldRename.pascal,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -83,14 +90,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
-                    metadata: [
-                      FakeXmlSerializableConstructorElementElementAnnotation(
-                        value: XmlSerializable(
-                          fieldRename: FieldRename.none,
+                  enclosingElement: FakeClassElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(
+                            fieldRename: FieldRename.none,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -104,12 +113,14 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeClassElement(
-                    metadata: [
-                      FakeXmlSerializableConstructorElementElementAnnotation(
-                        value: XmlSerializable(),
-                      ),
-                    ],
+                  enclosingElement: FakeClassElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlSerializableConstructorElementElementAnnotation(
+                          value: XmlSerializable(),
+                        ),
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -135,14 +146,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
-                    metadata: [
-                      FakeXmlEnumConstructorElementElementAnnotation(
-                        value: XmlEnum(
-                          fieldRename: FieldRename.kebab,
+                  enclosingElement: FakeEnumElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlEnumConstructorElementElementAnnotation(
+                          value: XmlEnum(
+                            fieldRename: FieldRename.kebab,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -156,14 +169,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
-                    metadata: [
-                      FakeXmlEnumConstructorElementElementAnnotation(
-                        value: XmlEnum(
-                          fieldRename: FieldRename.snake,
+                  enclosingElement: FakeEnumElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlEnumConstructorElementElementAnnotation(
+                          value: XmlEnum(
+                            fieldRename: FieldRename.snake,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -177,14 +192,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
-                    metadata: [
-                      FakeXmlEnumConstructorElementElementAnnotation(
-                        value: XmlEnum(
-                          fieldRename: FieldRename.pascal,
+                  enclosingElement: FakeEnumElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlEnumConstructorElementElementAnnotation(
+                          value: XmlEnum(
+                            fieldRename: FieldRename.pascal,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -198,14 +215,16 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
-                    metadata: [
-                      FakeXmlEnumConstructorElementElementAnnotation(
-                        value: XmlEnum(
-                          fieldRename: FieldRename.none,
+                  enclosingElement: FakeEnumElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlEnumConstructorElementElementAnnotation(
+                          value: XmlEnum(
+                            fieldRename: FieldRename.none,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),
@@ -219,12 +238,14 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  enclosingElement3: FakeEnumElement(
-                    metadata: [
-                      FakeXmlEnumConstructorElementElementAnnotation(
-                        value: XmlEnum(),
-                      ),
-                    ],
+                  enclosingElement: FakeEnumElement(
+                    metadata: FakeMetadata(
+                      annotations: [
+                        FakeXmlEnumConstructorElementElementAnnotation(
+                          value: XmlEnum(),
+                        ),
+                      ],
+                    ),
                   ),
                   name: 'helloWorld',
                 ).getEncodedFieldName(),

@@ -121,7 +121,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         );
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name!)};',
         );
 
         buffer.writeln(
@@ -162,7 +162,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
     }
 
     buffer.writeln(
-      'return ${element.name}(${elements.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element).generateDeserializer(element.name)}').join(', ')});',
+      'return ${element.name}(${elements.map((element) => '${element.name}: ${_xmlSerializableSerializerGeneratorFactory(element).generateDeserializer(element.name!)}').join(', ')});',
     );
 
     buffer.write('}');
@@ -218,7 +218,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name!)};',
         );
 
         buffer.writeln(
@@ -265,7 +265,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         buffer.writeln('final ${element.name} = instance.${element.name};');
 
         buffer.writeln(
-          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name)};',
+          'final ${element.name}Serialized = ${_xmlSerializableSerializerGeneratorFactory(element).generateSerializer(element.name!)};',
         );
 
         buffer.writeln(
@@ -354,7 +354,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
       );
       if (converterElement is ClassElement) {
         return XmlConverterXmlElementSerializerGenerator(
-          converterElement.name,
+          converterElement.name!,
           isNullable: type.isNullable,
           isConverterNullable: converterElement.thisType.allSupertypes.any(
             (supertype) =>
@@ -365,7 +365,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           ),
         );
       } else if (type is InterfaceType && type.element.hasXmlSerializable) {
-        for (final element in element.library.topLevelElements) {
+        for (final element in element.library.classes) {
           if (element == type.element) {
             return XmlSerializableXmlElementSerializerGenerator(
               element.name!,
@@ -374,12 +374,11 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           }
         }
 
-        for (final import
-            in element.library.definingCompilationUnit.libraryImports) {
-          for (final entry in import.namespace.definedNames.entries) {
+        for (final import in element.library.firstFragment.libraryImports) {
+          for (final entry in import.namespace.definedNames2.entries) {
             if (entry.value == type.element) {
               return XmlSerializableXmlElementSerializerGenerator(
-                entry.key,
+                '${import.prefix!.name!}.${entry.key}',
                 isNullable: type.isNullable,
               );
             }
@@ -387,7 +386,7 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
         }
 
         return XmlSerializableXmlElementSerializerGenerator(
-          type.element.name,
+          type.element.name!,
           isNullable: type.isNullable,
         );
       } else if (type is ParameterizedType && type.isDartCoreIterable) {

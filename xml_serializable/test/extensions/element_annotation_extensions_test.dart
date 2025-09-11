@@ -54,7 +54,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlAttribute,
                 isFalse,
               );
@@ -107,7 +107,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlCDATA,
                 isFalse,
               );
@@ -136,7 +136,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     thisType: FakeInterfaceType(
                       interfaces: [
                         FakeInterfaceType(
@@ -158,7 +158,7 @@ void main() {
 
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     thisType: FakeInterfaceType(
                       interfaces: [
                         FakeInterfaceType(
@@ -234,7 +234,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlConverter(),
                 isFalse,
               );
@@ -246,7 +246,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(
+                  enclosingElement: FakeClassElement(
                     thisType: FakeInterfaceType(
                       interfaces: [
                         FakeInterfaceType(
@@ -343,7 +343,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlElement,
                 isFalse,
               );
@@ -396,7 +396,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlEnum,
                 isFalse,
               );
@@ -449,7 +449,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlRootElement,
                 isFalse,
               );
@@ -502,7 +502,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlSerializable,
                 isFalse,
               );
@@ -555,7 +555,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlText,
                 isFalse,
               );
@@ -608,7 +608,7 @@ void main() {
             () {
               expect(
                 FakeConstructorElementElementAnnotation(
-                  enclosingElement3: FakeClassElement(),
+                  enclosingElement: FakeClassElement(),
                 ).isXmlValue,
                 isFalse,
               );

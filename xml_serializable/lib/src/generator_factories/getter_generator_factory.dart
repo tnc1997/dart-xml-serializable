@@ -75,7 +75,7 @@ GetterGenerator xmlAttributeGetterGeneratorFactory(FieldElement element) {
   final xmlAttribute = element.getXmlAttribute()!.toXmlAttributeValue()!;
 
   return XmlAttributeGetterGenerator(
-    xmlAttribute.name ?? element.getEncodedFieldName(),
+    xmlAttribute.name ?? element.getEncodedFieldName()!,
     namespace: xmlAttribute.namespace,
     isNullable: element.type.isNullable,
   );
@@ -93,8 +93,8 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
     );
     if (converterElement is ClassElement) {
       return XmlConverterXmlElementIterableGetterGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
-        converterElement.name,
+        xmlElement.name ?? element.getEncodedFieldName()!,
+        converterElement.name!,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
         isConverterNullable: converterElement.thisType.allSupertypes.any(
@@ -107,13 +107,13 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
       );
     } else if (type.typeArguments.single.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementIterableGetterGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
+        xmlElement.name ?? element.getEncodedFieldName()!,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
       );
     } else {
       return XmlTextXmlElementIterableGetterGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
+        xmlElement.name ?? element.getEncodedFieldName()!,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
       );
@@ -124,8 +124,8 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
     );
     if (converterElement is ClassElement) {
       return XmlConverterXmlElementGetterGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
-        converterElement.name,
+        xmlElement.name ?? element.getEncodedFieldName()!,
+        converterElement.name!,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
         isConverterNullable: converterElement.thisType.allSupertypes.any(
@@ -138,13 +138,13 @@ GetterGenerator xmlElementGetterGeneratorFactory(FieldElement element) {
       );
     } else if (type.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementGetterGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
+        xmlElement.name ?? element.getEncodedFieldName()!,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
       );
     } else {
       return XmlTextXmlElementGetterGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
+        xmlElement.name ?? element.getEncodedFieldName()!,
         namespace: xmlElement.namespace,
         isNullable: type.isNullable,
       );

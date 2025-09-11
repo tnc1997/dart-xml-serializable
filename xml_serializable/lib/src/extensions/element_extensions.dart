@@ -7,8 +7,9 @@ import 'element_annotation_extensions.dart';
 
 extension ElementExtensions on Element {
   /// Gets the annotation of the form `@XmlAttribute()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlAttribute()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlAttribute() =>
-      metadata.singleWhere((e) => e.isXmlAttribute).computeConstantValue();
+  DartObject? getXmlAttribute() => metadata.annotations
+      .singleWhere((e) => e.isXmlAttribute)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlAttribute` as an annotation on this element for example:
   ///
@@ -19,11 +20,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlAttributeElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlAttribute) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -34,8 +35,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlCDATA()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlCDATA()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlCDATA() =>
-      metadata.singleWhere((e) => e.isXmlCDATA).computeConstantValue();
+  DartObject? getXmlCDATA() => metadata.annotations
+      .singleWhere((e) => e.isXmlCDATA)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlCDATA` as an annotation on this element for example:
   ///
@@ -46,11 +48,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlCDATAElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlCDATA) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -90,15 +92,15 @@ extension ElementExtensions on Element {
   DartObject? getXmlConverter({
     DartType? type,
   }) {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlConverter(type: type)) {
         return annotation.computeConstantValue();
       }
     }
 
-    final enclosingElement3 = this.enclosingElement3;
-    if (enclosingElement3 != null) {
-      for (final annotation in enclosingElement3.metadata) {
+    final enclosingElement = this.enclosingElement;
+    if (enclosingElement != null) {
+      for (final annotation in enclosingElement.metadata.annotations) {
         if (annotation.isXmlConverter(type: type)) {
           return annotation.computeConstantValue();
         }
@@ -151,24 +153,24 @@ extension ElementExtensions on Element {
   Element? getXmlConverterElement({
     DartType? type,
   }) {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlConverter(type: type)) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
       }
     }
 
-    final enclosingElement3 = this.enclosingElement3;
-    if (enclosingElement3 != null) {
-      for (final annotation in enclosingElement3.metadata) {
+    final enclosingElement = this.enclosingElement;
+    if (enclosingElement != null) {
+      for (final annotation in enclosingElement.metadata.annotations) {
         if (annotation.isXmlConverter(type: type)) {
           final element = annotation.element;
           if (element is ConstructorElement) {
-            return element.enclosingElement3;
+            return element.enclosingElement;
           } else if (element is PropertyAccessorElement) {
             return element.returnType.element;
           }
@@ -194,8 +196,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlElement()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlElement()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlElement() =>
-      metadata.singleWhere((e) => e.isXmlElement).computeConstantValue();
+  DartObject? getXmlElement() => metadata.annotations
+      .singleWhere((e) => e.isXmlElement)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlElement` as an annotation on this element for example:
   ///
@@ -206,11 +209,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlElementElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlElement) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -221,8 +224,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlEnum()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlEnum()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlEnum() =>
-      metadata.singleWhere((e) => e.isXmlEnum).computeConstantValue();
+  DartObject? getXmlEnum() => metadata.annotations
+      .singleWhere((e) => e.isXmlEnum)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlEnum` as an annotation on this element for example:
   ///
@@ -233,11 +237,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlEnumElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlEnum) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -248,8 +252,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlRootElement()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlRootElement()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlRootElement() =>
-      metadata.singleWhere((e) => e.isXmlRootElement).computeConstantValue();
+  DartObject? getXmlRootElement() => metadata.annotations
+      .singleWhere((e) => e.isXmlRootElement)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlRootElement` as an annotation on this element for example:
   ///
@@ -260,11 +265,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlRootElementElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlRootElement) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -275,8 +280,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlSerializable()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlSerializable()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlSerializable() =>
-      metadata.singleWhere((e) => e.isXmlSerializable).computeConstantValue();
+  DartObject? getXmlSerializable() => metadata.annotations
+      .singleWhere((e) => e.isXmlSerializable)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlSerializable` as an annotation on this element for example:
   ///
@@ -287,11 +293,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlSerializableElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlSerializable) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -302,8 +308,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlText()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlText()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlText() =>
-      metadata.singleWhere((e) => e.isXmlText).computeConstantValue();
+  DartObject? getXmlText() => metadata.annotations
+      .singleWhere((e) => e.isXmlText)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlText` as an annotation on this element for example:
   ///
@@ -314,11 +321,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlTextElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlText) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -329,8 +336,9 @@ extension ElementExtensions on Element {
   }
 
   /// Gets the annotation of the form `@XmlValue()`. Throws a [StateError] if this element does not have an annotation of the form `@XmlValue()`. Returns `null` if the value of the annotation could not be computed because of errors.
-  DartObject? getXmlValue() =>
-      metadata.singleWhere((e) => e.isXmlValue).computeConstantValue();
+  DartObject? getXmlValue() => metadata.annotations
+      .singleWhere((e) => e.isXmlValue)
+      .computeConstantValue();
 
   /// Gets the element that represents the class `XmlValue` as an annotation on this element for example:
   ///
@@ -341,11 +349,11 @@ extension ElementExtensions on Element {
   /// }
   /// ```
   Element? getXmlValueElement() {
-    for (final annotation in metadata) {
+    for (final annotation in metadata.annotations) {
       if (annotation.isXmlValue) {
         final element = annotation.element;
         if (element is ConstructorElement) {
-          return element.enclosingElement3;
+          return element.enclosingElement;
         } else if (element is PropertyAccessorElement) {
           return element.returnType.element;
         }
@@ -356,10 +364,10 @@ extension ElementExtensions on Element {
   }
 
   /// Returns `true` if this element has an annotation of the form `@XmlAttribute()`.
-  bool get hasXmlAttribute => metadata.any((e) => e.isXmlAttribute);
+  bool get hasXmlAttribute => metadata.annotations.any((e) => e.isXmlAttribute);
 
   /// Returns `true` if this element has an annotation of the form `@XmlCDATA()`.
-  bool get hasXmlCDATA => metadata.any((e) => e.isXmlCDATA);
+  bool get hasXmlCDATA => metadata.annotations.any((e) => e.isXmlCDATA);
 
   /// Returns `true` if this element has an annotation that implements `XmlConverter` and can convert the [type] for example:
   ///
@@ -381,15 +389,15 @@ extension ElementExtensions on Element {
   bool hasXmlConverter({
     DartType? type,
   }) {
-    for (var annotation in metadata) {
+    for (var annotation in metadata.annotations) {
       if (annotation.isXmlConverter(type: type)) {
         return true;
       }
     }
 
-    final enclosingElement3 = this.enclosingElement3;
-    if (enclosingElement3 != null) {
-      for (var annotation in metadata) {
+    final enclosingElement = this.enclosingElement;
+    if (enclosingElement != null) {
+      for (var annotation in metadata.annotations) {
         if (annotation.isXmlConverter(type: type)) {
           return true;
         }
@@ -400,20 +408,22 @@ extension ElementExtensions on Element {
   }
 
   /// Returns `true` if this element has an annotation of the form `@XmlElement()`.
-  bool get hasXmlElement => metadata.any((e) => e.isXmlElement);
+  bool get hasXmlElement => metadata.annotations.any((e) => e.isXmlElement);
 
   /// Returns `true` if this element has an annotation of the form `@XmlEnum()`.
-  bool get hasXmlEnum => metadata.any((e) => e.isXmlEnum);
+  bool get hasXmlEnum => metadata.annotations.any((e) => e.isXmlEnum);
 
   /// Returns `true` if this element has an annotation of the form `@XmlRootElement()`.
-  bool get hasXmlRootElement => metadata.any((e) => e.isXmlRootElement);
+  bool get hasXmlRootElement =>
+      metadata.annotations.any((e) => e.isXmlRootElement);
 
   /// Returns `true` if this element has an annotation of the form `@XmlSerializable()`.
-  bool get hasXmlSerializable => metadata.any((e) => e.isXmlSerializable);
+  bool get hasXmlSerializable =>
+      metadata.annotations.any((e) => e.isXmlSerializable);
 
   /// Returns `true` if this element has an annotation of the form `@XmlText()`.
-  bool get hasXmlText => metadata.any((e) => e.isXmlText);
+  bool get hasXmlText => metadata.annotations.any((e) => e.isXmlText);
 
   /// Returns `true` if this element has an annotation of the form `@XmlValue()`.
-  bool get hasXmlValue => metadata.any((e) => e.isXmlValue);
+  bool get hasXmlValue => metadata.annotations.any((e) => e.isXmlValue);
 }

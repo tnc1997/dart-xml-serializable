@@ -6,23 +6,23 @@ import 'dart_object_extensions.dart';
 import 'element_extensions.dart';
 
 extension FieldElementExtensions on FieldElement {
-  String getEncodedFieldName() {
-    final fieldRename = enclosingElement3.hasXmlSerializable
-        ? enclosingElement3
+  String? getEncodedFieldName() {
+    final fieldRename = enclosingElement.hasXmlSerializable
+        ? enclosingElement
             .getXmlSerializable()
             ?.toXmlSerializableValue()
             ?.fieldRename
-        : enclosingElement3.hasXmlEnum
-            ? enclosingElement3.getXmlEnum()?.toXmlEnumValue()?.fieldRename
+        : enclosingElement.hasXmlEnum
+            ? enclosingElement.getXmlEnum()?.toXmlEnumValue()?.fieldRename
             : null;
 
     switch (fieldRename) {
       case FieldRename.kebab:
-        return name.paramCase;
+        return name?.paramCase;
       case FieldRename.snake:
-        return name.snakeCase;
+        return name?.snakeCase;
       case FieldRename.pascal:
-        return name.pascalCase;
+        return name?.pascalCase;
       case FieldRename.none:
       default:
         return name;

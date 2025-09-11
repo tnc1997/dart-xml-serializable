@@ -5,4 +5,4 @@ import 'package:xml_annotation/xml_annotation.dart';
 @Deprecated(
   'Use element.isXmlRootElement instead of xmlRootElementTypeChecker.hasAnnotationOf(element).',
 )
-const xmlRootElementTypeChecker = TypeChecker.fromRuntime(XmlRootElement);
+const xmlRootElementTypeChecker = TypeChecker.typeNamed(XmlRootElement);

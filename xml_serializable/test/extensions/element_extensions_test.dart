@@ -3,6 +3,7 @@ import 'package:xml_annotation/xml_annotation.dart';
 import 'package:xml_serializable/xml_serializable.dart';
 
 import '../fake_field_element.dart';
+import '../fake_metadata.dart';
 import '../fake_xml_attribute_element_annotation.dart';
 import '../fake_xml_cdata_element_annotation.dart';
 import '../fake_xml_element_element_annotation.dart';
@@ -24,11 +25,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlAttributeConstructorElementElementAnnotation(
-                      value: XmlAttribute(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlAttributeConstructorElementElementAnnotation(
+                        value: XmlAttribute(),
+                      ),
+                    ],
+                  ),
                 ).getXmlAttribute(),
                 isNotNull,
               );
@@ -40,11 +43,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlAttributePropertyAccessorElementElementAnnotation(
-                      value: XmlAttribute(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlAttributePropertyAccessorElementElementAnnotation(
+                        value: XmlAttribute(),
+                      ),
+                    ],
+                  ),
                 ).getXmlAttribute(),
                 isNotNull,
               );
@@ -71,11 +76,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlCDATAConstructorElementElementAnnotation(
-                      value: XmlCDATA(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlCDATAConstructorElementElementAnnotation(
+                        value: XmlCDATA(),
+                      ),
+                    ],
+                  ),
                 ).getXmlCDATA(),
                 isNotNull,
               );
@@ -87,11 +94,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlCDATAPropertyAccessorElementElementAnnotation(
-                      value: XmlCDATA(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlCDATAPropertyAccessorElementElementAnnotation(
+                        value: XmlCDATA(),
+                      ),
+                    ],
+                  ),
                 ).getXmlCDATA(),
                 isNotNull,
               );
@@ -118,11 +127,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlElementConstructorElementElementAnnotation(
-                      value: XmlElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlElementConstructorElementElementAnnotation(
+                        value: XmlElement(),
+                      ),
+                    ],
+                  ),
                 ).getXmlElement(),
                 isNotNull,
               );
@@ -134,11 +145,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlElementPropertyAccessorElementElementAnnotation(
-                      value: XmlElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlElementPropertyAccessorElementElementAnnotation(
+                        value: XmlElement(),
+                      ),
+                    ],
+                  ),
                 ).getXmlElement(),
                 isNotNull,
               );
@@ -165,11 +178,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlEnumConstructorElementElementAnnotation(
-                      value: XmlEnum(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(),
+                      ),
+                    ],
+                  ),
                 ).getXmlEnum(),
                 isNotNull,
               );
@@ -181,11 +196,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlEnumPropertyAccessorElementElementAnnotation(
-                      value: XmlEnum(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlEnumPropertyAccessorElementElementAnnotation(
+                        value: XmlEnum(),
+                      ),
+                    ],
+                  ),
                 ).getXmlEnum(),
                 isNotNull,
               );
@@ -212,11 +229,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlRootElementConstructorElementElementAnnotation(
-                      value: XmlRootElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlRootElementConstructorElementElementAnnotation(
+                        value: XmlRootElement(),
+                      ),
+                    ],
+                  ),
                 ).getXmlRootElement(),
                 isNotNull,
               );
@@ -228,11 +247,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlRootElementPropertyAccessorElementElementAnnotation(
-                      value: XmlRootElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlRootElementPropertyAccessorElementElementAnnotation(
+                        value: XmlRootElement(),
+                      ),
+                    ],
+                  ),
                 ).getXmlRootElement(),
                 isNotNull,
               );
@@ -259,11 +280,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlSerializableConstructorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ).getXmlSerializable(),
                 isNotNull,
               );
@@ -275,11 +298,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlSerializablePropertyAccessorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializablePropertyAccessorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ).getXmlSerializable(),
                 isNotNull,
               );
@@ -306,11 +331,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlTextConstructorElementElementAnnotation(
-                      value: XmlText(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlTextConstructorElementElementAnnotation(
+                        value: XmlText(),
+                      ),
+                    ],
+                  ),
                 ).getXmlText(),
                 isNotNull,
               );
@@ -322,11 +349,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlTextPropertyAccessorElementElementAnnotation(
-                      value: XmlText(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlTextPropertyAccessorElementElementAnnotation(
+                        value: XmlText(),
+                      ),
+                    ],
+                  ),
                 ).getXmlText(),
                 isNotNull,
               );
@@ -353,11 +382,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlAttributeConstructorElementElementAnnotation(
-                      value: XmlAttribute(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlAttributeConstructorElementElementAnnotation(
+                        value: XmlAttribute(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlAttribute,
                 isTrue,
               );
@@ -369,11 +400,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlAttributePropertyAccessorElementElementAnnotation(
-                      value: XmlAttribute(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlAttributePropertyAccessorElementElementAnnotation(
+                        value: XmlAttribute(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlAttribute,
                 isTrue,
               );
@@ -400,11 +433,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlCDATAConstructorElementElementAnnotation(
-                      value: XmlCDATA(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlCDATAConstructorElementElementAnnotation(
+                        value: XmlCDATA(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlCDATA,
                 isTrue,
               );
@@ -416,11 +451,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlCDATAPropertyAccessorElementElementAnnotation(
-                      value: XmlCDATA(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlCDATAPropertyAccessorElementElementAnnotation(
+                        value: XmlCDATA(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlCDATA,
                 isTrue,
               );
@@ -447,11 +484,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlElementConstructorElementElementAnnotation(
-                      value: XmlElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlElementConstructorElementElementAnnotation(
+                        value: XmlElement(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlElement,
                 isTrue,
               );
@@ -463,11 +502,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlElementPropertyAccessorElementElementAnnotation(
-                      value: XmlElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlElementPropertyAccessorElementElementAnnotation(
+                        value: XmlElement(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlElement,
                 isTrue,
               );
@@ -494,11 +535,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlEnumConstructorElementElementAnnotation(
-                      value: XmlEnum(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlEnumConstructorElementElementAnnotation(
+                        value: XmlEnum(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlEnum,
                 isTrue,
               );
@@ -510,11 +553,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlEnumPropertyAccessorElementElementAnnotation(
-                      value: XmlEnum(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlEnumPropertyAccessorElementElementAnnotation(
+                        value: XmlEnum(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlEnum,
                 isTrue,
               );
@@ -541,11 +586,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlRootElementConstructorElementElementAnnotation(
-                      value: XmlRootElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlRootElementConstructorElementElementAnnotation(
+                        value: XmlRootElement(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlRootElement,
                 isTrue,
               );
@@ -557,11 +604,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlRootElementPropertyAccessorElementElementAnnotation(
-                      value: XmlRootElement(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlRootElementPropertyAccessorElementElementAnnotation(
+                        value: XmlRootElement(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlRootElement,
                 isTrue,
               );
@@ -588,11 +637,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlSerializableConstructorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlSerializable,
                 isTrue,
               );
@@ -604,11 +655,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlSerializablePropertyAccessorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializablePropertyAccessorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlSerializable,
                 isTrue,
               );
@@ -635,11 +688,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlTextConstructorElementElementAnnotation(
-                      value: XmlText(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlTextConstructorElementElementAnnotation(
+                        value: XmlText(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlText,
                 isTrue,
               );
@@ -651,11 +706,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlTextPropertyAccessorElementElementAnnotation(
-                      value: XmlText(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlTextPropertyAccessorElementElementAnnotation(
+                        value: XmlText(),
+                      ),
+                    ],
+                  ),
                 ).hasXmlText,
                 isTrue,
               );
@@ -682,11 +739,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlValueConstructorElementElementAnnotation(
-                      value: XmlValue('value'),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlValueConstructorElementElementAnnotation(
+                        value: XmlValue('value'),
+                      ),
+                    ],
+                  ),
                 ).hasXmlValue,
                 isTrue,
               );
@@ -698,11 +757,13 @@ void main() {
             () {
               expect(
                 FakeFieldElement(
-                  metadata: [
-                    FakeXmlValuePropertyAccessorElementElementAnnotation(
-                      value: XmlValue('value'),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlValuePropertyAccessorElementElementAnnotation(
+                        value: XmlValue('value'),
+                      ),
+                    ],
+                  ),
                 ).hasXmlValue,
                 isTrue,
               );

@@ -57,7 +57,7 @@ SerializerGenerator serializerGeneratorFactory(DartType type) {
     return UriSerializerGenerator(isNullable: type.isNullable);
   } else if (type is InterfaceType && type.element is EnumElement) {
     return EnumSerializerGenerator(
-      type.element.name,
+      type.element.name!,
       isNullable: type.isNullable,
     );
   }

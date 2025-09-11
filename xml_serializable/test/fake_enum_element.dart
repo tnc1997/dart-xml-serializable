@@ -4,6 +4,7 @@ import 'package:test/fake.dart';
 
 import 'fake_interface_type.dart';
 import 'fake_library_element.dart';
+import 'fake_metadata.dart';
 
 class FakeEnumElement extends Fake implements EnumElement {
   @override
@@ -13,7 +14,7 @@ class FakeEnumElement extends Fake implements EnumElement {
   final LibraryElement library;
 
   @override
-  final List<ElementAnnotation> metadata;
+  final Metadata metadata;
 
   @override
   final String name;
@@ -26,12 +27,12 @@ class FakeEnumElement extends Fake implements EnumElement {
   FakeEnumElement({
     List<FieldElement>? fields,
     LibraryElement? library,
-    List<ElementAnnotation>? metadata,
+    Metadata? metadata,
     String? name,
     InterfaceType? thisType,
   })  : fields = fields ?? [],
         library = library ?? FakeLibraryElement(),
-        metadata = metadata ?? [],
+        metadata = metadata ?? FakeMetadata(),
         name = name ?? 'HelloWorld',
         _thisType = thisType;
 }

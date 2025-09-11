@@ -5,4 +5,4 @@ import 'package:xml_annotation/xml_annotation.dart';
 @Deprecated(
   'Use element.isXmlAttribute instead of xmlAttributeTypeChecker.hasAnnotationOf(element).',
 )
-const xmlAttributeTypeChecker = TypeChecker.fromRuntime(XmlAttribute);
+const xmlAttributeTypeChecker = TypeChecker.typeNamed(XmlAttribute);

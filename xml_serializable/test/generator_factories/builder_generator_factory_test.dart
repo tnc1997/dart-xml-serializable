@@ -6,6 +6,7 @@ import '../fake_class_element.dart';
 import '../fake_field_element.dart';
 import '../fake_interface_type.dart';
 import '../fake_iterable_class_element.dart';
+import '../fake_metadata.dart';
 import '../fake_string_class_element.dart';
 import '../fake_xml_attribute_element_annotation.dart';
 import '../fake_xml_cdata_element_annotation.dart';
@@ -23,11 +24,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlAttributeConstructorElementElementAnnotation(
-                  value: XmlAttribute(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlAttributeConstructorElementElementAnnotation(
+                    value: XmlAttribute(),
+                  ),
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -49,13 +52,15 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlAttributeConstructorElementElementAnnotation(
-                  value: XmlAttribute(
-                    name: 'name',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlAttributeConstructorElementElementAnnotation(
+                    value: XmlAttribute(
+                      name: 'name',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -77,14 +82,16 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlAttributeConstructorElementElementAnnotation(
-                  value: XmlAttribute(
-                    name: 'name',
-                    namespace: 'https://www.example.com',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlAttributeConstructorElementElementAnnotation(
+                    value: XmlAttribute(
+                      name: 'name',
+                      namespace: 'https://www.example.com',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -109,11 +116,13 @@ void main() {
           expect(
             () => builderGeneratorFactory(
               FakeClassElement(
-                metadata: [
-                  FakeXmlAttributeConstructorElementElementAnnotation(
-                    value: XmlAttribute(),
-                  ),
-                ],
+                metadata: FakeMetadata(
+                  annotations: [
+                    FakeXmlAttributeConstructorElementElementAnnotation(
+                      value: XmlAttribute(),
+                    ),
+                  ],
+                ),
               ),
             ),
             throwsA(isA<ArgumentError>()),
@@ -126,11 +135,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlCDATAConstructorElementElementAnnotation(
-                  value: XmlCDATA(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlCDATAConstructorElementElementAnnotation(
+                    value: XmlCDATA(),
+                  ),
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -155,11 +166,13 @@ void main() {
           expect(
             () => builderGeneratorFactory(
               FakeClassElement(
-                metadata: [
-                  FakeXmlCDATAConstructorElementElementAnnotation(
-                    value: XmlCDATA(),
-                  ),
-                ],
+                metadata: FakeMetadata(
+                  annotations: [
+                    FakeXmlCDATAConstructorElementElementAnnotation(
+                      value: XmlCDATA(),
+                    ),
+                  ],
+                ),
               ),
             ),
             throwsA(isA<ArgumentError>()),
@@ -172,19 +185,23 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(),
+                  ),
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeClassElement(
-                  metadata: [
-                    FakeXmlSerializableConstructorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -209,21 +226,25 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeClassElement(
-                  metadata: [
-                    FakeXmlSerializableConstructorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -248,22 +269,26 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
-                    namespace: 'https://www.example.com',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                      namespace: 'https://www.example.com',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeClassElement(
-                  metadata: [
-                    FakeXmlSerializableConstructorElementElementAnnotation(
-                      value: XmlSerializable(),
-                    ),
-                  ],
+                  metadata: FakeMetadata(
+                    annotations: [
+                      FakeXmlSerializableConstructorElementElementAnnotation(
+                        value: XmlSerializable(),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -288,11 +313,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(),
+                  ),
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeIterableClassElement(),
@@ -300,11 +327,13 @@ void main() {
                 typeArguments: [
                   FakeInterfaceType(
                     element: FakeClassElement(
-                      metadata: [
-                        FakeXmlSerializableConstructorElementElementAnnotation(
-                          value: XmlSerializable(),
-                        ),
-                      ],
+                      metadata: FakeMetadata(
+                        annotations: [
+                          FakeXmlSerializableConstructorElementElementAnnotation(
+                            value: XmlSerializable(),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -331,13 +360,15 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeIterableClassElement(),
@@ -345,11 +376,13 @@ void main() {
                 typeArguments: [
                   FakeInterfaceType(
                     element: FakeClassElement(
-                      metadata: [
-                        FakeXmlSerializableConstructorElementElementAnnotation(
-                          value: XmlSerializable(),
-                        ),
-                      ],
+                      metadata: FakeMetadata(
+                        annotations: [
+                          FakeXmlSerializableConstructorElementElementAnnotation(
+                            value: XmlSerializable(),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -376,14 +409,16 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
-                    namespace: 'https://www.example.com',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                      namespace: 'https://www.example.com',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeIterableClassElement(),
@@ -391,11 +426,13 @@ void main() {
                 typeArguments: [
                   FakeInterfaceType(
                     element: FakeClassElement(
-                      metadata: [
-                        FakeXmlSerializableConstructorElementElementAnnotation(
-                          value: XmlSerializable(),
-                        ),
-                      ],
+                      metadata: FakeMetadata(
+                        annotations: [
+                          FakeXmlSerializableConstructorElementElementAnnotation(
+                            value: XmlSerializable(),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ],
@@ -422,11 +459,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(),
+                  ),
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -449,13 +488,15 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -478,14 +519,16 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
-                    namespace: 'https://www.example.com',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                      namespace: 'https://www.example.com',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -509,11 +552,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(),
+                  ),
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeIterableClassElement(),
@@ -547,13 +592,15 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeIterableClassElement(),
@@ -587,14 +634,16 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlElementConstructorElementElementAnnotation(
-                  value: XmlElement(
-                    name: 'name',
-                    namespace: 'https://www.example.com',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlElementConstructorElementElementAnnotation(
+                    value: XmlElement(
+                      name: 'name',
+                      namespace: 'https://www.example.com',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'value',
               type: FakeInterfaceType(
                 element: FakeIterableClassElement(),
@@ -629,11 +678,13 @@ void main() {
           expect(
             () => builderGeneratorFactory(
               FakeClassElement(
-                metadata: [
-                  FakeXmlElementConstructorElementElementAnnotation(
-                    value: XmlElement(),
-                  ),
-                ],
+                metadata: FakeMetadata(
+                  annotations: [
+                    FakeXmlElementConstructorElementElementAnnotation(
+                      value: XmlElement(),
+                    ),
+                  ],
+                ),
               ),
             ),
             throwsA(isA<ArgumentError>()),
@@ -646,11 +697,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeClassElement(
-              metadata: [
-                FakeXmlRootElementConstructorElementElementAnnotation(
-                  value: XmlRootElement(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlRootElementConstructorElementElementAnnotation(
+                    value: XmlRootElement(),
+                  ),
+                ],
+              ),
               name: 'HelloWorld',
             ),
           );
@@ -674,13 +727,15 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeClassElement(
-              metadata: [
-                FakeXmlRootElementConstructorElementElementAnnotation(
-                  value: XmlRootElement(
-                    name: 'name',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlRootElementConstructorElementElementAnnotation(
+                    value: XmlRootElement(
+                      name: 'name',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'HelloWorld',
             ),
           );
@@ -704,14 +759,16 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeClassElement(
-              metadata: [
-                FakeXmlRootElementConstructorElementElementAnnotation(
-                  value: XmlRootElement(
-                    name: 'name',
-                    namespace: 'https://www.example.com',
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlRootElementConstructorElementElementAnnotation(
+                    value: XmlRootElement(
+                      name: 'name',
+                      namespace: 'https://www.example.com',
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
               name: 'HelloWorld',
             ),
           );
@@ -736,11 +793,13 @@ void main() {
           expect(
             () => builderGeneratorFactory(
               FakeFieldElement(
-                metadata: [
-                  FakeXmlRootElementConstructorElementElementAnnotation(
-                    value: XmlRootElement(),
-                  ),
-                ],
+                metadata: FakeMetadata(
+                  annotations: [
+                    FakeXmlRootElementConstructorElementElementAnnotation(
+                      value: XmlRootElement(),
+                    ),
+                  ],
+                ),
               ),
             ),
             throwsA(isA<ArgumentError>()),
@@ -753,11 +812,13 @@ void main() {
         () {
           final generator = builderGeneratorFactory(
             FakeFieldElement(
-              metadata: [
-                FakeXmlTextConstructorElementElementAnnotation(
-                  value: XmlText(),
-                ),
-              ],
+              metadata: FakeMetadata(
+                annotations: [
+                  FakeXmlTextConstructorElementElementAnnotation(
+                    value: XmlText(),
+                  ),
+                ],
+              ),
               name: 'value',
             ),
           );
@@ -782,11 +843,13 @@ void main() {
           expect(
             () => builderGeneratorFactory(
               FakeClassElement(
-                metadata: [
-                  FakeXmlTextConstructorElementElementAnnotation(
-                    value: XmlText(),
-                  ),
-                ],
+                metadata: FakeMetadata(
+                  annotations: [
+                    FakeXmlTextConstructorElementElementAnnotation(
+                      value: XmlText(),
+                    ),
+                  ],
+                ),
               ),
             ),
             throwsA(isA<ArgumentError>()),

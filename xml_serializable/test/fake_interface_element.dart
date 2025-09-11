@@ -4,6 +4,7 @@ import 'package:test/fake.dart';
 
 import 'fake_interface_type.dart';
 import 'fake_library_element.dart';
+import 'fake_metadata.dart';
 
 class FakeInterfaceElement extends Fake implements InterfaceElement {
   @override
@@ -13,7 +14,7 @@ class FakeInterfaceElement extends Fake implements InterfaceElement {
   final LibraryElement library;
 
   @override
-  final List<ElementAnnotation> metadata;
+  final Metadata metadata;
 
   @override
   final String name;
@@ -24,10 +25,11 @@ class FakeInterfaceElement extends Fake implements InterfaceElement {
   FakeInterfaceElement({
     this.fields = const [],
     LibraryElement? library,
-    this.metadata = const [],
+    Metadata? metadata,
     this.name = 'HelloWorld',
     InterfaceType? thisType,
-  }) : library = library ?? FakeLibraryElement() {
+  })  : library = library ?? FakeLibraryElement(),
+        metadata = metadata ?? FakeMetadata() {
     this.thisType = thisType ??
         FakeInterfaceType(
           element: this,

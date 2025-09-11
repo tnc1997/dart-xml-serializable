@@ -5,16 +5,17 @@ import 'package:test/fake.dart';
 import 'fake_class_element.dart';
 import 'fake_dart_type.dart';
 import 'fake_library_element.dart';
+import 'fake_metadata.dart';
 
 class FakeFieldElement extends Fake implements FieldElement {
   @override
-  final Element enclosingElement3;
+  final InstanceElement enclosingElement;
 
   @override
   final LibraryElement library;
 
   @override
-  final List<ElementAnnotation> metadata;
+  final Metadata metadata;
 
   @override
   final String name;
@@ -26,13 +27,14 @@ class FakeFieldElement extends Fake implements FieldElement {
   final bool isEnumConstant;
 
   FakeFieldElement({
-    Element? enclosingElement3,
+    InstanceElement? enclosingElement,
     LibraryElement? library,
-    this.metadata = const [],
+    Metadata? metadata,
     this.name = 'value',
     DartType? type,
     this.isEnumConstant = false,
-  })  : enclosingElement3 = enclosingElement3 ?? FakeClassElement(),
+  })  : enclosingElement = enclosingElement ?? FakeClassElement(),
         library = library ?? FakeLibraryElement(),
+        metadata = metadata ?? FakeMetadata(),
         type = type ?? FakeDartType();
 }

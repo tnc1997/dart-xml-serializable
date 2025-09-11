@@ -88,7 +88,7 @@ ConstructorGenerator xmlAttributeConstructorGeneratorFactory(
   final xmlAttribute = element.getXmlAttribute()!.toXmlAttributeValue()!;
 
   return XmlAttributeConstructorGenerator(
-    xmlAttribute.name ?? element.getEncodedFieldName(),
+    xmlAttribute.name ?? element.getEncodedFieldName()!,
     namespace: xmlAttribute.namespace,
     isNullable: element.type.isNullable,
   );
@@ -109,8 +109,8 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     if (converterElement is ClassElement) {
       return IterableConstructorGenerator(
         XmlConverterXmlElementConstructorGenerator(
-          xmlElement.name ?? element.getEncodedFieldName(),
-          converterElement.name,
+          xmlElement.name ?? element.getEncodedFieldName()!,
+          converterElement.name!,
           namespace: xmlElement.namespace,
           isSelfClosing: xmlElement.isSelfClosing,
           includeIfNull: xmlElement.includeIfNull,
@@ -128,7 +128,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     } else if (type.typeArguments.single.element!.hasXmlSerializable) {
       return IterableConstructorGenerator(
         XmlSerializableXmlElementConstructorGenerator(
-          xmlElement.name ?? element.getEncodedFieldName(),
+          xmlElement.name ?? element.getEncodedFieldName()!,
           namespace: xmlElement.namespace,
           isSelfClosing: xmlElement.isSelfClosing,
           includeIfNull: xmlElement.includeIfNull,
@@ -139,7 +139,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     } else {
       return IterableConstructorGenerator(
         XmlTextXmlElementConstructorGenerator(
-          xmlElement.name ?? element.getEncodedFieldName(),
+          xmlElement.name ?? element.getEncodedFieldName()!,
           namespace: xmlElement.namespace,
           isSelfClosing: xmlElement.isSelfClosing,
           includeIfNull: xmlElement.includeIfNull,
@@ -154,8 +154,8 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
     );
     if (converterElement is ClassElement) {
       return XmlConverterXmlElementConstructorGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
-        converterElement.name,
+        xmlElement.name ?? element.getEncodedFieldName()!,
+        converterElement.name!,
         namespace: xmlElement.namespace,
         isSelfClosing: xmlElement.isSelfClosing,
         includeIfNull: xmlElement.includeIfNull,
@@ -170,7 +170,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
       );
     } else if (type.element!.hasXmlSerializable) {
       return XmlSerializableXmlElementConstructorGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
+        xmlElement.name ?? element.getEncodedFieldName()!,
         namespace: xmlElement.namespace,
         isSelfClosing: xmlElement.isSelfClosing,
         includeIfNull: xmlElement.includeIfNull,
@@ -178,7 +178,7 @@ ConstructorGenerator xmlElementConstructorGeneratorFactory(
       );
     } else {
       return XmlTextXmlElementConstructorGenerator(
-        xmlElement.name ?? element.getEncodedFieldName(),
+        xmlElement.name ?? element.getEncodedFieldName()!,
         namespace: xmlElement.namespace,
         isSelfClosing: xmlElement.isSelfClosing,
         includeIfNull: xmlElement.includeIfNull,
@@ -195,7 +195,7 @@ ConstructorGenerator xmlRootElementConstructorGeneratorFactory(
   final xmlRootElement = element.getXmlRootElement()!.toXmlRootElementValue()!;
 
   return XmlRootElementConstructorGenerator(
-    xmlRootElement.name ?? element.name,
+    xmlRootElement.name ?? element.name!,
     namespace: xmlRootElement.namespace,
     isSelfClosing: xmlRootElement.isSelfClosing,
     isNullable: element.thisType.isNullable,

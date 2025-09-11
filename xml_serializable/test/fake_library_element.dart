@@ -3,6 +3,9 @@ import 'package:test/fake.dart';
 
 class FakeLibraryElement extends Fake implements LibraryElement {
   @override
+  final List<ClassElement> classes;
+
+  @override
   final String identifier;
 
   @override
@@ -11,16 +14,13 @@ class FakeLibraryElement extends Fake implements LibraryElement {
   @override
   final String name;
 
-  @override
-  final Iterable<Element> topLevelElements;
-
   FakeLibraryElement({
+    List<ClassElement>? classes,
     String? identifier,
     bool? isDartCore,
     String? name,
-    Iterable<Element>? topLevelElements,
-  })  : identifier = identifier ?? '',
+  })  : classes = classes ?? [],
+        identifier = identifier ?? '',
         isDartCore = isDartCore ?? false,
-        name = name ?? '',
-        topLevelElements = topLevelElements ?? [];
+        name = name ?? '';
 }
