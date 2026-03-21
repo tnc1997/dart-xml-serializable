@@ -365,28 +365,25 @@ class XmlSerializableGenerator extends GeneratorForAnnotation<XmlSerializable> {
           ),
         );
       } else if (type is InterfaceType && type.element.hasXmlSerializable) {
-        for (final element in element.library.classes) {
-          if (element == type.element) {
-            return XmlSerializableXmlElementSerializerGenerator(
-              element.name!,
-              isNullable: type.isNullable,
-            );
-          }
-        }
+        final buffer = StringBuffer();
 
-        for (final import in element.library.firstFragment.libraryImports) {
-          for (final entry in import.namespace.definedNames2.entries) {
-            if (entry.value == type.element) {
-              return XmlSerializableXmlElementSerializerGenerator(
-                '${import.prefix!.name!}.${entry.key}',
-                isNullable: type.isNullable,
-              );
+        for (final fragment in element.library.fragments) {
+          for (final import in fragment.libraryImports) {
+            for (final entry in import.namespace.definedNames2.entries) {
+              if (entry.value == type.element) {
+                final prefix = import.prefix?.name;
+                if (prefix != null) {
+                  buffer.write('$prefix.');
+                }
+              }
             }
           }
         }
 
+        buffer.write(type.element.name!);
+
         return XmlSerializableXmlElementSerializerGenerator(
-          type.element.name!,
+          buffer.toString(),
           isNullable: type.isNullable,
         );
       } else if (type is ParameterizedType && type.isDartCoreIterable) {
