@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [Conventional Commits](https://www.conventionalcommits.org) for commit guidelines.
 
+## 2.5.5 (2026-04-08)
+
+### Bug Fixes
+
+* incorrect library import prefix handling ([#68](https://github.com/tnc1997/dart-xml-serializable/issues/68)) ([d0ce5c7](https://github.com/tnc1997/dart-xml-serializable/commit/d0ce5c776a94b573ae24e0521ee56e47ea8cd621))
+
+### Builds
+
+* **deps-dev:** bump lints ([f2185cf](https://github.com/tnc1997/dart-xml-serializable/commit/f2185cf1fdfe00d459f68ef47dc64caba7d8035d))
+* **deps-dev:** remove build_test ([c687886](https://github.com/tnc1997/dart-xml-serializable/commit/c687886c6c60f957a77977c0da30b1a28e119648))
+* **deps:** bump analyzer, build, source_gen ([0f6b3e7](https://github.com/tnc1997/dart-xml-serializable/commit/0f6b3e7ecddae74ce69918cdde7bf9be40d6d39b))
+* **deps:** bump analyzer ([b219c33](https://github.com/tnc1997/dart-xml-serializable/commit/b219c33cc7f78a81abeab094afce5d3316a44e91))
+
 ## 2.5.4 (2025-03-09)
 
 ### Code Refactoring
